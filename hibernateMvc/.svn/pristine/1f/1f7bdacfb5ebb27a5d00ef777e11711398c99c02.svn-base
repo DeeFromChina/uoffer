@@ -1,0 +1,259 @@
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<%@include file="/common/header.jsp"%>
+<title></title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+</head>
+<script language="javascript">
+	function init() {
+		var url = "login/firmaccount1.do";
+		var formId = "finduserForm";
+		var data = ajaxSumbit(url, formId);
+		addfirm(data.information);
+		addLi(data.guwen,"guwen");
+	}
+	function addinformation(item){
+		document.getElementById("userphoto").src=item.userphoto;
+		document.getElementById("userName").innerText=item.userName;
+		document.getElementById("usershenfen").innerText=item.usershenfen;
+		document.getElementById("zhucetime").innerText=item.zhucetime;
+		document.getElementById("newtime").innerText=item.newtime;
+		document.getElementById("firmName").innerText=item.firmName;
+		document.getElementById("job").innerText=item.job;
+		document.getElementById("phone").innerText=item.phone;
+		document.getElementById("tongzhi").innerText=item.tongzhi;
+		document.getElementById("status").innerText=item.status;
+		document.getElementById("gewenbeizhu").innerText=item.gewenbeizhu;
+		document.getElementById("beizhu").value=item.beizhu;
+	}
+	//下拉列表
+	function addLi(items,liId){
+		var inn = "";
+		for(var i in items){
+			inn = inn + "<li role='presentation'>"
+				+"<a role='menuitem' onclick='selectDownValue(" + items[i].id +",\"" + items[i].value +"\",\""+liId+"\")'><font color='#000'>" + items[i].value
+				+"</font></a></li>";
+		}
+		document.getElementById(liId).innerHTML=inn;
+	}
+	function selectDownValue(ke, val, targetInput){
+		var ti1 = "firm" + targetInput;
+		var ti2 = "firm" + targetInput + "Value";
+		document.getElementById(ti1).value=ke;
+		document.getElementById(ti2).value=val;
+	}
+	
+	function goSumbit(){
+		if(isResetLogin()) {
+			alert("登陆超时!");
+			top.location.href='stafflogin.jsp';
+		}
+		else{
+			var firmguwen = document.getElementById('firmguwen').value;
+			var beizhu = document.getElementById('beizhu').value;
+			var url = "firm/changefirmStatus.do?firmguwen="+firmguwen+"&beizhu="+beizhu;
+			var formId = "finduserForm";
+			var data = ajaxSumbit(url, formId);
+			if(data == "success"){
+				alert("提交成功!");
+			}else{
+				alert("保存出错!");
+			}
+		}
+	}
+	
+	function addfirm(items){
+		var firm = "";
+		for(var i in items){
+		if(firm != ""){
+			firm = firm + "<hr>";
+		}
+		firm = firm + "<div style='width:100%;padding:20px 200px;'>"
+							+ "<table width='100%' style='border-bottom:1px #CCCCCC solid;'>"
+								+ "<tr>"
+									+ "<td style='width:130px;' rowspan='3'>"
+										+ "<img src='"+items[i].photo+"' width='120px' height='120px'/>"
+									+ "</td>"
+									+ "<td valign='bottom' style='padding-left:40px;'>"
+										+ "<font size='1'>"+items[i].userName+"</font>"
+										+ "<font size='1' color='#3CBAFF'>"+items[i].userType+"</font>"
+									+ "</td>"
+								+ "</tr>"
+								+ "<tr>"
+									+ "<td valign='bottom' style='height:25px;padding-left:40px;'>"
+										+ "<font size='1'>注册时间："+items[i].createTime+"</font>"
+									+ "</td>"
+								+ "</tr>"
+								+ "<tr>"
+									+ "<td valign='top' style='height:25px;padding-left:40px;'>"
+										+ "<font size='1'>最新登陆："+items[i].updataTime+"</font>"
+									+ "</td>"
+								+ "</tr>"
+								+ "<tr>"
+									+ "<td height='40px' colspan='2'></td>"
+								+ "</tr>"
+							+ "</table>"
+							+ "<table width='100%' style='border-bottom:1px #CCCCCC solid;border-collapse:separate;border-spacing:20px;' cellpadding='10'>"
+								+ "<tr>"
+									+ "<td width='100px'><font size='1'>公司</font></td>"
+									+ "<td><font size='1' color='#3CBAFF'>"+items[i].firmName+"</font></td>"
+								+ "</tr>"
+								+ "<tr>"
+									+ "<td width='100px'><font size='1'>职位</font></td>"
+									+ "<td><font size='1' color='#3CBAFF'>"+items[i].job+"</font></td>"
+								+ "</tr>"
+								+ "<tr>"
+									+ "<td width='100px'><font size='1'>手机</font></td>"
+									+ "<td><font size='1' color='#3CBAFF'>"+items[i].phone+"</font></td>"
+								+ "</tr>"
+								+ "<tr>"
+									+ "<td width='100px'><font size='1'>通知信息</font></td>"
+									+ "<td><font size='1' color='#3CBAFF'>已开启："+items[i].msg+"</font></td>"
+								+ "</tr>"
+								+ "<tr>"
+									+ "<td width='100px'><font size='1'>目前状态</font></td>"
+									+ "<td><font size='1' color='#FE9B00' id='status'>"+items[i].status+"</font></td>"
+								+ "</tr>"
+								+ "<tr>"
+									+ "<td width='100px'><font size='1'>顾问备注</font></td>"
+									+ "<td>"+items[i].remark+"</td>"
+								+ "</tr>"
+							+ "</table>"
+						+ "</div>";
+		}
+		if(firm == ""){
+			alert("数据错误！");
+			return;
+		}
+		var save = "<div style='width:100%;padding:20px 200px;'>"
+				+ "<table width='100%' style='border-collapse:separate;border-spacing:20px;'>"
+				+ "<tr>"
+					+ "<td><font size='1'>顾问审核</font></td>"
+				+ "</tr>"
+				+ "<tr>"
+					+ "<td>"
+						+ "<div class='input-group' style='width: 100%;'>"
+							+ "<div class='dropdown'>"
+								+ "<input type='hidden' id='firmguwen' name='firmguwen'/>"
+								+ "<input type='text' name='firmguwenValue' id='firmguwenValue' class='form-control' style='margin-left:-20px;width: 164px !important'>"
+								+ "<button type='button' style='height:34px !important;background-color:#3CBAFF;color:#FFF;' class='btn dropdown-toggle' id='dropdownMenu1' data-toggle='dropdown'>"
+									+ "<span class='caret'></span>"
+								+ "</button>"
+								+ "<ul class='dropdown-menu' role='menu' aria-labelledby='dropdownMenu1' style='margin-left:-20px;width: 200px !important' id='guwen'>"
+								+ "</ul>"
+							+ "</div>"
+						+ "</div>"
+					+ "</td>"
+				+ "</tr>"
+				+ "<tr>"
+					+ "<td>"
+						+ "<textarea placeholder='顾问审核备注' rows='8' style='width:100%;' id='beizhu'></textarea>"
+					+ "</td>"
+				+ "</tr>"
+				+ "<tr>"
+					+ "<td class='textR'>"
+						+ "<button type='button' class='btn btn-primary' onclick='goSumbit()' data-toggle='button'"
+						+ "style='background-color: #3CBAFF; border-color: #3CBAFF; color:#FFF; width: 150px;'>"
+						+ "确认提交</button>"
+					+ "</td>"
+				+ "</tr>"
+			+ "</table>"
+		+ "</div>";
+		firm = firm + save;
+		document.body.innerHTML=firm;
+	}
+</script>
+<body bgcolor="#FFF" onload="init()">
+	<form id="finduserForm">
+		<input type="hidden" id="firmguwen" name="firmguwen"/>
+		<input type="hidden" id="offerFirmId" name="offerFirmId"/>
+	</form>
+	<div style="width:100%;padding:0px 200px;">
+		<table width="100%" style="border-bottom:1px #CCCCCC solid;margin-top:60px;">
+			<tr>
+				<td style="width:130px;" rowspan="3">
+					<img src="../img/changjinglu.jpg" width="120px" height="120px" id="userphoto"/>
+				</td>
+				<td valign="bottom" style="padding-left:40px;">
+					<font size="1" id="userName">捂脸</font>
+					<font size="1" color="#3CBAFF" id="usershenfen">管理员</font>
+				</td>
+			</tr>
+			<tr>
+				<td valign="bottom" style="height:25px;padding-left:40px;">
+					<font size="1" id="zhucetime">注册时间：1017年07月17日</font>
+				</td>
+			</tr>
+			<tr>
+				<td valign="top" style="height:15px;padding-left:40px;">
+					<font size="1" id="newtime">最新登陆：1017年07月17日</font>
+				</td>
+			</tr>
+			<tr>
+				 <td height="40px" colspan="2"></td>
+			</tr>
+		</table>
+		<table width="100%" style="border-bottom:1px #CCCCCC solid;border-collapse:separate;border-spacing:20px;" cellpadding="10">
+			<tr>
+				<td width="100px"><font size="1">公司</font></td>
+				<td><font size="1" color="#3CBAFF" id="firmName">百度</font></td>
+			</tr>
+			<tr>
+				<td width="100px"><font size="1">职位</font></td>
+				<td><font size="1" color="#3CBAFF" id="job">CEO</font></td>
+			</tr>
+			<tr>
+				<td width="100px"><font size="1">手机</font></td>
+				<td><font size="1" color="#3CBAFF" id="phone">133464356</font></td>
+			</tr>
+			<tr>
+				<td width="100px"><font size="1">通知信息</font></td>
+				<td><font size="1" color="#3CBAFF" id="tongzhi">已开启：邮件通知，邮件订阅</font></td>
+			</tr>
+			<tr>
+				<td width="100px"><font size="1">目前状态</font></td>
+				<td><font size="1" color="#FE9B00" id="status">审核中</font></td>
+			</tr>
+			<tr>
+				<td width="100px"><font size="1">顾问备注</font></td>
+				<td id="gewenbeizhu"></td>
+			</tr>
+		</table>
+		<table width="100%" style="border-collapse:separate;border-spacing:20px;">
+			<tr>
+				<td><font size="1">顾问审核</font></td>
+			</tr>
+			<tr>
+				<td>
+					<div class="input-group" style="width: 100%;">
+						<div class="dropdown" style="">
+							<input type="text" name="firmguwenValue" id="firmguwenValue" class="form-control" style="margin-left:-20px;width: 164px !important">
+						    <button type="button" style="height:34px !important;background-color:#3CBAFF;color:#FFF;" class="btn dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown">
+						        <span class="caret"></span>
+						    </button>
+						    <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1" style="margin-left:-20px;width: 200px !important" id="guwen">
+						        
+						    </ul>
+						</div>
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<textarea placeholder="顾问审核备注" rows="8" style="width:100%;" id="beizhu"></textarea>
+				</td>
+			</tr>
+			<tr>
+				<td class="textR">
+					<button type="button" class="btn btn-primary" onclick="goSumbit()" data-toggle="button"
+						style="background-color: #3CBAFF; border-color: #3CBAFF; color:#FFF; width: 150px;">
+						确认提交</button>
+				</td>
+			</tr>
+		</table>
+	</div>
+</body>
+</html>

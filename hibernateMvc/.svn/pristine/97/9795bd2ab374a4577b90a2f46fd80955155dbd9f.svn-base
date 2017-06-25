@@ -1,0 +1,37 @@
+<sqls>
+	<sql orderBy="C.CHAT_CREATE_TIME">
+		SELECT 
+			I.ID AS id,
+			I.JOB_NAME AS jobName,
+			I.JOB_PLACE AS jobPlace,
+			I.JOB_MONTH_WAGES_FIRST AS jobMonthWagesFirst,
+			I.JOB_MONTH_WAGES_SECOND AS jobMonthWagesSecond,
+			I.JOB_MONTH AS jobMonth,
+			I.FIRM_ID AS firmId,
+			I.USER_ID AS userId,
+			I.STATUS AS iStatus,
+			I.ISSTOCK AS isstock,
+			I.RESULT AS result,
+			I.CREATE_TIME AS createTime,
+			I.CANDIDATE_ID AS candidateId,
+			C.ID AS offerInviteChat,
+			C.CHAT_CREATE_TIME AS chatCreateTime,
+			C.CHAT_MESSAGE AS chatMessage,
+			C.STATUS AS cStatus,
+			C.ISOFFER AS isoffer,
+			C.INTERVIEWTIME AS interviewtime,
+			C.INTERVIEWTIME2 AS interviewtime2,
+			C.INTERVIEWWORKSPACE AS interviewworkspace,
+			C.INTERVIEWMAN AS interviewman,
+			C.INTERVIEWWAY AS interviewWay,
+			U.OFFER_USER_NAME AS offerCandidateName,
+			U.OFFER_USER_PHONE AS offerCandidatePhone,
+			OP.PHOTO_SAVENAME AS photoSavename
+		FROM OFFER_INVITE I
+		LEFT JOIN OFFER_INVITE_CHAT C ON I.ID = C.INVITE_ID
+		LEFT JOIN OFFER_USER U ON U.ID = I.CANDIDATE_ID
+		LEFT JOIN OFFER_PHOTO OP ON OP.TABLE_ID = I.CANDIDATE_ID AND OP.TABLE_NAME = 'offer_candidate_photo'
+		{#param}
+		<param value="param"/>
+	</sql>
+</sqls>

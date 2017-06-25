@@ -1,0 +1,444 @@
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<%@include file="/common/header.jsp"%>
+<title></title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+</head>
+<script language="javascript">
+	function init(){
+		document.getElementById('allorpair').value = parent.document.getElementById('allorpair').value;
+		document.getElementById('firstIn').value = parent.document.getElementById('firstIn').value;
+		document.getElementById('pageId').value = parent.document.getElementById('pageId').value;
+		var	url = "firm/findusersum1.do";
+		var formId = "findusersumForm";
+		var data = ajaxSumbit(url, formId);
+		adddiv(data);
+		addpageNum(data.pageNum, "u1");
+		parent.document.getElementById('dataNum').innerText = data.dataNum;
+		addallorpair(data.allnum,data.pairnum);
+		parent.document.getElementById("iframe1").height=0;
+		parent.document.getElementById("iframe1").height=document.body.scrollHeight;
+	}
+	
+	function addpageNum(items, u1){
+		var inn = "<ul class='pagination' id='u1' style='margin-top:10px;'>";
+		var pageId = parent.document.getElementById("pageId").value;
+		if (items > 1) {
+			inn += "<li><a href='#' onclick='getpage(1)'>&laquo;</a></li>";
+		}
+		if (items == 1) {
+			inn += "<li><a href='#' onclick='getpage(1)'>1</a></li>";
+		}
+		else {
+			for (var i = 0; i < items; i++) {
+				inn += "<li><a href='#' onclick='getpage(" + (i + 1) + ")'>" + (i + 1) + "</a></li>";
+			}
+		}
+		inn += "</ul>";
+		parent.document.getElementById(u1).innerHTML=inn;
+		
+	}
+	function addallorpair(allnum,pairnum){
+		parent.document.getElementById('divall').innerHTML="<font size='1'>全部（"+allnum+")</font>";
+		parent.document.getElementById('divpair').innerHTML="<font size='1'>已收藏（"+pairnum+")</font>";
+	}
+	/* function addbutton(name,items,buttonId){
+		var inn = "";
+		for(var i in items){
+			inn = inn + "<button type='button' class='close' aria-hidden='true' style='float:left;opacity:0.9;background:#00B38A;color:#FFF;padding:10px;'>"
+				+"<font size='2' style='font-weight: normal;letter-spacing:2px;'>" + items[i].value 
+				+"<a href='#' id='"+name+"_"+items[i].id+"' onclick='removebutton(this)' style='color:#FFF;'>&nbsp;&nbsp;&times;</a></font></button>";
+				parent.document.getElementById(name).value = items[i].id + "_" + items[i].value;
+		}
+		parent.document.getElementById(buttonId).innerHTML=inn;
+	} */
+	function checkunderfined(eles){
+		if(eles != undefined){
+			return eles.value;
+		}else{
+			return;
+		}
+	}
+	function color1(obj){
+		obj.style.color="#FFF";
+		obj.style.border="1px #00B38A solid";
+	}
+	function color2(obj){
+		obj.style.color="#9A9A9A";
+		obj.style.border="1px #CCCCCC solid";
+	}
+	function color3(obj){
+		obj.style.border="1px #57B1ED solid";
+	}
+	function color4(obj){
+		obj.style.border="none";
+	}
+	function adddiv(data){
+		var div1 = "";
+		for(var i in data.userresume){
+			var item = data.userresume[i];
+			div1 = div1+"<div class='getColor' tabindex='0' style='width:100%;cursor:pointer;' onmouseover='color3(this)' onmouseout='color4(this)' >"//onclick='goView(\""+item.id+"\")'
+				+"<table style=' width: 100%;padding-top:5px;padding-left:10px;'>" 
+							+"<tr height='40px'/>"
+							+"<tr>"
+								+"<td rowspan='5' width='150px' width='151px' style='padding-right:31px;'>"
+									+"<img src=" + item.photopath + " onclick='goView(\""+item.id+"\")' width='120px' height='120px'/>"
+								+"</td>"
+								+"<td width='69%'>"
+									+"<font size='3' style='font-weight:bold;'>" + item.username + "</font>"
+								+"</td>"
+								+"<td/>"
+							+"</tr>"
+							+"<tr>"
+								+"<td class='textL'><font style='font-size:14px;' color='#4F4F4F'>" + item.nowyearwages + "</font></td>"
+								+"<td class='textR' rowspan='2' width='20%'>"
+									+"<table width='100%'>"
+										+"<tr>"
+											+"<td width='50%' class='textR' style='padding-left:5px;'>"
+												+"<div class='btn-group btn-group-lg'>"
+													+"<button type='button' class='btn btn-default' onclick='nofeel(\""+item.id+"\")' onmouseover='color1(this)' onmouseout='color2(this)' style='width: 120px;color:#9A9A9A;border:1px #CCCCCC solid;'>"
+														+"<center><img src='../img/delete.png'/>"
+														+"<font style='font-size:14px;'>&nbsp;不感兴趣</font></center>"
+													+"</button>"
+												+"</div>"
+											+"</td>"
+											+"<td width='50%' class='textL' style='padding-left:5px;'>"
+												+"<div class='btn-group btn-group-lg'>"
+													+"<button id='regit' type='button' class='btn btn-default' onclick='hadfeel(\""+item.id+"\")' onmouseover='color1(this)' onmouseout='color2(this)' style='width:120px;color:#9A9A9A;border:1px #CCCCCC solid;'>"
+														+"<center><img src='../img/collection.png'/>"
+														+"<font style='font-size:14px;'>&nbsp;&nbsp;收藏</font></center>"
+													+"</button>"
+												+"</div>"
+											+"</td>"
+										+"</tr>"
+									+"</table>"
+								+"</td>"
+							+"</tr>"
+							+"<tr>"
+								+"<td class='textL'><font size='1' color='#999999'>职位：</font><font size='1'>" + item.resume + "</font></td>"
+								+"<td/>"
+							+"</tr>"
+							+"<tr>"
+							+"<td class='textL'><font size='1' color='#999999'>工作说明：</font><font size='1'>" + item.jobDescript + "</font></td>"
+							+"<td/>"
+						+"</tr>"
+							+"<tr>"
+								+"<td class='textL'><font size='1' color='#999999'>学校：</font><font size='1'>" + (item.xueli == '' ? '' : item.xueli + "，") + item.school + "</font></td>"
+								+"<td/>"
+							+"</tr>"
+							+"<tr height='39px'/>"
+						+"</table>"
+					+"</div>"
+					+"<hr/>";
+		}	
+		document.body.innerHTML=div1;
+	}
+	
+	function nofeel(id) {//不感兴趣
+		var url = "firm/selectfindusersum1.do?status=0&offerCandidateId=" + id;//状态（0：不敢兴趣，1：收藏）
+		var formId = "findusersumForm";
+		var data = ajaxSumbit(url, formId);
+		if(data == 'success'){
+			alert("下次不再为您提供该候选人信息");
+			window.location.href="mainfinduser_sum.jsp";
+		}
+	}
+	
+	function hadfeel(id) {//收藏
+		var url = "firm/selectfindusersum1.do?status=1&offerCandidateId=" + id;//状态（0：不敢兴趣，1：收藏）
+		var formId = "findusersumForm";
+		var data = ajaxSumbit(url, formId);
+		if(data == 'success'){
+			alert("收藏成功");
+			window.location.href="mainfinduser_sum.jsp";
+		}
+	}
+	
+	function goView(id){
+		var url = "login/sessionPutUser.do";
+		var data = ajaxSumbitNoform(url, id);
+		top.location.href='resume_view.jsp';
+	}
+</script>
+<style>
+	.getColor{
+		background-color:#FFF;
+	}
+	.getTdColor{
+		background-color:#00B38A;
+		cursor:pointer;
+	}
+	.getTdColor:focus{
+		background-color:#FFF;
+		}
+	.getTdColor:hover{
+		background-color:#FFF;
+	}
+</style>
+	<form id="findusersumForm">
+		<input type="hidden" id="pageId" name="pageId"/>
+		<input type="hidden" id="citybutton" name="citybutton"/>
+		<input type="hidden" id="jobbutton" name="jobbutton"/>
+		<input type="hidden" id="workbutton" name="workbutton"/>
+		<input type="hidden" id="allorpair" name="allorpair"/>
+		<input type="hidden" id="firmsaved" name="firmsaved"/>
+		<input type="hidden" id="firstIn" name="firstIn"/>
+	</form>
+<body onload="init()">
+</body>
+</html>
+
+
+
+
+
+
+<%-- <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<%@include file="/common/header.jsp"%>
+<title></title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+</head>
+<script language="javascript">
+	function init(){
+		document.getElementById('firstIn').value = parent.document.getElementById('firstIn').value;
+		document.getElementById('firmsaved').value = parent.document.getElementById('firmsaved').value;
+		var allorpair = parent.document.getElementById('allorpair').value;
+		if (allorpair == "") allorpair = "quanbu";
+		var firmsaved = parent.document.getElementById('firmsaved').value;
+		var removeWho = parent.document.getElementById('removeWho').value;
+		var firmsavedValue = parent.document.getElementById('firmsavedValue').value;
+		var saved = parent.document.getElementById('saved').value;
+		var citybutton = parent.document.getElementById('c');
+		var jobbutton = parent.document.getElementById('j');
+		var workbutton = parent.document.getElementById('w');
+		document.getElementById('citybutton').value=checkunderfined(citybutton);
+		document.getElementById('jobbutton').value=checkunderfined(jobbutton);
+		document.getElementById('workbutton').value=checkunderfined(workbutton);
+		document.getElementById('pageId').value = parent.document.getElementById('pageId').value;
+		var firstIn = document.getElementById('firstIn').value;
+		var pageId = document.getElementById('pageId').value;
+		var url;
+		var allName = "";
+		var i = 0;
+		if (document.getElementById('citybutton').value != "") {
+			allName += "&city=" + document.getElementById('citybutton').value.split('_')[0];
+		}
+		if (document.getElementById('jobbutton').value != "") {
+			allName += "&job=" + document.getElementById('jobbutton').value.split('_')[0];
+		}
+		if (document.getElementById('workbutton').value != "") {
+			allName += "&workTime=" + document.getElementById('workbutton').value.split('_')[1];
+		}
+		if (firmsaved != "") {
+			if (removeWho != "") url = "firm/findusersum1.do?allorpair=" + allorpair + "&firmsaved=" + firmsaved + "&removeWho=" + removeWho;
+			else url = "firm/findusersum1.do?allorpair=" + allorpair + "&firmsaved=" + firmsaved + "&pageId=" + pageId;
+		}
+		else if (allName == "") {
+			url = "firm/findusersum1.do?allorpair=" + allorpair + "&pageId=" + pageId;
+		}
+		else {
+			url = "firm/findusersum1.do?allorpair=" + allorpair + allName + "&pageId=" + pageId;
+		}
+		var formId = "findusersumForm";
+		var data = ajaxSumbit(url, formId);
+		if (removeWho.length > 0) {
+			parent.document.getElementById("removeWho").value = "";
+		}
+		adddiv(data);
+		addpageNum(data.pageNum, "u1");
+		parent.document.getElementById('pageSize').value = data.pageNum;
+		parent.document.getElementById('dataNum').innerText = data.dataNum;
+		if (firmsaved != "") {
+			parent.document.getElementById('citybutton').innerHTML="";
+			parent.document.getElementById('jobbutton').innerHTML="";
+			parent.document.getElementById('workbutton').innerHTML="";
+			addbutton("c",data.citybutton,"citybutton");
+			addbutton("j",data.jobbutton,"jobbutton");
+			addbutton("w",data.workbutton,"workbutton");
+			addallorpair(data.allnum,data.pairnum);
+		}
+		else {
+			addallorpair(data.allnum,data.pairnum);
+		}
+		parent.document.getElementById("iframe1").height=0;
+		parent.document.getElementById("iframe1").height=document.body.scrollHeight;
+	}
+	
+	function addpageNum(items, u1){
+		var inn = "<ul class='pagination' id='u1' style='margin-top:10px;'>";
+		var pageId = parent.document.getElementById("pageId").value;
+		if (items > 1) {
+			inn += "<li><a href='#' onclick='getpage(1)'>&laquo;</a></li>";
+		}
+		if (items == 1) {
+			inn += "<li><a href='#' onclick='getpage(1)'>1</a></li>";
+		}
+		else {
+			for (var i = 0; i < items; i++) {
+				inn += "<li><a href='#' onclick='getpage(" + (i + 1) + ")'>" + (i + 1) + "</a></li>";
+			}
+		}
+		/* else {
+			for (var i = 0; i < 10; i++) {
+				inn += "<li><a href='#' onclick='getpage(" + (i + 1) + ")'>" + (i + 1) + "</a></li>";
+			}
+			inn += "<li><a href='#'>...</a></li>";
+		}
+		if (items > 10) {
+			inn += "<li><a href='#' onclick='getpage(" + items + ")'>&laquo;</a></li>";
+		} */
+		inn += "</ul>";
+		parent.document.getElementById(u1).innerHTML=inn;
+		
+	}
+	function addallorpair(allnum,pairnum){
+		parent.document.getElementById('divall').innerHTML="<font size='1'>全部（"+allnum+")</font>";
+		parent.document.getElementById('divpair').innerHTML="<font size='1'>已收藏（"+pairnum+")</font>";
+	}
+	function addbutton(name,items,buttonId){
+		var inn = "";
+		for(var i in items){
+			//alert(items[i].value);
+			//alert(items[i].id);
+			inn = inn + "<button type='button' class='close' aria-hidden='true' style='float:left;opacity:0.9;background:#00B38A;color:#FFF;padding:10px;'>"
+				+"<font size='2' style='font-weight: normal;letter-spacing:2px;'>" + items[i].value 
+				+"<a href='#' id='"+name+"_"+items[i].id+"' onclick='removebutton(this)' style='color:#FFF;'>&nbsp;&nbsp;&times;</a></font></button>";
+				parent.document.getElementById(name).value = items[i].id + "_" + items[i].value;
+		}
+		parent.document.getElementById(buttonId).innerHTML=inn;
+	}
+	function checkunderfined(eles){
+		if(eles != undefined){
+			return eles.value;
+		}else{
+			return;
+		}
+	}
+	function adddiv(data){
+		var div1 = "";
+		for(var i in data.userresume){
+			var item = data.userresume[i];
+			div1 = div1+"<div class='getColor' tabindex='0' style='width:100%;cursor:pointer;' >"//onclick='goView(\""+item.id+"\")'
+				+"<table style=' width: 100%;padding-top:5px;padding-left:10px;'>" 
+							+"<tr>"
+								+"<td rowspan='5' width='150px' style='padding-top:5px;padding-left:10px;padding-bottom:5px;padding-right:10px;'>"
+									+"<img src=" + item.photopath + " onclick='goView(\""+item.id+"\")' width='120px' height='120px'/>"
+								+"</td>"
+								+"<td>"
+									+"<font size='3' style='font-weight:bold;'>" + item.username + "</font>"
+								+"</td>"
+								+"<td/>"
+							+"</tr>"
+							+"<tr>"
+								+"<td class='textL'><font size='1'>" + item.nowyearwages + "</font></td>"
+								+"<td class='textR' rowspan='2' width='400px'>"
+									+"<table width='400px'>"
+										+"<tr>"
+											+"<td/>"
+											+"<td width='180px' class='textR' style='padding-left:5px;'>"
+												+"<div class='btn-group btn-group-lg'>"
+													+"<button type='button' class='btn btn-default' onclick='nofeel(\""+item.id+"\")' style='width: 120px;'>"
+														+"<center><img src='../img/delete.png'/>"
+														+"<font size='1' style='font-weight:bold;'>不感兴趣</font></center>"
+													+"</button>"
+												+"</div>"
+											+"</td>"
+											+"<td width='180px' class='textL' style='padding-left:5px;'>"
+												+"<div class='btn-group btn-group-lg'>"
+													+"<button id='regit' type='button' class='btn btn-default' onclick='hadfeel(\""+item.id+"\")' style='width:120px;'>"
+														+"<center><img src='../img/collection.png'/>"
+														+"<font size='1'>收藏</font></center>"
+													+"</button>"
+												+"</div>"
+											+"</td>"
+											+"<td/>"
+										+"</tr>"
+									+"</table>"
+								+"</td>"
+							+"</tr>"
+							+"<tr>"
+								+"<td class='textL'><font size='1' color='#999999'>职位：</font><font size='1'>" + item.resume + "</font></td>"
+								+"<td/>"
+							+"</tr>"
+							+"<tr>"
+							+"<td class='textL'><font size='1' color='#999999'>工作说明：</font><font size='1'>" + item.jobDescript + "</font></td>"
+							+"<td/>"
+						+"</tr>"
+							+"<tr>"
+								+"<td class='textL'><font size='1' color='#999999'>学校：</font><font size='1'>" + (item.xueli == '' ? '' : item.xueli + "，") + item.school + "</font></td>"
+								+"<td/>"
+							+"</tr>"
+						+"</table>"
+					+"</div>"
+					+"<hr/>";
+		}	
+		document.body.innerHTML=div1;
+	}
+	
+	function nofeel(id) {//不感兴趣
+		var url = "firm/selectfindusersum1.do?status=0&offerCandidateId=" + id;//状态（0：不敢兴趣，1：收藏）
+		var formId = "findusersumForm";
+		var data = ajaxSumbit(url, formId);
+		if(data == 'success'){
+			alert("下次不再为您提供该候选人信息");
+			window.location.href="mainfinduser_sum.jsp";
+		}
+	}
+	
+	function hadfeel(id) {//收藏
+		var url = "firm/selectfindusersum1.do?status=1&offerCandidateId=" + id;//状态（0：不敢兴趣，1：收藏）
+		var formId = "findusersumForm";
+		var data = ajaxSumbit(url, formId);
+		if(data == 'success'){
+			alert("收藏成功");
+			window.location.href="mainfinduser_sum.jsp";
+		}
+	}
+	
+	function goView(id){
+		var url = "login/sessionPutUser.do";
+		var data = ajaxSumbitNoform(url, id);
+		top.location.href='resume_view.jsp';
+		/* var url = "firm/findUserInformation.do?offerCandidateId="+id;
+		var formId = "findusersumForm";
+		var data = ajaxSumbit(url, formId);
+		if(data == 'success'){
+			top.location.href='resume_view.jsp';
+		} */
+	}
+</script>
+<style>
+	.getColor{
+		background-color:#FFF;
+	}
+	.getTdColor{
+		background-color:#00B38A;
+		cursor:pointer;
+	}
+	.getTdColor:focus{
+		background-color:#FFF;
+		}
+	.getTdColor:hover{
+		background-color:#FFF;
+	}
+</style>
+	<form id="findusersumForm">
+		<input type="hidden" id="pageId" name="pageId"/>
+		<input type="hidden" id="citybutton" name="citybutton"/>
+		<input type="hidden" id="jobbutton" name="jobbutton"/>
+		<input type="hidden" id="workbutton" name="workbutton"/>
+		<input type="hidden" id="allorpair" name="allorpair"/>
+		<input type="hidden" id="firmsaved" name="firmsaved"/>
+		<input type="hidden" id="firstIn" name="firstIn"/>
+	</form>
+<body onload="init()">
+</body>
+</html>
+ --%>

@@ -1,0 +1,94 @@
+package com.offer.service.impl;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.offer.dao.BaseDao;
+import com.offer.model.OfferInvite;
+import com.offer.service.OfferInviteChatService;
+import com.offer.service.OfferInviteService;
+import com.offer.util.ConUtil;
+
+@Service("offerInviteService")
+public class OfferInviteServiceImpl extends BaseServiceImpl implements OfferInviteService {
+   
+   @Override
+   public void saveOfferInviteWithChat(Map<String, String> map) throws Exception {
+      OfferInvite offerInvite = new OfferInvite();
+      conUtil.mapToObject(offerInvite, map);
+      baseDao.save(offerInvite);
+      map.put("inviteId", offerInvite.getId() + "");
+      offerInviteChatService.saveOfferInviteChat(map);
+   }
+   
+   @Override
+   public List<Map<String, String>> getOfferInvites(Map<String, String> map) throws Exception {
+      StringBuffer sql = new StringBuffer();
+      String firmId = map.get("firmId");
+      sql.append(" WHERE FIRM_ID " + firmId + "' ");
+      String status = map.get("status");
+      if (status != null && status.length() > 0) {
+         sql.append(" AND STATUS IN (" + status + ") ");
+      }
+      map.put("param", sql.toString());
+      return baseDao.findByQuery("/sql/sql_invite.xml", map);
+   }
+   
+   @Override
+   public List<OfferInvite> getOfferInvites(String id) throws Exception {
+      Map<String, String> map = new HashMap<String, String>();
+      map.put("id", id);
+      return (List<OfferInvite>) baseDao.findField(OfferInvite.class, map);
+   }
+   
+   @Override
+   public void updateOfferInvite(OfferInvite offerInvite) throws Exception {
+      baseDao.update(offerInvite);
+   }
+   
+   @Override
+   public void updateOfferInvite(Map<String, String> map) throws Exception {
+      OfferInvite offerInvite = new OfferInvite();
+      conUtil.mapToObject(offerInvite, map);
+      baseDao.update(offerInvite);
+   }
+
+   @Override
+   public void deleteOfferInvite(String ids) throws Exception {
+      String[] id = ids.split(",");
+      Integer[] del_ids = new Integer[id.length];
+      for (int i = 0; i < id.length; i++) {
+         del_ids[i] = Integer.parseInt(id[i]);
+      }
+      baseDao.deleteByIds(del_ids, OfferInvite.class);
+   }
+   
+   @Override
+   public List<OfferInvite> getOfferInvitesforUserId(String id) throws Exception {
+	      Map<String, String> map = new HashMap<String, String>();
+	      map.put("firm_id", id);
+	      return (List<OfferInvite>) baseDao.findField(OfferInvite.class, map);
+   }
+   
+   @Override
+   public List<OfferInvite> getOfferInvitesforcandaId(String id,String firmId) throws Exception {
+	      Map<String, String> map = new HashMap<String, String>();
+	      map.put("candidate_id", id);
+	      map.put("firm_id", firmId);
+	      return (List<OfferInvite>) baseDao.findField(OfferInvite.class, map);
+   }
+   
+   @Autowired
+   private BaseDao baseDao;
+   
+   @Autowired
+   private ConUtil conUtil;
+   
+   @Autowired
+   private OfferInviteChatService offerInviteChatService;
+
+}

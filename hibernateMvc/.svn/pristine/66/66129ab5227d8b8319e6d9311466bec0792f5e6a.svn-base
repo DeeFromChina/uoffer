@@ -1,0 +1,269 @@
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<%@include file="/common/header.jsp"%>
+<title></title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<style>
+	.gray{
+		border:1px #CCCCCC solid;
+		height:47px;
+		min-width:100px;
+	}
+</style>
+</head>
+<script language="javascript">
+	var isNowAdmin;
+	function changeColor1(der){
+		der.style.background="#999999";
+	}
+	function changeColor2(der){
+		der.style.background="#000";
+	}
+	function changeColor3(der){
+		der.style.background="#00B38A";
+		der.style.color="#FFF";
+	}
+	function changeColor4(der){
+		der.style.background="#FFF";
+		der.style.color="#666666";
+	}
+	function booleanInfot(url){
+		top.location.href=url;
+	}
+	function sendemil(){
+		var url = "user/teammemberSandEmail.do";
+		var data = ajaxSumbitNoform(url, document.getElementById('tongshiEmail').value);
+		if(data == "success"){
+				alert("修改成功");
+			init();
+		}else{
+			alert("保存出错！");
+		}
+	}
+	function init(){
+		goSearch();
+	}
+	function goSearch(){
+		var url = "user/getteammenber.do";
+		var formId = "caozuoForm";
+		var data = ajaxSumbit(url, formId);
+		addIsAdmin(data.isAdmin);
+		addmessage(data.offerUsers1);
+	}
+	function addIsAdmin(items){
+		for(var i in items){
+			document.getElementById('isAdmin').value = items[i].isAdmin;
+		}
+		isNowAdmin = document.getElementById('isAdmin').value;
+	}
+	function addmessage(items){
+		var isAdmin, teamPeopleStatus;
+		var me = "<tr height='40px'>"+
+		"<td colspan='6' valign='top'>团队成员</td>"+
+			"</tr>"+
+				"<tr>"+
+					"<td class='gray textC' style='background:#E2E2E2;'>姓名</td>"+
+					"<td class='gray textC' style='background:#E2E2E2;'>职位</td>"+
+					"<td class='gray textC' style='background:#E2E2E2;'>邮箱</td>"+
+					"<td class='gray textC' style='background:#E2E2E2;'>身份</td>"+
+					"<td class='gray textC' style='background:#E2E2E2;'>状态</td>"+
+					"<td class='gray textC' style='background:#E2E2E2;'>操作</td>"+
+				"</tr>";
+		
+			for(var i in items){
+				isAdmin = items[i].isAdmin;
+				teamPeopleStatus = items[i].teamPeopleStatus;
+				me = me + "<tr>" +
+					"<td class='gray textC'>"+items[i].name+"</td>"+
+					"<td class='gray textC'>"+items[i].job+"</td>"+
+					"<td class='gray textC'>"+items[i].addree+"</td>"+
+					"<td class='gray textC'>"+items[i].shenfen+"</td>"+
+					"<td class='gray textC'>"+items[i].status+"</td>";
+				if (isNowAdmin == 1) {
+					if (isAdmin != 1) {
+						me += "<td class='gray textC'>";
+						if (teamPeopleStatus == 4) {
+							me += "<a href='#' color='00B38A' id='"+items[i].id+"' onclick='goChangeStatus(9,"+items[i].id+")'>禁用</a>";
+						}
+						else if (teamPeopleStatus == 9){
+							me += "<a href='#' color='00B38A' id='"+items[i].id+"' onclick='goChangeStatus(4,"+items[i].id+")'>启用</a>";
+						}
+						me += "&nbsp;<a href='#' id='"+items[i].id+"' onclick='goChangeAdmin("+items[i].id+")'>转移管理员</a></td>";
+					}
+					else {
+						me += "<td class='gray textC'></td>";
+					}
+				}
+				else {
+					me += "<td class='gray textC'></td>";
+				}
+				me += "</tr>";
+			}
+		document.getElementById("message").innerHTML= me;
+	}
+	
+	function goChangeAdmin( id) {
+		document.getElementById('teamPeopleId').value = id;
+		if (confirm("确定要转移管理员身份吗？请慎重考虑")) {
+			var url = "firm/changeTeamAdmin.do?";
+			var formId = "caozuoForm";
+			var data = ajaxSumbit(url, formId);
+			if (data == 'success'){
+				alert("已转移管理员！");
+			}
+			else if (data == 'error') {
+				alert("操作错误");
+				return;
+			}
+			else {
+				alert(data);
+				return;
+			}
+			goSearch();
+		}
+	}
+	
+	function goChangeStatus(status, id) {
+		document.getElementById('teamPeopleStatus').value = status;
+		document.getElementById('teamPeopleId').value = id;
+		var url = "firm/changeTeamPeopleStatus.do?";
+		var formId = "caozuoForm";
+		var data = ajaxSumbit(url, formId);
+		if (data == 'success'){
+			if (status == '9') {
+				alert("已成功禁用！");
+			}
+			else {
+				alert("已成功启用！");
+			}
+		}
+		else if (data == 'error') {
+			alert("操作错误");
+			return;
+		}
+		goSearch();
+	}
+</script>
+<body bgcolor="#F4F9F9" onload="init()">
+	<form id="caozuoForm">
+		<input type="hidden" id="teamPeopleStatus" name="teamPeopleStatus"/>
+		<input type="hidden" id="teamPeopleId" name="teamPeopleId"/>
+		<input type="hidden" id="isAdmin" name="isAdmin"/>
+	</form>
+	<div style="width:100%;height:55px;background: #000;position:absolute;top:expression(documentElement.scrollTop + 'px');position:fixed;z-index:9999;">
+		<table style="width:100%;white-space: nowrap;">
+			<tr>
+				<td width="270px" style="padding-left:150px;"><img src="../img/U-Offerlogo.png"></td>
+				<td class="textC">
+				    <button type="button" style="height:55px !important;width:80px !important;color:#FFF;background-color:#000;" class="btn dropdown-toggle" id="dropdownMenu3" data-toggle="dropdown" onmouseover="changeColor1(this)" onmouseout="changeColor2(this)" onclick="booleanInfot('finduser.jsp')">
+				    	<font size="3">候选人</font>
+				    </button>
+				    <button type="button" style="height:55px !important;width:80px !important;color:#FFF;background-color:#000;" class="btn dropdown-toggle" id="dropdownMenu2" data-toggle="dropdown" onmouseover="changeColor1(this)" onmouseout="changeColor2(this)" onclick="booleanInfot('interview.jsp')">
+				    	<font size="3">已发邀请</font>
+				    </button>
+			    </td>
+			    <td class="textC" width="270px">
+				    <button type="button" style="height:55px !important;width:80px !important;color:#FFF;background-color:#000;" class="btn dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown" onmouseover="changeColor1(this)" onmouseout="changeColor2(this)" onclick="javascript:top.location.href='personal_settings_edit.jsp'">个人设置
+				    </button>
+				    <button type="button" style="height:55px !important;width:80px !important;color:#FFF;background-color:#000;" class="btn dropdown-toggle" id="dropdownMenu4" data-toggle="dropdown" onmouseover="changeColor1(this)" onmouseout="changeColor2(this)" onclick="javascript:top.location.href='login.jsp'">退出
+				    </button>
+				</td>
+			</tr>
+		</table>
+	</div>
+	<br />
+	<br />
+	<br />
+	<br />
+	<table width="100%">
+		<tr>
+			<td width="5%" rowspan="10"/>
+			<td rowspan="10" width="250px" valign="top">
+				<table width="100%" style="background:#FFF">
+					<tr><td class="textL" style="cursor:pointer;padding-top:15px;padding-bottom:15px;padding-left:60px;padding-right:20px;" onmouseover="changeColor3(this)" onmouseout="changeColor4(this)" onclick="javascript:top.location.href='personal_settings_edit.jsp'"><font size="3">账号信息</font></td></tr>
+					<tr><td class="textL" style="background:#00B38A;color:#FFF;cursor:pointer;padding-top:15px;padding-bottom:15px;padding-left:60px;padding-right:20px;" onmouseover="changeColor3(this)" onmouseout="changeColor4(this)" onclick="javascript:top.location.href='team_member.jsp'"><font size="3">团队成员</font></td></tr>
+					<tr><td class="textL" style="cursor:pointer;padding-top:15px;padding-bottom:15px;padding-left:60px;padding-right:20px;" onmouseover="changeColor3(this)" onmouseout="changeColor4(this)" onclick="javascript:top.location.href='personal_questionnaire.jsp'"><font size="3">需求问卷</font></td></tr>
+				</table>
+			</td>
+			<td width="30px" rowspan="10" style="border-right:2px #0dad87 solid;" valign="top">
+				<table width="100%">
+					<tr height="49px"><td class="textR" style="padding-top:15px;padding-bottom:15px;"></td></tr>
+					<tr height="49px"><td class="textR" style="padding-top:15px;padding-bottom:15px;"><div class="triangle-left" style="float:right"></div></td></tr>
+					<tr height="49px"><td class="textR" style="padding-top:15px;padding-bottom:15px;"></td></tr>
+				</table>
+			</td>
+			<td class="textL">
+				<div style="background: #FFFFFF; width: 750px;padding-top:30px;">
+					<table width="100%" style="border-collapse:separate;border-spacing:30px;">
+						<tr>
+							<td>邀请同事加入招聘团队</td>
+						</tr>
+						<tr>
+							<td>
+								<font size="1">
+									发送邀请邮件给指定邮箱，被邀请人成功注册账号后既可使用U-offer
+								</font>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<table>
+									<tr>
+										<td><font size="1">输入同事邮箱</font></td>
+										<td style="padding:0px 20px;">
+											<input id="tongshiEmail" class="form-control" type="text" style="width:200px !important;"/>
+										</td>
+									</tr>
+									<tr height="60px">
+										<td/>
+										<td style="padding:0px 20px;">
+											<button type="button" class="btn btn-default" style="color:#FFF;background:#00B389;width:200px;" onclick="sendemil()">发送邀请</button>
+										</td>
+									</tr>
+								</table>
+							</td>
+						</tr>
+						<tr>
+							<td style="height:1px;background:#999999;" colspan="3"></td>
+						</tr>
+					</table>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<div style="background: #FFFFFF; width: 750px;min-height:300px;padding:0px 30px;">
+					<table width="100%" id="message">
+						<tr height="40px">
+							<td colspan="6" valign="top">团队成员</td>
+						</tr>
+						<tr>
+							<td class="gray textC" style="background:#E2E2E2;">姓名</td>
+							<td class="gray textC" style="background:#E2E2E2;">职位</td>
+							<td class="gray textC" style="background:#E2E2E2;">邮箱</td>
+							<td class="gray textC" style="background:#E2E2E2;">身份</td>
+							<td class="gray textC" style="background:#E2E2E2;">状态</td>
+							<td class="gray textC" style="background:#E2E2E2;">操作</td>
+						</tr>
+						<tr>
+							<td class="gray textC">王工</td>
+							<td class="gray textC">HR</td>
+							<td class="gray textC">123234@dfsf.com</td>
+							<td class="gray textC">管理员</td>
+							<td class="gray textC">启用中</td>
+							<td class="gray textC"><font color="00B38A">王工</font></td>
+						</tr>
+						<tr height="30px"/>
+					</table>
+				</div>
+			</td>
+		</tr>
+	</table>
+	<br/>
+	<br/>
+	<br/>
+</body>
+</html>

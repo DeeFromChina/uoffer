@@ -1,0 +1,157 @@
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<%@include file="/common/header.jsp"%>
+<title></title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+</head>
+<script language="javascript">
+	function init(){
+		var url = "login/useraccount1.do";
+		var formId = "finduserForm";
+		var data = ajaxSumbit(url, formId);
+		addinformation(data.information);
+		document.getElementById("offerCandidateId").value=data.offerCandidateId;
+		document.getElementById("firmguwen").value=data.firmguwen;
+		document.getElementById("firmguwenValue").value=data.firmguwenValue;
+		addLi(data.guwen,"guwen");
+	}
+	function addinformation(item){
+		document.getElementById("userPhoto").src=item.userPhoto;
+		document.getElementById("userName").innerText=item.userName;
+		document.getElementById("usershenfen").innerText=item.usershenfen;
+		document.getElementById("zhucetime").innerText=item.zhucetime;
+		document.getElementById("newtime").innerText=item.newtime;
+		//document.getElementById("firmName").innerText=item.firmName;
+		document.getElementById("job").innerText=item.job;
+		document.getElementById("phone").innerText=item.phone;
+		document.getElementById("tongzhi").innerText=item.tongzhi;
+		document.getElementById("status").innerText=item.status;
+		document.getElementById("gewenbeizhu").innerText=item.beizhu;
+		document.getElementById("beizhu").value=item.beizhu;
+	}
+	//下拉列表
+	function addLi(items,liId){
+		var inn = "";
+		for(var i in items){
+			inn = inn + "<li role='presentation'>"
+				+"<a role='menuitem' onclick='selectDownValue(" + items[i].id +",\"" + items[i].value +"\",\""+liId+"\")'><font color='#000'>" + items[i].value
+				+"</font></a></li>";
+		}
+		document.getElementById(liId).innerHTML=inn;
+	}
+	function selectDownValue(ke, val, targetInput){
+		var ti1 = "firm" + targetInput;
+		var ti2 = "firm" + targetInput + "Value";
+		document.getElementById(ti1).value=ke;
+		document.getElementById(ti2).value=val;
+	}
+	
+	function validateCode() {
+		var firmguwen = document.getElementById('firmguwen').value;
+		var beizhu = document.getElementById('beizhu').value;
+		var url = "firm/changeUserStatus.do?firmguwen="+firmguwen+"&beizhu="+beizhu;
+		var formId = "finduserForm";
+		var data = ajaxSumbit(url, formId);
+		if(data == "success"){
+			alert("提交成功!");
+		}else{
+			alert("保存出错!");
+		}
+		window.location.href="user_account.jsp";
+	}
+</script>
+<body bgcolor="#FFF" onload="init()">
+	<form id="finduserForm">
+		<input type="hidden" name="offerCandidateId" id="offerCandidateId"/>
+	
+	</form>
+	<div style="width:100%;padding:60px 200px;">
+		<table width="100%" style="border-bottom:1px #CCCCCC solid;">
+			<tr>
+				<td style="width:130px;" rowspan="3">
+					<img src="../img/changjinglu.jpg" width="120px" height="120px" id="userPhoto"/>
+				</td>
+				<td valign="bottom" style="padding-left:40px;">
+					<font size="1" id="userName">捂脸</font>
+					<font size="1" color="#3CBAFF" id="usershenfen">管理员</font>
+				</td>
+			</tr>
+			<tr>
+				<td valign="bottom" style="height:25px;padding-left:40px;">
+					<font size="1" id="zhucetime">注册时间：1017年07月17日</font>
+				</td>
+			</tr>
+			<tr>
+				<td valign="top" style="height:15px;padding-left:40px;">
+					<font size="1" id="newtime">最新登陆：1017年07月17日</font>
+				</td>
+			</tr>
+			<tr>
+				 <td height="40px" colspan="2"></td>
+			</tr>
+		</table>
+		<table width="100%" style="border-bottom:1px #CCCCCC solid;border-collapse:separate;border-spacing:20px;" cellpadding="10">
+			<!-- <tr>
+				<td width="100px"><font size="1">公司</font></td>
+				<td><font size="1" color="#3CBAFF" id="firmName">百度</font></td>
+			</tr> -->
+			<tr>
+				<td width="100px"><font size="1">期望职位</font></td>
+				<td><font size="1" color="#3CBAFF" id="job">CEO</font></td>
+			</tr>
+			<tr>
+				<td width="100px"><font size="1">手机</font></td>
+				<td><font size="1" color="#3CBAFF" id="phone">133464356</font></td>
+			</tr>
+			<tr>
+				<td width="100px"><font size="1">通知信息</font></td>
+				<td><font size="1" color="#3CBAFF" id="tongzhi">已开启：邮件通知，邮件订阅</font></td>
+			</tr>
+			<tr>
+				<td width="100px"><font size="1">目前状态</font></td>
+				<td><font size="1" color="#FE9B00" id="status">审核中</font></td>
+			</tr>
+			<tr>
+				<td width="100px"><font size="1">顾问备注</font></td>
+				<td id="gewenbeizhu"></td>
+			</tr>
+		</table>
+		<table width="100%" style="border-collapse:separate;border-spacing:20px;">
+			<tr>
+				<td><font size="1">顾问审核</font></td>
+			</tr>
+			<tr>
+				<td>
+					<div class="input-group" style="width: 100%;">
+						<div class="dropdown" style="">
+							<input type="hidden" id="firmguwen" name="firmguwen"/>
+							<input type="text" name="firmguwenValue" id="firmguwenValue" class="form-control" style="margin-left:-20px;width: 164px !important">
+						    <button type="button" style="width:41px;height:41px !important;background-color:#3CBAFF;color:#FFF;" class="btn dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown">
+						        <span class="caret"></span>
+						    </button>
+						    <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1" style="margin-left:-20px;width: 200px !important" id="guwen">
+						        
+						    </ul>
+						</div>
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<textarea placeholder="顾问审核备注" rows="8" style="width:100%;" id="beizhu" name="beizhu"></textarea>
+				</td>
+			</tr>
+			<tr>
+				<td class="textR">
+					<button type="button" class="btn btn-primary" onclick="validateCode()" data-toggle="button"
+						style="background-color: #3CBAFF; border-color: #3CBAFF; color:#FFF; width: 150px;">
+						确认提交</button>
+				</td>
+			</tr>
+		</table>
+	</div>
+</body>
+</html>

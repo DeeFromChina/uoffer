@@ -1,0 +1,438 @@
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<%@include file="/common/header.jsp"%>
+<title></title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+</head>
+<style>
+</style>
+<script language="javascript">
+
+	function init(){
+		var url = "user/resumeedit3.do";
+		var formId = "finduserForm";
+		var data = ajaxSumbit(url, formId);
+		
+// 		addLi(data.status,"status");
+		addJobF(data.jobF,"jobF");
+		addCheckJob(data.nowJobList);
+		editCheckJob(data.jobId1,data.jobId2, data.jobvalue1, data.jobvalue2);
+		$("#finduserForm").populateForm(data);
+		//document.getElementById("offerUserDescription").value = data.offerUserDescription;
+	}
+	function editCheckJob(job1, job2, jobname1, jobname2){
+		if(job1 != undefined){
+			document.getElementById(job1).setAttribute("class","icheckbox_square-green checked");
+			editworkyears(job1, jobname1, 1);
+		}
+		if(job2 != undefined){
+			document.getElementById(job2).setAttribute("class","icheckbox_square-green checked");
+			editworkyears(job2, jobname2, 2);
+		}
+	}
+	//求职方向
+	function addJobF(items){
+		var inn = "";
+		for(var i in items){
+			inn = inn + "<li role='presentation'>"
+				+"<a role='menuitem' onclick='offerJobValue(" + items[i].id +",\"" + items[i].value +"\")'><font color='#000'>" + items[i].value
+				+"</font></ a></li>";
+		}
+		document.getElementById("jobF").innerHTML=inn;
+	}
+	function offerJobValue(ke, val){
+		document.getElementById("offerJobId").value=ke;
+		document.getElementById("offerJobValue").value=val;
+	}
+	function selectDownValue(ke, val, targetInput){
+		var ti1 = "firm" + targetInput;
+		var ti2 = "firm" + targetInput + "Value";
+		document.getElementById(ti1).value=ke;
+		document.getElementById(ti2).value=val;
+	}
+	function test(){
+		init();
+		parent.document.getElementById("main1").height=0;
+		parent.document.getElementById("main1").height=document.body.scrollHeight;
+	}
+	//添加城市
+	function addCity(items){
+		var citys = "<tr>"
+						+"<td width='5%'/><td width='20%'/>"
+						+"<td width='5%'/><td width='20%'/>"
+						+"<td width='5%'/><td width='20%'/>"
+						+"<td width='5%'/><td width='20%'/>"
+					+"</tr>";
+		var j = 1;
+		for(var i in items){
+			if(j == 1){
+				citys = citys + "<tr>";
+			}
+			citys = citys + "<td class='textR' style='padding-top:10px;padding-bottom:10px;'>"
+							+"<div class='icheckbox_square-green hover' onclick='cityId(this)' id='"+items[i].id+"'>"
+								+"<input type='hidden' value='city'/>"
+								+"<input tabindex='2' type='checkbox' style='opacity:0;'>"
+							+"</div>"
+						+"</td>"
+						+"<td class='textL'><font size='2'>"+items[i].value+"</font></td>";
+			if(j == 4){
+				citys = citys + "</tr>";
+				j = 1;
+			}else{
+				j = j+1;
+			}
+		}
+		citys = citys + "";
+		document.getElementById('city').innerHTML=citys;
+	}
+	function cityId(obj){
+		if(obj.getAttribute('class') == "icheckbox_square-green checked"){
+			obj.setAttribute("class","icheckbox_square-green hover");
+		}
+		else if(obj.getAttribute('class') == "icheckbox_square-green hover"){
+			obj.setAttribute("class","icheckbox_square-green checked");
+		}
+	}
+	function selected(obj){
+		$(".circleA").each(function () {
+			if(obj.id.indexOf('j') > -1 && this.id.indexOf('j') > -1){
+				this.setAttribute("class","circleB");
+			}
+			if(obj.id.indexOf('i') > -1 && this.id.indexOf('i') > -1){
+				this.setAttribute("class","circleB");
+			}
+		});
+		obj.setAttribute("class","circleA");
+		if(obj.id.indexOf('j') > -1){
+			document.getElementById("jobstatus").value=obj.id;
+		}
+		if(obj.id.indexOf('i') > -1){
+			document.getElementById("intime").value=obj.id;
+		}
+	}
+	//职位
+	function jobId(job){
+		var jobNum = 1;
+		if(job.getAttribute('class') == "icheckbox_square-green checked"){
+			delworkyears(job);
+			job.setAttribute("class","icheckbox_square-green hover");
+		}
+		else if(job.getAttribute('class') == "icheckbox_square-green hover"){
+			$(".checked").each(function () {
+				jobNum = jobNum + 1;
+	        });
+			if(jobNum > 2){
+				alert("最多选择两项");
+				return;
+			}
+			addworkyears(job);
+			job.setAttribute("class","icheckbox_square-green checked");
+		}
+	}
+	//职位年限
+	function addworkyears(obj){
+		var jobId;
+		var jobName;
+		var jobtitle;
+		if(document.getElementById("job1").getElementsByTagName("td")[0] == undefined){
+			jobId = "job1";
+			jobName = "jobyear1";
+			jobtitle = "job1_title";
+		}else if(document.getElementById("job2").getElementsByTagName("td")[0] == undefined){
+			jobId = "job2";
+			jobName = "jobyear2";
+			jobtitle = "job2_title";
+		}
+		document.getElementById(jobtitle).innerHTML = "<td/><td colspan='2'>您在"+obj.getElementsByTagName("input")[0].value+"岗位上有多长时间的工作经验</td>";
+		document.getElementById(jobId).innerHTML = "<td/>"
+		 +"<td colspan='3' class='textL'>"
+		 	+"<div class='input-group' style='margin-left:0px !important;width: 56% !important'>"
+				+"<div class='dropdown'>"
+			 		+"<input type='text' name='"+jobName+"' id='"+jobName+"' class='form-control' style='width: 80% !important' readOnly>"
+			 		+"<button type='button' style='height:34px !important;background-color:#E6E6E6;' class='btn dropdown-toggle' id='dropdownMenu1' data-toggle='dropdown'>"
+			 			+"<span class='caret'></span>"
+			 		+"</button>"
+				 	+"<ul class='dropdown-menu' role='menu' aria-labelledby='dropdownMenu1' style='width: 90% !important'>"
+				 		+"<li role='presentation'>"
+				 			+"<a role='menuitem' tabindex='-1' onclick=\"workTime('1年','"+jobName+"')\"><font color='#000'>1年</font></a>"
+				 			+"<a role='menuitem' tabindex='-1' onclick=\"workTime('一至三年','"+jobName+"')\"><font color='#000'>一至三年</font></a>"
+				 			+"<a role='menuitem' tabindex='-1' onclick=\"workTime('三至五年','"+jobName+"')\"><font color='#000'>三至五年</font></a>"
+				 			+"<a role='menuitem' tabindex='-1' onclick=\"workTime('五年以上','"+jobName+"')\"><font color='#000'>五年以上</font></a>"
+				 		+"</li>"
+				 	+"</ul>"
+		 		+"</div>"
+		 	+"</div>"
+		 +"</td>"
+		 ;
+	}
+	function editworkyears(jobId, jobN, a){
+		var jobId;
+		var jobName;
+		var jobtitle;
+		if(a == 1){
+			jobId = "job1";
+			jobName = "jobyear1";
+			jobtitle = "job1_title";
+		}
+		if(a == 2){
+			jobId = "job2";
+			jobName = "jobyear2";
+			jobtitle = "job2_title";
+		}
+		document.getElementById(jobtitle).innerHTML = "<td/><td colspan='2'>您在"+jobN+"岗位上有多长时间的工作经验</td>";
+		document.getElementById(jobId).innerHTML = "<td/>"
+		 +"<td colspan='3' class='textL'>"
+		 	+"<div class='input-group' style='margin-left:0px !important;width: 56% !important'>"
+				+"<div class='dropdown'>"
+			 		+"<input type='text' name='"+jobName+"' id='"+jobName+"' class='form-control' style='width: 80% !important' readOnly>"
+			 		+"<button type='button' style='height:34px !important;background-color:#E6E6E6;' class='btn dropdown-toggle' id='dropdownMenu1' data-toggle='dropdown'>"
+			 			+"<span class='caret'></span>"
+			 		+"</button>"
+				 	+"<ul class='dropdown-menu' role='menu' aria-labelledby='dropdownMenu1' style='width: 90% !important'>"
+				 		+"<li role='presentation'>"
+				 			+"<a role='menuitem' tabindex='-1' onclick=\"workTime('1年','"+jobName+"')\"><font color='#000'>1年</font></a>"
+				 			+"<a role='menuitem' tabindex='-1' onclick=\"workTime('一至三年','"+jobName+"')\"><font color='#000'>一至三年</font></a>"
+				 			+"<a role='menuitem' tabindex='-1' onclick=\"workTime('三至五年','"+jobName+"')\"><font color='#000'>三至五年</font></a>"
+				 			+"<a role='menuitem' tabindex='-1' onclick=\"workTime('五年以上','"+jobName+"')\"><font color='#000'>五年以上</font></a>"
+				 		+"</li>"
+				 	+"</ul>"
+		 		+"</div>"
+		 	+"</div>"
+		 +"</td>"
+		 ;
+	}
+	function delworkyears(job){
+		var title="您在"+job.getElementsByTagName("input")[0].value+"岗位上有多长时间的工作经验";
+		if(document.getElementById("job1_title").innerText == title){
+			document.getElementById("job1_title").innerHTML = "";
+			document.getElementById("job1").innerHTML = "";
+		}else if(document.getElementById("job2_title").innerText == title){
+			document.getElementById("job2_title").innerHTML = "";
+			document.getElementById("job2").innerHTML = "";
+		}
+	}
+	function workTime(jobval,jobName){
+		document.getElementById(jobName).value=jobval;
+	}
+	
+	//添加职位
+	function addCheckJob(items){
+		var jobs = "<table width='100%'>";
+		var j = 1;
+		for(var i in items){
+			if(j == 1){
+				jobs = jobs + "<tr>";
+			}
+			jobs = jobs + "<td class='textR' style='padding-top:10px;padding-bottom:10px;width:45;'>"
+							+"<div class='icheckbox_square-green hover' onclick='jobId(this)' id='"+items[i].id+"'>"
+								+"<input type='hidden' value='"+items[i].value+"'/>"
+								+"<input tabindex='2' type='checkbox' style='opacity:0;'>"
+							+"</div>"
+						+"</td>"
+						+"<td class='textL'><font size='2'>"+items[i].value+"</font></td>";
+			if(j == 4){
+				jobs = jobs + "</tr>";
+				j = 1;
+			}else{
+				j = j+1;
+			}
+		}
+		jobs = jobs + "</table>";
+		document.getElementById('checkJob').innerHTML=jobs;
+	}
+	//工作年限
+	function workTimeValue(time){
+		document.getElementById("offerUserWorktime").value=time;
+	}
+	function replaceAll(str, str1, str2) {
+		/* for (var i in str.split(str1)) {
+			str = str.replace(str1, str2);
+		}
+		return str; */
+		var lstr = ""
+		for (var i in str.split(str1)) {
+			str = str.replace(str1, str2);
+		}
+		for (var i in str.split(str2)) {
+			if (str.split(str2)[i] != '') lstr += str.split(str2)[i] + ",";
+		}
+		lstr = lstr.substring(0, lstr.length - 1);
+		return lstr;
+	}
+	function saveData(ispass) {
+		if (ispass) {
+			var jobs = "";
+			$(".checked").each(function () {
+				if(jobs != ""){
+					jobs = jobs + ",";
+				}
+				jobs = jobs + this.id
+	        });
+			document.getElementById("jobs").value=jobs;
+			if (!checkValue()) return;
+			var offerUserDescription = document.getElementById('offerUserDescription').value;
+			offerUserDescription = replaceAll(offerUserDescription, "，", ",");
+			document.getElementById('offerUserDescription').value = offerUserDescription;
+			var url = "user/saveresumeedit3.do";
+			var formId = "finduserForm";
+			var data = ajaxSumbit(url, formId);
+			if(data == 'error'){
+				alert('保存错误！');
+			}
+			else {
+				alert('保存成功！');
+				top.location.href='resume_edit.jsp';
+			}
+		}
+		else {
+			/* $(".checked").each(function () {
+				this.setAttribute("class","icheckbox_square-green hover");
+	        });
+			document.getElementById("job1_title").innerHTML = "";
+			document.getElementById("job2_title").innerHTML = "";
+			document.getElementById("job1").innerHTML = "";
+			document.getElementById("job2").innerHTML = "";
+			document.getElementById("jobs").value = "";
+			document.getElementById("offerJobId").value = "";
+			document.getElementById("reset").click(); */
+			top.location.href='resume_edit.jsp';
+		}
+	}
+	function checkValue() {
+		if(!checkInput('offerJobId',"你的职业方向","30",false)) return false;
+		if(!checkInput('offerUserWorktime',"工作年限","30",false)) return false;
+		if(!checkInput('jobs',"期望的工作岗位","30",false)) return false;
+		if(document.getElementById("jobyear1") != null) {
+			if(!checkInput('jobyear1',"工作岗位的工作经验","30",false)) return false;
+		}
+		if(document.getElementById("jobyear2") != null) {
+			if(!checkInput('jobyear2',"工作岗位的工作经验","30",false)) return false;
+		}
+		if(!checkInput('offerUserDescription',"工作技能","200",false)) return false;
+		return true;
+	}
+</script>
+<body bgcolor="#FFF" onload="test()">
+	<div style="width:100%;">
+	<form id="finduserForm">
+		<table width="100%">
+			<tr height="49px"/>
+			<tr>
+				<td width="40px"/>
+				<td colspan="2">
+					<font style="font-size:20px;" color="#4F4F4F">技能</font>
+				</td>
+				<td/>
+			</tr>
+			<tr height="48px"/>
+			<tr>
+				<td/>
+				<td>
+					<font color="#4F4F4F" style="font-size:14px;" >你的职业方向是？</font><font color="#00B38A">*</font>
+					<input type="hidden" name="offerJobId" id="offerJobId"/>
+				</td>
+			</tr>
+			<tr height="16px"/>
+			<tr>
+				<td/>
+				<td colspan="3">
+					<div class="input-group" style="width:56%;">
+						<div class="dropdown" style="width:100%;min-width:237px;">
+							<input type="text" readOnly="readOnly" class="form-control" style="width:90%;min-width:200px;" name="offerJobValue" id="offerJobValue">
+						    <button type="button" style="height:34px !important;background-color:#E6E6E6;" class="btn dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown">
+						        <span class="caret"></span>
+						    </button>
+						    <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1" style="width: 100% !important;min-width:237px;" id="jobF">
+						    </ul>
+						</div>
+					</div>
+				</td>
+			</tr>
+			<tr height="48px"/>
+			<tr>
+				<td/>
+				<td>
+					<font color="#4F4F4F" style="font-size:16px;" >工作年限</font><font color="#00B38A">*</font>
+				</td>
+			</tr>
+			<tr height="13px"/>
+			<tr>
+				<td/>
+				<td colspan="3">
+					<div class="input-group" style="width:56%;">
+						<div class="dropdown" style="width:100%;min-width:237px;">
+							<input type="text" readOnly="readOnly" class="form-control" style="width:90%;min-width:200px;" id="offerUserWorktime" name="offerUserWorktime">
+						    <button type="button" style="height:34px !important;background-color:#E6E6E6;" class="btn dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown">
+						        <span class="caret"></span>
+						    </button>
+						    <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1" style="width: 100% !important;min-width:237px;">
+						    <li role="presentation">
+					            <a role="menuitem" tabindex="-1" onclick='workTimeValue("1年")'><font color="#000">1年</font></ a><!-- href="#"  -->
+					            <a role="menuitem" tabindex="-1" onclick='workTimeValue("一至三年")'><font color="#000">一至三年</font></ a>
+					            <a role="menuitem" tabindex="-1" onclick='workTimeValue("三至五年")'><font color="#000">三至五年</font></ a>
+					            <a role="menuitem" tabindex="-1" onclick='workTimeValue("五年以上")'><font color="#000">五年以上</font></ a>
+					        </li>
+						    </ul>
+						</div>
+					</div>
+				</td>
+			</tr>
+			<tr height="56px"/>
+			<tr>
+				<td/>
+				<td>
+					<font color="#4F4F4F" style="font-size:16px;" >您期望的工作岗位是？（最多选择两项）</font><font color="#00B38A">*</font>
+					<input type="hidden" id="jobs" name="jobs"/>
+				</td>
+			</tr>
+			<tr height="13px"/>
+			<tr>
+				<td/>
+				<td colspan="3" id="checkJob">
+				</td>
+			</tr>
+			<tr id="job1_title"/>
+		 	<tr height="16px"/>
+			<tr id="job1"/>
+		 	<tr height="16px"/>
+			<tr id="job2_title"/>
+		 	<tr height="16px"/>
+			<tr id="job2"/>
+			<tr height="48px"/>
+			<tr>
+				<td/>
+				<td>
+					<font color="#4F4F4F" style="font-size:16px;" >您擅长哪些工作技能？（请用逗号分隔你的技能特长）</font><font color="#00B38A">*</font>
+				</td>
+			</tr>
+			<tr height="13px"/>
+			<tr>
+				<td/>
+				<td colspan="3">
+					<input type="text" name="offerUserDescription" id="offerUserDescription" class="form-control" style="width: 56% !important">
+				</td>
+			</tr>
+			<tr height="50px"/>
+			<tr>
+				<td/>
+				<td colspan="3" class="textC">
+					<input type="reset" name="reset" id="reset" style="display: none;" />
+					<button type="button" class="btn btn-primary" data-toggle="button" onclick="saveData(false)"
+						style="font-size:14px;border-color:#CCCCCC;color:#4F4F4F;background-color:#CCCCCC;min-width:140px;">
+						取消
+					</button>
+					<button type="button" class="btn btn-primary" data-toggle="button" onclick="saveData(true)"
+						style="margin-left:19px;font-size:14px;color:#FFF;background-color:#00B389;min-width:140px;">
+						保存
+					</button>
+				</td>
+			</tr>
+		</table>
+		</form>
+	</div>
+	<div style="width:100%;height:50px;"></div>
+</body>
+</html>

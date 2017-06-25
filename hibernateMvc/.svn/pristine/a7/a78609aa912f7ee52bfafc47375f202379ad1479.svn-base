@@ -1,0 +1,290 @@
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<%@include file="/common/header.jsp"%>
+<title></title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+</head>
+<script language="javascript">
+	function closeWindow(ret){
+		parent.closedialog(ret);
+	}
+	function init(){}
+</script>
+<body onload="init()">
+<table width="100%">
+	<tr>
+		<td width="30px"/>
+		<td width="119px">
+			<font color='#4F4F4F' style='font-size:30px;'>U -<font color="#00B38A">O</font>ffer</font>
+		</td>
+		<td width="17px"/>
+		<td width="148px">
+			<font color='#4F4F4F' style='font-size:18px;'>互联网高端招聘网</font>
+		</td>
+		<td/>
+	</tr>
+	<tr height="31px"/>
+	<tr>
+		<td width="30px"/>
+		<td colspan="4" style="height:2px;background:#CCCCCC;">
+		</td>
+	</tr>
+	<tr height="50px"/>
+	<tr>
+		<td width="30px"/>
+		<td colspan="4" class="textC">
+			<font color='#4F4F4F' style='font-size:30px;' id="userName">李先生</font>
+		</td>
+	</tr>
+	<tr height="20px"/>
+	<tr>
+		<td width="30px"/>
+		<td colspan="4" class="textC">
+			<font color='#4F4F4F' style='font-size:18px;' id="userPhone">联系电话：13560472910 | 联系邮箱：37651058@qq.com</font>
+		</td>
+	</tr>
+	<tr height="38px"/>
+	<tr>
+		<td width="30px"/>
+		<td colspan="4">
+			<table width="100%">
+				<tr>
+					<td width="40px"/>
+					<th>
+						<font color='#4F4F4F' style='font-size:20px;'>关于我</font>
+					</th>
+				</tr>
+				<tr height="14px"/>
+				<tr>
+					<td colspan="2" id="userMe">
+						<ul>
+							<li>
+								<font color='#4F4F4F' style='font-size:16px;'>目前年薪为 ¥ 28.0万，期望年薪 ¥ 36万。</font>
+							</li>
+							<li>
+								<font color='#4F4F4F' style='font-size:16px;'>目前年薪为 ¥ 28.0万，期望年薪 ¥ 36万。</font>
+							</li>
+						</ul>
+					</td>
+				</tr>
+			</table>
+		</td>
+	</tr>
+	<tr height="38px"/>
+	<tr>
+		<td/>
+		<td colspan="4">
+			<table width="100%">
+				<tr>
+					<td width="30px"/>
+					<th style="padding-left:9px;">
+						<font color='#4F4F4F' style='font-size:20px;'>技能</font>
+					</th>
+				</tr>
+				<tr height="14px"/>
+				<tr>
+					<td/>
+					<td>
+						<font color='#4F4F4F' style='font-size:16px;' id="userStill">
+							3年技术<br/>期望职位：
+						</font>
+					</td>
+				</tr>
+			</table>
+		</td>
+	</tr>
+	<tr height="38px"/>
+	<tr>
+		<td/>
+		<td colspan="4">
+			<table width="100%">
+				<tr>
+					<td width="30px"/>
+					<th style="padding-left:9px;" colspan="2">
+						<font color='#4F4F4F' style='font-size:20px;'>工作经历</font>
+					</th>
+				</tr>
+				<tr height="14px"/>
+				<tr>
+					<td/>
+					<td id="userStill">
+						<table width="100%">
+							<tr>
+								<td>
+									<font color='#4F4F4F' style='font-size:16px;'>
+										广州闻乐教育科技有限公司
+									</font>
+								</td>
+								<td class="textR">
+									<font color='#4F4F4F' style='font-size:16px;'>
+										2015.11 — 现在
+									</font>
+								</td>
+								<td width="8%"/>
+							</tr>
+							<tr height="20px"/>
+							<tr>
+								<td colspan="2">
+									 java软件 程师 
+								</td>
+								<td/>
+							</tr>
+							<tr>
+								<td colspan="2">
+									 负责数据库设计,程序设计,需求分析,核负责数据库设计,程序设计,需求分析,核负责数据库设计,程序设计,需求分析,核
+								</td>
+								<td/>
+							</tr>
+						</table>
+						<table width="100%">
+							<tr height="50px"/><!-- 注意这里的高度，除了第一个没有下面的都会有 -->
+							<tr>
+								<td>
+									<font color='#4F4F4F' style='font-size:16px;'>
+										广州闻乐教育科技有限公司
+									</font>
+								</td>
+								<td class="textR">
+									<font color='#4F4F4F' style='font-size:16px;'>
+										2015.11 — 现在
+									</font>
+								</td>
+								<td width="8%"/>
+							</tr>
+							<tr height="20px"/>
+							<tr>
+								<td colspan="2">
+									 java软件 程师 
+								</td>
+								<td/>
+							</tr>
+							<tr>
+								<td colspan="2">
+									 负责数据库设计,程序设计,需求分析,核负责数据库设计,程序设计,需求分析,核负责数据库设计,程序设计,需求分析,核
+								</td>
+								<td/>
+							</tr>
+						</table>
+					</td>
+				</tr>
+			</table>
+		</td>
+	</tr>
+	<tr height="38px"/>
+	<tr>
+		<td/>
+		<td colspan="4">
+			<table width="100%">
+				<tr>
+					<td width="30px"/>
+					<th style="padding-left:9px;" colspan="2">
+						<font color='#4F4F4F' style='font-size:20px;'>教育经历</font>
+					</th>
+				</tr>
+				<tr height="14px"/>
+				<tr>
+					<td/>
+					<td id="userStill">
+						<table width="100%">
+							<tr>
+								<td>
+									<font color='#4F4F4F' style='font-size:16px;'>
+										广州闻乐教育科技有限公司
+									</font>
+								</td>
+								<td class="textR">
+									<font color='#4F4F4F' style='font-size:16px;'>
+										2015.11 — 现在
+									</font>
+								</td>
+								<td width="8%"/>
+							</tr>
+							<tr height="20px"/>
+							<tr>
+								<td colspan="2">
+									 java软件 程师 
+								</td>
+								<td/>
+							</tr>
+							<tr>
+								<td colspan="2">
+									 负责数据库设计,程序设计,需求分析,核负责数据库设计,程序设计,需求分析,核负责数据库设计,程序设计,需求分析,核
+								</td>
+								<td/>
+							</tr>
+						</table>
+						<table width="100%">
+							<tr height="50px"/><!-- 注意这里的高度，除了第一个没有下面的都会有 -->
+							<tr>
+								<td>
+									<font color='#4F4F4F' style='font-size:16px;'>
+										广州闻乐教育科技有限公司
+									</font>
+								</td>
+								<td class="textR">
+									<font color='#4F4F4F' style='font-size:16px;'>
+										2015.11 — 现在
+									</font>
+								</td>
+								<td width="8%"/>
+							</tr>
+							<tr height="20px"/>
+							<tr>
+								<td colspan="2">
+									 java软件 程师 
+								</td>
+								<td/>
+							</tr>
+							<tr>
+								<td colspan="2">
+									 负责数据库设计,程序设计,需求分析,核负责数据库设计,程序设计,需求分析,核负责数据库设计,程序设计,需求分析,核
+								</td>
+								<td/>
+							</tr>
+						</table>
+					</td>
+				</tr>
+			</table>
+		</td>
+	</tr>
+	<tr height="38px"/>
+	<tr>
+		<td/>
+		<td colspan="4">
+			<table width="100%">
+				<tr>
+					<td width="30px"/>
+					<th style="padding-left:9px;">
+						<font color='#4F4F4F' style='font-size:20px;'>个人描述</font>
+					</th>
+				</tr>
+				<tr height="14px"/>
+				<tr>
+					<td/>
+					<td>
+						<font color='#4F4F4F' style='font-size:16px;' id="userDescription">
+							本⼈性格开朗，积极主动，为⼈热情，待⼈友好，乐于帮助他，平易近，善于与沟通；为诚实谦虚，作勤奋 ，认真负责，分内的事⼀定会做好；能吃苦耐劳，认真好学，喜欢钻研，喜欢折腾电脑，喜欢尝试新技术。
+						</font>
+					</td>
+				</tr>
+			</table>
+		</td>
+	</tr>
+	<tr height="87px"/>
+	<tr>
+		<td colspan="5" class="textC">
+			<button id="pdf" type="button" class="btn btn-default" style="width:200px;height:40px;color:#000;background:#CCCCCC;border:none;border-radius:40px;" onclick="closeWindow(false)">
+	   			<font size="1">取消</font>
+	   		</button>
+			<button id="pdf" type="button" class="btn btn-default" style="margin-left:30px;width:200px;height:40px;color:#FFF;background:#00B389;border:none;border-radius:40px;" onclick="closeWindow(true)">
+	   			<font size="1">确定下载</font>
+	   		</button>
+   		</td>
+	</tr>
+	<tr height="87px"/>
+</table>
+</body>
+</html>

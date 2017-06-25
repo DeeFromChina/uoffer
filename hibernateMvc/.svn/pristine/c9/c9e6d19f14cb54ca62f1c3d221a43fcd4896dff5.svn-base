@@ -1,0 +1,65 @@
+<sqls>
+	<sql><!--  orderBy="id" -->
+		SELECT 
+			U.ID,
+			U.OFFER_USER_NAME AS offerUserName,
+			U.OFFER_USER_PHONE AS offerUserPhone,
+			U.STATUS AS uStatus,
+			U.OFFER_JOB_ID AS offerJobId,
+			F.ID AS offerFirmId,
+			F.OFFER_NAME AS offerName,
+			F.OFFER_EMAIL AS offerEmail,
+			F.STATUS AS fStatus,
+			F.CREATE_TIME AS fCreateTime,
+			F.ADMIN_ID AS adminId,
+			I.ID AS offerFirmInformationId,
+			I.FIRM_ALL_NAME AS firmAllName,
+			I.FIRM_SIMPLE_NAME AS firmSimpleName,
+			I.FIRM_WEB_LINK AS firmWebLink,
+			I.FIRM_CITY AS firmCity,
+			I.firmxuqiu AS firmxuqiu,
+			OC.CITY_NAME AS cityName,
+			I.FIRM_ADDRESS AS firmAddress,
+			I.AREA_ID AS areaId,
+			I.FIRM_CREATE_YEAR AS firmCreateYear,
+			I.FIRM_SIZE AS firmSize,
+			I.FIRM_TEAM_SIZE AS firmTeamSize,
+			I.FIRM_STAGE AS firmStage,
+			OS.ID AS firmStageId,
+			I.FIRM_DESCRIPT AS firmDescript,
+			I.ISPHOTO AS isphoto,
+			I.FIRM_JOB_ID AS firmJobId,
+			I.FIRM_ONE_DESCRIPT AS firmOneDescript,
+			II.ID AS offerFirmIntroduceId,
+			II.FIRM_DESCRIPT AS FIRM_INTRODUCE_DESCRIPT,
+			P.ID AS offerFirmProduceId,
+			P.PRODUCE_DESCRIPT AS produceDescript,
+			R.ID AS offerFirmReportId,
+			R.REPORT_LINK AS reportLink,
+			T.ID AS offerFirmTechologyId,
+			T.FIRM_SEO AS firmSeo,
+			W.ID AS offerFirmWelfareId,
+			W.WELFARE_ID AS welfareId,
+			N.NUM AS num
+		FROM offer_user U 
+		LEFT JOIN offer_firm F ON F.ID = U.FIRM_ID
+		LEFT JOIN offer_firm_information I ON U.FIRM_ID = I.FIRM_ID
+		LEFT JOIN offer_firm_introduce II ON U.FIRM_ID = II.FIRM_ID
+		LEFT JOIN offer_firm_produce P ON U.FIRM_ID = P.FIRM_ID
+		LEFT JOIN offer_firm_report R ON U.FIRM_ID = R.FIRM_ID
+		LEFT JOIN offer_firm_technology T ON U.FIRM_ID = T.FIRM_ID
+		LEFT JOIN offer_firm_welfare W ON U.FIRM_ID = W.FIRM_ID
+		LEFT JOIN offer_stage OS ON OS.OFFER_STAGE = I.FIRM_STAGE
+		LEFT JOIN offer_city OC ON OC.ID = I.FIRM_CITY
+		LEFT JOIN (
+			SELECT F.ID, COUNT(*) AS NUM
+			FROM offer_firm F 
+			LEFT JOIN offer_user U ON U.FIRM_ID = F.ID
+			WHERE U.ISOFFER = '2' GROUP BY F.ID
+		) N ON N.ID = U.FIRM_ID
+		{#param}
+		<!-- GROUP BY U.ID -->
+		<!-- LEFT JOIN OFFER_FIRM_WELFARE W ON F.ID = W.FIRM_ID -->
+		<param value="param"/>
+	</sql>
+</sqls>

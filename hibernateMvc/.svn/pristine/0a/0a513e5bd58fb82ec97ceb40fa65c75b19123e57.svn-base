@@ -1,0 +1,340 @@
+package com.offer.service.impl;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.offer.dao.BaseDao;
+import com.offer.model.OfferUser;
+import com.offer.model.OfferUserEducation;
+import com.offer.model.OfferUserInformation;
+import com.offer.model.OfferUserPlanWorkPlace;
+import com.offer.model.OfferUserShield;
+import com.offer.model.OfferUserWorks;
+import com.offer.service.BaseService;
+import com.offer.service.OfferUserInformationService;
+import com.offer.service.OfferUserService;
+import com.offer.util.ConUtil;
+
+@Service("offerUserInformationService")
+public class OfferUserInformationServiceImpl extends BaseServiceImpl implements OfferUserInformationService{
+	
+	@Override
+	public void saveOfferUserInfo(Map<String, String> map)
+			throws Exception {
+		   try {
+		      OfferUserInformation offerUserInformation = new OfferUserInformation();
+		      offerUserInformation = (OfferUserInformation) conUtil.mapToObject(offerUserInformation, map);
+            baseDao.save(offerUserInformation);
+		   } catch (Exception e) {
+	         e.printStackTrace();
+	      } 
+		
+	}
+
+   @Override
+	public List<OfferUserInformation> getOfferUserInformation(int id) throws Exception {
+	   return (List<OfferUserInformation>) baseDao.findField(OfferUserInformation.class, id);
+	}
+
+   @Override
+   public void updateOfferUserInformation(OfferUserInformation offerUserInformation) throws Exception {
+      baseDao.update(offerUserInformation);
+   }
+
+   @Override
+   public void deleteOfferUserInformation(String ids) throws Exception {
+      String[] id = ids.split(",");
+      Integer[] del_ids = new Integer[id.length];
+      for (int i = 0; i < id.length; i++) {
+         del_ids[i] = Integer.parseInt(id[i]);
+      }
+      baseDao.deleteByIds(del_ids, OfferUserInformation.class);
+   }
+   
+   @Override
+   public List<Map<String, String>> getOfferUserInformationByOfferUserId(Map<String, String> findMap) throws Exception {
+      try {
+         StringBuffer sql = new StringBuffer();
+         sql.append(" WHERE 1=1 ");
+         String str = findMap.get("offerUserId") == null ? "" : findMap.get("offerUserId");
+         if (!"".equals(str)) {
+            sql.append(" AND U.ID = '" + str + "' ");
+         }
+         str = findMap.get("isoffer") == null ? "" : findMap.get("isoffer");
+         if (!"".equals(str)) {
+            sql.append(" AND isoffer = '" + str + "' ");
+         }
+         str = findMap.get("offerUserAddress") == null ? "" : findMap.get("offerUserAddress");
+         if (!"".equals(str)) {
+            sql.append(" AND I.offer_user_address = '" + str + "' ");
+         }
+         str = findMap.get("status") == null ? "" : findMap.get("status");
+         if (!"".equals(str)) {
+            sql.append(" AND u.status = '" + str + "' ");
+         }
+         str = findMap.get("offerJobId") == null ? "" : findMap.get("offerJobId");
+         if (!"".equals(str)) {
+            sql.append(" AND u.offer_job_id = '" + str + "' ");
+         }
+         findMap.put("param", sql.toString());
+         return baseDao.findByQuery("/sql/sql_offer_user_information.xml", findMap);
+      } catch (Exception e) {
+         e.printStackTrace();
+      }
+      return null;
+   }
+   
+   @Override
+   public List<Map<String, String>> getOfferUserInformations(Map<String, String> findMap) throws Exception {
+      try {
+         StringBuffer sql = new StringBuffer();
+         sql.append(" WHERE 1=1 ");
+         String id = findMap.get("offerUserId");
+         if (!"".equals(id)) {
+            sql.append(" AND U.ID = '" + id + "' ");
+         }
+         findMap.put("param", sql.toString());
+         return baseDao.findByQuery("/sql/sql_offer_user_information.xml", findMap);
+      } catch (Exception e) {
+         e.printStackTrace();
+      }
+      return null;
+   }
+
+   @Override
+   public void saveResumeAddInformation1(Map<String, String> map) throws Exception {
+      String offerUserInformationId = map.get("offerUserInformationId").equals("null") ? "" : map.get("offerUserInformationId");
+      
+      OfferUserInformation offerUserInformation;
+      if ("".equals(offerUserInformationId)) {
+         offerUserInformation = new OfferUserInformation();
+      }
+      else {
+         offerUserInformation = getOfferUserInformation(Integer.valueOf(offerUserInformationId)).get(0);
+         map.put("id", offerUserInformationId);
+      }
+      
+      String[] jobs = map.get("jobs").split(",");
+      int i = 1;
+      for (String string : jobs) {
+         map.put("offerUserJob" + i++, string);
+      }
+      String jobyear1 = map.get("jobyear1");
+      String jobyear2 = map.get("jobyear2");
+      map.put("offerHaveExperience1", jobyear1);
+      map.put("offerHaveExperience2", jobyear2);
+      
+      conUtil.mapToObject(offerUserInformation, map);
+      baseDao.saveOrUpdate(offerUserInformation);
+      
+      String offerUserId = map.get("offerUserId");
+      OfferUser offerUser = offerUserService.getOfferUser(Integer.valueOf(offerUserId));
+      map.put("id", offerUserId);
+      conUtil.mapToObject(offerUser, map);
+      baseDao.update(offerUser);
+   }
+   
+   public void saveResumeAddPlanjob1(Map<String, String> map) throws Exception {
+      String offerUserInformationId = map.get("offerUserInformationId");
+      OfferUserInformation offerUserInformation = getOfferUserInformation(Integer.valueOf(offerUserInformationId)).get(0);
+
+      map.put("id", offerUserInformationId);
+      map.put("offerUserWorkPlace", map.get("workplace"));
+      map.put("offerUserLikeFirmStage", map.get("firmIds"));
+      conUtil.mapToObject(offerUserInformation, map);
+      baseDao.update(offerUserInformation);
+      
+      OfferUserPlanWorkPlace offerUserPlanWorkPlace;
+      
+      String offerUserPlanWorkPlaceId = map.get("offerUserPlanWorkPlaceId").equals("null") ? "" : map.get("offerUserPlanWorkPlaceId");
+      if ("".equals(offerUserPlanWorkPlaceId)) {
+         offerUserPlanWorkPlace = new OfferUserPlanWorkPlace();
+         map.put("id", "");
+      }
+      else {
+         offerUserPlanWorkPlace = ((List<OfferUserPlanWorkPlace>) baseDao.findField(OfferUserPlanWorkPlace.class, offerUserPlanWorkPlaceId)).get(0);
+         map.put("id", offerUserPlanWorkPlaceId);
+      }
+
+      map.put("offerCityId", map.get("cityIds"));
+      
+      conUtil.mapToObject(offerUserPlanWorkPlace, map);
+      baseDao.saveOrUpdate(offerUserPlanWorkPlace);
+   }
+   
+   public void saveResumeAddWorkexperience1(Map<String, String> map) throws Exception {
+	    String oldFirmName = map.get("firmName");
+       String startTime = map.get("jobstart");
+       String endTime = map.get("jobend");
+       String jobName = map.get("jobName");
+       String jobDescript = map.get("workcontent");
+       
+       map.put("oldFirmName", oldFirmName);
+       map.put("startTime", startTime);
+       map.put("endTime", endTime);
+       map.put("jobName", jobName);
+       map.put("jobDescript", jobDescript);
+       
+       String offerUserWorksId = String.valueOf(map.get("offerUserWorksId")).equals("null") ? "" : map.get("offerUserWorksId");
+       
+       OfferUserWorks offerUserWorks;
+       if ("".equals(offerUserWorksId)) {
+    	   offerUserWorks = new OfferUserWorks();
+    	  map.put("id", "");
+       }
+       else {
+    	   offerUserWorks = ((List<OfferUserWorks>) baseDao.findField(OfferUserWorks.class, offerUserWorksId)).get(0);
+    	   map.put("id", offerUserWorksId);
+       }
+       conUtil.mapToObject(offerUserWorks, map);
+       baseDao.saveOrUpdate(offerUserWorks);
+       
+//       String offerUserEducationId = map.get("offerUserEducationId").equals("null") ? "" : map.get("offerUserEducationId");
+//       
+//       OfferUserEducation offerUserEducation;
+//       if ("".equals(offerUserEducationId)) {
+//          offerUserEducation = new OfferUserEducation();
+//          map.put("id", "");
+//      }
+//       else {
+//          offerUserEducation = ((List<OfferUserEducation>) baseDao.findField(OfferUserEducation.class, offerUserEducationId)).get(0);
+//       }
+//       
+//       conUtil.mapToObject(offerUserEducation, map);
+//       baseDao.saveOrUpdate(offerUserEducation);
+   }
+   
+   public void saveresumeAddWorkexperience2(Map<String, String> map) throws Exception {
+	    String schoolName = map.get("schoolName");
+       String studstart = map.get("studstart");
+       String studend = map.get("studend");
+       String zhuanye = map.get("zhuanye");
+       String xueli = map.get("xueli");
+       
+       map.put("schoolName", schoolName);
+       map.put("starTime", studstart);
+       map.put("endTime", studend);
+       map.put("userMajor", zhuanye);
+       map.put("offerUserXueli", xueli);
+       
+       String offerUserEducationId = String.valueOf(map.get("offerUserEducationId")).equals("null") ? "" : map.get("offerUserEducationId");
+       
+       OfferUserEducation offerUserEducation;
+       if ("".equals(offerUserEducationId)) {
+          offerUserEducation = new OfferUserEducation();
+       }
+       else{
+    	   offerUserEducation = ((List<OfferUserEducation>) baseDao.findField(OfferUserEducation.class, offerUserEducationId)).get(0);
+    	   map.put("id", offerUserEducationId);
+       }
+       conUtil.mapToObject(offerUserEducation, map);
+       baseDao.saveOrUpdate(offerUserEducation);
+   }
+   
+   public void saveresumeAddQuestionnaire1(Map<String, String> map) throws Exception {
+      if (!"null".equals(map.get("jobstatus"))) {
+         if ("j1".equals(map.get("jobstatus"))) {
+            map.put("offerJobStatus", "不着急找工作，先看看机会");
+         }
+         else if ("j2".equals(map.get("jobstatus"))) {
+            map.put("offerJobStatus", "已经有offer了，想看更好的");
+         }
+         else if ("j3".equals(map.get("jobstatus"))) {
+            map.put("offerJobStatus", "正在找工作，还没有offer");
+         }
+         else if ("j4".equals(map.get("jobstatus"))) {
+            map.put("offerJobStatus", "暂时不考虑换工作");
+         }
+      }
+      if (!"".equals(map.get("intime"))) {
+         if ("i1".equals(map.get("intime"))) {
+            map.put("offerUserWhenWork", "目前是离职状态，随时可以入职");
+         }
+         else if ("i2".equals(map.get("intime"))) {
+            map.put("offerUserWhenWork", "一周");
+         }
+         else if ("i3".equals(map.get("intime"))) {
+            map.put("offerUserWhenWork", "一个月");
+         }
+         else if ("i4".equals(map.get("intime"))) {
+            map.put("offerUserWhenWork", "不确定");
+         }
+      }
+      map.put("offerGetHowMonthWages", map.get("month"));
+      map.put("offerEveryMonthWages", map.get("monthmoney"));
+//      map.put("offerMoneyTypeId", map.get("moneytypeList"));
+      map.put("offerUserPlanYearWages", map.get("planmoney"));
+      map.put("offerNowGetMoneyType", map.get("nowmoneytype"));
+      map.put("offerPlanGetMoneyType", map.get("planmoneytype"));
+      map.put("offerRequestNextJob", map.get("offerRequestNextJob"));
+//      map.put("offerJobStatus", map.get("jobstatus"));
+      
+      String offerUserInformationId = map.get("offerUserInformationId");
+      OfferUserInformation offerUserInformation = getOfferUserInformation(Integer.valueOf(offerUserInformationId)).get(0);
+      
+      conUtil.mapToObject(offerUserInformation, map);
+      
+      baseDao.update(offerUserInformation);
+      
+      String offerUserId = map.get("offerUserId");
+      OfferUser offerUser = offerUserService.getOfferUser(Integer.valueOf(offerUserId));
+      if (offerUser.getStatus().equals("4")) {
+         
+      }
+      else {
+         offerUser.setStatus("2");
+      }
+      baseDao.update(offerUser);
+   }
+
+   @Override
+   public List<OfferUserInformation> getOfferUserInformation4UserId(int id) throws Exception {
+      Map<String, String> map = new HashMap<String, String>();
+      map.put("offerUserId", String.valueOf(id));
+      return (List<OfferUserInformation>) baseDao.findField(OfferUserInformation.class, map);
+   }
+
+   @Override
+   public List<OfferUserWorks> getOfferUserWorks4UserId(int id) throws Exception {
+   	// TODO Auto-generated method stub
+	   Map<String, String> map = new HashMap<String, String>();
+	   map.put("offerUserId", String.valueOf(id));
+	   return (List<OfferUserWorks>) baseDao.findField(OfferUserWorks.class, map);
+   }
+
+   @Override
+   public List<OfferUserEducation> getOfferUserEducation4UserId(int id) throws Exception {
+   	// TODO Auto-generated method stub
+	   Map<String, String> map = new HashMap<String, String>();
+	   map.put("offerUserId", String.valueOf(id));
+	   return (List<OfferUserEducation>) baseDao.findField(OfferUserEducation.class, map);
+   }
+   
+   @Override
+   public List<OfferUserShield> getOfferUserShield4UserId(int id) throws Exception {
+   	// TODO Auto-generated method stub
+	   Map<String, String> map = new HashMap<String, String>();
+	   map.put("offerUserId", String.valueOf(id));
+	   return (List<OfferUserShield>) baseDao.findField(OfferUserShield.class, map);
+   }
+   
+   @Override
+   public void updateOfferUserShield(OfferUserShield offerUserShield) throws Exception {
+   	// TODO Auto-generated method stub
+	   baseDao.update(offerUserShield);
+   }
+   
+   @Autowired
+   private BaseDao baseDao;
+   
+   @Autowired
+   private ConUtil conUtil;
+   
+   @Autowired
+   private OfferUserService offerUserService;
+
+}

@@ -1,0 +1,41 @@
+<sqls>
+	<sql>
+SELECT
+	oc.city_name AS address,
+	oj.job_name AS job,
+	ou.offer_user_name AS name,
+	E.OFFER_USER_XUELI AS xueli,
+	oui.offer_user_worktime AS jingyan,
+	oui.offer_user_now_year_wages AS nowmoney,
+	oui.offer_user_plan_year_wages AS planmoney,
+	oc.city_name AS plandidian,
+	DATE_FORMAT(om.match_time,'%Y-%m-%d') AS tuijianTime,
+	oin.`status`,
+	ou.id AS candidate_id
+FROM
+	offer_match om
+LEFT JOIN offer_user_infomation oui ON oui.offer_user_id = om.user_id
+LEFT JOIN offer_user ou ON ou.id = om.user_id
+LEFT JOIN offer_firm of ON of.id = om.firm_id
+LEFT JOIN offer_firm_information ofi ON ofi.firm_id = om.firm_id
+LEFT JOIN offer_city oc ON oc.city_name = oui.offer_user_work_place
+LEFT JOIN offer_job oj ON oj.id = oui.offer_user_job1
+LEFT JOIN offer_invite oin ON oin.candidate_id = ou.id
+LEFT JOIN (
+	SELECT
+		E.SCHOOL_NAME,
+		E.STAR_TIME,
+		max(E.END_TIME),
+		E.USER_MAJOR,
+		E.OFFER_USER_ID,
+		E.OFFER_USER_XUELI
+	FROM
+		OFFER_USER_EDUCATION E
+	GROUP BY
+		E.OFFER_USER_ID
+) E ON E.OFFER_USER_ID = ou.id
+<!--   WHERE of.id = "36" -->
+	   {#param1}
+	<param value="param1"/>
+	</sql>
+</sqls>

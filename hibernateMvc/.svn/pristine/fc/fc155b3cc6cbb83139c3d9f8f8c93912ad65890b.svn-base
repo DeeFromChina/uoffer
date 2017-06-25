@@ -1,0 +1,54 @@
+<sqls>
+	<sql>
+		SELECT
+			U.ID AS id,
+			U.OFFER_USER_NAME AS offerUserName,
+			U.OFFER_USER_CITY AS offerUserCity,
+			U.OFFER_JOB_ID AS offerJobId,
+			U.ISOFFER AS isoffer,
+			I.OFFER_USER_PLAN_YEAR_WAGES AS offerUserPlanYearWages,
+			I.OFFER_USER_DESCRIPTION AS offerUserDescription,
+			I.OFFER_USER_EDUCATION AS offerUserEducation,
+			I.OFFER_USER_WORKTIME AS offerUserWorktime,
+			I.OFFER_USER_NOW_YEAR_WAGES AS offerUserNowYearWages,
+			I.OFFER_USER_ADDRESS AS offerUserAddress,
+			I.OFFER_USER_JOB1 AS offerUserJob1,
+			I.OFFER_USER_JOB2 AS offerUserJob2,
+			I.OFFER_PHOTO_ID AS offerPhotoId, 
+			I.OFFER_USER_WORK_PLACE AS offerUserWorkPlace,
+			I.OFFER_USER_SEX AS offerUserSex,
+			I.OFFER_ADVISER_REMARK AS offerAdviseRemark,
+			E.ID AS offerUserEducationId,
+			E.SCHOOL_NAME AS schoolName,
+			E.STAR_TIME AS starTime,
+			E.END_TIME AS endTime,
+			E.USER_MAJOR AS userMajor,
+			E.OFFER_USER_ID AS offerUserId,
+			E.OFFER_USER_XUELI AS offerUserXueli
+		FROM (
+			SELECT 
+				U.ID, U.OFFER_USER_NAME, U.OFFER_USER_CITY, U.OFFER_JOB_ID, U.ISOFFER, U.STATUS
+			FROM OFFER_USER U 
+			LEFT JOIN OFFER_COLLECT C ON U.ID = C.OFFER_CANDIDATE_ID
+			LEFT JOIN OFFER_INVITE I ON U.ID = I.CANDIDATE_ID<!-- 20170321最近才加的 -->
+			{#param1}
+		) U 
+		LEFT JOIN OFFER_USER_INFOMATION I ON U.ID = I.OFFER_USER_ID 
+		LEFT JOIN (
+			SELECT U.ID,
+				E.SCHOOL_NAME,
+				E.STAR_TIME,
+				E.END_TIME,
+				E.USER_MAJOR,
+				E.OFFER_USER_ID,
+				E.OFFER_USER_XUELI
+			FROM OFFER_USER U
+			LEFT JOIN OFFER_USER_EDUCATION E ON U.ID = E.OFFER_USER_ID
+			WHERE U.ISOFFER = '1'
+			LIMIT 0,1
+		) E ON E.ID = U.ID
+		{#param2}
+		<param value="param1"/>
+		<param value="param2"/>
+	</sql>
+</sqls>

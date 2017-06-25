@@ -1,0 +1,84 @@
+<sqls>
+	<sql>
+<!-- 		SELECT  -->
+<!-- 			U.ID, -->
+<!-- 			U.OFFER_USER_NAME AS offerUserName, -->
+<!-- 			U.OFFER_USER_PHONE AS offerUserPhone, -->
+<!-- 			U.STATUS AS uStatus, -->
+<!-- 			U.OFFER_JOB_ID AS offerJobId, -->
+<!-- 			F.ID AS offerFirmId, -->
+<!-- 			F.OFFER_NAME AS offerName, -->
+<!-- 			F.OFFER_EMAIL AS offerEmail, -->
+<!-- 			F.STATUS AS fStatus, -->
+<!-- 			F.CREATE_TIME AS fCreateTime, -->
+<!-- 			F.ADMIN_ID AS adminId, -->
+<!-- 			I.ID AS offerFirmInformationId, -->
+<!-- 			I.FIRM_ALL_NAME AS firmAllName, -->
+<!-- 			I.FIRM_SIMPLE_NAME AS firmSimpleName, -->
+<!-- 			I.FIRM_WEB_LINK AS firmWebLink, -->
+<!-- 			I.FIRM_CITY AS firmCity, -->
+<!-- 			I.FIRM_ADDRESS AS firmAddress, -->
+<!-- 			I.AREA_ID AS areaId, -->
+<!-- 			I.FIRM_CREATE_YEAR AS firmCreateYear, -->
+<!-- 			I.FIRM_SIZE AS firmSize, -->
+<!-- 			I.FIRM_TEAM_SIZE AS firmTeamSize, -->
+<!-- 			I.FIRM_STAGE AS firmStage, -->
+<!-- 			I.FIRM_DESCRIPT AS firmDescript, -->
+<!-- 			I.ISPHOTO AS isphoto, -->
+<!-- 			I.FIRM_JOB_ID AS firmJobId, -->
+<!-- 			I.FIRM_ONE_DESCRIPT AS firmOneDescript, -->
+<!-- 			S.CITY_IDS AS cityIds, -->
+<!-- 			S.JOB_IDS AS jobIds, -->
+<!-- 			C.STATUS AS cStatus, -->
+<!-- 			II.STATUS AS iStatus -->
+<!-- 		FROM OFFER_USER U  -->
+<!-- 		LEFT JOIN OFFER_FIRM F ON F.ID = U.FIRM_ID -->
+<!-- 		LEFT JOIN OFFER_FIRM_INFORMATION I ON U.FIRM_ID = I.FIRM_ID -->
+<!-- 		LEFT JOIN ( -->
+<!-- 			SELECT S.ID, S.FIRM_ID, S.CITY_IDS, S.JOB_IDS, S.USER_ID FROM offer_firm_select S -->
+<!-- 		) S ON S.FIRM_ID = U.FIRM_ID AND S.USER_ID = U.ID -->
+<!-- 		LEFT JOIN ( -->
+<!-- 			SELECT C.OFFER_FIRM_ID, C.OFFER_CANDIDATE_ID, C.OFFER_USER_ID, C.STATUS FROM OFFER_COLLECT C  -->
+<!-- 			WHERE OFFER_CANDIDATE_ID = '47' -->
+<!-- 		) C ON C.OFFER_FIRM_ID = U.FIRM_ID AND S.USER_ID = C.OFFER_USER_ID -->
+<!-- 		LEFT JOIN ( -->
+<!-- 			SELECT I.ID, I.FIRM_ID, I.candidate_id, I.USER_ID, I.STATUS FROM OFFER_INVITE I -->
+<!-- 			WHERE CANDIDATE_ID = '47' -->
+<!-- 		) II ON II.FIRM_ID = U.FIRM_ID AND II.USER_ID = C.OFFER_USER_ID -->
+<!-- 		WHERE 1=1  AND isoffer = '2' AND F.status = '4' GROUP BY U.ID LIMIT 0,20 -->
+	SELECT
+	oc.city_name as firmAddress,
+	ofi.area_id as areaId,
+	ofi.firm_simple_name as firmSimpleName,
+	ofi.firm_size as firmSize,
+	ofi.firm_stage as firmStage,
+	ou1.offer_user_name as offerUserName,
+	jb.jobname as zhiwei,
+	DATE_FORMAT(om.match_time,'%Y-%m-%d') as match_time,
+	cs.code_name as status
+	FROM
+	offer_match om
+	LEFT JOIN offer_user_infomation oui ON oui.offer_user_id = om.user_id
+	LEFT JOIN offer_user ou ON ou.id = om.user_id
+	LEFT JOIN offer_firm of ON of.id = om.firm_id
+	LEFT JOIN offer_user ou1 ON ou1.id = of.admin_id
+	LEFT JOIN offer_firm_information ofi ON ofi.firm_id = om.firm_id
+	LEFT JOIN offer_city oc ON oc.id = ofi.firm_city
+	LEFT JOIN offer_job oj ON oj.id = oui.offer_user_job1
+	LEFT JOIN offer_invite oin ON oin.candidate_id = om.user_id
+	LEFT JOIN offer_firm_select ofs ON ofs.user_id = om.firm_user_id
+	LEFT JOIN codeset cs ON cs.codeset_name = 'houTaiCandidateMianShiStatus' and  oin.status = cs.code_value
+	LEFT JOIN (SELECT
+	ofs.id,
+	ofs.user_id,
+	GROUP_CONCAT(oj.job_name) as jobname
+	FROM
+	offer_firm_select ofs
+	LEFT JOIN offer_job oj ON find_in_set(oj.id, ofs.job_ids)
+	GROUP BY
+	ofs.id) jb ON of.admin_id = jb.user_id
+		{#param}
+		<param value="param"/>
+	</sql>
+</sqls>
+

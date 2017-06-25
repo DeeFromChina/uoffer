@@ -1,0 +1,274 @@
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<%@include file="/common/header.jsp"%>
+<title></title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+</head>
+<style>
+	#userTable td{
+		border:1px #CCCCCC solid;
+		height:47px;
+		min-width:80px;
+	}
+</style>
+<script language="javascript">
+	function init(){
+		var url = "login/userinformation1.do?pageId="+1;
+		var formId = "finduserForm";
+		var data = ajaxSumbit(url, formId);
+		document.getElementById("allNum").innerText=data.allNum;
+		addLi(data.city,"city");
+		addLi(data.job,"job");
+		addLi(data.status,"status");
+		addList(data.users);
+		addpageNum(data.pageNum,"u1");
+	}
+	//下拉列表
+	function addLi(items,liId){
+		var inn = "";
+		for(var i in items){
+			inn = inn + "<li role='presentation'>"
+				+"<a role='menuitem' onclick='selectDownValue(" + items[i].id +",\"" + items[i].value +"\",\""+liId+"\")'><font color='#000'>" + items[i].value
+				+"</font></a></li>";
+		}
+		document.getElementById(liId).innerHTML=inn;
+	}
+	function selectDownValue(ke, val, targetInput){
+		var ti1 = "firm" + targetInput;
+		var ti2 = "firm" + targetInput + "Value";
+		document.getElementById(ti1).value=ke;
+		document.getElementById(ti2).value=val;
+		goSearch();
+	}
+	
+	function goSearch() {
+		var pageId = document.getElementById('pageId').value;
+		var firmcity = document.getElementById('firmcity').value;
+		var firmcityValue = document.getElementById('firmcityValue').value;
+		var firmjob = document.getElementById('firmjob').value;
+		var firmjobValue = document.getElementById('firmjobValue').value;
+		var firmstatus = document.getElementById('firmstatus').value;
+		
+		var url = "login/userinformation1.do?pageId=" + pageId + "&firmcityValue=" + firmcityValue + "&firmjob=" + firmjob +"&firmstatus=" + firmstatus;
+		var formId = "finduserForm";
+		var data = ajaxSumbit(url, formId);
+		addList(data.users);
+	}
+	//增加列表
+	function addList(items){
+		$("#userTable tbody").html("");
+		for(var i in items){
+			var tr1 = document.createElement("tr");
+			document.getElementById("tbody").appendChild(tr1);
+			tr1.innerHTML = "<td class='textC'>"
+								+"<font size='1'>"+items[i].address+"</font>"
+							+"</td>"       
+							+"<td class='textC'>"
+								+"<font size='1'>"+items[i].job+"</font>"
+							+"</td>"
+							+"<td class='textC'>"
+								+"<font size='1'>"+items[i].name+"</font>"
+							+"</td>"
+							+"<td class='textC'>"
+								+"<font size='1'>"+items[i].xueli+"</font>"
+							+"</td>"
+							+"<td class='textC'>"
+								+"<font size='1'>"+items[i].works+"</font>"
+							+"</td>"
+							+"<td class='textC'>"
+								+"<font size='1'>"+items[i].nowmoney+"</font>"
+							+"</td>"
+							+"<td class='textC'>"
+								+"<font size='1'>"+items[i].planmoney+"</font>"
+							+"</td>"
+							+"<td class='textC'>"
+								+"<font size='1'>"+items[i].tuijiantime+"</font>"
+							+"</td>"
+							+"<td class='textC'>"
+								+"<font size='1'>"+items[i].status+"</font>"
+							+"</td>"
+							+"<td class='textC'>"
+								+"<button type='button' style='height:34px !important;background-color:#3CBAFF;color:#FFF;' onclick='goView(\""+items[i].id+"\")' class='btn dropdown-toggle' data-toggle='dropdown'>"
+								+"查看"
+								+"</button>"
+							+"</td>";
+			//document.getElementById("userTable").appendChild(tr1);
+		}
+	}
+	function addpageNum(items,pageId){
+		var inn = "";
+		for(var i = 1; i <= items; i++){
+			inn = inn + "<li>"
+				+"<a href='#' onclick='getpage("+i+")'>"+i+"</a>"
+				+"</li>";
+		}
+		document.getElementById(pageId).innerHTML=inn;
+	}
+	function getpage(str) {
+		document.getElementById('pageId').value = str;
+		goSearch();
+	}
+	function goView(id){
+		var url = "login/sessionPutUser.do";
+		var data = ajaxSumbitNoform(url, id);
+		top.location.href='user_all_information.jsp';
+		/* var url = "firm/findUserInformation.do?offerCandidateId="+id;
+		var formId = "findusersumForm";
+		var data = ajaxSumbit(url, formId);
+		if(data == 'success'){
+			top.location.href='user_all_information.jsp';
+		} */
+	}
+</script>
+<body bgcolor="#FFF" onload="init()">
+	<div style="width:100%;padding:20px 200px;">
+		<table width="100%">
+			<tr height="20px"/>
+			<tr>
+				<td width="220px">
+					<div class="input-group" style="width: 100%;">
+						<div class="dropdown">
+							<input type="hidden" id="firmcity" name="firmcity"/>
+							<input type="text" name="firmcityValue" id="firmcityValue" class="form-control" placeholder="城市" style="margin-left:-20px;width: 164px !important">
+						    <button type="button" style="height:34px !important;background-color:#3CBAFF;color:#FFF;" class="btn dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown">
+						        <span class="caret"></span>
+						    </button>
+						    <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1" style="margin-left:-20px;width: 90% !important" id="city">
+						        
+						    </ul>
+						</div>
+					</div>
+				</td>
+				<td width="220px">
+					<div class="input-group" style="width: 100%;">
+						<div class="dropdown">
+							<input type="hidden" id="firmjob" name="firmjob"/>
+							<input type="text" name="firmjobValue" id="firmjobValue" class="form-control" placeholder="职位" style="margin-left:-20px;width: 164px !important">
+						    <button type="button" style="height:34px !important;background-color:#3CBAFF;color:#FFF;" class="btn dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown">
+						        <span class="caret"></span>
+						    </button>
+						    <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1" style="margin-left:-20px;width: 90% !important" id="job">
+						        
+						    </ul>
+						</div>
+					</div>
+				</td>
+				<td width="220px">
+					<div class="input-group" style="width: 100%;">
+						<div class="dropdown">
+							<input type="hidden" id="firmstatus" name="firmstatus"/>
+							<input type="text" name="firmstatusValue" id="firmstatusValue" class="form-control" placeholder="流程状态" style="margin-left:-20px;width: 164px !important">
+						    <button type="button" style="height:34px !important;background-color:#3CBAFF;color:#FFF;" class="btn dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown">
+						        <span class="caret"></span>
+						    </button>
+						    <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1" style="margin-left:-20px;width: 90% !important" id="status">
+						        
+						    </ul>
+						</div>
+					</div>
+				</td>
+				<td width="220px">
+					<input type="text" name="firmcondition" id="firmcondition" class="form-control" placeholder="搜索" style="margin-left:-20px;width: 164px !important">
+				</td>
+				<td/>
+			</tr>
+		</table>
+	</div>
+	<div style="width:100%;padding:20px 180px;">
+		<font size="1">
+			共
+			<font color="#3CBAFF" size="3" id="allNum">140</font>
+			个匹配项，显示
+			<font color="#3CBAFF" size="3">1-20</font>
+		</font>
+		<br/>
+		<br/>
+		<table width="100%" style="border:1px #CCCCCC solid;" id="userTable">
+			<thead>
+			<tr>
+				<td class="textC" style="background:#E2E2E2;">
+					<font size="1">地区</font>
+				</td>
+				<td class="textC" style="background:#E2E2E2;">
+					<font size="1">职位</font>
+				</td>
+				<td class="textC" style="background:#E2E2E2;">
+					<font size="1">姓名</font>
+				</td>
+				<td class="textC" style="background:#E2E2E2;">
+					<font size="1">学历</font>
+				</td>
+				<td class="textC" style="background:#E2E2E2;">
+					<font size="1">工作经验</font>
+				</td>
+				<td class="textC" style="background:#E2E2E2;">
+					<font size="1">目前年薪</font>
+				</td>
+				<td class="textC" style="background:#E2E2E2;">
+					<font size="1">期待年薪</font>
+				</td>
+				<td class="textC" style="background:#E2E2E2;">
+					<font size="1">推荐时间</font>
+				</td>
+				<td class="textC" style="background:#E2E2E2;">
+					<font size="1">流程状态</font>
+				</td>
+				<td class="textC" style="background:#E2E2E2;">
+					<font size="1">操作</font>
+				</td>
+			</tr>
+			</thead>
+			<tbody id="tbody">
+				
+			</tbody>
+			<!-- <tr>
+				<td class="textC">
+					<font size="1">广州</font>
+				</td>
+				<td class="textC">
+					<font size="1">b2b电商</font>
+				</td>
+				<td class="textC">
+					<font size="1">姓名</font>
+				</td>
+				<td class="textC">
+					<font size="1">50-100</font>
+				</td>
+				<td class="textC">
+					<font size="1">2016.11.11</font>
+				</td>
+				<td class="textC">
+					<font size="1">产品总监</font>
+				</td>
+				<td class="textC">
+					<font size="1">1233523452345</font>
+				</td>
+				<td class="textC">
+					<font size="1">java java2</font>
+				</td>
+				<td class="textC">
+					<font size="1">19823年-啊健搜地方哈</font>
+				</td>
+				<td class="textC">
+					<button type="button" style="height:34px !important;background-color:#3CBAFF;color:#FFF;" onclick="goView('1')" class="btn dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown">
+				        	查看
+				    </button>
+				</td>
+			</tr> -->
+		</table>
+	</div>
+	<div style="padding:0px 180px;">
+		<input type="hidden" name="pageId" id="pageId" value="1"/>
+		<ul class="pagination" id="u1" style="margin-top:10px;">
+		    <li><a href="#">1</a></li>
+		    <li><a href="#">2</a></li>
+		    <li><a href="#">3</a></li>
+		    <li><a href="#">4</a></li>
+		    <li><a href="#">5</a></li>
+		</ul>
+	</div>
+</body>
+</html>

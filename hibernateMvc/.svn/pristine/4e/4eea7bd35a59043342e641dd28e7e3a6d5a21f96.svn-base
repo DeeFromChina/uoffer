@@ -1,0 +1,137 @@
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<%@include file="/common/header.jsp"%>
+<title></title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+</head>
+<script language="javascript">
+	function init() {
+
+		
+	}
+	function changeColor1(der){
+		der.style.background="#777777";
+	}
+	function changeColor2(der){
+		der.style.background="#32373C";
+	}
+	function changeColor3(der){
+		der.style.background="#00B38A";
+		der.style.color="#FFF";
+	}
+	function changeColor4(der){
+		der.style.background="#FFF";
+		der.style.color="#666666";
+	}
+	function jobId(job){
+		if(job.getAttribute('class') == "icheckbox_square-green checked"){
+			job.setAttribute("class","icheckbox_square-green hover");
+		}
+		else if(job.getAttribute('class') == "icheckbox_square-green hover"){
+			job.setAttribute("class","icheckbox_square-green checked");
+		}
+	}
+	function selectInterviewType(seqno){
+		$(".triangle-left").each(function () {
+			this.setAttribute("class","");
+        });
+		if(seqno == 1){
+			document.getElementById("type11").setAttribute("class","triangle-left");
+			document.getElementById("interviewtype").value = seqno;
+		}
+		if(seqno == 2){
+			document.getElementById("type12").setAttribute("class","triangle-left");
+			document.getElementById("interviewtype").value = seqno;
+		}
+		if(seqno == 3){
+			document.getElementById("type13").setAttribute("class","triangle-left");
+			document.getElementById("interviewtype").value = seqno;
+		}
+		if(seqno == 4){
+			document.getElementById("type14").setAttribute("class","triangle-left");
+			document.getElementById("interviewtype").value = seqno;
+		}
+		if(seqno == 5){
+			document.getElementById("type15").setAttribute("class","triangle-left");
+			document.getElementById("interviewtype").value = seqno;
+		}
+		if(seqno == 6){
+			document.getElementById("type16").setAttribute("class","triangle-left");
+			document.getElementById("interviewtype").value = seqno;
+		}
+		goSearch();
+	}
+	function addtags(typeId,typemsg){
+		document.getElementById(typeId).innerHTML="<font size='3' color='#666666'>"+typemsg+"</font>";
+	}
+	function goSearch(){
+		window.iframe1.location.href="maininterview_object.jsp";
+	}
+	$(function(){
+        $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+            // 获取已激活的标签页的名称
+            var activeTab = $(e.target).text();
+            // 获取前一个激活的标签页的名称
+            var previousTab = $(e.relatedTarget).text();
+            $(".active-tab span").html(activeTab);
+            $(".previous-tab span").html(previousTab);
+        });
+    });
+</script>
+<body bgcolor="#FFF" onload="init()" style="overflow-y:hidden;">
+	<input type="hidden" id="firmId" name="firmId"/>
+	<div style="width:100%;height:60px;min-width:1000px;background: #32373C;position:absolute;top:expression(documentElement.scrollTop + 'px');position:fixed;z-index:9999;">
+		<table style="width:100%;white-space: nowrap;">
+			<tr>
+				<td width="19%" style="padding-left:14%;"><img src="../img/U-Offerlogo.png" width="109px" height="26px"></td>
+				<td width="5%"/>
+				<td>
+				    <button type="button" style="font-size:14px;height:60px !important;width:103px !important;color:#F5F8F9;background-color:#32373C;" class="btn dropdown-toggle" id="dropdownMenu3" data-toggle="dropdown" onmouseover="changeColor1(this)" onmouseout="changeColor2(this)" onclick="javascript:top.location.href='user_manager.jsp'">
+				    	<font>候选人</font>
+				    </button>
+				    <button type="button" style="font-size:14px;height:60px !important;width:103px !important;color:#F5F8F9;background-color:#32373C;" class="btn dropdown-toggle" id="dropdownMenu2" data-toggle="dropdown" onmouseover="changeColor1(this)" onmouseout="changeColor2(this)" onclick="javascript:top.location.href='firm_manager.jsp'">
+				    	<font>企业</font>
+				    </button>
+				    <button type="button" style="font-size:14px;height:60px !important;width:103px !important;color:#F5F8F9;background-color:#32373C;" class="btn dropdown-toggle" id="dropdownMenu2" data-toggle="dropdown" onmouseover="changeColor1(this)" onmouseout="changeColor2(this)" onclick="javascript:top.location.href='account_manager.jsp'">
+				    	<font>数据统计</font>
+				    </button>
+			    </td>
+			     <td style="width:24%;padding-right:10%">
+			    	<button type="button" style="font-size:14px;height:60px !important;width:80px !important;color:#F5F8F9;background-color:#32373C;"class="btn dropdown-toggle" id="dropdownMenu3" data-toggle="dropdown" onmouseover="changeColor1(this)" onmouseout="changeColor2(this)" onclick="javascript:top.location.href='stafflogin.jsp'">
+				    	<font>退出</font>
+				    </button>
+			    </td>
+			</tr>
+		</table>
+	</div>
+	<div style="width:100%;height:73px;margin-top:60px;background:#3CBAFF;position:absolute;top:expression(documentElement.scrollTop + 'px');position:fixed;z-index:9999;">
+		<ul id="myTab" class="nav nav-tabs" style="padding:0px 14%;height:41px;margin-top:32px;border-bottom:1px #FFF solid;min-width:1000px">
+		    <li class="active"><a href="#firminformation" data-toggle="tab">企业信息</a></li>
+		    <li><a href="#accountinformation" data-toggle="tab">账号信息</a></li>
+		    <li><a href="#questionnaire" data-toggle="tab">需求问卷</a></li>
+		    <li><a href="#tuijian" data-toggle="tab">推荐候选人</a></li>
+		    <li><a href="#zhaopin" data-toggle="tab">招聘进度</a></li>
+		</ul>
+	</div>
+	<div id="myTabContent" class="tab-content" style="background:#FFF;height:100%;">
+	    <div class="tab-pane fade in active" id="firminformation" style="height:100%;padding-top:68px;">
+	        <iframe height="100%" width="100%" src="firm_information2.jsp" scrolling="auto" frameborder="0" marginheight="0px" marginwidth="0px" style="background:#FFF;" id="iframe1" name="iframe1"></iframe>
+	    </div>
+	    <div class="tab-pane fade" id="accountinformation" style="height:100%;padding-top:68px;">
+	        <iframe height="100%" width="100%" src="firm_account.jsp" scrolling="auto" frameborder="0" marginheight="0px" marginwidth="0px" style="background:#FFF;" id="iframe2" name="iframe2"></iframe>
+	    </div>
+	    <div class="tab-pane fade" id="questionnaire" style="height:100%;padding-top:68px;">
+	        <iframe height="100%" width="100%" src="firm_questionnaire.jsp" scrolling="auto" frameborder="0" marginheight="0px" marginwidth="0px" style="background:#FFF;" id="iframe3" name="iframe3"></iframe>
+	    </div>
+	    <div class="tab-pane fade" id="tuijian" style="height:100%;padding-top:68px;">
+	        <iframe height="100%" width="100%" src="firm_tuijian.jsp" scrolling="auto" frameborder="0" marginheight="0px" marginwidth="0px" style="background:#FFF;" id="iframe4" name="iframe4"></iframe>
+	    </div>
+	    <div class="tab-pane fade" id="zhaopin" style="height:100%;padding-top:68px;">
+	        <iframe height="100%" width="100%" src="firm_zhaopin.jsp" scrolling="auto" frameborder="0" marginheight="0px" marginwidth="0px" style="background:#FFF;" id="iframe5" name="iframe5"></iframe>
+	    </div>
+	</div>
+</body>
+</html>

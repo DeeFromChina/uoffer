@@ -1,0 +1,27 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<script type="text/javascript">
+		function init(){
+			document.getElementById("test").style.height=document.body.scrollHeight + "px";
+		}
+	</script>
+</head>
+<body>
+<div id="test">
+	1、简历是否完整真实。<br/>
+	虽然写简历是一件非常耗费时间的事情，但是真实完整的简历，才能让HR更加 了解您过去的工作经历与成果，并且发现您的价值。<br/>
+	<br/>
+	 千万不要试图夸大自己的经历，因为不管简历上写的如何，HR也会对您进行面试。<br/>
+	 <br/>
+	 2、有不错的相关工作能力。<br/>
+	 <br/> 
+	 希望您能有2年以上的相关工作经验，倾向于有国内外一定名气的互联网公司工 作经验的候选人。<br/>
+	  我们也希望您能填写您的社交账号（如Github、站酷、lofter等），以及通过详 细的自我描述来体现您的能力。<br/>
+	 <br/>
+	  3、工作城市在我们的服务范围内。<br/>
+	   我们目前主要服务广州、深圳、北京、杭州这4个城市, 另外已开放上海、苏州、 厦门、珠海、成都、武汉城市。如果你所在的城市不在这些城市内，我们目前 可能没有能力帮助到您。
+</div>
+</body>
+</html>

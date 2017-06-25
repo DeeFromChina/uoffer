@@ -1,0 +1,41 @@
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>My JSP 'index.jsp' starting page</title>
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="cache-control" content="no-cache">
+<meta http-equiv="expires" content="0">
+<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+<meta http-equiv="description" content="This is my page">
+<link href="../css/bootstrap.min.css" rel="stylesheet">
+<link href="../css/base.css" rel="stylesheet">
+<link href="../skins/all.css" rel="stylesheet">
+<link rel="shortcut icon" href="../img/title.ico" type="image/x-icon"/>
+<style>
+</style>
+</head>
+<script src="../js/jquery-3.1.1.min.js" type="text/javascript"></script>
+<script src="../js/ajaxSubmit.js" type="text/javascript"></script>
+<script src="../js/ajaxfileupload.js" type="text/javascript"></script>
+<script src="../js/bootstrap.min.js"></script>
+<script src="../js/Carousel.js"></script>
+<script src="../js/jquery.icheck.js"></script>
+<script src="../js/custom.js"></script>
+<script src="../js/custom.min.js"></script>
+<script type="text/javascript" src="../js/bootstrap-datetimepicker.js"></script>
+    <script type="text/javascript" src="../js/locales/bootstrap-datetimepicker.zh-CN.js"></script>
+<script language="javascript">
+	function upload() {
+		$.ajax({
+			url : "register/firm.do", // 自行按需配置好完整的url，包括ip和端口号  
+			type : "POST",
+			datatype : "text",
+			data : JSON.stringify($("#form1").serializeObject()),
+			contentType : "application/json",
+		});
+	}
+</script>
+<body>
+</body>
+</html>

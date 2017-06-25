@@ -1,0 +1,11 @@
+<sqls>
+	<sql orderBy="id">
+		SELECT 
+		oc.id AS id, 
+		oc.city_name AS cityName, 
+		oc.province_id AS provinceId 
+		FROM offer_city oc 
+		{#param}
+		<param value="param"/>
+	</sql>
+</sqls>

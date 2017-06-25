@@ -1,0 +1,573 @@
+$.fn.serializeObject = function() {
+	var data = {};
+	var a = this.serializeArray();
+	$.each(a, function() {
+		if (data[this.name]) {
+			if (!data[this.name].push) {
+				data[this.name] = [ data[this.name] ];
+			}
+			data[this.name].push(this.value || '');
+		} else {
+			data[this.name] = this.value || '';
+		}
+	});
+	return data;
+}
+
+function ajaxSumbit(urllink, formId) {
+	var link = "/hibernateMvc/" + urllink;
+	var formIndex = "#" + formId;
+	var dataResult;
+	$.ajax({
+		url : link, // 自行按需配置好完整的url，包括ip和端口号
+		type : "POST",
+		datatype : "text",
+		data : JSON.stringify($(formIndex).serializeObject()),
+		contentType : "application/json",
+		async:false,
+		error: function(request) {
+            alert("Connection error");
+        },
+        success: function(result) {
+        	if(result == undefined){
+        		alert("数据错误！");
+        	}
+        	if(result == 'unlogin'){
+        		alert("请重新登陆！");
+        		top.location.href = "../index.jsp";
+        	}
+        	if(result.status == '1'){
+        		alert("数据错误！");
+        	}
+        	dataResult = result.data;
+        }
+	});
+	return dataResult;
+}
+
+function ajaxSumbitNoform(urllink,str) {
+	var link = "/hibernateMvc/" + urllink;
+	var dataResult;
+	$.ajax({
+		url : link, // 自行按需配置好完整的url，包括ip和端口号
+		type : "POST",
+		datatype : "text",
+		data : str+"",
+		contentType : "application/text",
+		async:false,
+		error: function(request) {
+			alert("Connection error");
+		},
+		success: function(result) {
+			if(result == undefined){
+				alert("数据错误！");
+			}
+			if(result == 'unlogin'){
+        		alert("请重新登陆！");
+        		top.location.href = "../index.jsp";
+        	}
+			if(result.status == '1'){
+				alert("数据错误！");
+			}
+			dataResult = result.data;
+		}
+	});
+	return dataResult;
+}
+
+function ajaxSumbitNoformofstring(urllink,str) {
+	var link = "/hibernateMvc/" + urllink;
+	var dataResult;
+	$.ajax({
+		url : link, // 自行按需配置好完整的url，包括ip和端口号
+		type : "POST",
+		datatype : "text",
+		data : str,
+		contentType : "application/text",
+		async:false,
+		error: function(request) {
+			alert("Connection error");
+		},
+		success: function(result) {
+			if(result == undefined){
+				alert("数据错误！");
+			}
+			if(result == 'unlogin'){
+        		alert("请重新登陆！");
+        		top.location.href = "../index.jsp";
+        	}
+			if(result.status == '1'){
+				alert("数据错误！");
+			}
+			dataResult = result;
+		}
+	});
+
+	return dataResult;
+}
+
+function obj2string(o){ 
+	 var r=[]; 
+	 if(typeof o=="string"){ 
+	 return "\""+o.replace(/([\'\"\\])/g,"\\$1").replace(/(\n)/g,"\\n").replace(/(\r)/g,"\\r").replace(/(\t)/g,"\\t")+"\""; 
+	 } 
+	 if(typeof o=="object"){ 
+	 if(!o.sort){ 
+	  for(var i in o){ 
+	  r.push(i+":"+obj2string(o[i])); 
+	  } 
+	  if(!!document.all&&!/^\n?function\s*toString\(\)\s*\{\n?\s*\[native code\]\n?\s*\}\n?\s*$/.test(o.toString)){ 
+	  r.push("toString:"+o.toString.toString()); 
+	  } 
+	  r="{"+r.join()+"}"; 
+	 }else{ 
+	  for(var i=0;i<o.length;i++){ 
+	  r.push(obj2string(o[i])) 
+	  } 
+	  r="["+r.join()+"]"; 
+	 } 
+	 return r; 
+	 } 
+	 return o.toString(); 
+	}
+
+function createValidateCode(codeName){
+    var container = document.getElementById(codeName);
+    var code = new vCode(container, {
+        len: 4,
+        bgColor: "#444444",
+        colors: [
+            "#DDDDDD",
+            "#DDFF77",
+            "#77DDFF",
+            "#99BBFF",
+            //"#7700BB",
+            "#EEEE00"
+        ]
+    });
+    return code;
+}
+(function(){
+var randstr = function(length){
+var key = {
+
+    str : [
+        'a','b','c','d','e','f','g','h','i','j','k','l','m',
+        'o','p','q','r','s','t','x','u','v','y','z','w','n',
+        '0','1','2','3','4','5','6','7','8','9'
+    ],
+
+    randint : function(n,m){
+        var c = m-n+1;
+        var num = Math.random() * c + n;
+        return  Math.floor(num);
+    },
+
+    randStr : function(){
+        var _this = this;
+        var leng = _this.str.length - 1;
+        var randkey = _this.randint(0, leng);
+        return _this.str[randkey];
+    },
+
+    create : function(len){
+        var _this = this;
+        var l = len || 10;
+        var str = '';
+
+        for(var i = 0 ; i<l ; i++){
+            str += _this.randStr();
+        }
+
+        return str;
+    }
+
+};
+
+length = length ? length : 10;
+
+return key.create(length);
+};
+
+var randint = function(n,m){
+var c = m-n+1;
+var num = Math.random() * c + n;
+return  Math.floor(num);
+};
+
+var vCode = function(dom, options){
+this.codeDoms = [];
+this.lineDoms = [];
+this.initOptions(options);
+this.dom = dom;
+this.init();
+this.addEvent();
+this.update();
+this.mask();
+};
+
+vCode.prototype.init = function(){
+this.dom.style.position = "relative";
+this.dom.style.overflow = "hidden";
+this.dom.style.cursor = "pointer";
+this.dom.title = "点击更换验证码";
+this.dom.style.background = this.options.bgColor;
+this.w = this.dom.clientWidth;
+this.h = this.dom.clientHeight;
+this.uW = this.w / this.options.len;
+};
+
+vCode.prototype.mask = function(){
+var dom = document.createElement("div");
+dom.style.cssText = [
+    "width: 100%",
+    "height: 100%",
+    "left: 0",
+    "top: 0",
+    "position: absolute",
+    "cursor: pointer",
+    "z-index: 9999999"
+].join(";");
+
+dom.title = "点击更换验证码";
+
+this.dom.appendChild(dom);
+};
+
+vCode.prototype.addEvent = function(){
+var _this = this;
+_this.dom.addEventListener("click", function(){
+    _this.update.call(_this);
+});
+};
+
+vCode.prototype.initOptions = function(options){
+
+var f = function(){
+    this.len = 4;
+    this.fontSizeMin = 20;
+    this.fontSizeMax = 48;
+    this.colors = [
+        "green",
+        "red",
+        "blue",
+        "#53da33",
+        "#AA0000",
+        "#FFBB00"
+    ];
+    this.bgColor = "#FFF";
+    this.fonts = [
+        "Times New Roman",
+        "Georgia",
+        "Serif",
+        "sans-serif",
+        "arial",
+        "tahoma",
+        "Hiragino Sans GB"
+    ];
+    this.lines = 8;
+    this.lineColors = [
+        "#888888",
+        "#FF7744",
+        "#888800",
+        "#008888"
+    ];
+
+    this.lineHeightMin = 1;
+    this.lineHeightMax = 3;
+    this.lineWidthMin = 1;
+    this.lineWidthMax = 60;
+};
+
+this.options = new f();
+
+if(typeof options === "object"){
+    for(i in options){
+        this.options[i] = options[i];
+    }
+}
+};
+
+vCode.prototype.update = function(){
+for(var i=0; i<this.codeDoms.length; i++){
+    this.dom.removeChild(this.codeDoms[i]);
+}
+for(var i=0; i<this.lineDoms.length; i++){
+    this.dom.removeChild(this.lineDoms[i]);
+}
+this.createCode();
+this.draw();
+};
+
+vCode.prototype.createCode = function(){
+this.code = randstr(this.options.len);
+};
+
+vCode.prototype.verify = function(code){
+	return this.code === code;
+};
+
+vCode.prototype.realcode = function(){
+	return this.code;
+};
+
+vCode.prototype.draw = function(){
+this.codeDoms = [];
+for(var i=0; i<this.code.length; i++){
+    this.codeDoms.push(this.drawCode(this.code[i], i));
+}
+
+this.drawLines();
+};
+
+vCode.prototype.drawCode = function(code, index){
+var dom = document.createElement("span");
+
+dom.style.cssText = [
+    "font-size:" + randint(this.options.fontSizeMin, this.options.fontSizeMax) + "px",
+    "color:" + this.options.colors[randint(0,  this.options.colors.length - 1)],
+    "position: absolute",
+    "left:" + randint(this.uW * index, this.uW * index + this.uW - 10) + "px",
+    "top:" + randint(0, this.h - 30) + "px",
+    "transform:rotate(" + randint(-30, 30) + "deg)",
+    "-ms-transform:rotate(" + randint(-30, 30) + "deg)",
+    "-moz-transform:rotate(" + randint(-30, 30) + "deg)",
+    "-webkit-transform:rotate(" + randint(-30, 30) + "deg)",
+    "-o-transform:rotate(" + randint(-30, 30) + "deg)",
+    "font-family:" + this.options.fonts[randint(0, this.options.fonts.length - 1)],
+    "font-weight:" + randint(400, 900)
+].join(";");
+
+dom.innerHTML = code;
+this.dom.appendChild(dom);
+
+return dom;
+};
+
+vCode.prototype.drawLines = function(){
+this.lineDoms = [];
+for(var i=0; i<this.options.lines; i++){
+    var dom = document.createElement("div");
+
+    dom.style.cssText = [
+        "position: absolute",
+        "opacity: " + randint(3, 8) / 10,
+        "width:" + randint(this.options.lineWidthMin, this.options.lineWidthMax) + "px",
+        "height:" + randint(this.options.lineHeightMin, this.options.lineHeightMax) + "px",
+        "background: " + this.options.lineColors[randint(0, this.options.lineColors.length - 1)],
+        "left:" + randint(0, this.w - 20) + "px",
+        "top:" + randint(0, this.h) + "px",
+        "transform:rotate(" + randint(-30, 30) + "deg)",
+        "-ms-transform:rotate(" + randint(-30, 30) + "deg)",
+        "-moz-transform:rotate(" + randint(-30, 30) + "deg)",
+        "-webkit-transform:rotate(" + randint(-30, 30) + "deg)",
+        "-o-transform:rotate(" + randint(-30, 30) + "deg)",
+        "font-family:" + this.options.fonts[randint(0, this.options.fonts.length - 1)],
+        "font-weight:" + randint(400, 900)
+    ].join(";");
+    this.dom.appendChild(dom);
+
+    this.lineDoms.push(dom);
+}
+};
+
+this.vCode = vCode;
+
+}).call(this);
+
+
+$.fn.populateForm = function(data){
+    return this.each(function(){
+        var formElem, name;
+        if(data == null){this.reset(); return; }
+        for(var i = 0; i < this.length; i++){  
+            formElem = this.elements[i];
+            //checkbox的name可能是name[]数组形式
+            name = (formElem.type == "checkbox")? formElem.name.replace(/(.+)\[\]$/, "$1") : formElem.name;
+            if(data[name] == undefined) continue;
+            switch(formElem.type){
+                case "checkbox":
+                    if(data[name] == ""){
+                        formElem.checked = false;
+                    }else{
+                        //数组查找元素
+                        if(data[name].indexOf(formElem.value) > -1){
+                            formElem.checked = true;
+                        }else{
+                            formElem.checked = false;
+                        }
+                    }
+                break;
+                case "radio":
+                    if(data[name] == ""){
+                        formElem.checked = false;
+                    }else if(formElem.value == data[name]){
+                        formElem.checked = true;
+                    }
+                break;
+                case "button": break;
+                default: formElem.value = data[name];
+            }
+        }
+    });
+};
+
+function checkInput(id,name,len,isEmpty){
+	if(!isEmpty){
+		if(document.getElementById(id).value == ''){
+			alert("请输入"+name);
+			return false;
+		}
+	}
+	if(document.getElementById(id).value.length > len){
+		alert(name+"字符长度过长");
+		return false;
+	}
+	return true;
+}
+
+function checkNum(id,name,len,isEmpty){
+	if(!isEmpty){
+		if(document.getElementById(id).value == ''){
+			alert("请输入"+name);
+			return false;
+		}
+	}else{
+		if(document.getElementById(id).value != ''){
+			if(isNaN(document.getElementById(id).value)){
+				alert(name+"不是数字形式！");
+				return false;
+			}
+		}
+	}
+	if(document.getElementById(id).value.length > len){
+		alert(name+"字符长度过长");
+		return false;
+	}
+	return true;
+}
+
+function fileUpload(urllink, files) {  
+	var link = "/hibernateMvc/" + urllink;
+    $.ajaxFileUpload( {  
+        url : link,     //用于文件上传的服务器端请求地址    
+        secureuri : false,            //一般设置为false    
+        fileElementId : files,        //文件上传的id属性  <input type="file" id="file" name="file" />
+        dataType : 'json',            //返回值类型 一般设置为json    
+        success : function(data) {  
+        }  
+    })  
+}
+function isResetLogin() {
+	var link = "/hibernateMvc/login/checkLogin.do";
+	var formIndex = "#111";
+	var flag = false;
+	$.ajax({
+		url : link, // 自行按需配置好完整的url，包括ip和端口号
+		type : "POST",
+		datatype : "text",
+		data : JSON.stringify($(formIndex).serializeObject()),
+		contentType : "application/json",
+		async:false,
+		error: function(request) {
+            alert("Connection error");
+        },
+        success: function(result) {
+        	if(result == true){
+        		flag = true;
+        	}
+        	else {
+        		flag = false;
+        	}
+        }
+	});
+	return flag;
+}
+function isNowLogin(){
+	var link = "/hibernateMvc/login/checkNowLogin.do";
+	var formIndex = "#111";
+	var dataResult;
+	$.ajax({
+		url : link, // 自行按需配置好完整的url，包括ip和端口号
+		type : "POST",
+		datatype : "text",
+		data : JSON.stringify($(formIndex).serializeObject()),
+		contentType : "application/json",
+		async:false,
+		error: function(request) {
+            alert("Connection error");
+        },
+        success: function(result) {
+        	if(result.data == 'error'){
+        		alert('数据错误');
+        		return;
+        	}
+        	else if(result.data == 'caoshi'){
+        		alert('登陆超时！');
+        		top.location.href='login.jsp';
+        		return;
+        	}
+        	dataResult = result.data;
+        }
+	});
+	return dataResult;
+}
+
+function checkToNow(str) {
+	if (str == 'work') {
+		var jobstart = document.getElementById("jobstart").value;
+		var jobend = document.getElementById("jobend").value;
+		if (document.getElementById("toNowWork").checked == true) {
+			document.getElementById("toNow1").value = "true";
+			return checkDate("check", jobstart, "", "工作");
+		}
+		else {
+			document.getElementById("toNow1").value = "false";
+			return checkDate("noCheck", jobstart, jobend, "工作");
+		}
+	}
+	else {
+		var studstart = document.getElementById("studstart").value;
+		var studend = document.getElementById("studend").value;
+		if (document.getElementById("toNowEdu").checked == true) {
+			document.getElementById("toNow2").value = "true";
+			return checkDate("check", studstart, "", "教育");
+		}
+		else {
+			document.getElementById("toNow2").value = "false";
+			return checkDate("noCheck", studstart, studend, "教育");
+		}
+	}
+}
+
+function checkDate(str, start, end, name) {
+	var flag = false;
+	var date = new Date;
+	var year = date.getFullYear(); 
+	var month = date.getMonth()+1;
+	if (str == 'check') {
+		if (start.split('-')[0] > year) {
+			alert(name + "开始年份大于结束年份！");
+			flag = true;
+		}
+		else if (start.split('-')[0] == year) {
+			if (start.split('-')[1] > month) {
+				alert(name + "开始月份大于结束月份！");
+				flag = true;
+			}
+		}
+	}
+	else {
+		if (start.split('-')[0] > end.split('-')[0]) {
+			alert(name + "开始年份大于结束年份！");
+			flag = true;
+		}
+		else if (start.split('-')[0] == end.split('-')[0]) {
+			if (start.split('-')[1] > end.split('-')[1]) {
+				alert(name + "开始月份大于结束月份！");
+				flag = true;
+			}
+		}
+	}
+	return flag;
+}

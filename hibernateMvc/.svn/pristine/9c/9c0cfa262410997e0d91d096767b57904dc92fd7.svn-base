@@ -1,0 +1,12 @@
+<sqls>
+	<sql>
+	SELECT
+	 ou.offer_user_name
+	FROM
+	 offer_user ou
+	LEFT JOIN offer_user_infomation oui ON oui.offer_user_id = ou.id
+	LEFT JOIN offer_city oc ON oc.city_name = oui.offer_user_work_place
+	   {#param1}
+	<param value="param1"/>
+	</sql>
+</sqls>

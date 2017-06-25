@@ -1,0 +1,27 @@
+<sqls>
+	<sql orderBy="I.CREATE_TIME DESC">
+		SELECT 
+			I.ID AS id,
+			I.JOB_NAME AS jobName,
+			I.JOB_PLACE AS jobPlace,
+			I.JOB_MONTH_WAGES_FIRST AS jobMonthWagesFirst,
+			I.JOB_MONTH_WAGES_SECOND AS jobMonthWagesSecond,
+			I.JOB_MONTH AS jobMonth,
+			I.FIRM_ID AS firmId,
+			I.USER_ID AS userId,
+			I.STATUS AS iStatus,
+			I.ISSTOCK AS isstock,
+			I.RESULT AS result,
+			I.CREATE_TIME AS createTime,
+			I.CANDIDATE_ID AS candidateId,
+			II.OFFER_USER_SEX AS offerUserSex,
+			U.OFFER_USER_NAME AS offerUserName,
+			OP.PHOTO_SAVENAME AS photoSavename
+		FROM offer_invite I
+		LEFT JOIN offer_user U ON U.ID = I.CANDIDATE_ID
+		LEFT JOIN offer_user_infomation II ON U.ID = II.OFFER_USER_ID
+		LEFT JOIN offer_photo OP ON OP.TABLE_ID = I.CANDIDATE_ID AND OP.TABLE_NAME = 'offer_candidate_photo'
+		{#param}
+		<param value="param"/>
+	</sql>
+</sqls>

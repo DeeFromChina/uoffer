@@ -1,0 +1,502 @@
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<%@include file="/common/header.jsp"%>
+<title></title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+</head>
+<script language="javascript">
+	//头部
+	function changeColor1(der){
+		der.style.background="#777777";
+	}
+	function changeColor2(der){
+		der.style.background="#32373C";
+	}
+	function init() {
+		/* if(isResetLogin()) {
+			alert("登陆超时!");
+			top.location.href='login.jsp';
+		}
+		else{ */
+			var url = "user/resumeeditPage1.do";
+			var data = ajaxSumbitNoform(url, "123");
+			addgou(data);
+			addinformation1(data.informationTd1);
+			addinformation2(data.informationTd2);
+			addskillTd(data.skillTd);
+			addworkTd(data.workTd);
+			addeducationTd(data.educationTd);
+			adddescriptionTd(data.descriptionTd);
+			addworksTd(data.worksTd);
+			addprotectTd(data.protectTd);
+		/* } */
+	}
+	function addgou(data){
+		document.getElementById("integrity").innerText = data.integrity;
+		if(data.information == '1'){
+			document.getElementById("information").src = "../img/gou.png";
+		}
+		if(data.me == '1'){
+			document.getElementById("me").src = "../img/gou.png";
+		}
+		if(data.skill == '1'){
+			document.getElementById("skill").src = "../img/gou.png";
+		}
+		if(data.work == '1'){
+			document.getElementById("work").src = "../img/gou.png";
+		}
+		if(data.education == '1'){
+			document.getElementById("education").src = "../img/gou.png";
+		}
+		/* if(data.project == '1'){
+			document.getElementById("project").src = "../img/gou.png";
+		} */
+		if(data.description == '1'){
+			document.getElementById("description").src = "../img/gou.png";
+		}
+		if(data.works == '1'){
+			document.getElementById("works").src = "../img/gou.png";
+		}
+		if(data.protect == '1'){
+			document.getElementById("protect").src = "../img/gou.png";
+		}
+	}
+	//informationTd1
+	function addinformation1(item){
+		var information = "";
+		information = information + "<div style='background: #FFFFFF; width: 100%;padding-top:30px;padding-left:20px;'>"
+										+ "<table width='100%'>"
+											+ "<tr height='40px'/>"
+											+ "<tr>"
+												+ "<td rowspan='5' width='160px'>"
+													+ "<img src="+ item.userPhoto +" width='160px' height='160px'/>"
+												+ "</td>"
+												+ "<td/>"
+												+ "<td width='20%' class='textC'>"
+													+ "<a>"
+														+ "<a href='#' onclick='javascript:top.location.href=\"resume_edit_type.jsp?1\"'><font style='font-size:14px;' color='#00B38A'>编辑</font></a>"
+													+ "</a>"
+												+ "</td>"
+											+ "</tr>"
+											+ "<tr>"
+												+ "<td style='padding-left:30px;'><font style='font-size:20px;color:#4F4F4F;'>"+item.userName+"</font></td>"
+												+ "<td/>"
+											+ "</tr>"
+											+ "<tr>"
+												+ "<td style='padding-left:30px;'><font style='font-size:14px;color:#4F4F4F;'>" + item.simpleResume + "</font></td>"
+												+ "<td/>"
+											+ "</tr>"
+											+ "<tr>"
+												+ "<td style='padding-left:30px;'><font style='font-size:14px;color:#4F4F4F;'>邮箱："+item.email+"</font></td>"
+												+ "<td/>"
+											+ "</tr>"
+											+ "<tr>"
+												+ "<td style='padding-left:30px;'><font style='font-size:14px;color:#4F4F4F;'>电话："+item.phone+"</font></td>"
+												+ "<td/>"
+											+ "</tr>"
+											+ "<tr height='40px'/>"
+										+ "</table>"
+									+ "</div>";
+		document.getElementById("informationTd1").innerHTML = information;
+	}
+	//informationTd2
+	function addinformation2(item){
+		var information = "";
+		information = information + "<div style='background: #FFFFFF; width: 100%; margin-top:10px;padding-top:30px;padding-left:20px;'>"
+										+ "<table width='100%'>"
+										+ "<tr height='40px'/>"
+											+ "<tr>"
+												+ "<td>"
+													+ "<font style='font-size:20px;color:#4F4F4F;margin-left:30px;'>关于我</font>"
+													+ "<br/>"
+													+ "<br/>"
+													+ "<ul>";
+		for(var i in item.informationList2){
+			information = information + "<li><font style='font-size:14px;color:#4F4F4F;'>"+item.informationList2[i].str+"</font></li>";
+		}
+		information = information + "</ul>"
+												+ "</td>"
+												+ "<td width='20%' class='textC' valign='top'>"
+													+ "<a href='#' onclick='javascript:top.location.href=\"resume_edit_type.jsp?2\"'><font style='font-size:14px;' color='#00B38A'>编辑</font></a>"
+												+ "</td>"
+											+ "</tr>"
+											+ "<tr height='40px'/>"
+										+ "</table>"
+									+ "</div>";
+		document.getElementById("informationTd2").innerHTML = information;
+	}
+	//skillTd
+	function addskillTd(item){
+		var skill = "";
+		skill = skill + "<div style='background: #FFFFFF; width: 100%; margin-top:10px;padding-top:30px;padding-left:20px;'>"
+						+ "<table width='100%'>"
+						+ "<tr height='40px'/>"
+							+ "<tr>"
+								+ "<td>"
+									+ "<font style='font-size:20px;color:#4F4F4F;margin-left:30px;'>技能</font>"
+									+ "<ul>";
+		for(var i in item.skillList1){
+			skill = skill + "<li><font style='font-size:14px;color:#4F4F4F;'>"+item.skillList1[i].str+"</font></li>";
+		}
+		skill = skill + "</ul>"
+								+ "</td>"
+								+ "<td width='20%' class='textC' valign='top'>"
+									+ "<a href='#' onclick='javascript:top.location.href=\"resume_edit_type.jsp?3\"'>"
+										+ "<font style='font-size:14px;' color='#00B38A'>编辑</font>"
+									+ "</a>"
+								+ "</td>"
+							+ "</tr>"
+							+ "<tr>"
+								+ "<td colspan='2' style='padding-top:20px;'>";
+		for(var i in item.skillList2){
+			skill = skill + "<div class='btn-group btn-group-lg' style='margin-left:20px;'>"
+											+"<button type='button' class='btn btn-default' style='min-width:100px;height:40px;color:#00B389;background:#FFF;'>"
+												+"<font style='font-size:14px;color:#4F4F4F;'>"+ item.skillList2[i].str +"</font>"
+											+"</button>"
+										+"</div>";
+			if (i != 0 && i % 4 == 0) skill = skill + "<br/><br/>";
+		}
+		skill = skill + "</td>"
+							+ "</tr>"
+						+ "</table>"
+						+ "<br />"
+						+ "<br />"
+						+"</div>";
+		document.getElementById("skillTd").innerHTML = skill; 
+	}
+	//workTd
+	function addworkTd(item){
+		var work = "";
+			work = work + "<div style='background: #FFFFFF; width: 100%; margin-top:10px;padding-top:30px;padding-left:20px;'>"
+							+ "<table width='100%'>"
+								+ "<tr>"
+									+ "<td>"
+										+ "<font style='font-weight:bold;margin-left:30px;'>工作经历</font>"
+										/* + "<p style='padding:20px;'><font size='2'>" + item.str + "</font></p>" */
+									+ "</td>"
+									+ "<td width='15%' class='textC' valign='top'></td>"
+									+ "<td width='20%' class='textC' valign='top'>"
+										+ "<a href='#' onclick='javascript:top.location.href=\"resume_edit_type.jsp?4\"'>"
+											+ "<font style='font-size:14px;' color='#00B38A'>编辑</font>"
+										+ "</a>"
+									+ "</td>"
+								+ "</tr>";
+		for (var i in item) {
+			work = work + "<tr >"
+						+ "<td >"
+							+ "<p style='margin-left:30px;padding-top:30px'><font style='font-size:14px;color:#4F4F4F;'>" + item[i].oldFirmName + "</font></p>"
+						+ "</td>"
+						+ "<td class='textL' >"
+							+ "<p style='padding-top:30px'><font style='font-size:14px;color:#4F4F4F;'>" + item[i].startTime + "~" + item[i].endTime + "</font></p>"
+						+ "</td>"
+						+ "<td></td>"
+					+ "</tr>"
+					+"<tr>"
+						+ "<td colspan='2'>"
+							+ "<p style='margin-left:30px;'><font style='font-size:14px;color:#4F4F4F;'>" + item[i].jobName + "</font></p>"
+							+ "<p style='margin-left:30px;'><font style='font-size:14px;color:#4F4F4F;'>" + item[i].jobDescript + "</font></p>"
+						+ "</td>"
+						+ "<td >"
+						+ "</td>"
+					+ "</tr>"
+		}
+			work = work + "</table>"
+						+ "<br />"
+						+ "<br />"
+						+"</div>";
+		document.getElementById("workTd").innerHTML = work; 
+	}
+	function addeducationTd(item){
+		var education = "";
+		education = education + "<div style='background: #FFFFFF; width: 100%; margin-top:10px;padding-top:30px;padding-left:20px;'>"
+										+ "<table width='100%'>"
+											+ "<tr>"
+												+ "<td>"
+												+ "<font style='font-size:20px;color:#4F4F4F;margin-left:30px;'>教育经历</font>"
+												/* 	+ "<ul>";
+			for(var i in item.educationList){
+				education = education + "<li><font size='1' color='#666666'>"+item.educationList[i].schoolName+"</font></li>"
+				 					+ "<li><font size='1' color='#666666'>"+item.educationList[i].userMajor+"，"+item.educationList[i].userXueLi+"</font></li>";
+			}
+			education = education + "</ul>" */
+												+ "</td>"
+												+ "<td width='15%' class='textC' valign='top'></td>"
+												+ "<td width='20%' class='textC' valign='top'>"
+													+ "<a href='#' onclick='javascript:top.location.href=\"resume_edit_type.jsp?5\"' >"
+														+ "<font style='font-size:14px;' color='#00B38A'>编辑</font>"
+													+ "</a>"
+												+ "</td>"
+											+ "</tr>";
+				for (var i in item.educationList) {
+					education = education + "<tr >"
+												+ "<td >"
+												+ "<p style='margin-left:30px;padding-top:30px'><font style='font-size:14px;color:#4F4F4F;'>" + item.educationList[i].schoolName + "</font></p>"
+												+ "</td>"
+												+ "<td class='textL' >"
+													+ "<p style='padding-top:30px'><font style='font-size:14px;color:#4F4F4F;'>" + item.educationList[i].starTime + "~" +item.educationList[i].endTime + "</font></p>"
+												+ "</td>"
+												+ "<td></td>"
+											+ "</tr>"
+											+"<tr>"
+												+ "<td colspan='2'>"
+													+ "<p style='margin-left:30px;'><font style='font-size:14px;color:#4F4F4F;'>" + (item.educationList[i].userMajor == "" ? "" : item.educationList[i].userMajor + "，") + item.educationList[i].userXueLi + "</font></p>"
+												+ "</td>"
+												+ "<td >"
+												+ "</td>"
+											+ "</tr>";
+				}
+					education = education + "</table><br /><br />"
+									+ "</div>";
+		document.getElementById("educationTd").innerHTML = education;
+	}
+	function adddescriptionTd(item){
+		var description = "";
+		var value = item.str==undefined?"":item.str;
+		description = description + "<div style='background: #FFFFFF; width: 100%; margin-top:10px;padding-top:30px;padding-left:20px;'>"
+						+ "<table width='100%'>"
+							+ "<tr>"
+								+ "<td>"
+									+ "<font style='font-size:20px;color:#4F4F4F;margin-left:30px;'>个人描述</font>"
+									+ "<p style='padding:20px 30px;'><font style='font-size:14px;color:#4F4F4F;'>" + value + "</font></p>"
+								+ "</td>"
+								+ "<td width='20%' class='textC' valign='top'>"
+									+ "<a href='#' onclick='javascript:top.location.href=\"resume_edit_type.jsp?6\"'>"
+										+ "<font style='font-size:14px;' color='#00B38A'>编辑</font>"
+									+ "</a>"
+								+ "</td>"
+							+ "</tr>"
+							+ "<tr>"
+								+ "<td colspan='2' style='padding-top:20px;'>"
+								"</td>"
+							+ "</tr>"
+						+ "</table>"
+						+ "<br />"
+						+ "<br />"
+						+"</div>";
+		document.getElementById("descriptionTd").innerHTML = description; 
+	}
+	function addworksTd(item){
+		var works = "";
+		works = works + "<div style='background: #FFFFFF; width: 100%; margin-top:10px;padding-top:30px;padding-left:20px;'>"
+						+ "<table width='100%'>"
+							+ "<tr>"
+								+ "<td>"
+									+ "<font style='font-size:14px;color:#4F4F4F;margin-left:30px;'>个人作品</font>"
+									+ "<p style='padding:20px 30px;'><font style='font-size:14px;color:#4F4F4F;'>" + item + "</font></p>"
+								+ "</td>"
+								+ "<td width='20%' class='textC' valign='top'>"
+									+ "<a href='#' onclick='javascript:top.location.href=\"resume_edit_type.jsp?7\"'>"
+										+ "<font style='font-size:14px;' color='#00B38A'>编辑</font>"
+									+ "</a>"
+								+ "</td>"
+							+ "</tr>"
+							+ "<tr>"
+								+ "<td colspan='2' style='padding-top:20px;'>"
+								"</td>"
+							+ "</tr>"
+						+ "</table>"
+						+ "<br />"
+						+ "<br />"
+						+"</div>";
+		document.getElementById("worksTd").innerHTML = works; 
+	}
+	function addprotectTd(item){
+		var protect = "";
+		protect = protect + "<div style='background: #FFFFFF; width: 100%; margin-top:10px;padding-top:30px;padding-left:20px;'>"
+						+ "<table width='100%'>"
+							+ "<tr>"
+								+ "<td>"
+									+ "<font style='font-size:20px;margin-left:30px;'>私聊保护（可以填写您想屏蔽的公司邮箱后缀，让他们无法查看您的简历。）</font>"
+									+ "<p style='padding:20px 30px;'><font style='font-size:14px;color:#4F4F4F;'>" + item.str + "</font></p>"
+								+ "</td>"
+								+ "<td width='20%' class='textC' valign='top'>"
+									+ "<a href='#' onclick='javascript:top.location.href=\"resume_edit_type.jsp?8\"'>"
+										+ "<font style='font-size:14px;' color='#00B38A'>编辑</font>"
+									+ "</a>"
+								+ "</td>"
+							+ "</tr>"
+							+ "<tr>"
+								+ "<td colspan='2' style='padding-top:20px;'>"
+								"</td>"
+							+ "</tr>"
+						+ "</table>"
+						+ "<br />"
+						+ "<br />"
+						+"</div>";
+		document.getElementById("protectTd").innerHTML = protect; 
+	}
+	function openWindow(){
+		document.getElementById("editbutton").click();
+		//document.getElementById("myModalLabel").innerHTML = "<font color='#4F4F4F' style='font-size:18px;'>互联网高端招聘网</font>";
+		window.iframe1.location.href="mainresume_edit_downloadPDF.jsp";
+		//dowmloadpdf()
+	}
+	function goSave(){
+		var url = "user/saveeditcontent1.do";
+		var formId = "editForm";
+		var data = ajaxSumbit(url, formId);
+		if(data == "success"){
+			top.location.href='resume_edit.jsp';
+		}else{
+			alert("数据出错!");
+		}
+	}
+	
+	function dowmloadpdf(){
+		top.location.href='../user/downloadPdf.do';
+// 		var url = "user/saveeditcontent1.do";
+// 		var formId = "editForm";
+// 		var data = ajaxSumbit(url, formId);
+	}
+	
+	function booleanInfot(url){
+		top.location.href=url;
+	}
+	
+	function closedialog(ret){
+		if(ret){
+			dowmloadpdf();
+		}else{
+			document.getElementById("closeWin").click();
+		}
+	}
+</script>
+<body bgcolor="#F4F9F9" onload="init()">
+	<div style="width:100%;height:60px;min-width:1000px;background: #32373C;position:absolute;top:expression(documentElement.scrollTop + 'px');position:fixed;z-index:9999;">
+		<table style="width:100%;white-space: nowrap;">
+			<tr>
+				<td width="19%" style="padding-left:14%;"><a href="#" onclick="javascript:top.location.href='homepage.jsp'"><img src="../img/U-Offerlogo.png" width="109px" height="26px"></a></td>
+				<td width="5%"/>
+				<td>
+				    <button type="button" style="font-size:14px;height:60px !important;color:#F5F8F9;background-color:#32373C;" class="btn dropdown-toggle" id="dropdownMenu3" data-toggle="dropdown" class="btn dropdown-toggle" id="dropdownMenu3" data-toggle="dropdown" onmouseover="changeColor1(this)" onmouseout="changeColor2(this)" onclick="booleanInfot('interview.jsp')">
+				    	<font>面试邀请</font>
+				    </button>
+				    <button type="button" style="font-size:14px;height:60px !important;color:#F5F8F9;background-color:#777777;"class="btn dropdown-toggle" id="dropdownMenu2" data-toggle="dropdown" onclick="booleanInfot('resume_edit.jsp')">
+				    	<font>我的简历</font>
+				    </button>
+			    </td>
+			    <td width="5%"/>
+			    <td style="width:19%;padding-right:10%">
+				    <button type="button" style="font-size:14px;height:60px !important;color:#F5F8F9;background-color:#32373C;" class="btn dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown" onmouseover="changeColor1(this)" onmouseout="changeColor2(this)" onclick="javascript:top.location.href='personal_settings.jsp'">个人设置
+				    </button>
+				    <button type="button" style="font-size:14px;height:60px !important;color:#F5F8F9;background-color:#32373C;" class="btn dropdown-toggle" id="dropdownMenu4" data-toggle="dropdown" onmouseover="changeColor1(this)" onmouseout="changeColor2(this)" onclick="javascript:top.location.href='login.jsp'">退出
+				    </button>
+				</td>
+			</tr>
+		</table>
+	</div>
+	<br />
+	<br />
+	<br />
+	<br />
+	<table width="100%">
+		<tr>
+			<td width="12%" rowspan="10"/>
+			<td style="width:13%;min-width:200px;" rowspan="10" valign="top">
+				<table style="background:#FFF">
+					<tr>
+						<td width="100%" class="textC" style="padding-top:35px;padding-left:10px;padding-bottom:10px;">
+							<font style='font-size:18px;' color="#9A9A9A">简历完成度：</font>
+							<font style='font-size:18px;' color="#00B38A" id="integrity">40%</font>
+						</td>
+					</tr>
+					<tr>
+						<td height="1" style="background:#CCCCCC;"></td>
+					</tr>
+					<tr><td class="textC" style="padding-top:10px;"><img id="information" style="width:40px;padding:0px 10px;"/><font style='font-size:14px;' color="#00B38A">个人信息</font></td></tr>
+					<tr><td class="textC" style="padding-top:10px;"><img id="me" style="width:40px;padding:0px 10px;"/><font style='font-size:14px;' color="#00B38A">&nbsp;关&nbsp;于&nbsp;我&nbsp;</font></td></tr>
+					<tr><td class="textC" style="padding-top:10px;"><img id="skill" style="width:40px;padding:0px 10px;"/><font style='font-size:14px;' color="#00B38A">个人技能</font></td></tr>
+					<tr><td class="textC" style="padding-top:10px;"><img id="work" style="width:40px;padding:0px 10px;"/><font style='font-size:14px;' color="#00B38A">工作经历</font></td></tr>
+					<tr><td class="textC" style="padding-top:10px;"><img id="education" style="width:40px;padding:0px 10px;"/><font style='font-size:14px;' color="#00B38A">教育经历</font></td></tr>
+					<tr><td class="textC" style="padding-top:10px;"><img id="description" style="width:40px;padding:0px 10px;"/><font style='font-size:14px;' color="#00B38A">个人描述</font></td></tr>
+					<tr><td class="textC" style="padding-top:10px;"><img id="works" style="width:40px;padding:0px 10px;"/><font style='font-size:14px;' color="#00B38A">个人作品</font></td></tr>
+					<tr><td class="textC" style="padding-top:10px;"><img id="protect" style="width:40px;padding:0px 10px;"/><font style='font-size:14px;' color="#00B38A">隐私保护</font></td></tr>
+					<tr>
+						<td class="textC" style="padding:20px 40px;">
+							<div>
+								<button id="pdf" type="button" class="btn btn-default" style="width:150px;height:40px;margin-left:20px;color:#FFF;background:#00B389;" onclick="openWindow()">
+						   			<font style='font-size:14px;'>预览下载简历</font>
+						   		</button>
+							</div>
+						</td>
+					</tr>
+					<tr height="20px"/>
+				</table>
+			</td>
+			<td width="30px" rowspan="10"/>
+			<td width="56%" class="textL" id="informationTd1">
+			</td>
+			<td rowspan="10"/>
+		</tr>
+		<tr>
+			<td id="informationTd2">
+			</td>
+		</tr>
+		<tr>
+			<td id="skillTd">
+			</td>
+		</tr>
+		<tr>
+			<td id="workTd">
+			</td>
+		</tr>
+		<tr>
+			<td id="educationTd">
+			</td>
+		</tr>
+		<tr>
+			<td id="descriptionTd">
+			</td>
+		</tr>
+		<tr>
+			<td id="worksTd">
+			</td>
+		</tr>
+		<tr>
+			<td id="protectTd">
+			</td>
+		</tr>
+	</table>
+	<div style="width:100%;height:108px;"></div>
+	<br />
+	<button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal" style="display:none;" id="editbutton"></button>
+	<form id="editForm">
+		<center>
+		<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="margin-top:50px;">
+			<div class="modal-dialog" style="width:52%;min-width:600px;">
+				<div class="modal-content">
+					<!-- <div class="modal-header" style="border:none;">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+							&times;
+						</button>
+						<div class="modal-title" id="myModalLabel">
+						</div>
+					</div> -->
+					<div class="modal-body" style="overflow-y:auto;">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true" id="closeWin">
+							&times;
+						</button>
+						<iframe width="100%" scrolling="auto" frameborder="0" marginheight="0px" marginwidth="0px" style="background:#FFF;width:100%;min-height:400px;height:50%;" id="iframe1" name="iframe1"></iframe>
+		            </div>
+				</div>
+			</div>
+		</div>
+		</center>
+	</form>
+	<table style="width:100%;height:81px;background:#32373C;">
+		<tr>
+			<td class="textC">
+				<font color="#F5F8F9" style="font-size:14px;white-space: nowrap;">
+					关于我们&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					使用攻略&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					法律声明&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					关注我们
+				</font>
+			</td>
+		</tr>
+	</table>
+</body>
+</html>

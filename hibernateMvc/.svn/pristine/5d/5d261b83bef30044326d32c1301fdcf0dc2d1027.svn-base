@@ -1,0 +1,273 @@
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<%@include file="/common/header.jsp"%>
+<title></title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<style>
+.smailfont{
+	font-size:18px;
+}
+.fontcol{
+	padding-left: 40px;
+	color:#4F4F4F;
+}
+</style>
+</head>
+<script language="javascript">
+	function changeColor1(der){
+		der.style.background="#777777";
+	}
+	function changeColor2(der){
+		der.style.background="#32373C";
+	}
+	function init() {
+		if(isResetLogin()) {
+			alert("登陆超时!");
+			top.location.href='login.jsp';
+		}
+		else{
+			var url = "firm/examinefirmPage1.do";
+			var formId = "firmForm";
+			var data = ajaxSumbit(url, formId);
+			addLi(data.firmStageList,"Stage");
+			addLi(data.cityList,"City");
+			//addLi(data.xuqiuList,"xuqiu");
+			$("#firmForm").populateForm(data);
+		}
+	}
+	function addLi(items,liId){
+		var inn = "";
+		for(var i in items){
+			inn = inn + "<li role='presentation'>"
+				+"<a role='menuitem' onclick='selectDownValue(" + items[i].id +",\"" + items[i].value +"\",\""+liId+"\")'><font color='#000'>" + items[i].value
+				+"</font></a></li>";
+		}
+		document.getElementById(liId).innerHTML=inn;
+		var ti1 = "firm" + liId;
+		var ti2 = "firm" + liId + "Value";
+	}
+	function selectDownValue(ke, val, targetInput){
+		var ti1 = "firm" + targetInput;
+		var ti2 = "firm" + targetInput + "Value";
+		document.getElementById(ti1).value=ke;
+		document.getElementById(ti2).value=val;
+	}
+	function goSubmit(){
+		var url = "firm/saveexaminefirm1.do";
+		var formId = "firmForm";
+		var data = ajaxSumbit(url, formId);
+		if(data == 'success'){
+			top.location.href='examine_firm.jsp';
+		}
+	}
+</script>
+<body bgcolor="#FFFFFF" onload="init()">
+	<form id="firmForm">
+	<div style="width:100%;height:60px;background: #32373C;position:absolute;top:expression(documentElement.scrollTop + 'px');position:fixed;z-index:9999;">
+		<table style="width:100%;white-space: nowrap;">
+			<tr>
+				<td width="19%" style="padding-left:13%;"><a href="#" onclick="javascript:top.location.href='homepage.jsp'"><img src="../img/U-Offerlogo.png" width="109px" height="26px"></a></td>
+				<td width="5%"/>
+				<td>
+				    <button type="button" style="height:60px !important;color:#F5F8F9;background-color:#32373C;" class="btn dropdown-toggle" id="dropdownMenu3" data-toggle="dropdown" onmouseover="changeColor1(this)" onmouseout="changeColor2(this)" onclick="javascript:top.location.href='finduser.jsp'">
+				    	<font style="font-size:14px;" color="#F5F8F9">候选人</font>
+				    </button>
+				    <button type="button" style="height:60px !important;color:#F5F8F9;background-color:#32373C;"class="btn dropdown-toggle" id="dropdownMenu2" data-toggle="dropdown" onmouseover="changeColor1(this)" onmouseout="changeColor2(this)" onclick="javascript:top.location.href='user_view.jsp'">
+				    	<font style="font-size:14px;" color="#F5F8F9">已发邀请</font>
+				    </button>
+			    </td>
+			    <td width="5%"/>
+			    <td class="textR" style="width:19%;padding-right:10%">
+				    <div class="btn-group">
+						<button type="button" style="font-size:14px;height:60px !important;color:#F5F8F9;background-color:#32373C;"
+						 class="btn dropdown-toggle" id="dropdownMenu2" data-toggle="dropdown" onmouseover="changeColor1(this)"
+						 onmouseout="changeColor2(this)" ><span id="userName" name="userName"></span>
+					        <span class="caret"></span>
+					    </button>
+					    <ul class="dropdown-menu pull-right" role="menu" aria-labelledby="dropdownMenu2" style="background-color:#32373C;width:150px;">
+					        <li role="presentation">
+					            <a role="menuitem" tabindex="-1" href="#" onclick="javascript:top.location.href='personal_settings_edit.jsp'" style="height:46px;text-align:center;padding-top:10px;" onmouseover="changeColor1(this)" onmouseout="changeColor2(this)"><font color="#F5F8F9">个人设置</font></a>
+					            <a role="menuitem" tabindex="-1" href="#" onclick="javascript:top.location.href='firm_resume_add.jsp'" style="height:46px;text-align:center;padding-top:10px;" onmouseover="changeColor1(this)" onmouseout="changeColor2(this)"><font color="#F5F8F9">企业信息</font></a>
+					        </li>
+					    </ul>
+				    </div>
+				    <button type="button" style="font-size:14px;height:60px !important;color:#F5F8F9;background-color:#32373C;" class="btn dropdown-toggle" id="dropdownMenu4" data-toggle="dropdown" onmouseover="changeColor1(this)" onmouseout="changeColor2(this)" onclick="javascript:top.location.href='login.jsp'">退出
+				    </button>
+				</td>
+			</tr>
+		</table>
+	</div>
+	<br />
+	<br />
+	<br />
+	<br />
+	<center>
+		<div style="background: #FFFFFF; width: 38%;min-width:750px;">
+			<table width="100%">
+				<tr height="110px"/>
+				<tr>
+					<td class="textC" style="padding:20px 0px;" colspan="2">
+						<font style="font-size:20px;" color="#00B389">很抱歉，我们暂时无法向您提供服务。你可以重新提交审核或联系我们的企业客服。</font>
+					</td>
+				</tr>
+				<tr height="60px"/>
+				<tr>
+					<td class="textC" style="padding:10px 0px;font-size:20px;" colspan="2">公司信息</td>
+				</tr>
+				<tr height="60px">
+					<td class="textR" style="padding-right:30px;">
+						<font style="font-size:14px;" color="#4F4F4F">公司全称</font>
+					</td>
+					<td width="69%">
+						<div class="input-group">
+							<div class="dropdown">
+								<input type="text" name="firmAllName" id="firmAllName" class="form-control" style="width: 401px;">
+							</div>
+						</div>
+					</td>
+				</tr>
+				<tr height="60px">
+					<td class="textR" style="padding-right:30px;">
+						<font style="font-size:14px;" color="#4F4F4F">公司官网</font>
+					</td>
+					<td>
+						<div class="input-group">
+							<div class="dropdown">
+								<input type="text" name="firmWebLink" id="firmWebLink" class="form-control" style="width: 401px;">
+							</div>
+						</div>
+					</td>
+				</tr>
+				<tr height="60px">
+					<td class="textR" style="padding-right:30px;">
+						<font style="font-size:14px;" color="#4F4F4F">融资阶段</font>
+					</td>
+					<td>
+						<input type="hidden" id="firmStage" name="firmStage"/>
+						<div class="input-group" style="width: 410px;">
+							<div class="dropdown">
+								<input type="text" name="firmStageValue" id="firmStageValue" class="form-control" style="width: 360px;">
+							    <button type="button" style="width:41px;height:41px !important;border:1px #CCCCCC solid;background-color:#F5F8F9;" class="btn dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown">
+							        <span class="caret"></span>
+							    </button>
+							    <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1" style="width: 95% !important" id="Stage">
+							        
+							    </ul>
+							</div>
+						</div>
+					</td>
+				</tr>
+				<tr height="60px">
+					<td class="textR" style="padding-right:30px;">
+						<font style="font-size:14px;" color="#4F4F4F">所在城市</font>
+					</td>
+					<td>
+						<input type="hidden" id="firmCity" name="firmCity"/>
+						<div class="input-group" style="width: 410px;">
+							<div class="dropdown">
+								<input type="text" name="firmCityValue" id="firmCityValue" class="form-control" style="width: 360px;">
+							    <button type="button" style="width:41px;height:41px !important;border:1px #CCCCCC solid;background-color:#F5F8F9;" class="btn dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown">
+							        <span class="caret"></span>
+							    </button>
+							    <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1" style="width: 95% !important" id="City">
+							        
+							    </ul>
+							</div>
+						</div>
+					</td>
+				</tr>
+				<tr height="60px">
+					<td class="textR" style="padding-right:30px;">
+						<font style="font-size:14px;" color="#4F4F4F">招聘需求</font>
+					</td>
+					<td>
+						<input type="hidden" id="firmxuqiu" name="firmxuqiu"/>
+						<div class="input-group" style="width: 410px;">
+							<div class="dropdown">
+								<input type="text" name="firmxuqiuValue" id="firmxuqiuValue" class="form-control" style="width: 360px;">
+							    <button type="button" style="width:41px;height:41px !important;border:1px #CCCCCC solid;background-color:#F5F8F9;" class="btn dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown">
+							        <span class="caret"></span>
+							    </button>
+							    <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1" style="width: 95% !important" id="xuqiu">
+							        
+							    </ul>
+							</div>
+						</div>
+					</td>
+				</tr>
+				<tr height="20px"/>
+				<tr height="80px">
+					<td colspan="2" class="textC">
+						<button type="button" class="btn btn-primary" onclick="goSubmit()" data-toggle="button"
+							style="background-color: #00B38A !important; border-color: #00B38A !important; width: 200px">
+							提交审核</button>
+					</td>
+				</tr>
+				<tr height="40px"/>
+			</table>
+		</div>
+		<table style="width: 38%;min-width:750px;">
+			<tr>
+				<td width="34%"><div style="height: 2px; width: 100%; background-color: #CCCCCC;"></div></td>
+				<td class="textC"><font style="font-size:16px;" color="#CCCCCC">需要帮助</font></td>
+				<td width="34%"><div style="height: 2px; width: 100%; background-color: #CCCCCC;"></div></td>
+			</tr>
+		</table>
+		<!-- <div style="height: 2px; width: 60%; background-color: #CCCCCC;min-width:1000px;">
+			<div style="margin-top:-7px;background-color: #FFF;">
+				<font style="font-size:16px;" color="#CCCCCC">需要帮助</font>
+			</div>
+		</div> -->
+		<div style="background: #FFFFFF; width: 38%;min-width:750px;">
+			<br />
+			<table
+				style="border-collapse: separate; border-spacing: 10px; width: 100%;">
+				<tr height="20px"/>
+				<tr>
+					<td colspan="4">
+						<table width="100%">
+							<tr>
+								<td rowspan="6" class="textR" width="50%"><img src="../img/kefu.png" width="150px" height="150px" style="border:2px solid #BBBBBB;padding:10px 30px;border-radius:13px;"/></td>
+								<td class="textL fontcol smailfont" width="50%">蓝天</td>
+							</tr>
+							<tr>
+								<td class="textL fontcol smailfont">招聘助理</td>
+							</tr>
+							<tr>
+								<td class="textL fontcol smailfont">联系电话：13250325307</td>
+							</tr>
+							<tr>
+								<td class="textL fontcol smailfont">微信号：13250325307 </td>
+							</tr>
+							<tr>
+								<td class="textL fontcol smailfont">QQ：1611972891</td>
+							</tr>
+							<tr>
+								<td class="textL fontcol smailfont">邮箱：lantian@uoffer.com</td>
+							</tr>
+							<tr height="100px"/>
+						</table>
+					</td>
+				</tr>
+			</table>
+			<br />
+		</div>
+	</center>
+	</form>
+	<table style="width:100%;height:81px;background:#32373C;">
+		<tr>
+			<td class="textC">
+				<font color="#F5F8F9" style="font-size:14px;white-space: nowrap;">
+					关于我们&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					使用攻略&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					法律声明&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					关注我们
+				</font>
+			</td>
+		</tr>
+	</table>
+</body>
+</html>

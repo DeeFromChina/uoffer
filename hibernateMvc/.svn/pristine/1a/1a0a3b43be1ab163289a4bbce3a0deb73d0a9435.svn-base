@@ -1,0 +1,123 @@
+<sqls>
+	<sql>
+<!-- 		SELECT -->
+<!-- 			U.ID AS id, -->
+<!-- 			U.OFFER_USER_NAME AS offerUserName, -->
+<!-- 			U.OFFER_USER_CITY AS offerUserCity, -->
+<!-- 			U.OFFER_JOB_ID AS offerJobId, -->
+<!-- 			U.ISOFFER AS isoffer, -->
+<!-- 			I.OFFER_USER_PLAN_YEAR_WAGES AS offerUserPlanYearWages, -->
+<!-- 			I.OFFER_USER_DESCRIPTION AS offerUserDescription, -->
+<!-- 			I.OFFER_USER_EDUCATION AS offerUserEducation, -->
+<!-- 			I.OFFER_USER_WORKTIME AS offerUserWorktime, -->
+<!-- 			I.OFFER_USER_NOW_YEAR_WAGES AS offerUserNowYearWages, -->
+<!-- 			I.OFFER_USER_ADDRESS AS offerUserAddress, -->
+<!-- 			I.OFFER_USER_JOB1 AS offerUserJob1, -->
+<!-- 			I.OFFER_USER_JOB2 AS offerUserJob2, -->
+<!-- 			I.OFFER_PHOTO_ID AS offerPhotoId,  -->
+<!-- 			I.OFFER_USER_WORK_PLACE AS offerUserWorkPlace, -->
+<!-- 			I.OFFER_USER_SEX AS offerUserSex, -->
+<!-- 			I.OFFER_ADVISER_REMARK AS offerAdviseRemark, -->
+<!-- 			E.SCHOOL_NAME AS schoolName, -->
+<!-- 			E.STAR_TIME AS starTime, -->
+<!-- 			E.USER_MAJOR AS userMajor, -->
+<!-- 			E.OFFER_USER_ID AS offerUserId, -->
+<!-- 			E.OFFER_USER_XUELI AS offerUserXueli, -->
+<!-- 			W.JOB_DESCRIPT AS jobDescript -->
+<!-- 		FROM ( -->
+<!-- 			SELECT  -->
+<!-- 				U.ID, U.OFFER_USER_NAME, U.OFFER_USER_CITY, U.OFFER_JOB_ID, U.ISOFFER, U.STATUS -->
+<!-- 			FROM OFFER_USER U  -->
+<!-- 			LEFT JOIN OFFER_COLLECT C ON U.ID = C.OFFER_CANDIDATE_ID -->
+<!-- 			LEFT JOIN OFFER_INVITE I ON U.ID = I.CANDIDATE_ID -->
+<!-- 			{#param1} -->
+<!-- 			WHERE U.ISOFFER = '1' AND OFFER_USER_ID = '45' AND C.STATUS = '1' AND U.STATUS ='4' LIMIT 0,20  -->
+<!-- 		) U  -->
+<!-- 		LEFT JOIN OFFER_USER_INFOMATION I ON U.ID = I.OFFER_USER_ID  -->
+<!-- 		LEFT JOIN ( -->
+<!-- 			SELECT  -->
+<!-- 				E.SCHOOL_NAME, -->
+<!-- 				E.STAR_TIME, -->
+<!-- 				(E.END_TIME), -->
+<!-- 				E.USER_MAJOR, -->
+<!-- 				E.OFFER_USER_ID, -->
+<!-- 				E.OFFER_USER_XUELI -->
+<!-- 			FROM OFFER_USER_EDUCATION E -->
+<!-- 			GROUP BY E.OFFER_USER_ID -->
+<!-- 		) E ON E.OFFER_USER_ID = U.ID -->
+<!-- 		LEFT JOIN ( -->
+<!-- 			SELECT -->
+<!-- 				W.OFFER_USER_ID, -->
+<!-- 				W.JOB_DESCRIPT, -->
+<!-- 				max(W.END_TIME) -->
+<!-- 			FROM OFFER_USER_WORKS W -->
+<!-- 			GROUP BY W.OFFER_USER_ID -->
+<!-- 		) W ON W.OFFER_USER_ID = U.ID -->
+		<!-- WHERE U.ISOFFER = '1' AND U.STATUS ='4' LIMIT 0,20  -->
+	SELECT
+	ou.ID AS id,
+	ou.OFFER_USER_NAME AS offerUserName,
+	ou.OFFER_USER_CITY AS offerUserCity,
+	ou.OFFER_JOB_ID AS offerJobId,
+	oj1.job_name AS jobName,
+	ou.ISOFFER AS isoffer,
+	oui.OFFER_USER_PLAN_YEAR_WAGES AS
+	offerUserPlanYearWages,
+	oui.OFFER_USER_DESCRIPTION AS
+	offerUserDescription,
+	oui.OFFER_USER_EDUCATION AS offerUserEducation,
+	oui.OFFER_USER_WORKTIME AS offerUserWorktime,
+	oui.OFFER_USER_NOW_YEAR_WAGES AS offerUserNowYearWages,
+	oui.OFFER_USER_ADDRESS AS offerUserAddress,
+	oui.OFFER_USER_JOB1 AS
+	offerUserJob1,
+	oui.OFFER_USER_JOB2 AS offerUserJob2,
+	oui.OFFER_PHOTO_ID
+	AS offerPhotoId,
+	oui.OFFER_USER_WORK_PLACE AS offerUserWorkPlace,
+	oui.OFFER_USER_SEX AS offerUserSex,
+	oui.OFFER_ADVISER_REMARK AS
+	offerAdviseRemark,
+	E.SCHOOL_NAME AS schoolName,
+	E.STAR_TIME AS starTime,
+	E.USER_MAJOR AS userMajor,
+	E.OFFER_USER_ID AS offerUserId,
+	E.OFFER_USER_XUELI AS offerUserXueli,
+	W.JOB_DESCRIPT AS jobDescript
+	FROM
+	offer_match om
+	LEFT JOIN offer_user_infomation oui ON oui.offer_user_id = om.user_id
+	LEFT JOIN offer_user ou ON ou.id = om.user_id
+	LEFT JOIN offer_city oc ON oc.city_name = oui.offer_user_work_place
+	LEFT JOIN offer_job oj ON oj.id = oui.offer_user_job1
+	LEFT JOIN offer_job oj1 ON oj1.id = ou.OFFER_JOB_ID
+	LEFT JOIN offer_invite oin ON oin.candidate_id = ou.id and oin.firm_id = om.firm_id and oin.user_id = om.firm_user_id
+	LEFT JOIN offer_collect oco ON oco.offer_candidate_id = ou.id and oco.offer_user_id = om.firm_user_id and oco.offer_firm_id = om.firm_id
+	LEFT JOIN (
+	SELECT
+	E.SCHOOL_NAME,
+	E.STAR_TIME,
+	max(E.END_TIME),
+	E.USER_MAJOR,
+	E.OFFER_USER_ID,
+	E.OFFER_USER_XUELI
+	FROM
+	OFFER_USER_EDUCATION E
+	GROUP BY
+	E.OFFER_USER_ID
+	) E ON E.OFFER_USER_ID = ou.id
+	LEFT JOIN (
+	SELECT
+	W.OFFER_USER_ID,
+	W.JOB_DESCRIPT,
+	max(W.END_TIME)
+	FROM
+	OFFER_USER_WORKS W
+	GROUP BY
+	W.OFFER_USER_ID
+	) W ON W.OFFER_USER_ID = ou.ID
+
+	{#param}
+		<param value="param"/>
+	</sql>
+</sqls>

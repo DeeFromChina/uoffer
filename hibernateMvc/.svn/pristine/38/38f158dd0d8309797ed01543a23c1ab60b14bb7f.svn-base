@@ -1,0 +1,73 @@
+input:focus{
+	-webkit-transition:border linear .2s,-webkit-box-shadow linear .5s; 
+	border:1px #CCCCCC solid;
+	-webkit-box-shadow:0 0 0px rgba(255,255,255);
+	outline:none;
+}
+button{
+	height:41px;
+}
+button:focus{
+	outline:none;
+}
+.textL {
+	align: left;
+	text-align: left;
+}
+
+.textR {
+	align: right;
+	text-align: right;
+}
+
+.textC {
+	align: center;
+	text-align: center;
+}
+
+.triangle-up {
+	width: 0;
+	height: 0;
+	border-left: 5px solid transparent;
+	border-right: 5px solid transparent;
+	border-bottom: 10px solid #00B38A;
+}
+.triangle-down {
+	width: 0;
+	height: 0;
+	border-left: 5px solid transparent;
+	border-right: 5px solid transparent;
+	border-top: 10px solid #FFF;
+}
+.triangle-left {
+	width: 0;
+	height: 0;
+	border-top: 5px solid transparent;
+	border-bottom: 5px solid transparent;
+	border-right: 10px solid #00B38A;
+}
+.circleA {
+    width: 15px;
+    height: 15px;
+    background: #00B38A;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 10px;
+}
+.circleB {
+    width: 15px;
+    height: 15px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 10px;
+    border:1px #999999 solid;
+}
+.top-button{
+	height:59px !important;
+	width:100px;
+	line-height:50px;
+	text-align:center;
+	color:#FFF !important;
+	background-color:#000 !important;
+}
+

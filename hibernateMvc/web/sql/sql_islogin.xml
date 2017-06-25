@@ -1,0 +1,9 @@
+<sqls>
+	<sql orderBy="id">
+	SELECT 
+		*
+	FROM offer_user ou 
+	{#param}
+		<param value="param"/>
+	</sql>
+</sqls>

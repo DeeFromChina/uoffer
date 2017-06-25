@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans>
+	<bean id="generalControl" class="com.offer.job.GeneralControl">
+		<property name="popObjects">
+			<map>
+				<entry key="offerUserResumeStatus" value="offerUserResumeStatus"/>
+				<entry key="offerEmailStatus" value="offerEmailStatus"/>
+				<entry key="offerFirmSelectStatus" value="offerFirmSelectStatus"/>
+				<entry key="offerMatchStatus" value="offerMatchStatus"/>
+<!-- 				<entry key="offerInviteChangeStatus" value="offerInviteChangeStatus"/> -->
+			</map>
+		</property>
+	</bean>
+	
+	<bean id="offerUserResumeStatus" class="com.offer.job.service.impl.OfferUserResumeStatus" autowire="byName"/>
+		
+	<bean id="offerEmailStatus" class="com.offer.job.service.impl.OfferEmailStatus" autowire="byName"/>
+		
+	<bean id="offerFirmSelectStatus" class="com.offer.job.service.impl.OfferFirmSelectStatus" autowire="byName"/>
+		
+	<bean id="offerMatchStatus" class="com.offer.job.service.impl.OfferMatchStatus" autowire="byName"/>
+		
+<!-- 	<bean id="offerInviteChangeStatus" class="com.offer.job.service.impl.OfferInviteChangeStatus" autowire="byName"/>	 -->
+	
+	<bean id="job1"	class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="generalControl" />
+		<property name="targetMethod" value="scanExecuteJob" />
+		<property name="concurrent" value="false" />
+	</bean>
+
+    <!-- 每天零时启动任务 "0 15 10 ? * *" 每天上午10:15触发 -->
+	<bean id="checkJob" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail" ref="job1" />
+		<property name="cronExpression">
+			<value>0 0 0 ? * *</value>
+		</property>
+	</bean>
+	
+	<bean id="scheduler" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+		<property name="triggers">
+			<list>
+				<ref local="checkJob" />
+			</list>
+		</property>
+	</bean>
+	
+</beans>

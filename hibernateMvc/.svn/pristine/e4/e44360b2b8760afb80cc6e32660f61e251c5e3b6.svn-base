@@ -1,0 +1,337 @@
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<%@include file="/common/header.jsp"%>
+<title></title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+</head>
+<style>
+</style>
+<script language="javascript">
+	function init(){
+		var url = "login/firmtuijian1.do";
+		var formId = "finduserForm";
+		var data = ajaxSumbit(url, formId);
+		document.getElementById("allNum").innerText=data.allNum;
+		addLi(data.status,"status");
+		addLi(data.job,"job");
+		addList(data.firmList);
+		addpageNum(data.pageNum,"u1");
+	}
+	//下拉列表
+	function addLi(items,liId){
+		var inn = "";
+		for(var i in items){
+			inn = inn + "<li role='presentation'>"
+				+"<a role='menuitem' onclick='selectDownValue(" + items[i].id +",\"" + items[i].value +"\",\""+liId+"\")'><font color='#000'>" + items[i].value
+				+"</font></a></li>";
+		}
+		document.getElementById(liId).innerHTML=inn;
+	}
+	function selectDownValue(ke, val, targetInput){
+		var ti1 = "firm" + targetInput;
+		var ti2 = "firm" + targetInput + "Value";
+		document.getElementById(ti1).value=ke;
+		document.getElementById(ti2).value=val;
+	}
+	//增加列表
+	function addList(items){
+		var j = 0;
+		for(var i in items){
+			var tr1 = document.createElement("tr");
+			tr1.id = "t" + j;
+			document.getElementById("userTable").appendChild(tr1);
+			document.getElementById("t" + j).innerHTML = "<td class='textC'>"
+								+"<font size='1'>"+items[i].address+"</font>"
+							+"</td>"       
+							+"<td class='textC'>"
+								+"<font size='1'>"+items[i].job+"</font>"
+							+"</td>"
+							+"<td class='textC'>"
+								+"<font size='1'>"+items[i].name+"</font>"
+							+"</td>"
+							+"<td class='textC'>"
+								+"<font size='1'>"+items[i].xueli+"</font>"
+							+"</td>"
+							+"<td class='textC'>"
+								+"<font size='1'>"+items[i].jingyan+"</font>"
+							+"</td>"
+							+"<td class='textC'>"
+								+"<font size='1'>"+items[i].nowmoney+"</font>"
+							+"</td>"
+							+"<td class='textC'>"
+								+"<font size='1'>"+items[i].planmoney+"</font>"
+							+"</td>"
+							+"<td class='textC'>"
+								+"<font size='1'>"+items[i].plandidian+"</font>"
+							+"</td>"
+							+"<td class='textC'>"
+								+"<font size='1'>"+items[i].tuijianTime+"</font>"
+							+"</td>"
+							+"<td class='textC'>"
+								+"<font size='1'>"+items[i].status+"</font>"
+							+"</td>"
+							+"<td class='textC'>"
+								+"<button type='button' style='height:34px !important;background-color:#3CBAFF;color:#FFF;' onclick='goView(\""+items[i].id+"\")' class='btn dropdown-toggle' data-toggle='dropdown'>"
+								+"查看"
+								+"</button>"
+							+"</td>";
+			j = j + 1;
+		}
+	}
+	function addpageNum(items,pageId){
+		var inn = "";
+		for(var i = 1; i <= items; i++){
+			inn = inn + "<li>"
+				+"<a href='#' onclick='getpage("+i+")'>"+i+"</a>"
+				+"</li>";
+		}
+		document.getElementById(pageId).innerHTML=inn;
+	}
+	function goView(id){
+		window.location.href='user_information2.jsp';
+	}
+	function test(){
+		parent.document.getElementById("main1").height=0;
+		parent.document.getElementById("main1").height=document.body.scrollHeight;
+	}
+	//性别
+	function setSexValue(id) {
+		if(id == 1){
+			document.getElementById("sex1").style="font-size:14px;width:27%;color:#FFF;background-color:#00B38A;border-color:#00B38A;min-width:100px;";
+			document.getElementById("sex2").style="margin-left:19px;font-size:14px;width:27%;color:#00B38A;background-color:#FFF;border-color:#00B38A;min-width:100px;";
+			document.getElementById("offerUserSex").value="1";
+		}
+		if(id == 0){
+			document.getElementById("sex1").style="font-size:14px;width:27%;color:#00B38A;background-color:#FFF;border-color:#00B38A;min-width:100px;";
+			document.getElementById("sex2").style="margin-left:19px;font-size:14px;width:27%;color:#FFF;background-color:#00B38A;border-color:#00B38A;min-width:100px;";
+			document.getElementById("offerUserSex").value="2";
+		}
+	}
+</script>
+<body bgcolor="#FFF" onload="test()">
+	<div style="width:100%;">
+		<table width="100%">
+			<tr height="40px"/>
+			<tr>
+				<td width="40px"/>
+				<td width="160px">
+					<img src="" width="160px" height="160px"/>
+				</td>
+				<td style="padding-left:40px" valign="bottom">
+					<button type="button" style="border-radius:40px;width:140px;height:40px;background-color:#FFF;border:1px #00B38A solid;" class='btn dropdown-toggle' data-toggle='dropdown'>
+						<font color="#00B38A" style="font-size:14px;">更换头像</font>
+					</button>
+				</td>
+				<td/>
+			</tr>
+			<tr height="59px"/>
+			<tr>
+				<td/>
+				<td>
+					<font color="#4F4F4F" style="font-size:16px;" >姓名</font><font color="#00B38A">*</font>
+				</td>
+			</tr>
+			<tr height="13px"/>
+			<tr>
+				<td/>
+				<td colspan="3">
+					<input type="text" class="form-control" style="width:55%;min-width:200px;"/>
+				</td>
+			</tr>
+			<tr height="48px"/>
+			<tr>
+				<td/>
+				<td>
+					<font color="#4F4F4F" style="font-size:16px;" >性别</font><font color="#00B38A">*</font>
+				</td>
+			</tr>
+			<tr height="13px"/>
+			<tr>
+				<td/>
+				<td colspan="3">
+					<input type="hidden" name="offerUserSex" id="offerUserSex"/>
+					<button type="button" class="btn btn-primary" onclick="setSexValue(1)" data-toggle="button" id="sex1"
+						style="font-size:14px;width:27%;color:#FFF;background-color:#00B38A;border-color:#00B38A;min-width:100px;">
+						男
+					</button>
+					<button type="button" class="btn btn-primary" onclick="setSexValue(0)" data-toggle="button" id="sex2"
+						style="margin-left:19px;font-size:14px;width:27%;color:#00B38A;background-color:#FFF;border-color:#00B38A;min-width:100px;">
+						女
+					</button>
+				</td>
+			</tr>
+			<tr height="48px"/>
+			<tr>
+				<td/>
+				<td>
+					<font color="#4F4F4F" style="font-size:16px;" >出生年月</font><font color="#00B38A">*</font>
+				</td>
+			</tr>
+			<tr height="13px"/>
+			<tr>
+				<td/>
+				<td colspan="3">
+					<div class="input-group" style="width: 100%">
+						<div class="dropdown">
+							<input type="text" readOnly="readOnly" class="form-control" style="width: 56% !important">
+						    <button type="button" style="height:34px !important;background-color:#E6E6E6;" class="btn dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown">
+						        <span class="caret"></span>
+						    </button>
+						    <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1" style="width: 56% !important" id="offerUserWorktime">
+						        <li role="presentation">
+						        </li>
+						    </ul>
+						</div>
+					</div>
+				</td>
+			</tr>
+			<tr height="48px"/>
+			<tr>
+				<td/>
+				<td>
+					<font color="#4F4F4F" style="font-size:16px;" >你目前所在的城市</font><font color="#00B38A">*</font>
+				</td>
+			</tr>
+			<tr height="13px"/>
+			<tr>
+				<td/>
+				<td colspan="3">
+					<div class="input-group" style="width: 100%">
+						<div class="dropdown">
+							<input type="text" readOnly="readOnly" class="form-control" style="width: 56% !important">
+						    <button type="button" style="height:34px !important;background-color:#E6E6E6;" class="btn dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown">
+						        <span class="caret"></span>
+						    </button>
+						    <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1" style="width: 56% !important" id="offerUserWorktime">
+						        <li role="presentation">
+						        </li>
+						    </ul>
+						</div>
+					</div>
+				</td>
+			</tr>
+			<tr height="48px"/>
+			<tr>
+				<td/>
+				<td colspan="3">
+					<div style="width: 58%">
+						<font color="#4F4F4F" style="font-size:16px;" >手机</font><font color="#00B38A">*</font>
+						<font color="#4F4F4F" style="font-size:16px;float:right;" >如需修改,请访问<font color="#00B38A">个人设置</font></font>
+					</div>
+				</td>
+			</tr>
+			<tr height="13px"/>
+			<tr>
+				<td/>
+				<td colspan="3">
+					<input type="text" class="form-control" style="width:58%;min-width:200px;"/>
+				</td>
+			</tr>
+			<tr height="48px"/>
+			<tr>
+				<td/>
+				<td colspan="3">
+					<font color="#4F4F4F" style="font-size:16px;" >邮箱</font><font color="#00B38A">*</font>
+				</td>
+			</tr>
+			<tr height="13px"/>
+			<tr>
+				<td/>
+				<td colspan="3">
+					<input type="text" class="form-control" style="width:58%;min-width:200px;"/>
+				</td>
+			</tr>
+			<tr height="51px"/>
+			<tr>
+				<td/>
+				<td colspan="3">
+					<div style="width: 58%">
+						<table width="100%">
+							<tr>
+								<td width="49px">
+									<img src="../img/zhihu.png" width="40px" height="40px"/>
+								</td>
+								<td>
+									<input type="text" class="form-control" style="width:100%;min-width:200px;"/>
+								</td>
+							</tr>
+						</table>
+					</div>
+				</td>
+			</tr>
+			<tr height="29px"/>
+			<tr>
+				<td/>
+				<td colspan="3">
+					<div style="width: 58%">
+						<table width="100%">
+							<tr>
+								<td width="49px">
+									<img src="../img/github.png" width="40px" height="40px"/>
+								</td>
+								<td>
+									<input type="text" class="form-control" style="width:100%;min-width:200px;"/>
+								</td>
+							</tr>
+						</table>
+					</div>
+				</td>
+			</tr>
+			<tr height="29px"/>
+			<tr>
+				<td/>
+				<td colspan="3">
+					<div style="width: 58%">
+						<table width="100%">
+							<tr>
+								<td width="49px">
+									<img src="../img/blog.png" width="40px" height="40px"/>
+								</td>
+								<td>
+									<input type="text" class="form-control" style="width:100%;min-width:200px;"/>
+								</td>
+							</tr>
+						</table>
+					</div>
+				</td>
+			</tr>
+			<tr height="29px"/>
+			<tr>
+				<td/>
+				<td colspan="3">
+					<div style="width: 58%">
+						<table width="100%">
+							<tr>
+								<td width="49px">
+									<img src="../img/personlink.png" width="40px" height="40px"/>
+								</td>
+								<td>
+									<input type="text" class="form-control" style="width:100%;min-width:200px;"/>
+								</td>
+							</tr>
+						</table>
+					</div>
+				</td>
+			</tr>
+			<tr height="50px"/>
+			<tr>
+				<td/>
+				<td colspan="3" class="textC">
+					<button type="button" class="btn btn-primary" data-toggle="button"
+						style="font-size:14px;border-color:#CCCCCC;color:#4F4F4F;background-color:#CCCCCC;min-width:140px;">
+						取消
+					</button>
+					<button type="button" class="btn btn-primary" onclick="setSexValue(0)" data-toggle="button" id="sex2"
+						style="margin-left:19px;font-size:14px;color:#FFF;background-color:#00B389;min-width:140px;">
+						保存
+					</button>
+				</td>
+			</tr>
+		</table>
+	</div>
+	<div style="width:100%;height:50px;"></div>
+</body>
+</html>

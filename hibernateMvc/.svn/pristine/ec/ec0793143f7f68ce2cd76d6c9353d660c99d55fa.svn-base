@@ -1,0 +1,77 @@
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+
+<html>
+<head>
+<%@include file="/common/header.jsp"%>
+<title></title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+</head>
+<script language="javascript">
+	function init(){
+		goSearch();
+	}
+	function goSearch(){
+		var url = "manager/showguwencommit1.do";
+		var formId = "interviewForm";
+		var data = ajaxSumbit(url, formId);
+		document.getElementById("guwenphone").value= data.guwenphone;
+		document.getElementById("guwenemil").value= data.guwenemil;
+
+	}
+	function changeColor1(obj){
+		obj.style.background="#999999";
+	}
+	function changeColor2(obj){
+		obj.style.background="#FFF";
+	}
+	function goSumbit(){
+		var url = "manager/saveguwencommit1.do";
+		var formId = "guwenForm";
+		var data = ajaxSumbit(url, formId);
+	}
+</script>
+<style>
+</style>
+<body bgColor="#FFF" onload="init()">
+	<form id="guwenForm">
+	<table style="width:100%;">
+		<tr height="25px"/>
+		<tr>
+			<td class="textC" style="width:27%;font-size:17px;color:#4F4F4F">顾问联系设置</td>
+			<td width="75px"/>
+			<td/>
+		</tr>
+		<tr height="72px"/>
+		<tr>
+			<td/>
+			<td class="textR" style="padding-right:17px;">
+				<font style="font-size:14px;" color="#4F4F4F">联系电话</font>
+			</td>
+			<td>
+				<input id="guwenphone"  name="guwenphone" type="text" style="color:#4F4F4F;font-size:14px;width:300px;height:36px;border:1px #CCCCCC solid;"/>
+			</td>
+		</tr>
+		<tr height="16px"/>
+		<tr>
+			<td/>
+			<td class="textR" style="padding-right:17px;">
+				<font style="font-size:14px;" color="#4F4F4F">联系邮件</font>
+			</td>
+			<td>
+				<input id="guwenemil"  name="guwenemil" type="text" style="color:#4F4F4F;font-size:14px;width:300px;height:36px;border:1px #CCCCCC solid;"/>
+			</td>
+		</tr>
+		<tr height="45px"/>
+		<tr>
+			<td/>
+			<td/>
+			<td style="padding-left:30px;">
+				<button type="button" class="btn btn-primary" onclick="validateCode()" data-toggle="button"
+				style="background-color: #00B38A; border-color: #00B38A; width: 180px; height: 41px;">
+				保存</button>
+			</td>
+		</tr>
+	</table>
+	</form>
+</body>
+</html>

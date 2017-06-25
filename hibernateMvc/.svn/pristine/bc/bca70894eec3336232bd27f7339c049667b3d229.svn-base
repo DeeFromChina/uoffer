@@ -1,0 +1,417 @@
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<%@include file="/common/header.jsp"%>
+<title></title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+</head>
+<script language="javascript">
+	function goSubmit() {
+		var url = "register/firm.do";
+		var formId = "loginForm";
+		ajaxSumbit(url, formId);
+	}
+	function div3Height(){
+		var d3height = document.getElementById("div3Photo").height;
+		$(".div3").each(function(){
+		  this.height=d3height;
+		});
+		var d3dheight = d3height*0.26;
+		$(".div3div").each(function(){
+		  this.height=d3dheight;
+		  this.style.marginTop = 0-d3dheight;
+		});
+		$(".div3divtr").each(function(){
+		  this.style.height=d3dheight*0.5;
+		});
+		$(".div3divtr2").each(function(){
+		  this.style.height=d3dheight*0.33;
+		});
+	}
+	function init(){
+		div3Height();
+	}
+</script>
+<body bgcolor="#000" onload="init()">
+	<div style="width:100%;height:60px;background: #32373C;position:absolute;top:expression(documentElement.scrollTop + 'px');position:fixed;z-index:9999;">
+		<table style="width:100%;white-space: nowrap;">
+			<tr>
+				<td width="19%" style="padding-left:14%;"><a href="homepage.jsp"><a href="#" onclick="javascript:top.location.href='homepage.jsp'"><img src="../img/U-Offerlogo.png" width="109px" height="26px"></a></a></td>
+				<td width="5%"/>
+				<td class="textC">
+					<div class="btn-group">
+						<button type="button" style="font-size:14px;height:60px !important;color:#F5F8F9;background-color:#32373C;"
+						 class="btn dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown" onmouseover="changeColor1(this)"
+						 onmouseout="changeColor2(this)">看机会
+					        <span class="caret"></span>
+					    </button>
+					    <ul class="dropdown-menu pull-right" role="menu" aria-labelledby="dropdownMenu1" style="background-color:#32373C;width:150px;">
+					        <li role="presentation">
+					            <a tabindex="-1" href="#" onclick="javascript:top.location.href='mainuse_strategy.jsp'" style="height:46px;text-align:center;padding-top:10px;" onmouseover="changeColor1(this)" onmouseout="changeColor2(this)"><font color="#F5F8F9">使用攻略</font></a>
+					        </li>
+					        <li role="presentation" style="height:46px;">
+					            <a tabindex="-1" href="mainuser_question.jsp" style="height:46px;text-align:center;padding-top:10px;" onmouseover="changeColor1(this)" onmouseout="changeColor2(this)"><font color="#F5F8F9">常见问题</font></a>
+					        </li>
+					    </ul>
+					</div>
+					<div class="btn-group">
+						<button type="button" style="font-size:14px;height:60px !important;color:#F5F8F9;background-color:#32373C;"
+						 class="btn dropdown-toggle" id="dropdownMenu2" data-toggle="dropdown" onmouseover="changeColor1(this)"
+						 onmouseout="changeColor2(this)">招人才
+					        <span class="caret"></span>
+					    </button>
+					    <ul class="dropdown-menu pull-right" role="menu" aria-labelledby="dropdownMenu2" style="background-color:#32373C;width:150px;">
+					        <li role="presentation">
+					            <a tabindex="-1" href="#" onclick="javascript:top.location.href='mainfirm_strategy.jsp'" style="height:46px;text-align:center;padding-top:10px;" onmouseover="changeColor1(this)" onmouseout="changeColor2(this)"><font color="#F5F8F9">使用攻略</font></a>
+					        </li>
+					        <li role="presentation" style="height:46px;">
+					            <a tabindex="-1" href="mainfirm_question.jsp" style="height:46px;text-align:center;padding-top:10px;" onmouseover="changeColor1(this)" onmouseout="changeColor2(this)"><font color="#F5F8F9">常见问题</font></a>
+					        </li>
+					    </ul>
+				    </div>
+					<button type="button" style="font-size:14px;height:60px !important;color:#F5F8F9;background-color:#32373C;padding:0px 20px;"
+					 class="btn dropdown-toggle" onmouseover="changeColor1(this)"
+					 onmouseout="changeColor2(this)" onclick="javascript:top.location.href='maincontact_assistant.jsp'">联系助理
+				    </button>
+			    </td>
+			    <td style="width:24%;padding-right:13%">
+				    <button type="button" class="btn btn-default" style="width:101px;color:#00B38A;background:#F5F8F9;" onclick="javascript:top.location.href='login.jsp'">登录</button>
+				    <button id="regit" type="button" class="btn btn-default" style="margin-left:9px;width:101px;color:#FFFFFF;background:#00B38A;" onclick="javascript:top.location.href='register.jsp'">注册</button>
+				</td>
+			</tr>
+		</table>
+	</div>
+	<div style="width:100%;height:60px;"></div>
+	<div id="myCarousel" class="carousel slide" style="width:100%;height:382px;min-width:1000px;">
+	    <!-- 轮播（Carousel）指标 -->
+	    <ol class="carousel-indicators">
+	        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+	        <li data-target="#myCarousel" data-slide-to="1"></li>
+	        <li data-target="#myCarousel" data-slide-to="2"></li>
+	    </ol>   
+	    <!-- 轮播（Carousel）项目 -->
+	    <div class="carousel-inner" style="background:none;">
+	        <div class="item active" style="height:382px;">
+	            <img src="../img/banner1.png" style="width:100%;height:382px">
+				<div style="width:480px;margin-top:-280px;margin-left:58%;z-index:9999;">
+	            	<table>
+	            		<tr height="40px">
+	            			<td>
+				            	<font color="#FFF" size="5">连接中高端人才，我们更懂业务</font>
+	            			</td>
+	            		</tr>
+	            		<tr height="40px">
+	            			<td>
+				            	<font color="#FFF">每周100+优质互联网人才等你邀请</font>
+	            			</td>
+	            		</tr>
+	            		<tr height="40px">
+	            			<td>
+				            	<font color="#FFF">Java、Web前端、iOS、android、UI设计、产品经理等火热应聘中</font>
+	            			</td>
+	            		</tr>
+	            		<tr height="40px">
+	            			<td>
+				            	<button type="button" class="btn btn-default" style="width:150px" onclick="javascript:top.location.href='login.jsp'">免费注册</button>
+	            			</td>
+	            		</tr>
+	            	</table>
+	            </div>
+	        </div>
+	        <div class="item" style="width:100%;height:382px;">
+	            <img src="../img/about_us_banner.png" style="height:382px">
+	            <div style="margin-top:-280px;margin-left:47px;z-index:9999;">
+	            	<table>
+	            		<tr>
+	            			<td>
+				            	<font color="#F5F8F9" style="font-size:32px;">帮助你发现更好的企业和人才</font>
+	            			</td>
+	            		</tr>
+	            		<tr height="42px"/>
+	            		<tr>
+	            			<td>
+				            	<font color="#F5F8F9" style="font-size:14px;">uoffer平台，专注连接中高端人才，高效批量提供优质互联网人才的网站，</font>
+	            			</td>
+	            		</tr>
+	            		<tr>
+	            			<td>
+				            	<font color="#F5F8F9" style="font-size:14px;">我们团队顾问帮助企业筛选简历，每一份简历经过我们顾问人工沟通审核， </font>
+	            			</td>
+	            		</tr>
+	            		<tr>
+	            			<td>
+				            	<font color="#F5F8F9" style="font-size:14px;">而且简历信息里包括候选人的具体求职意向以及社交类网址，</font>
+	            			</td>
+	            		</tr>
+	            		<tr>
+	            			<td>
+				            	<font color="#F5F8F9" style="font-size:14px;">企业无需写JD，无需搜简历，无需费时约，顾问1对1全程跟踪服务，</font>
+	            			</td>
+	            		</tr>
+	            		<tr>
+	            			<td>
+				            	<font color="#F5F8F9" style="font-size:14px;">每周100+优质互联网人才供企业发出邀请，省去了HR漫长的搜索优质候选人的过程，</font>
+	            			</td>
+	            		</tr>
+	            		<tr>
+	            			<td>
+				            	<font color="#F5F8F9" style="font-size:14px;">企业可以集中精力跟候选人沟通、面试，大大提升招聘效率。</font>
+	            			</td>
+	            		</tr>
+	            	</table>
+	            </div>
+	        </div>
+	        <div class="item">
+	            <img src="/wp-content/uploads/2014/07/slide3.png" alt="Third slide">
+	        </div>
+	    </div>
+	    <!-- 轮播（Carousel）导航 -->
+	    <!-- <a class="carousel-control left" href="#myCarousel" 
+	        data-slide="prev">&lsaquo;
+	    </a>
+	    <a class="carousel-control right" href="#myCarousel" 
+	        data-slide="next">&rsaquo;
+	    </a> -->
+	</div>
+	<div style="height:610px;background-color:#FFF;min-width:1000px;">
+		<table class="textC" width="100%">
+			<tr height="61px"/>
+			<tr>
+				<td colspan="6" class="textC" height="20px"><font style="font-size:32px" color="#777777">一种全新招聘流程体验</font></td>
+			</tr>
+			<tr height="97px"/>
+			<tr>
+				<td width="13%"></td>
+				<td class="textC" height="110px"><img src="../img/notebook.png" width="110px" height="110px"/></td>
+				<td class="textC" height="110px"><img src="../img/yearbook.png" width="110px" height="110px"/></td>
+				<td class="textC" height="110px"><img src="../img/paper_plane.png" width="110px" height="110px"/></td>
+				<td class="textC" height="110px"><img src="../img/anpaimianshi.png" width="110px" height="110px"/></td>
+				<td width="13%"></td>
+			</tr>
+			<tr height="26px"/>
+			<tr>
+				<td width="13%"></td>
+				<td class="textC" style="height:40px"><font color="#4F4F4F" style="font-size:24px;font-weight:bold;">1、开始推荐简历</font></td>
+				<td class="textC" style="height:40px"><font color="#4F4F4F" style="font-size:24px;font-weight:bold;">2、挑选合适的候选人</font></td>
+				<td class="textC" style="height:40px"><font color="#4F4F4F" style="font-size:24px;font-weight:bold;">3、发送面试邀请</font></td>
+				<td class="textC" style="height:40px"><font color="#4F4F4F" style="font-size:24px;font-weight:bold;">4、安排面试</font></td>
+				<td width="13%"></td>
+			</tr>
+			<tr height="26px"/>
+			<tr>
+				<td width="13%"></td>
+				<td class="textC" valign="top"><font color="#5E5E5E" style="font-size:18px;text-align:left">我们每周会推荐一批<br/>大致符合贵公司招聘<br/>需求的全新候选人。</font></td>
+				<td class="textC" valign="top"><font color="#5E5E5E" style="font-size:18px;text-align:left">通过职位、工作年限<br/>候选人项目经验、顾问<br/>综合评价等就可以从中<br/>筛选出满意的候选人。</font></td>
+				<td class="textC" valign="top"><font color="#5E5E5E" style="font-size:18px;text-align:left">填写职位、薪资范围<br/>股权期权以及邀请信<br/>既可向候选人发送面试<br/>邀请。</font></td>
+				<td class="textC" valign="top"><font color="#5E5E5E" style="font-size:18px;text-align:left">候选人接收面试邀请<br/>之后，可以查看到TA<br/>的姓名及其联系方式，<br/>顾问会协助线下安排<br/>面试。</font></td>
+				<td width="13%"></td>
+			</tr>
+		</table>
+	</div>
+	<div style="height:575px;background-color:#F5F8F9;min-width:1000px;">
+		<table width="100%">
+			<tr height="68px"/>
+			<tr>
+				<td colspan="9" class="textC"><font style="font-size:32px;" color="#4F4F4F">u<font color="#00B38A">o</font>ffer 帮你发现这样的人才</font></td>
+			</tr>
+			<tr height="47px"/>
+			<tr>
+				<td width="9%"/>
+				<td width="15%" class="textR">
+					<div style="width:100%;" class="div3">
+						<img src="../img/home_page_div3_1.png" width="100%" id="div3Photo"/>
+					</div>
+					<div style="width:100%;background:rgba(0,0,0,0.6);position: relative;" class="div3div">
+						<table width="100%">
+							<tr class="div3divtr">
+								<td class="textC" style="font-size:14px;color:#F5F8F9">每一份简历经过顾问沟通审核,</td>
+							</tr>
+							<tr class="div3divtr">
+								<td class="textC" style="font-size:14px;color:#F5F8F9">他们具备3年以上经验,年薪20w+</td>
+							</tr>
+						</table>
+					</div>
+				</td>
+				<td width="6%"/>
+				<td width="15%" class="textC">
+					<div style="width:100%;" class="div3">
+						<img src="../img/home_page_div3_2.png" width="100%"/>
+					</div>
+					<div style="width:100%;background:rgba(0,0,0,0.6);position: relative;" class="div3div">
+						<table width="100%">
+							<tr class="div3divtr2">
+								<td class="textC" style="font-size:14px;color:#F5F8F9">基于大数据算法智能分析解读</td>
+							</tr>
+							<tr class="div3divtr2">
+								<td class="textC" style="font-size:14px;color:#F5F8F9">企业和候选人需求，做到精准</td>
+							</tr>
+							<tr class="div3divtr2">
+								<td class="textC" style="font-size:14px;color:#F5F8F9">推荐符合双方需求</td>
+							</tr>
+						</table>
+					</div>
+				</td>
+				<td width="6%"/>
+				<td width="15%" class="textC">
+					<div style="width:100%;" class="div3">
+						<img src="../img/home_page_div3_3.png" width="100%"/>
+					</div>
+					<div style="width:100%;background:rgba(0,0,0,0.6);position: relative;" class="div3div">
+						<table width="100%">
+							<tr class="div3divtr">
+								<td class="textC" style="font-size:14px;color:#F5F8F9">只需一分钟勾选招聘需求，</td>
+							</tr>
+							<tr class="div3divtr">
+								<td class="textC" style="font-size:14px;color:#F5F8F9">每周获得100+优质互联网人才推荐；</td>
+							</tr>
+						</table>
+					</div>
+				</td>
+				<td width="6%"/>
+				<td width="15%" class="textL">
+					<div style="width:100%;" class="div3">
+						<img src="../img/home_page_div3_4.png" width="100%"/>
+					</div>
+					<div style="width:100%;background:rgba(0,0,0,0.6);position: relative;" class="div3div">
+						<table width="100%">
+							<tr class="div3divtr">
+								<td class="textC" style="font-size:14px;color:#F5F8F9">享受五星级服务，企业发出</td>
+							</tr>
+							<tr class="div3divtr">
+								<td class="textC" style="font-size:14px;color:#F5F8F9">邀请，顾问全程跟进服务；</td>
+							</tr>
+						</table>
+					</div>
+				</td>
+				<td/>
+			</tr>
+		</table>
+	</div>
+	<div style="background-color:#FFF;height:800px;min-width:1000px;">
+		<table width="100%">
+			<tr height="50px"/>
+			<tr>
+				<td colspan="5" class="textC"><font style="font-size:32px;">u<font color="#00B38A">o</font>ffer Q&A</font></td>
+			</tr>
+			<tr height="30px"/>
+			<tr>
+				<td width="20%"></td>
+				<td width="20%">
+					<table style="font-size:1px;">
+						<tr>
+							<td rowspan="2"><img src="../img/Q.png" width="30px" height="30px"/></td>
+							<td><font style="font-weight:bold;">U<font color="#00B38A">o</font>ffer是一个什么样</font></td>
+						</tr>
+						<tr>
+							<td><font style="font-weight:bold;">招聘网站？</font></td>
+						</tr>
+					</table>
+				</td>
+				<td width="20%"></td>
+				<td width="20%">
+					<table style="font-size:1px;">
+						<tr>
+							<td rowspan="2"><img src="../img/Q.png" width="30px" height="30px"/></td>
+							<td><font style="font-weight:bold;">U<font color="#00B38A">o</font>ffer与别的招聘网站</font></td>
+						</tr>
+						<tr>
+							<td><font style="font-weight:bold;">有何不同？</font></td>
+						</tr>
+					</table>
+				</td>
+				<td width="20%"></td>
+			</tr>
+			<tr height="18px"/>
+			<tr>
+				<td width="20%"></td>
+				<td width="20%" style="background-color:#F5F8F9;padding:30px;">
+					<font style="font-size:14px;" color="#4F4F4F">
+						<font style="font-weight:bold;">U<font color="#00B38A">o</font>ffer</font>
+						是国内目前唯一一个可以高效批量接触到
+						优质互联网人才的网站，而且简历信息里包括
+						候选人的具体求职意向以及社交类网址，省去了
+						HR漫长的搜索优质候选人的过程,您可以集中精力
+						跟候选人沟通、面试、大大提升招聘效率。
+					</font>
+				</td>
+				<td width="20%"></td>
+				<td width="20%" style="background-color:#F5F8F9;padding:30px;">
+					<font style="font-size:14px;" color="#4F4F4F">
+						在<font style="font-weight:bold;">U<font color="#00B38A">o</font>ffer</font>
+						您不需要撰写JD、发布职位，我们把所有的候选人直接展示在您的面前，
+						您只需要挑选出合适的候选人邀请他们过来面试既可，uoffer对每一位
+						候选人严格审核，确保只将最优秀的互联网人才被推荐，而在传统招聘网站
+						您只会收到大量参差不起的简历更有可能求职意向不明，严重影响您的工作效率。
+					</font>
+				</td>
+				<td width="20%"></td>
+			</tr>
+			<tr height="78px"/>
+			<tr>
+				<td width="20%"></td>
+				<td width="20%">
+					<table style="font-size:1px;">
+						<tr>
+							<td rowspan="2"><img src="../img/Q.png" width="30px" height="30px"/></td>
+							<td><font style="font-weight:bold;">U<font color="#00B38A">o</font>ffer提供怎样的</font></td>
+						</tr>
+						<tr>
+							<td><font style="font-weight:bold;">候选人？</font></td>
+						</tr>
+					</table>
+				</td>
+				<td width="20%"></td>
+				<td width="20%">
+					<table style="font-size:1px;">
+						<tr>
+							<td rowspan="2"><img src="../img/Q.png" width="30px" height="30px"/></td>
+							<td><font style="font-weight:bold;">U<font color="#00B38A">o</font>ffer如何进行</font></td>
+						</tr>
+						<tr>
+							<td><font style="font-weight:bold;">收费？</font></td>
+						</tr>
+					</table>
+				</td>
+				<td width="20%"></td>
+			</tr>
+			<tr height="18px"/>
+			<tr>
+				<td width="20%"></td>
+				<td width="20%" style="background-color:#F5F8F9;padding:30px;">
+					<font style="font-size:14px;" color="#4F4F4F">
+						<font style="font-weight:bold;">U<font color="#00B38A">o</font>ffer</font>
+						是一个中高端人才招聘网站，专注为互联网行业推荐中高端技术类、产品类、
+						设计类等职位人才，他们工作3年以上，近期有明确求职意向，平均年薪15w
+						以上，并通过我们顾问沟通后严格筛选出来的简历。
+					</font>
+				</td>
+				<td width="20%"></td>
+				<td width="20%" style="background-color:#F5F8F9;padding:30px;">
+					<font style="font-size:14px;" color="#4F4F4F">
+						<font style="font-weight:bold;">U<font color="#00B38A">o</font>ffer</font>
+						按招聘结果付费的形式收费，在uoffer注册账号、看简历、发面试邀请、
+						面试候选人都是不需要任何费用，只有在候选人成功入职后，我们才会收费，
+						且大部分人选我们只收取候选人一个月月薪，高端人才按年薪的比例佣金，
+						而且我们有三个月的保证期。
+					</font>
+				</td>
+				<td width="20%"></td>
+			</tr>
+		</table>
+	</div>
+	<table style="width:100%;height:81px;background:#32373C;">
+		<tr>
+			<td class="textC">
+				<font color="#F5F8F9" style="font-size:14px;white-space: nowrap;">
+					关于我们&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					使用攻略&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					法律声明&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					关注我们
+				</font>
+			</td>
+		</tr>
+	</table>
+</body>
+</html>

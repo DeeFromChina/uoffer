@@ -1,0 +1,37 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "">
+<html xmlns="">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+</head>
+<script src="../js/jquery-3.1.1.min.js" type="text/javascript"></script>
+<body>
+<table>
+<tr>
+<td>ID</td>
+<td>姓名</td>
+<td>电话</td>
+<td>操作</td>
+</tr>
+<tr>
+<td>1</td>
+<td>张山</td>
+<td>111111</td>
+<td><a onclick="test()">删除</a></td>
+</tr>
+<tr>
+<td>2</td>
+<td>李四</td>
+<td>22222</td>
+</tr>
+</table>
+<script type="text/javascript">
+jQuery(function($){
+$('a[rel=del]').click(function(){
+$(this).parents('tr').remove();
+return false;
+});
+});
+</script>
+</body>
+</html>

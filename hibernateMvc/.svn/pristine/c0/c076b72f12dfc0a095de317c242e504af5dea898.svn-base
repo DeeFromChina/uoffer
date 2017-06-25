@@ -1,0 +1,24 @@
+<sqls>
+	<sql orderBy="id">
+		SELECT
+			U.ID,
+			U.OFFER_USER_NAME,
+			U.OFFER_USER_CITY,
+			U.OFFER_JOB_ID,
+			I.OFFER_USER_PLAN_YEAR_WAGES,
+			I.OFFER_USER_DESCRIPTION,
+			I.OFFER_USER_EDUCATION,
+			I.OFFER_USER_NOW_YEAR_WAGES,
+			I.OFFER_USER_ADDRESS,
+			I.OFFER_USER_JOB1,
+			I.OFFER_USER_JOB2,
+			I.OFFER_PHOTO_ID, 
+			I.OFFER_USER_WORK_PLACE,
+			I.OFFER_USER_SEX,
+			I.OFFER_ADVISER_REMARK 
+		FROM offer_user_infomation I 
+		LEFT JOIN offer_user U ON U.ID = I.OFFER_USER_ID 
+		{#param}
+		<param value="param"/>
+	</sql>
+</sqls>

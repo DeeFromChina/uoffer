@@ -1,0 +1,473 @@
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<%-- <%@include file="/common/header.jsp"%> --%>
+<title></title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<!-- <link href="../css/bootstrap.css" rel="stylesheet" /> -->
+<link href="../css/bootstrap.min.css" rel="stylesheet" />
+<link href="../css/bootstrap-datetimepicker.css" rel="stylesheet" />
+<link href="../css/bootstrap-datetimepicker.min.css" rel="stylesheet" />
+</head>
+<script type="text/javascript" src="../js/jquery-1.9.1.js"></script>
+<script type="text/javascript" src="../js/bootstrap-datetimepicker.js"></script>
+<script type="text/javascript" src="../js/locales/bootstrap-datetimepicker.zh-CN.js"></script>
+<script src="../js/ajaxSubmit.js" type="text/javascript"></script>
+<script src="../js/ajaxfileupload.js" type="text/javascript"></script>
+<script src="../js/bootstrap.min.js"></script>
+<script src="../js/Carousel.js"></script>
+<script src="../js/jquery.icheck.js"></script>
+<script src="../js/custom.js"></script>
+<script src="../js/custom.min.js"></script>
+<style>
+.date-control{
+		width:100%;height:41px;padding:6px 12px;font-size:14px;line-height:1.42857143;
+		color:#555;background-color:#fff;background-image:none;border:1px solid #ccc;border-radius:4px;
+		-webkit-box-shadow:inset 0 1px 1px rgba(0,0,0,.075);box-shadow:inset 0 1px 1px rgba(0,0,0,.075);
+		-webkit-transition:border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
+		-o-transition:border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+		transition:border-color ease-in-out .15s,box-shadow ease-in-out .15s
+	}
+</style>
+<script language="javascript">
+	//下拉列表
+	function addLi(items,liId){
+		var inn = "";
+		for(var i in items){
+			inn = inn + "<li role='presentation'>"
+				+"<a role='menuitem' onclick='selectDownValue(" + items[i].id +",\"" + items[i].value +"\",\""+liId+"\")'><font color='#000'>" + items[i].value
+				+"</font></a></li>";
+		}
+		document.getElementById(liId).innerHTML=inn;
+	}
+	function selectDownValue(ke, val, targetInput){
+		var ti1 = "firm" + targetInput;
+		var ti2 = "firm" + targetInput + "Value";
+		document.getElementById(ti1).value=ke;
+		document.getElementById(ti2).value=val;
+	}
+	//增加列表
+	function addList(items){
+		var j = 0;
+		for(var i in items){
+			var tr1 = document.createElement("tr");
+			tr1.id = "t" + j;
+			document.getElementById("userTable").appendChild(tr1);
+			document.getElementById("t" + j).innerHTML = "<td class='textC'>"
+								+"<font color='#4F4F4F' style='font-size:14px;'>"+items[i].address+"</font>"
+							+"</td>"       
+							+"<td class='textC'>"
+								+"<font color='#4F4F4F' style='font-size:14px;'>"+items[i].job+"</font>"
+							+"</td>"
+							+"<td class='textC'>"
+								+"<font color='#4F4F4F' style='font-size:14px;'>"+items[i].name+"</font>"
+							+"</td>"
+							+"<td class='textC'>"
+								+"<font color='#4F4F4F' style='font-size:14px;'>"+items[i].xueli+"</font>"
+							+"</td>"
+							+"<td class='textC'>"
+								+"<font color='#4F4F4F' style='font-size:14px;'>"+items[i].jingyan+"</font>"
+							+"</td>"
+							+"<td class='textC'>"
+								+"<font color='#4F4F4F' style='font-size:14px;'>"+items[i].nowmoney+"</font>"
+							+"</td>"
+							+"<td class='textC'>"
+								+"<font color='#4F4F4F' style='font-size:14px;'>"+items[i].planmoney+"</font>"
+							+"</td>"
+							+"<td class='textC'>"
+								+"<font color='#4F4F4F' style='font-size:14px;'>"+items[i].plandidian+"</font>"
+							+"</td>"
+							+"<td class='textC'>"
+								+"<font color='#4F4F4F' style='font-size:14px;'>"+items[i].tuijianTime+"</font>"
+							+"</td>"
+							+"<td class='textC'>"
+								+"<font color='#4F4F4F' style='font-size:14px;'>"+items[i].status+"</font>"
+							+"</td>"
+							+"<td class='textC'>"
+								+"<button type='button' style='height:41px !important;background-color:#3CBAFF;color:#FFF;' onclick='goView(\""+items[i].id+"\")' class='btn dropdown-toggle' data-toggle='dropdown'>"
+								+"查看"
+								+"</button>"
+							+"</td>";
+			j = j + 1;
+		}
+	}
+	function addpageNum(items,pageId){
+		var inn = "";
+		for(var i = 1; i <= items; i++){
+			inn = inn + "<li>"
+				+"<a href='#' onclick='getpage("+i+")'>"+i+"</a>"
+				+"</li>";
+		}
+		document.getElementById(pageId).innerHTML=inn;
+	}
+	function goView(id){
+		window.location.href='user_information2.jsp';
+	}
+	function test(){
+		parent.document.getElementById("main1").height=0;
+		parent.document.getElementById("main1").height=document.body.scrollHeight;
+		
+		var url = "user/resumeedit1.do";
+		var formId = "userInformationForm";
+		var data = ajaxSumbit(url, formId);
+		dataName = data.dataName;
+// 		addCheckJob(data.nowJobList);
+		if(data.offerUserName != undefined){
+// 			editCheckJob(data.jobId1,data.jobId2, data.jobvalue1, data.jobvalue2);
+			setSexValue(data.offerUserSex);
+		}
+		addWorkplace(data.citys);
+		addphoto(data.logo);
+		$("#userInformationForm").populateForm(data);
+		$(".form_datetime2").datetimepicker({
+	        format: "yyyy-mm-dd",
+	        autoclose:true,
+	        startView: 'month',
+	        minView:'month',
+	        maxView:'decade',
+	        language:'zh-CN'
+	    });
+	}
+	function addphoto(logo){//,items
+		if(logo == undefined){
+			//return;
+		}
+		else {
+			document.getElementById("img1").src=logo;
+		}
+	}
+	function workplaceId(obj){
+		document.getElementById("offerUserNowPlace").value = obj.id;
+		document.getElementById("offerUserNowPlaceValue").value = obj.innerText;
+	}
+	
+	function addWorkplace(items){
+		var li = "";
+		for(var i in items){
+			li = li + "<li role='presentation'>"
+						+"<a role='menuitem' tabindex='-1' id='"+items[i].id+"' onclick='workplaceId(this)'><font color='#000'>"+items[i].value+"</font></ a>"
+					+ "</li>"
+		}
+		document.getElementById("workplaceUl").innerHTML = li;
+	}
+	//性别
+	function setSexValue(id) {
+		if(id == 1){
+			document.getElementById("sex1").style="font-size:14px;width:284px;color:#FFF;background-color:#00B38A;border-color:#00B38A;";
+			document.getElementById("sex2").style="margin-left:15px;font-size:14px;width:284px;color:#00B38A;background-color:#FFF;border-color:#00B38A;";
+			document.getElementById("offerUserSex").value="1";
+		}
+		if(id == 0){
+			document.getElementById("sex1").style="font-size:14px;width:284px;color:#00B38A;background-color:#FFF;border-color:#00B38A;";
+			document.getElementById("sex2").style="margin-left:15px;font-size:14px;width:284px;color:#FFF;background-color:#00B38A;border-color:#00B38A;";
+			document.getElementById("offerUserSex").value="2";
+		}
+	}
+	function addimg(){
+		return document.getElementById("fileLogo").click();
+	}
+	function review(){
+		var docObj=document.getElementById("fileLogo");
+		var imgObjPreview=document.getElementById("img1");
+		//files属性：返回一个 Files 集合，由指定文件夹中包含的所有 File 对象组成，包括设置了隐藏和系统文件属性的文件。
+		if(docObj.files &&docObj.files[0]){
+			//火狐下，直接设img属性
+			imgObjPreview.style.display = 'block';
+			imgObjPreview.style.width = '160px';
+			imgObjPreview.style.height = '160px'; 
+			//imgObjPreview.src = docObj.files[0].getAsDataURL();
+			//火狐7以上版本不能用上面的getAsDataURL()方式获取，需要一下方式
+			imgObjPreview.src = window.URL.createObjectURL(docObj.files[0]);
+			}else{
+				//IE下，使用滤镜
+				docObj.select();
+				var imgSrc = document.selection.createRange().text;
+				var localImagId = document.getElementById("logo");
+				//必须设置初始大小
+				localImagId.style.width = "160px";
+				localImagId.style.height = "160px";
+				//图片异常的捕捉，防止用户修改后缀来伪造图片    
+				try{
+					localImagId.style.filter="progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale)";
+					localImagId.filters.item("DXImageTransform.Microsoft.AlphaImageLoader").src = imgSrc;
+				}
+				catch(e)
+				{
+					alert("您上传的图片格式不正确，请重新选择!");
+					return false;
+				}
+				imgObjPreview.style.display = 'none';
+				document.selection.empty();
+			}
+		return true;
+	}
+	function saveData(ispass) {
+		if (ispass) {
+			if(!checkValue()) return;
+			var url = "user/saveresumeedit1.do";
+			var formId = "userInformationForm";
+			var data = ajaxSumbit(url, formId);
+			if (data == 'success') {
+				uploadPhoto();
+				alert('保存成功');
+				top.location.href='resume_edit.jsp';
+			}
+			else {
+				alert('保存错误！');
+			}
+		}
+		else {
+			top.location.href='resume_edit.jsp';
+		}
+	}
+	function checkValue() {
+		if(!checkInput('offerUserName',"姓名","30",false)) return false;
+		if(!checkInput('offerUserSex',"性别","1",false)) return false;
+		if(!checkInput('offerUserBirthday',"出生年月","30",false)) return false;
+		if(!checkInput('offerUserNowPlace',"你目前所在的城市","30",false)) return false;
+		return true;
+	}
+	function uploadPhoto() {
+		var url = "user/uploadUserPhoto.do";
+		var files = [];
+		files[0] = 'fileLogo';
+		var data = fileUpload(url, files);
+	}
+</script>
+<body bgcolor="#FFF" onload="test()">
+<form id="userInformationForm" style="overflow-y:auto;">
+	<div style="width:100%;min-width:750px;">
+		<table width="100%">
+			<tr height="40px"/>
+			<tr>
+				<td width="40px"/>
+				<td width="160px" id="logo">
+					<input type="file" id="fileLogo" name="fileLogo" style="display:none;" onchange="review()"/>
+					<img src="" width="160px" id="img1" onclick="addimg()" height="160px"/>
+				</td>
+				<td style="padding-left:40px" valign="bottom">
+					<button type="button" style="border-radius:40px;width:140px;height:40px;background-color:#FFF;border:1px #00B38A solid;" class='btn dropdown-toggle' data-toggle='dropdown' onclick="addimg()">
+						<font color="#00B38A" style="font-size:14px;">更换头像</font>
+					</button>
+				</td>
+				<td/>
+			</tr>
+			<tr height="59px"/>
+			<tr>
+				<td/>
+				<td>
+					<font color="#4F4F4F" style="font-size:16px;" >姓名</font><font color="#00B38A">*</font>
+				</td>
+			</tr>
+			<tr height="13px"/>
+			<tr>
+				<td/>
+				<td colspan="3">
+					<input type="text" name="offerUserName" id="offerUserName" class="form-control" style="width:588px;"/>
+				</td>
+			</tr>
+			<tr height="48px"/>
+			<tr>
+				<td/>
+				<td>
+					<font color="#4F4F4F" style="font-size:16px;" >性别</font><font color="#00B38A">*</font>
+				</td>
+			</tr>
+			<tr height="13px"/>
+			<tr>
+				<td/>
+				<td colspan="3">
+					<input type="hidden" name="offerUserSex" id="offerUserSex"/>
+					<button type="button" class="btn btn-primary" onclick="setSexValue(1)" data-toggle="button" id="sex1"
+						style="font-size:14px;width:284px;color:#FFF;background-color:#00B38A;border-color:#00B38A;">
+						男
+					</button>
+					<button type="button" class="btn btn-primary" onclick="setSexValue(0)" data-toggle="button" id="sex2"
+						style="margin-left:15px;font-size:14px;width:284px;color:#00B38A;background-color:#FFF;border-color:#00B38A;min-width:100px;">
+						女
+					</button>
+				</td>
+			</tr>
+			<tr height="48px"/>
+			<tr>
+				<td/>
+				<td>
+					<font color="#4F4F4F" style="font-size:16px;" >出生年月</font><font color="#00B38A">*</font>
+				</td>
+			</tr>
+			<tr height="13px"/>
+			<tr>
+				<td/>
+				<td colspan="3">
+					<!-- <div class="input-group" style="width: 100%">
+						<div class="dropdown">
+							<input type="text" readOnly="readOnly" class="form-control" style="width: 56% !important">
+						    <button type="button" style="height:41px !important;background-color:#CCCCCC;" class="btn dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown">
+						        <span class="caret"></span>
+						    </button>
+						    <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1" style="width: 56% !important" id="offerUserWorktime">
+						        <li role="presentation">
+						        </li>
+						    </ul>
+						</div>
+					</div> -->
+					<div class='input-append date form_datetime2' style='width: 588px;'>
+					    <input style="font-size:14px;color:#4F4F4F;" type='text' value='' class='date-control form-control' readonly name='offerUserBirthday' id='offerUserBirthday'>
+					    <span class="add-on"><i class="icon-th"></i></span>
+					</div>
+				</td>
+			</tr>
+			<tr height="48px"/>
+			<tr>
+				<td/>
+				<td>
+					<font color="#4F4F4F" style="font-size:16px;" >你目前所在的城市</font><font color="#00B38A">*</font>
+				</td>
+			</tr>
+			<tr height="13px"/>
+			<tr>
+				<td/>
+				<td colspan="3">
+					<div class="input-group" style="width: 100%">
+						<div class="dropdown">
+<!-- 							<input type="text" readOnly="readOnly" class="form-control" style="width: 56% !important"> -->
+							<input type="hidden" name="offerUserNowPlace" id="offerUserNowPlace"/>
+							<input type="text" name="offerUserNowPlaceValue" id="offerUserNowPlaceValue" readOnly="readOnly" class="form-control" style="width: 547px;">
+						    <button type="button" style="width:41px;height:41px !important;border:1px #CCCCCC solid;background-color:#F5F8F9;" class="btn dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown">
+						        <span class="caret"></span>
+						    </button>
+						    <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1" style="width: 58% !important" id="workplaceUl">
+						        <li role="presentation">
+						        </li>
+						    </ul>
+						</div>
+					</div>
+				</td>
+			</tr>
+			<tr height="48px"/>
+			<tr>
+				<td/>
+				<td colspan="3">
+					<div style="width: 588px">
+						<font color="#4F4F4F" style="font-size:16px;" >手机</font><!-- <font color="#00B38A">* --></font>
+						<font color="#4F4F4F" style="font-size:16px;float:right;" >如需修改,请访问<font color="#00B38A">个人设置</font></font>
+					</div>
+				</td>
+			</tr>
+			<tr height="13px"/>
+			<tr>
+				<td/>
+				<td colspan="3">
+					<input type="text" readonly name="offerUserPhone" class="form-control" style="width:588px;background:#F5F8F9;"/>
+				</td>
+			</tr>
+			<tr height="48px"/>
+			<tr>
+				<td/>
+				<td colspan="3">
+					<font color="#4F4F4F" style="font-size:16px;" >邮箱</font><!-- <font color="#00B38A">*</font> -->
+				</td>
+			</tr>
+			<tr height="13px"/>
+			<tr>
+				<td/>
+				<td colspan="3">
+					<input type="text" readonly name="offerUserEmail" class="form-control" style="width:588px;background:#F5F8F9;"/>
+				</td>
+			</tr>
+			<tr height="51px"/>
+			<tr>
+				<td/>
+				<td colspan="3">
+					<div style="width: 588px">
+						<table width="100%">
+							<tr>
+								<td width="49px">
+									<img src="../img/zhihu.png" width="40px" height="40px"/>
+								</td>
+								<td width="538px">
+									<input type="text"  name="offeruserzhihu" class="form-control" style="width:538px;"/>
+								</td>
+							</tr>
+						</table>
+					</div>
+				</td>
+			</tr>
+			<tr height="29px"/>
+			<tr>
+				<td/>
+				<td colspan="3">
+					<div style="width: 588px">
+						<table width="100%">
+							<tr>
+								<td width="49px">
+									<img src="../img/github.png" width="40px" height="40px"/>
+								</td>
+								<td>
+									<input type="text" name="offerusergithub" class="form-control" style="width:100%;min-width:200px;"/>
+								</td>
+							</tr>
+						</table>
+					</div>
+				</td>
+			</tr>
+			<tr height="29px"/>
+			<tr>
+				<td/>
+				<td colspan="3">
+					<div style="width: 588px">
+						<table width="100%">
+							<tr>
+								<td width="49px">
+									<img src="../img/blog.png" width="40px" height="40px"/>
+								</td>
+								<td>
+									<input type="text" name="offeruserblog" class="form-control" style="width:100%;min-width:200px;"/>
+								</td>
+							</tr>
+						</table>
+					</div>
+				</td>
+			</tr>
+			<tr height="29px"/>
+			<tr>
+				<td/>
+				<td colspan="3">
+					<div style="width: 588px">
+						<table width="100%">
+							<tr>
+								<td width="49px">
+									<img src="../img/personlink.png" width="40px" height="40px"/>
+								</td>
+								<td>
+									<input type="text" name="offeruserpersonweb" class="form-control" style="width:100%;min-width:200px;"/>
+								</td>
+							</tr>
+						</table>
+					</div>
+				</td>
+			</tr>
+			<tr height="50px"/>
+			<tr>
+				<td/>
+				<td/>
+				<td/>
+				<td class="textR">
+					<button type="button" class="btn btn-primary" data-toggle="button" onclick="saveData(false)"
+						style="font-size:14px;border-color:#CCCCCC;color:#4F4F4F;background-color:#CCCCCC;width:140px;">
+						取消
+					</button>
+					<button type="button" class="btn btn-primary" onclick="saveData(true)" data-toggle="button" id="sex2"
+						style="margin-left:19px;font-size:14px;color:#FFF;background-color:#00B389;width:140px;">
+						保存
+					</button>
+				</td>
+			</tr>
+		</table>
+	</div>
+	<div style="width:100%;height:50px;"></div>
+	</form>
+</body>
+</html>

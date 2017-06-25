@@ -1,0 +1,102 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>标题</title>
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <link href="../css/datetimepicker/bootstrap.css" rel="stylesheet" />
+        <link href="../css/datetimepicker/bootstrap.min.css" rel="stylesheet" />
+        <link href="../css/bootstrap-datetimepicker.css" rel="stylesheet" />
+        <link href="../css/bootstrap-datetimepicker.min.css" rel="stylesheet" />
+    </head>
+    <body>
+　   
+    <script type="text/javascript" src="../js/jquery-1.9.1.js"></script>
+    <script type="text/javascript" src="../js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../js/bootstrap-datetimepicker.js"></script>
+    <script type="text/javascript" src="../js/locales/bootstrap-datetimepicker.zh-CN.js"></script>
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=jTB5Q082IG0seSILPcPpvVArxg8iExdU"></script>
+　　<script type="text/javascript">
+	$(function(){
+	    $(".form_datetime2").datetimepicker({
+	        format: "yyyy-mm-dd",
+	        autoclose:true,
+	        startView: 'year',
+	        minView:'year',
+	        maxView:'decade',
+	        language:'zh-CN'
+	    });
+	})
+</script>
+<table>
+	<tr height="800px"/>
+	<tr>
+		<td>
+			<div class="input-append date form_datetime2" id="datetimepicker">
+    <input class="span2" size="16" type="text">
+    <span class="add-on"><i class="icon-th"></i></span>
+</div>   
+		</td>
+		<td>
+		<div class="input-append date form_datetime2">
+    <input size="16" type="text" value="" readonly>
+    <span class="add-on"><i class="icon-th"></i></span>
+</div>
+		</td>
+	</tr>
+	<tr height="800px"/>
+	<tr>
+		<td>
+		<div class="input-append date form_datetime2">
+    <input size="16" type="text" value="" readonly>
+    <span class="add-on"><i class="icon-th"></i></span>
+</div>
+		</td>
+		<td>
+		<div class="input-append date form_datetime2">
+    <input size="16" type="text" value="" readonly>
+    <span class="add-on"><i class="icon-th"></i></span>
+</div>
+		</td>
+	</tr>
+</table>
+
+<div id="allmap" style="width:200px;height:200px;"></div> 
+<!-- <div id="myCarousel" class="carousel slide">
+    轮播（Carousel）指标
+    <ol class="carousel-indicators">
+        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+        <li data-target="#myCarousel" data-slide-to="1"></li>
+        <li data-target="#myCarousel" data-slide-to="2"></li>
+    </ol>   
+    轮播（Carousel）项目
+    <div class="carousel-inner">
+        <div class="item active">
+            <img src="/wp-content/uploads/2014/07/slide1.png" alt="First slide">
+        </div>
+        <div class="item">
+            <img src="/wp-content/uploads/2014/07/slide2.png" alt="Second slide">
+        </div>
+        <div class="item">
+            <img src="/wp-content/uploads/2014/07/slide3.png" alt="Third slide">
+        </div>
+    </div>
+    轮播（Carousel）导航
+    <a class="carousel-control left" href="#myCarousel" 
+        data-slide="prev">&lsaquo;
+    </a>
+    <a class="carousel-control right" href="#myCarousel" 
+        data-slide="next">&rsaquo;
+    </a>
+</div> -->
+    </body>
+</html>
+<script type="text/javascript">
+	// 百度地图API功能
+	var map = new BMap.Map("allmap");    // 创建Map实例
+	map.centerAndZoom(new BMap.Point(116.404, 39.915), 11);  // 初始化地图,设置中心点坐标和地图级别
+	map.addControl(new BMap.MapTypeControl());   //添加地图类型控件
+	map.setCurrentCity("北京");          // 设置地图显示的城市 此项是必须设置的
+	map.enableScrollWheelZoom(true);     //开启鼠标滚轮缩放
+</script>

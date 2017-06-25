@@ -1,0 +1,42 @@
+<sqls>
+	<sql>
+		SELECT 
+			U.ID,
+			U.OFFER_USER_NAME AS offerUserName,
+			U.OFFER_USER_PHONE AS offerUserPhone,
+			U.STATUS AS uStatus,
+			U.OFFER_JOB_ID AS offerJobId,
+			U.LAST_LOGIN_TIME AS lastLoginTime,
+			F.ID AS offerFirmId,
+			F.OFFER_NAME AS offerName,
+			F.OFFER_EMAIL AS offerEmail,
+			F.STATUS AS fStatus,
+			F.CREATE_TIME AS fCreateTime,
+			F.ADMIN_ID AS adminId,
+			I.ID AS offerFirmInformationId,
+			I.FIRM_ALL_NAME AS firmAllName,
+			I.FIRM_SIMPLE_NAME AS firmSimpleName,
+			I.FIRM_WEB_LINK AS firmWebLink,
+			I.FIRM_CITY AS firmCity,
+			I.FIRM_ADDRESS AS firmAddress,
+			I.AREA_ID AS areaId,
+			I.FIRM_CREATE_YEAR AS firmCreateYear,
+			I.FIRM_SIZE AS firmSize,
+			I.FIRM_TEAM_SIZE AS firmTeamSize,
+			I.FIRM_STAGE AS firmStage,
+			I.FIRM_DESCRIPT AS firmDescript,
+			I.ISPHOTO AS isphoto,
+			I.FIRM_JOB_ID AS firmJobId,
+			I.FIRM_ONE_DESCRIPT AS firmOneDescript,
+			S.CITY_IDS AS cityIds,
+			S.YEAR_IDS AS yearIds,
+			S.JOB_IDS AS jobIds
+		FROM OFFER_FIRM F 
+		LEFT JOIN OFFER_USER U ON F.ID = U.FIRM_ID
+		LEFT JOIN OFFER_FIRM_INFORMATION I ON F.ID = I.FIRM_ID
+		LEFT JOIN OFFER_FIRM_SELECT S ON F.ID = S.FIRM_ID
+		<!-- WHERE F.ID = '38' AND U.ID = S.USER_ID -->
+		{#param}
+		<param value="param"/>
+	</sql>
+</sqls>

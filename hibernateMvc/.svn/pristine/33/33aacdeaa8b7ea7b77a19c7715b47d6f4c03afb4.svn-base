@@ -1,0 +1,198 @@
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<%@include file="/common/header.jsp"%>
+<title></title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<style>
+.smailfont{
+	
+}
+.fontcol{
+	padding-left: 20px;
+	color:#666666;
+}
+</style>
+</head>
+<script language="javascript">
+	//头部
+	function changeColor1(der){
+		der.style.background="#CCCCCC";
+	}
+	function changeColor2(der){
+		der.style.background="#32373C";
+	}
+	function booleanInfot(url){
+		alert("请等候我们的审核！");
+	}
+</script>
+<body bgcolor="#FFFFFF" onload="init()" height="852px">
+	<form id="loginForm">
+	<div style="width:100%;height:60px;background:#32373C;position:absolute;top:expression(documentElement.scrollTop + 'px');position:fixed;z-index:9999;">
+		<table style="width:100%;white-space: nowrap;">
+			<tr>
+				<td style="width:19%;padding-left:13%;"><img src="../img/U-Offerlogo.png" width="109px" height="26px"></td>
+			    <td width="4%"/>
+				<td>
+				    <button type="button" style="height:60px !important;width:103px !important;background-color:#32373C;" class="btn dropdown-toggle" id="dropdownMenu3" data-toggle="dropdown" class="btn dropdown-toggle" id="dropdownMenu3" data-toggle="dropdown" onmouseover="changeColor1(this)" onmouseout="changeColor2(this)" onclick="booleanInfot('user_view.jsp')">
+				    	<font color="#F5F8F9" style="font-size:14px;">面试邀请</font>
+				    </button>
+				    <button type="button" style="height:60px !important;width:103px !important;background-color:#32373C;"class="btn dropdown-toggle" id="dropdownMenu2" data-toggle="dropdown" onmouseover="changeColor1(this)" onmouseout="changeColor2(this)" onclick="booleanInfot('resume_edit.jsp')">
+				    	<font color="#F5F8F9" style="font-size:14px;">我的简历</font>
+				    </button>
+			    </td>
+			    <td width="19%">
+				    <button type="button" style="height:60px !important;width:103px !important;background-color:#32373C;" class="btn dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown" onmouseover="changeColor1(this)" onmouseout="changeColor2(this)" onclick="javascript:top.location.href='personal_settings.jsp'">
+				    	<font color="#F5F8F9" style="font-size:14px;">个人设置</font>
+				    </button>
+				    <button type="button" style="height:60px !important;width:103px !important;background-color:#32373C;" class="btn dropdown-toggle" id="dropdownMenu4" data-toggle="dropdown" onmouseover="changeColor1(this)" onmouseout="changeColor2(this)" onclick="javascript:top.location.href='login.jsp'">
+				    	<font color="#F5F8F9" style="font-size:14px;">退出</font>
+				    </button>
+				</td>
+			</tr>
+		</table>
+	</div>
+	<div style="width:100%;height:32%;"></div>
+	<center>
+		<div style="background: #FFFFFF;width:100%;height:43%;">
+			<table width="100%" height="100%">
+				<tr>
+					<td class="textC" style="padding:10px 0px;">
+						<font style="font-size:20px;width:40%" color="#4F4F4F">系统默认有效推荐周期为1个月，到期后如果希望再收到企业面试邀请，请重新提交申请</font>
+					</td>
+				</tr>
+				<tr height="26%"/>
+				<tr>
+					<td class="textC" style="padding:10px 0px;">
+						<button type="button" style="height:41px;width:200px;background-color:#00B38A;" class="btn dropdown-toggle">
+							<font style="font-size:14px;" color="#FFF">重新申请</font>
+				    	</button>
+					</td>
+				</tr>
+				<tr height="57%"/>
+			</table>
+		</div>
+		<div style="height: 2px; width: 80%; background-color: #DDDDDD;"></div>
+		<div style="background: #FFFFFF;">
+			<table style="border-collapse: separate; border-spacing: 10px; width: 100%;">
+				<tr>
+					<td class="textC" style="padding:10px 0px;" colspan="4"><font size="2">完善简历</font></td>
+				</tr>
+				<tr>
+					<td class="smailfont textR" valign="top" width="43%" style="padding-right:20px;">简历完成度</td>
+					<td style="width:203px;">
+						<div class="progress" style="width:200px;height:15px;">
+						    <div class="progress-bar" role="progressbar" aria-valuenow="60" 
+						        aria-valuemin="0" aria-valuemax="100" style="width: 40%;background:#00B389;border:1px #00B389 solid;">
+						        <span class="sr-only"></span>
+						    </div>
+						</div>
+					</td>
+					<td class="smailfont textL" valign="top" style="width:20px;">40%</td>
+					<td class="smailfont textL" valign="top"></td>
+				</tr>
+				<tr>
+					<td class="smailfont textC" colspan="4">
+						<font color="#666666">简历的完善程度影响您能收获的机会，也是我们审核时重要的依据。<a href="#"><font color="#00B389" style="text-decoration: underline;">看看我们的审核标准</font></a></font>
+					</td>
+				</tr>
+				<tr height="20px"/>
+				<tr>
+					<td colspan="4">
+						<table width="100%">
+							<tr>
+								<td rowspan="6" class="textR" width="50%"><img src="../img/kefu.png" width="100px" style="border:2px solid #BBBBBB;padding:10px 20px;border-radius:13px;"/></td>
+								<td class="textL fontcol smailfont" width="50%">我是张丽，你的职业顾问</td>
+							</tr>
+							<tr>
+								<td class="textL fontcol smailfont">期待着与您交流工作、求职中的想法</td>
+							</tr>
+							<tr>
+								<td class="textL fontcol smailfont">电话：</td>
+							</tr>
+							<tr>
+								<td class="textL fontcol smailfont">微信：</td>
+							</tr>
+							<tr>
+								<td class="textL fontcol smailfont">QQ:</td>
+							</tr>
+							<tr>
+								<td class="textL fontcol smailfont">邮箱：</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+			</table>
+			<br />
+		</div>
+		<div style="height: 2px; width: 80%; background-color: #DDDDDD;"></div>
+		<div style="background: #FFFFFF; width: 80%;">
+			<br />
+			<table
+				style="border-collapse: separate; border-spacing: 10px; width: 100%;">
+				<tr>
+					<td width="33%"/>
+					<td class="textC" style="padding:10px 0px;"><font size="4" style="font-weight:bold;">看看申请后会发生什么</font></td>
+					<td width="33%"/>
+				</tr>
+				<tr>
+					<td class="textC"><img src="../img/project.png" width="100px"/></td>
+					<td class="textC"><img src="../img/email.png" width="100px"/></td>
+					<td class="textC"><img src="../img/aguy.png" width="180px"/></td>
+				</tr>
+				<tr>
+					<td class="textC">
+						<center>
+							<div style="width:125px;margin-top:-20px">
+								<font size="2">您的简历向您感兴趣的企业展示2周</font>
+							</div>
+						</center>
+					</td>
+					<td class="textC">
+						<center>
+							<div style="width:145px;font-size:1;margin-top:-20px">
+								<font size="2">企业向您发出面试邀请，并声明职位及薪酬</font>
+							</div>
+						</center>
+					</td>
+					<td class="textC">
+						<center>
+							<div style="width:147px;font-size:1;margin-top:-10px">
+								<font size="2">选择您满意的参加面试，挑选满意的offer入职</font>
+							</div>
+						</center>
+					</td>
+				</tr>
+			</table>
+			<br />
+		</div>
+		<div style="height: 2px; width: 80%; background-color: #DDDDDD;"></div>
+		<div style="background: #FFFFFF; width: 80%;">
+			<br />
+			<table
+				style="border-collapse: separate; border-spacing: 10px; width: 100%;">
+				<tr>
+					<td width="33%"/>
+					<td class="textC" style="padding:10px 0px;"><font size="4" style="font-weight:bold;">最近在U-offer招聘的企业</font></td>
+					<td width="33%"/>
+				</tr>
+				<tr>
+					<td class="textC"><img src="../img/firm_logo3.png" width="100px"/></td>
+					<td class="textC"><img src="../img/firm_logo2.png" width="100px"/></td>
+					<td class="textC"><img src="../img/firm_logo1.png" width="100px"/></td>
+				</tr>
+				<tr height="10px"/>
+				<tr>
+					<td class="textC"><img src="../img/firm_logo5.png" width="100px"/></td>
+					<td class="textC"><img src="../img/firm_logo6.png" width="100px"/></td>
+					<td class="textC"><img src="../img/firm_logo4.png" width="100px"/></td>
+				</tr>
+			</table>
+			<br />
+		</div>
+	</center>
+	</form>
+</body>
+</html>

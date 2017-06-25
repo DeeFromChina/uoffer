@@ -1,0 +1,128 @@
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<%@include file="/common/header.jsp"%>
+<title></title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+</head>
+<style>
+	td{
+		border:1px #CCCCCC solid;
+		height:47px;
+		min-width:100px;
+	}
+</style>
+<script language="javascript">
+	function init(){
+		var url = "login/firmquestionnaire1.do";
+		var formId = "finduserForm";
+		var data = ajaxSumbit(url, formId);
+		addList(data.questionnaire);
+		addpageNum(data.pageNum,"u1");
+	}
+	//增加列表
+	function addList(items){
+		var j = 0;
+		for(var i in items){
+			var tr1 = document.createElement("tr");
+			tr1.id = "t" + j;
+			document.getElementById("userTable").appendChild(tr1);
+			document.getElementById("t" + j).innerHTML = "<td class='textC'>"
+								+"<font size='1'>"+items[i].name+"</font>"
+							+"</td>"       
+							+"<td class='textC'>"
+								+"<font size='1'>"+items[i].newTime+"</font>"
+							+"</td>"
+							+"<td class='textC'>"
+								+"<font size='1'>"+items[i].job+"</font>"
+							+"</td>"
+							+"<td class='textC'>"
+								+"<font size='1'>"+items[i].phone+"</font>"
+							+"</td>"
+							+"<td class='textC'>"
+								+"<font size='1'>"+items[i].zhaopin+"</font>"
+							+"</td>"
+							+"<td class='textC'>"
+								+"<font size='1'>"+items[i].workplace+"</font>"
+							+"</td>"
+							+"<td class='textC'>"
+								+"<font size='1'>"+items[i].jingyan+"</font>"
+							+"</td>";
+			j = j + 1;
+		}
+	}
+	function addpageNum(items,pageId){
+		var inn = "";
+		for(var i = 1; i <= items; i++){
+			inn = inn + "<li>"
+				+"<a href='#' onclick='getpage("+i+")'>"+i+"</a>"
+				+"</li>";
+		}
+		document.getElementById(pageId).innerHTML=inn;
+	}
+</script>
+<body bgcolor="#FFF" onload="init()">
+	<div style="width:100%;padding:0px 180px;margin-top:47px;">
+		<table width="100%" style="border:1px #CCCCCC solid;" id="userTable">
+			<tr>
+				<td class="textC" style="background:#E2E2E2;">
+					<font size="1">姓名</font>
+				</td>
+				<td class="textC" style="background:#E2E2E2;">
+					<font size="1">最新登录</font>
+				</td>
+				<td class="textC" style="background:#E2E2E2;">
+					<font size="1">职位</font>
+				</td>
+				<td class="textC" style="background:#E2E2E2;">
+					<font size="1">电话</font>
+				</td>
+				<td class="textC" style="background:#E2E2E2;">
+					<font size="1">招聘职位</font>
+				</td>
+				<td class="textC" style="background:#E2E2E2;">
+					<font size="1">工作地点</font>
+				</td>
+				<td class="textC" style="background:#E2E2E2;">
+					<font size="1">经验要求</font>
+				</td>
+			</tr>
+			<tr>
+				<td class="textC">
+					<font size="1">姓名</font>
+				</td>
+				<td class="textC">
+					<font size="1">2016.11.11</font>
+				</td>
+				<td class="textC">
+					<font size="1">产品总监</font>
+				</td>
+				<td class="textC">
+					<font size="1">1233523452345</font>
+				</td>
+				<td class="textC">
+					<font size="1">java java2 java3 java4 java5</font>
+				</td>
+				<td class="textC">
+					<font size="1">工作地点:广州越秀长坂按时速</font>
+				</td>
+				<td class="textC">
+					<font size="1">19823年-啊健搜地方哈</font>
+				</td>
+			</tr>
+		</table>
+	</div>
+	<div style="width:100%;padding:0px 180px;margin-top:27px;">
+		<input type="hidden" name="pageId" id="pageId" value="1"/>
+		<ul class="pagination" id="u1" style="margin-top:10px;">
+		    <li><a href="#">1</a></li>
+		    <li><a href="#">2</a></li>
+		    <li><a href="#">3</a></li>
+		    <li><a href="#">4</a></li>
+		    <li><a href="#">5</a></li>
+		</ul>
+	</div>
+</body>
+</html>

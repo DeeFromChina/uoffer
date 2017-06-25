@@ -1,0 +1,21 @@
+<sqls>
+	<sql>
+		SELECT 
+			I.ID AS id,
+			I.JOB_NAME AS jobName,
+			I.JOB_PLACE AS jobPlace,
+			I.JOB_MONTH_WAGES_FIRST AS jobMonthWagesFirst,
+			I.JOB_MONTH_WAGES_SECOND AS jobMonthWagesSecond,
+			I.JOB_MONTH AS jobMonth,
+			I.FIRM_ID AS firmId,
+			I.USER_ID AS userId,
+			I.STATUS AS iStatus,
+			I.ISSTOCK AS isstock,
+			I.RESULT AS result,
+			I.CREATE_TIME AS createTime,
+			I.CANDIDATE_ID AS candidateId
+		FROM offer_invite I
+		{#param}
+		<param value="param"/>
+	</sql>
+</sqls>

@@ -1,0 +1,11 @@
+[
+  {
+    "id": "a1",
+    "title": "",
+    "start": "2017-03-03T14:30:00",
+    "end": "2017-03-03T19:30:00",
+    "className": "meeting-over",
+    "today": "2017-03-03",
+    "allDay": "false"
+  }
+]

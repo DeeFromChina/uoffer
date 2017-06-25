@@ -1,0 +1,24 @@
+<sqls>
+	<sql orderBy="I.CREATE_TIME">
+		SELECT 
+			I.ID AS id,
+			I.JOB_NAME AS jobName,
+			I.JOB_PLACE AS jobPlace,
+			I.JOB_MONTH_WAGES_FIRST AS jobMonthWagesFirst,
+			I.JOB_MONTH_WAGES_SECOND AS jobMonthWagesSecond,
+			I.JOB_MONTH AS jobMonth,
+			I.FIRM_ID AS firmId,
+			I.USER_ID AS userId,
+			I.STATUS AS iStatus,
+			I.ISSTOCK AS isstock,
+			I.RESULT AS result,
+			I.CREATE_TIME AS createTime,
+			I.CANDIDATE_ID AS candidateId,
+			F.OFFER_NAME AS offerName,
+			F.OFFER_EMAIL AS offerEmail
+		FROM OFFER_INVITE I
+		LEFT JOIN OFFER_FIRM F ON F.ID = I.FIRM_ID
+		{#param}
+		<param value="param"/>
+	</sql>
+</sqls>

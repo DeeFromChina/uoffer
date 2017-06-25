@@ -1,0 +1,170 @@
+ <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<%@include file="/common/header.jsp"%>
+<title></title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+</head>
+<style>
+</style>
+<script language="javascript">
+	function test(){
+		var url = "user/getuserendless.do";
+		var data = ajaxSumbitNoform(url, "123");
+		init(data);
+// 		document.getElementById("endless").value = data;
+		accountheight();
+		
+	}
+	function init(data){
+		var strs= new Array(); //定义一数组 
+		strs=data.split(";"); //字符分割 
+		for(var i in strs){
+			
+			if(i==0){
+				var tr1 = document.createElement("tr");
+				tr1.innerHTML = "<td style='padding-top:20px;width: 42% !important;min-width:200px;'>"
+									+"<input type='text' value='"+strs[i]+"'class='form-control' placeholder='assss@baidu.com' style='width: 100% !important;min-width:200px;height:41px;border-right:none;border-radius: 0;'>"
+								+"</td>"
+								+"<td width='41px' style='padding-top:20px;'>"
+									+"<span class='input-group-addon' style='width:41px;height:40px;background:#FFF;border:1px #CCCCCC solid;border-left:none;'><img src='../img/jian.png' style='cursor:pointer;' onclick='cleartd()'/></span>"
+								+"</td>"
+								+"<td style='padding-left:30px;padding-top:20px;'>"
+									+"<img src='../img/jia.png' style='cursor:pointer;' onclick='addtr()'/>"
+								+"</td>"
+								;
+				document.getElementById("addtable").appendChild(tr1);
+			}else{
+				var tr1 = document.createElement("tr");
+				tr1.innerHTML = "<td style='padding-top:20px;width: 42% !important;min-width:200px;'>"
+									+"<input type='text' value='"+strs[i]+"'class='form-control' placeholder='assss@baidu.com' style='width: 100% !important;min-width:200px;height:41px;border-right:none;border-radius: 0;'>"
+								+"</td>"
+								+"<td width='41px' style='padding-top:20px;'>"
+									+"<span class='input-group-addon' style='width:41px;height:40px;background:#FFF;border:1px #CCCCCC solid;border-left:none;'><img src='../img/jian.png' style='cursor:pointer;' onclick='deltr(this)'/></span>"
+								+"</td>"
+								+"<td style='padding-left:30px;padding-top:20px;'>"
+									+"<img src='../img/jia.png' style='cursor:pointer;' onclick='addtr()'/>"
+								+"</td>"
+								;
+				document.getElementById("addtable").appendChild(tr1);
+			}
+
+		}
+		accountheight();
+	}
+	function accountheight(){
+		parent.document.getElementById("main1").height=0;
+		parent.document.getElementById("main1").height=document.body.scrollHeight;
+	}
+	function goSave(ispass){
+		if (ispass) {
+			var endless = allInputValue();
+			var url = "user/saveuserendless.do?endless="+endless;
+			var formId = "editForm";
+			var data = ajaxSumbitNoform(url, "123");
+			if(data == "success"){
+				alert("修改成功!");
+				top.location.href='resume_edit.jsp';
+			}else{
+				alert("数据出错!");
+			}
+		}
+		else {
+			top.location.href='resume_edit.jsp';
+		}
+	}
+	function allInputValue(){
+		var str = "";
+		$(".form-control").each(function () {
+			if(str != ""){
+				str = str + ";";
+			}
+			str = str + this.value;
+        });
+		return str;
+	}
+	
+	function addtr(){
+		var tr1 = document.createElement("tr");
+		tr1.innerHTML = "<td style='padding-top:20px;width: 42% !important;min-width:200px;'>"
+							+"<input type='text' class='form-control' placeholder='assss@baidu.com' style='width: 100% !important;min-width:200px;height:41px;border-right:none;border-radius: 0;'>"
+						+"</td>"
+						+"<td width='41px' style='padding-top:20px;'>"
+							+"<span class='input-group-addon' style='width:41px;height:40px;background:#FFF;border:1px #CCCCCC solid;border-left:none;'><img src='../img/jian.png' style='cursor:pointer;' onclick='deltr(this)'/></span>"
+						+"</td>"
+						+"<td style='padding-left:30px;padding-top:20px;'>"
+							+"<img src='../img/jia.png' style='cursor:pointer;' onclick='addtr()'/>"
+						+"</td>"
+						;
+		document.getElementById("addtable").appendChild(tr1);
+		accountheight();
+	}
+	function deltr(obj){
+		var childNode=obj.parentNode.parentNode.parentNode;
+		childNode.parentNode.removeChild(childNode);
+		accountheight();
+	}
+	function cleartd(){
+		document.getElementById("endless").value="";
+	}
+</script>
+<body bgcolor="#FFF" onload="test()">
+	<div style="width:100%;">
+		<table width="100%">
+			<tr height="49px"/>
+			<tr>
+				<td width="40px"/>
+				<td width="54%">
+					<font style="font-size:20px;" color="#4F4F4F">隐私保护</font>
+				</td>
+				<td class="textC" width="19%">
+				</td>
+				<td/>
+			</tr>
+			<tr height="20px"/>
+			<tr>
+				<td/>
+				<td colspan="3">
+					<font color="#9A9A9A" style="font-size:16px;" >可以填写你想屏蔽的公式邮箱后缀，让他们无法查看你的简历</font>
+				</td>
+			</tr>
+			<tr height="29px"/>
+			<tr>
+				<td/>
+				<td colspan="3">
+					<table width="100%" id="addtable">
+<!-- 						<tr> -->
+<!-- 							<td style="width: 42% !important;min-width:200px;"> -->
+<!-- 								<input type="text" id="endless" class="form-control" placeholder="assss@baidu.com" style="width: 100% !important;min-width:200px;height:41px;border-right:none;border-radius: 0;"> -->
+<!-- 							</td> -->
+<!-- 							<td width="41px"> -->
+<!-- 								<span class="input-group-addon" style="width:41px;height:40px;background:#FFF;border:1px #CCCCCC solid;border-left:none;"><img src="../img/jian.png" width="20px" height="20px" style="cursor:pointer;" onclick="cleartd()"/></span> -->
+<!-- 							</td> -->
+<!-- 							<td style="padding-left:30px;"> -->
+<!-- 								<img src="../img/jia.png" width="20px" height="20px" style="cursor:pointer;" onclick="addtr()"/> -->
+<!-- 							</td> -->
+<!-- 						</tr> -->
+					</table>
+				</td>
+			</tr>
+			<tr height="50px"/>
+			<tr>
+				<td/>
+				<td colspan="3" class="textC">
+					<button type="button" class="btn btn-primary" data-toggle="button" onclick="goSave(false)"
+						style="font-size:14px;border-color:#CCCCCC;color:#4F4F4F;background-color:#CCCCCC;min-width:140px;">
+						取消
+					</button>
+					<button type="button" class="btn btn-primary" data-toggle="button"
+						style="margin-left:19px;font-size:14px;color:#FFF;background-color:#00B389;min-width:140px;" onclick="goSave(true)">
+						保存
+					</button>
+				</td>
+			</tr>
+		</table>
+	</div>
+	<div style="width:100%;height:50px;"></div>
+</body>
+</html>

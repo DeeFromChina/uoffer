@@ -1,0 +1,71 @@
+<sqls>
+	<sql>
+		SELECT
+			U.ID AS id,
+			U.FIRM_ID AS firmId,
+			U.OFFER_USER_NAME AS offerUserName,
+			U.OFFER_USER_EMAIL AS offerUserEmail,
+			U.OFFER_USER_PHONE AS offerUserPhone,
+			U.OFFER_USER_COMPANY AS offerUserCompany,
+			U.OFFER_USER_CITY AS offerUserCity,
+			U.OFFER_USER_PASSWORD AS offerUserPassword,
+			U.OFFER_JOB_ID AS offerJobId,
+			U.ISOFFER AS isoffer,
+			U.CREATE_TIME AS createTime,
+			U.OFFER_USER_PROVINCE AS offerUserProvince,
+			U.STATUS AS status,
+			U.EMAILMSG AS emailmsg,
+			U.LAST_LOGIN_TIME AS lastLoginTime,
+			I.ID AS offerUserInformationId, 
+			I.OFFER_USER_PLAN_YEAR_WAGES AS offerUserPlanYearWages,
+			I.OFFER_USER_DESCRIPTION AS offerUserDescription, 
+			I.OFFER_USER_EDUCATION AS offerUserEducation, 
+			I.OFFER_USER_NOW_YEAR_WAGES AS offerUserNowYearWages, 
+			I.OFFER_USER_ADDRESS AS offerUserAddress,
+			I.OFFER_USER_JOB1 AS offerUserJob1, 
+			I.OFFER_USER_JOB2 AS offerUserJob2, 
+			I.OFFER_PHOTO_ID AS offerPhotoId,
+			I.OFFER_USER_WORK_PLACE AS offerUserWorkPlace,
+			I.OFFER_USER_SEX AS offerUserSex, 
+			I.OFFER_ADVISER_REMARK AS offerAdviserRemark,
+			I.OFFER_USER_WORKTIME AS offerUserWorktime,
+			I.OFFER_HAVE_EXPERIENCE1 AS offerHaveExperience1,
+			I.OFFER_HAVE_EXPERIENCE2 AS offerHaveExperience2,
+			I.OFFER_USER_LIKE_FIRM_STAGE AS offerUserLikeFirmStage,
+			I.OFFER_GET_HOW_MONTH_WAGES AS offerGetHowMonthWages,
+			I.OFFER_EVERY_MONTH_WAGES AS offerEveryMonthWages,
+			I.OFFER_USER_WHEN_WORK AS offerUserWhenWork,
+			I.OFFER_MONEY_TYPE_ID AS offerMoneyTypeId,
+			I.OFFER_JOB_STATUS AS offerJobStatus,
+			I.OFFER_NOW_GET_MONEY_TYPE AS offerNowGetMoneyType,
+			I.OFFER_PLAN_GET_MONEY_TYPE AS offerPlanGetMoneyType,
+			I.OFFER_REQUEST_NEXT_JOB  AS offerRequestNextJob,
+			I.OFFER_USER_ZHIHU AS offerUserZhihu,
+			I.OFFER_USER_GITHUB AS offerUserGithub,
+			I.OFFER_USER_BLOG AS offerUserBlog,
+			I.OFFER_USER_PERSON_WEB AS offerUserPersonWeb,
+			I.OFFER_USER_AGE AS offerUserAge,
+			I.OFFER_USER_BIRTHDAY AS offerUserBirthday,
+			I.OFFER_USER_NOW_PLACE AS offerUserNowPlace,
+			P.ID AS offerUserPlanWorkPlaceId,
+			P.OFFER_CITY_ID AS offerCityId
+			<!-- W.ID AS offerUserWorksId,
+			W.OLD_FIRM_NAME AS oldFirmName,
+			W.START_TIME AS startTime,
+			W.END_TIME AS wEndTime,
+			W.JOB_NAME AS wJobName,
+			W.JOB_DESCRIPT AS jobDescript,
+			E.ID AS offerUserEducationId,
+			E.SCHOOL_NAME AS schoolName,
+			E.STAR_TIME AS eStarTime,
+			E.END_TIME AS eEndTime,
+			E.USER_MAJOR AS userMajor -->
+		FROM OFFER_USER U 
+		LEFT JOIN OFFER_USER_INFOMATION I ON I.OFFER_USER_ID = U.ID
+		LEFT JOIN OFFER_USER_PLAN_WORK_PLACE P ON P.OFFER_USER_ID = U.ID
+		<!-- LEFT JOIN OFFER_USER_WORKS W ON W.OFFER_USER_ID = U.ID
+		LEFT JOIN OFFER_USER_EDUCATION E ON E.OFFER_USER_ID = U.ID -->
+		{#param}
+		<param value="param"/>
+	</sql>
+</sqls>

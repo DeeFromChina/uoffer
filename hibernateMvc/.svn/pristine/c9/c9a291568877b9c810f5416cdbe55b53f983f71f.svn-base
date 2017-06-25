@@ -1,0 +1,564 @@
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<%@include file="/common/header.jsp"%>
+<title></title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+</head>
+<script language="javascript">
+	var myVar;
+	var a = 60;
+	function daoshu(){
+		var phone = document.getElementById("offer_user_phone").value;
+		if(phone.length < 11 || isNaN(phone)){
+			alert("手机号码格式不正确！")
+			return;
+		}
+		getmsg();
+		myVar=setInterval(function(){myTimer()},1000);
+		a = 60;
+	}
+	function myTimer(){
+		if(a != 0){
+			a = a-1;
+			document.getElementById("msgtime").setAttribute("disabled", true);
+		}else{
+			clearInterval(myVar);
+			document.getElementById("msgtime").style.background="#00B38A";
+			document.getElementById("msgtime").style.color="#FFF";
+			document.getElementById("msgtime").style.border="1px #00B38A solid";
+			document.getElementById("msgtime").innerHTML="<font style='font-size:14px;'>获取</font>";
+			document.getElementById("msgtime").removeAttribute("disabled"); 
+			return;
+		}
+		document.getElementById("msgtime").style.background="#FFF";
+		document.getElementById("msgtime").style.color="#9A9A9A";
+		document.getElementById("msgtime").style.border="1px #9A9A9A solid";
+		document.getElementById("msgtime").innerHTML="<font style='font-size:14px;'>"+a+"秒</font>";
+	}
+    var phoneCode = ""; 
+	//头部
+	function changeColor1(der){
+		der.style.background="#777777";
+	}
+	function changeColor2(der){
+		der.style.background="#32373C";
+	}
+	function changeColor3(der){
+		if(der.style.Color=="#00B38A"){
+			der.style.background="#00B38A";
+			der.style.Color="#FFF";
+		}
+	}
+	function changeColor4(){
+		if(document.getElementById("type").value=="1"){
+			document.getElementById("button1").style.background="#00B38A";
+			document.getElementById("button1").innerHTML="<font style='font-size:14px;' color='#FFF'>我是候选人</font>";
+			document.getElementById("button2").style.background="#FFF";
+			document.getElementById("button2").innerHTML="<font style='font-size:14px;' color='#00B38A'>我是HR/BOSS</font>";
+		}
+		if(document.getElementById("type").value=="2"){
+			document.getElementById("button2").style.background="#00B38A";
+			document.getElementById("button2").innerHTML="<font style='font-size:14px;' color='#FFF'>我是HR/BOSS</font>";
+			document.getElementById("button1").style.background="#FFF";
+			document.getElementById("button1").innerHTML="<font style='font-size:14px;' color='#00B38A'>我是候选人</font>";
+		}
+	}
+	function init() {
+		code2 = createValidateCode('vCode2');
+		getTran('1');
+		var regit = document.getElementById('regit');
+		regit.focus();
+		var b = document.getElementById('button1');
+		b.focus();
+		var url = "register/jobList1.do";
+		var formId = "registerForm";
+		var data = ajaxSumbit(url, formId);
+		addJob(data.nowJob);
+		addJobF(data.jobF);
+		addCity(data.city);
+	}
+	//选择用户/企业
+	var code2;
+	function getTran(ret) {
+		var trans1 = document.getElementById('transparent1');
+		var trans2 = document.getElementById('transparent2');
+		if (ret == '1') {
+			trans1.setAttribute("class", "triangle-up");
+			trans2.setAttribute("class", "");
+			document.getElementById("type").value="1";
+			document.getElementById("button1").style.background="#00B38A";
+			document.getElementById("button1").innerHTML="<font style='font-size:14px;' color='#FFF'>我是候选人</font>";
+			document.getElementById("button2").style.background="#FFF";
+			document.getElementById("button2").innerHTML="<font style='font-size:14px;' color='#00B38A'>我是HR/BOSS</font>";
+			clearTable();
+			code2.update();
+			document.getElementById("firmTable").style.display="none";
+			document.getElementById("userTable").style.display="";
+		}
+		if (ret == '2') {
+			trans2.setAttribute("class", "triangle-up");
+			trans1.setAttribute("class", "");
+			document.getElementById("type").value="2";
+			document.getElementById("button2").style.background="#00B38A";
+			document.getElementById("button2").innerHTML="<font style='font-size:14px;' color='#FFF'>我是HR/BOSS</font>";
+			document.getElementById("button1").style.background="#FFF";
+			document.getElementById("button1").innerHTML="<font style='font-size:14px;' color='#00B38A'>我是候选人</font>";
+			clearTable();
+			code2.update();
+			document.getElementById("userTable").style.display="none";
+			document.getElementById("firmTable").style.display="";
+		}
+	}
+	//目前职位
+	function addJob(items){
+		var inn = "";
+		for(var i in items){
+			inn = inn + "<li role='presentation'>"
+				+"<a role='menuitem' onclick='jobValue(" + items[i].id +",\"" + items[i].value +"\")'><font color='#000'>" + items[i].value
+				+"</font></a></li>";
+		}
+		document.getElementById("nowjob").innerHTML=inn;
+	}
+	function jobValue(ke, val){
+		document.getElementById("nowjobkey").value=ke;
+		document.getElementById("nowjobvalue").value=val;
+	}
+	//求职方向
+	function addJobF(items){
+		var inn = "";
+		for(var i in items){
+			inn = inn + "<li role='presentation'>"
+				+"<a role='menuitem' onclick='jobFValue(" + items[i].id +",\"" + items[i].value +"\")'><font color='#000'>" + items[i].value
+				+"</font></a></li>";
+		}
+		document.getElementById("jobF").innerHTML=inn;
+	}
+	function jobFValue(ke, val){
+		document.getElementById("jobFkey").value=ke;
+		document.getElementById("jobFvalue").value=val;
+	}
+	//所在城市
+	function addCity(items){
+		var inn = "";
+		for(var i in items){
+			inn = inn + "<li role='presentation'>"
+				+"<a role='menuitem' onclick='cityValue(" + items[i].id +",\"" + items[i].value +"\")'><font color='#000'>" + items[i].value
+				+"</font></a></li>";
+		}
+		document.getElementById("city").innerHTML=inn;
+	}
+	function cityValue(ke, val){
+		document.getElementById("citykey").value=ke;
+		document.getElementById("cityvalue").value=val;
+	}
+	function clearTable(){
+		$(".form-control").each(function () {
+			this.value = "";
+        });
+	}
+	function getmsg(){
+		phoneCode = Math.floor(Math.random()*9000)+1000;
+		var phone = document.getElementById("offer_user_phone").value;
+		var url = "register/getmsg1.do?code="+phoneCode;
+		if(phone == ""){
+			alert("请输入手机号码!")
+			return;
+		}
+		ajaxSumbitNoform(url,phone);
+	}
+	//同意
+	var isremeber = true;
+	function changeRemeber() {
+		var remeberId = document.getElementById('remeberId').value;
+		if (remeberId == '1') {
+			document.getElementById('remeber').src = "../img/wangji.png";
+			document.getElementById('remeber').style.width = "20px";
+			document.getElementById('remeber').style.height = "20px";
+			document.getElementById('remeberId').value = '2';
+			isremeber = false;
+		} else if (remeberId == '2') {
+			document.getElementById('remeber').src = "../img/gou.png";
+			document.getElementById('remeber').style.width = "17px";
+			document.getElementById('remeber').style.height = "17px";
+			document.getElementById('remeberId').value = '1';
+			isremeber = true;
+		}
+	}
+	function validateCode() {
+		if(!checkValue()){
+			return;
+		}
+		if(!isremeber){
+			alert("请同意协议!");
+			return;
+		}
+		var ispassword = false;
+		if(document.getElementById("type").value=="1"){
+			if(document.getElementById("offer_user_password").value === document.getElementById("offer_user_password_c").value){
+				ispassword = true;
+			}
+		}
+		if(document.getElementById("type").value=="2"){
+			if(document.getElementById("password").value === document.getElementById("password_c").value){
+				ispassword = true;
+			}
+		}
+		if(!ispassword){
+			alert("密码不一致！");
+			return;
+		}
+		var ispass = false;
+		ispass = true;//code2.verify(document.getElementById("inputCode2").value);
+		if (ispass) {
+			var url = "register/register1.do";
+			var formId = "registerForm";
+			var data = ajaxSumbit(url, formId);
+			$("#registerForm").populateForm(data);
+			if(data != 'success'){
+				/* if(data == 'undefined') {
+					return;
+				} */
+				if(data == 'error') {
+					alert('已经存在该账号！');
+				}
+				return;
+			}
+			//alert("注册成功，请先查看邮箱！");
+			top.location.href='user_check_msg.jsp';
+		}else{
+			alert("验证码输入有误！");
+			code2.update();
+		}
+		return;
+	}
+	function checkValue(){
+		if(document.getElementById("type").value=="1"){
+			if(!isEmail('email',"邮箱","30",false)) return false;
+			if(!checkInput('jobFkey',"求职方向","30",false)) return false;
+			if(!checkInput('citykey',"所在城市","30",false)) return false;
+			if(!checkpsw('offer_user_password',"密码","4","16",false)) return false;
+		}
+		if(document.getElementById("type").value=="2"){
+			if(!checkInput('offer_user_company',"公司","30",false)) return false;
+			if(!checkInput('offer_user_name',"目前职位","30",false)) return false;
+			if(!checkInput('nowjobkey',"职位","30",false)) return false;
+			if(!isEmail('offer_user_email',"邮箱","30",false)) return false;
+			if(!checkInput('offer_user_phone',"手机","11",false)) return false;
+			if(!checkpsw('password',"密码","4","16",false)) return false;
+			if(phoneCode != document.getElementById("msgCode").value) {
+				alert("手机验证码错误");
+				return false;
+			}
+		}
+		return true;
+	}
+	
+</script>
+<body bgcolor="#F5F8F9" onload="init()">
+	<form id="registerForm" style="overflow-y:auto;">
+	<div style="width:100%;height:60px;min-width:1000px;background: #32373C;position:absolute;top:expression(documentElement.scrollTop + 'px');position:fixed;z-index:9999;">
+		<table style="width:100%;white-space: nowrap;">
+			<tr>
+				<td width="19%" style="padding-left:12%;"><a href="#" onclick="javascript:top.location.href='homepage.jsp'"><img src="../img/U-Offerlogo.png" width="109px" height="26px"></a></td>
+				<td width="5%"/>
+				<td class="textC">
+					<div class="btn-group">
+						<button type="button" style="font-size:14px;height:60px !important;color:#F5F8F9;background-color:#32373C;"
+						 class="btn dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown" onmouseover="changeColor1(this)"
+						 onmouseout="changeColor2(this)">看机会
+					        <span class="caret"></span>
+					    </button>
+					    <ul class="dropdown-menu pull-right" role="menu" aria-labelledby="dropdownMenu1" style="background-color:#32373C;width:150px;">
+					        <li role="presentation">
+					            <a tabindex="-1" href="#" onclick="javascript:top.location.href='mainuse_strategy.jsp'" style="height:46px;text-align:center;padding-top:10px;" onmouseover="changeColor1(this)" onmouseout="changeColor2(this)"><font color="#F5F8F9">使用攻略</font></a>
+					        </li>
+					        <li role="presentation" style="height:46px;">
+					            <a tabindex="-1" href="mainuser_question.jsp" style="height:46px;text-align:center;padding-top:10px;" onmouseover="changeColor1(this)" onmouseout="changeColor2(this)"><font color="#F5F8F9">常见问题</font></a>
+					        </li>
+					    </ul>
+					</div>
+					<div class="btn-group">
+						<button type="button" style="font-size:14px;height:60px !important;color:#F5F8F9;background-color:#32373C;"
+						 class="btn dropdown-toggle" id="dropdownMenu2" data-toggle="dropdown" onmouseover="changeColor1(this)"
+						 onmouseout="changeColor2(this)">招人才
+					        <span class="caret"></span>
+					    </button>
+					    <ul class="dropdown-menu pull-right" role="menu" aria-labelledby="dropdownMenu2" style="background-color:#32373C;width:150px;">
+					        <li role="presentation">
+					            <a tabindex="-1" href="#" onclick="javascript:top.location.href='mainfirm_strategy.jsp'" style="height:46px;text-align:center;padding-top:10px;" onmouseover="changeColor1(this)" onmouseout="changeColor2(this)"><font color="#F5F8F9">使用攻略</font></a>
+					        </li>
+					        <li role="presentation" style="height:46px;">
+					            <a tabindex="-1" href="mainfirm_question.jsp" style="height:46px;text-align:center;padding-top:10px;" onmouseover="changeColor1(this)" onmouseout="changeColor2(this)"><font color="#F5F8F9">常见问题</font></a>
+					        </li>
+					    </ul>
+				    </div>
+					<button type="button" style="font-size:14px;height:60px !important;color:#F5F8F9;background-color:#32373C;padding:0px 20px;"
+					 class="btn dropdown-toggle" onmouseover="changeColor1(this)"
+					 onmouseout="changeColor2(this)" onclick="javascript:top.location.href='maincontact_assistant.jsp'">推荐
+				    </button>
+			    </td>
+			    <td style="width:24%;padding-right:13%">
+				    <button type="button" class="btn btn-default" style="width:101px;color:#00B38A;background:#F5F8F9;" onclick="javascript:top.location.href='login.jsp'">登录</button>
+				    <button id="regit" type="button" class="btn btn-default" style="margin-left:9px;width:101px;color:#FFFFFF;background:#00B38A;" onclick="javascript:top.location.href='register.jsp'">注册</button>
+				</td>
+			</tr>
+		</table>
+	</div>
+	<div style="width:100%;height:167px;"></div>
+	<center>
+		<div style="background: #FFFFFF; width: 800px;">
+			<table width="100%">
+				<tr>
+					<td width="25%" />
+					<td width="25%" />
+					<td width="25%" />
+					<td width="25%" />
+				</tr>
+				<tr height="25px"/>
+				<tr>
+					<td />
+					<td colspan="2" class="textC">
+						<font color="#4F4F4F" style="font-size:24px;">注 册</font>
+					</td>
+					<td />
+				</tr>
+				<tr height="25px"/>
+				<tr>
+					<td />
+					<td colspan="2" class="textC">
+						<input type="hidden" name="type" id="type"/>
+						<div class="btn-group btn-group-lg">
+							<button id="button1" type="button" style="width:140px;" class="btn btn-default" onmouseover="changeColor3(this)" onmouseout="changeColor4()"
+								onclick="getTran('1')"><font style="font-size:14px;">我是候选人</font></button>
+							<button id="button2" type="button" style="width:140px;" class="btn btn-default" onmouseover="changeColor3(this)" onmouseout="changeColor4()"
+								onclick="getTran('2')"><font style="font-size:14px;">我是HR/BOSS</font></button>
+						</div>
+					</td>
+					<td />
+				</tr>
+				<tr height="13px"/>
+				<tr>
+					<th />
+					<td class="textC" style="padding-left:60px;">
+							<div id="transparent1" style="margin:auto;"></div>
+						</td>
+					<td class="textC" style="padding-right:60px;">
+							<div id="transparent2" style="margin:auto;"></div>
+						</td>
+					<th />
+				</tr>
+			</table>
+		</div>
+		<div style="height: 2px; width: 800px; background-color: #00B38A;"></div>
+		<div style="background: #FFFFFF; width: 800px;">
+			<br />
+			<table style="border-collapse: separate; border-spacing: 10px; width: 100%;" id="userTable">
+				<tr>
+					<td class="textR" width="25%">
+						<font style="font-size:14px;" color="#4F4F4F">邮箱：</font>
+					</td>
+					<td style="padding-bottom:3px;">
+						<input type="text" name="email" class="form-control" style="width: 381px;" id="email" placeholder="请输入邮箱">
+					</td>
+				</tr>
+				<tr height="53px">
+					<td class="textR" width="25%">
+						<input type="hidden" name="jobFkey" id="jobFkey"/>
+						<font style="font-size:14px;" color="#4F4F4F">求职方向：</font>
+					</td>
+					<td style="padding-top:6px;">
+						<div class="input-group" style="display:inline;margin-left:-10px !important;width: 410px;">
+							<div class="dropdown" style="">
+								<input type="text" name="jobFvalue" id="jobFvalue" class="form-control" readOnly="readOnly" style="width: 340px;" placeholder="选择职业方向">
+							    <button type="button" style="width:41px;height:41px !important;border:1px #CCCCCC solid;background-color:#F5F8F9;" class="btn dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown">
+							        <span class="caret"></span>
+							    </button>
+							    <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1" style="width: 381px;;max-height:120px;overflow-y:auto;" id="jobF">
+							        
+							    </ul>
+							</div>
+						</div>
+					</td>
+				</tr>
+				<tr height="62px">
+					<td class="textR" width="25%">
+						<input type="hidden" name="citykey" id="citykey"/>
+						<font style="font-size:14px;" color="#4F4F4F">所在城市：</font>
+					</td>
+					<td>
+					<div class="input-group" style="display:inline;margin-left:-10px !important;width: 410px;">
+						<div class="dropdown" style="">
+							<input type="text" name="cityvalue" id="cityvalue" class="form-control" readOnly="readOnly" style="width: 340px;" placeholder="选择所在城市">
+						    <button type="button" style="width:41px;height:41px !important;border:1px #CCCCCC solid;background-color:#F5F8F9;" class="btn dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown">
+						        <span class="caret"></span>
+						    </button>
+						    <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1" style="width: 381px;height:150px;overflow-y:auto;" id="city">
+						        
+						    </ul>
+						</div>
+					</div>
+					</td>
+				</tr>
+				<tr>
+					<td class="textR">
+						<font style="font-size:14px;" color="#4F4F4F">密码：</font>
+					</td>
+					<td style="padding-top:2px">
+						<input type="password" name="offer_user_password" id="offer_user_password" class="form-control" style="width: 381px;">
+					</td>
+				</tr>
+				<tr height="1px"/>
+				<tr>
+					<td class="textR" width="25%">
+						<font style="font-size:14px;" color="#4F4F4F">确认密码：</font>
+					</td>
+					<td>
+						<input type="password" name="offer_user_password_c" id="offer_user_password_c" class="form-control" style="width: 381px;">
+					</td>
+				</tr>
+			</table>
+			<table style="border-collapse: separate; border-spacing: 10px; width: 100%;" id="firmTable">
+				<tr>
+					<td class="textR" width="25%">
+						<font style="font-size:14px;" color="#4F4F4F">公司：</font>
+					</td>
+					<td>
+						<input type="text" name="offer_user_company" id="offer_user_company" class="form-control" style="width: 381px;" placeholder="公司名称(全称)">
+					</td>
+				</tr>
+				<tr height="1px"/>
+				<tr>
+					<td class="textR" width="25%">
+						<font style="font-size:14px;" color="#4F4F4F">姓名：</font>
+					</td>
+					<td>
+						<input type="text" name="offer_user_name" id="offer_user_name" class="form-control" style="width: 381px;" placeholder="真实姓名或昵称">
+					</td>
+				</tr>
+				<tr>
+					<td class="textR" width="25%">
+						<input type="hidden" name="nowjobkey" id="nowjobkey"/>
+						<font style="font-size:14px;" color="#4F4F4F">目前职位：</font>
+					</td>
+					<td>
+					<div class="input-group" style="margin-left:-10px !important;width:410px;">
+						<div class="dropdown" style="">
+
+							<input type="text" name="nowjobvalue" id="nowjobvalue" readOnly="readOnly" class="form-control" style="width: 340px;" placeholder="目前职位：">
+						    <button type="button" style="width:41px;height:41px !important;border:1px #CCCCCC solid;background-color:#F5F8F9;" class="btn dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown">
+						        <span class="caret"></span>
+						    </button>
+						    <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1" style="width: 381px;" id="nowjob"><!-- max-height:100px;overflow-y:auto; -->
+						        
+						    </ul>
+						</div>
+					</div>
+					</td>
+				</tr>
+				<tr>
+					<td class="textR" width="25%">
+						<font style="font-size:14px;" color="#4F4F4F">邮箱：</font>
+					</td>
+					<td>
+						<input type="text" name="offer_user_email" id="offer_user_email" class="form-control" style="width: 381px;" placeholder="填写企业邮箱（不支持个人邮箱）">
+					</td>
+				</tr>
+				<tr/>
+				<tr>
+					<td class="textR" width="25%">
+						<font style="font-size:14px;" color="#4F4F4F">手机：</font>
+					</td>
+					<td>
+						<input type="text" name="offer_user_phone" id="offer_user_phone" class="form-control" style="width: 381px;" placeholder="支持中国大陆手机号">
+					</td>
+				</tr>
+				<tr>
+					<td class="textR" width="25%">
+						<font style="font-size:14px;" color="#4F4F4F">验证码：</font>
+					</td>
+					<td>
+						<div class="col-lg-6" style="width:100%;">
+							<div class="input-group" style="width: 100% !important; margin-left: -22px !important;">
+								<input type="text" id="msgCode" name="msgCode" class="form-control" style="width:280px;">
+								<button type="button" class="btn btn-default" style="width:101px;background:#00B38A;color:#FFF;" onclick="daoshu()" id="msgtime">获取</button>
+							</div>
+						</div>
+					</td>
+				</tr>
+				<tr>
+					<td class="textR">
+						<font style="font-size:14px;" color="#4F4F4F">密码：</font>
+					</td>
+					<td>
+						<input type="password" name="password" id="password" class="form-control" style="width: 381px;">
+					</td>
+				</tr>
+				<tr/>
+				<tr>
+					<td class="textR" width="25%">
+						<font style="font-size:14px;" color="#4F4F4F">确认密码：</font>
+					</td>
+					<td>
+						<input type="password" name="password_c" id="password_c" class="form-control" style="width: 381px;">
+					</td>
+				</tr>
+			</table>
+			<table style="border-collapse: separate; border-spacing: 10px; width: 100%;margin-top:-10px;">
+				<tr>
+					<td class="textR" width="25%">
+						<font style="font-size:14px;" color="#4F4F4F">图形验证码：</font>
+					</td>
+					<td>
+						<div class="col-lg-6" style="width:100%;">
+							<div class="input-group" style="width: 100% !important; margin-left: -22px !important;">
+								<input type="text" id="inputCode2" name="inputCode2" class="form-control" style="width:280px;">
+								<div id="vCode2" style="width: 100px; height: 41px; border: 1px solid #ccc; display: inline-block;"></div>
+							</div>
+						</div>
+					</td>
+				</tr>
+			</table>
+			<center>
+				<table width="280px">
+					<tr>
+						<td class="textL">
+							<input type="hidden" id="remeberId" value="1" />
+							<img id="remeber" src="../img/gou.png" width="16px" height="16px" onclick="changeRemeber()" />
+							<font style="font-size:13px;" color="#9A9A9A">我已阅读并同意</font>
+							<a href="#">
+								<font style="font-size:13px;" color="#00B38A">《U-Offer企业注册协议》</font>
+							</a>
+						</td>
+					</tr>
+					<tr height="10px" />
+					<tr>
+						<td colspan="2">
+							<button type="button" class="btn btn-primary" onclick="validateCode()" data-toggle="button"
+								style="font-size:14px;height:40px;background-color: #00B38A !important; border-color: #00B38A !important; width: 100%">
+								确认提交</button>
+						</td>
+					</tr>
+					<tr height="17px" />
+				</table>
+			</center>
+		</div>
+		<div style="width:100%;height:260px;"></div>
+	</center>
+	</form>
+	<table style="width:100%;height:81px;background:#32373C;">
+		<tr>
+			<td class="textC">
+				<font color="#F5F8F9" style="font-size:14px;white-space: nowrap;">
+					关于我们&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					使用攻略&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					法律声明&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					关注我们
+				</font>
+			</td>
+		</tr>
+	</table>
+</body>
+</html>
