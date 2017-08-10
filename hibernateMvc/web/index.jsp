@@ -54,7 +54,8 @@
 				document.location = "jsp/stafflogin.jsp";
 			}
 		}else{
-			document.location = "jsp/login.jsp";
+			var timestamp = Date.parse(new Date()); 
+			document.location = "autojsp/common/leftMeum.jsp?a="+timestamp;
 		}
 	}
 </script>
