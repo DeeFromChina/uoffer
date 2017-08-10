@@ -1,0 +1,25 @@
+.bottomDiv{
+	width:100%;
+	max-height:81px;
+	height:81px;
+	background-color:#32373C;
+	display:table;
+}
+.bottomSubDiv{
+	width:100%;
+	display:table-cell;
+	vertical-align: middle;
+}
+.bottomUrl{
+	color:#F5F8F9;
+	min-width:100px;
+	display:-webkit-inline-box;
+}
+.bottomUrl2{
+	text-align:center;
+	min-width:100px;
+	color:#F5F8F9;
+	width:50%;
+	height:40px;
+	line-height:40px;
+}

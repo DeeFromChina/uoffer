@@ -1,0 +1,55 @@
+.w140{
+	width:140px;
+}
+.wi22{
+	width:22%;
+}
+.wi25{
+	width:25%;
+}
+.wi28{
+	width:28%;
+}
+.wi100{
+	width:100%;
+}
+.h41{
+	height:41px;
+}
+.hi99{
+	height:99%;
+}
+.hi100{
+	height:100%;
+}
+.wh100{
+	height:100%;
+	width:100%;
+}
+.marginLeft19{
+	margin-left:19px;
+}
+.paddingRight19{
+	padding-right:19px;
+}
+.font-14{
+	font-size:14px;
+}
+.font-24{
+	font-size:24px;
+}
+.color4F4F4F{
+	color:#4F4F4F;
+}
+.color00B38A{
+	color:#00B38A;
+}
+.color9A9A9A{
+	color:#9A9A9A;
+}
+.bgColor00B38A{
+	background-color:#00B38A;
+}
+.brColor00B38A{
+	border-color: #00B38A;
+}

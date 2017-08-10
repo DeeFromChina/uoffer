@@ -1,0 +1,56 @@
+@media screen and (min-width: 200px) and (max-width: 580px){
+	/* ÷√∂•¿∏ */
+	.headTitle{
+		width:100%;
+		min-height:30px;
+		min-width:200px;
+		background: #32373C;
+		position:absolute;
+		top:expression(documentElement.scrollTop + 'px');
+		vertical-align: middle;
+	}
+	/* ÷√∂•¿∏-logoøÈ */
+	.logoDiv{
+		height:100%;
+		display:table;
+		float:left;
+	}
+	/* ÷√∂•¿∏-÷–º‰øÈ */
+	.headCenterDiv{
+		height:100%;
+		display:table;
+		float:left;
+	}
+	/* ÷√∂•¿∏-œ¬¿≠∞¥≈• */
+	.headMeumBtn{
+		background-color:#32373C;
+		width:80px;
+	}
+	/* ÷√∂•¿∏-œ¬¿≠≤Àµ• */
+	.headMeum{
+		height:30px;
+		text-align:center;
+		cursor:pointer;
+	}
+	/* Œﬁ–ß */
+	.headMeum:hover{
+		background-color:#777777;
+	}
+	.headMeum > font{
+		color:#F5F8F9;
+	}
+	.headMeum:hover > font{
+		color:#32373C;
+	}
+	/* ÷√∂•¿∏-”“±ﬂøÈ */
+	.headRightDiv{
+		width:50px;
+		height:100%;
+		display:table;
+		text-align:center;
+		float:right;
+	}
+	.headlevel2Meum{
+		background-color:#32373C;
+	}
+}

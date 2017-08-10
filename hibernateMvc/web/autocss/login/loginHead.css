@@ -1,0 +1,116 @@
+/* ÖÃ¶¥À¸ */
+.headTitle{
+	width:100%;
+	height:60px;
+	max-height:60px;
+	background: #32373C;
+	position:absolute;
+	top:expression(documentElement.scrollTop + 'px');
+	position:fixed;
+	z-index:9999;
+	vertical-align: middle;
+}
+/* ÖÃ¶¥À¸-logo¿é */
+.logoDiv{
+	width:19%;
+	height:100%;
+	display:table;
+	float:left;
+}
+.logoImg{
+	 max-width:109;
+	 max-height:26;
+	 width:109;
+	 height:26;
+}
+.centerDiv{
+	display:table-cell;
+	vertical-align: middle;
+}
+/* ÖÃ¶¥À¸-ÖÐ¼ä¿é */
+.headCenterDiv{
+	width:52%;
+	height:100%;
+	display:table;
+	float:left;
+}
+.headCenterGroupDiv{
+	height:100%;
+	margin:auto;
+	align:center;
+}
+.headButton{
+	font-size:14px;
+	height:99%;
+	padding-left:10px;
+	padding-right:10px;
+	color:#F5F8F9;
+	background-color:#32373C;
+	border:none;
+	min-width:80px;
+}
+.headButton:hover{
+	background-color:#777777;
+}
+/* ÖÃ¶¥À¸-ÏÂÀ­°´Å¥ */
+.headMeumBtn{
+	background-color:#32373C;
+	width:150px;
+}
+/* ÖÃ¶¥À¸-ÏÂÀ­²Ëµ¥ */
+.headMeum{
+	height:46px;
+	text-align:center;
+	cursor:pointer;
+}
+/* ÎÞÐ§ */
+.headMeum:hover{
+	background-color:#777777;
+}
+.headMeum > font{
+	color:#F5F8F9;
+}
+.headMeum:hover > font{
+	color:#32373C;
+}
+/* ÖÃ¶¥À¸-ÓÒ±ß¿é */
+.headRightDiv{
+	width:24%;
+	height:100%;
+	display:table;
+	float:left;
+}
+/* ÖÃ¶¥À¸-µÇÂ½/×¢²á°´Å¥ */
+.loginBtn{
+	border:1px #F5F8F9 solid;
+	min-width:80px;
+	background-color:#F5F8F9;
+	color:#00B38A;
+	padding-left:10px;
+	padding-right:10px;
+	font-size:14px;
+	height:41px;
+	border-radius:5px;
+}
+.registerBtn{
+	border:1px #00B38A solid;
+	min-width:80px;
+	background-color:#00B38A;
+	color:#FFFFFF;
+	padding-left:10px;
+	padding-right:10px;
+	font-size:14px;
+	height:41px;
+	border-radius:5px;
+}
+.headRightLoginBtn{
+	height:100%;
+	width:100%;
+	color:#FFFFFF;
+	background-color:#FFFFFF;
+	border:none;
+	background-image: url(../../img/person.png);
+	background-repeat: no-repeat;
+	background-position: center;
+	display:block;
+}
