@@ -11,3 +11,6 @@ var pages = {
 		"5":"maincontact_assistant.jsp",
 		"6":"personal_settings.jsp"
 	};
+function test(){
+	
+}
