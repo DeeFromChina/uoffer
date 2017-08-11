@@ -11,7 +11,7 @@ function openContent(objt){
 	if(obj.style.webkitTransform != "rotate(0deg)"){
 		obj.style.webkitTransform = "rotate(0deg)";
 	}else {
-		obj.style.webkitTransform = "rotate(270deg)";
+		obj.style.webkitTransform = "rotate(-90deg)";
 	}
 }
 function init(){

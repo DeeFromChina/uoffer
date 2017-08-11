@@ -6,12 +6,12 @@
 <%@include file="../common/common.jsp"%>
 <title></title>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="../../autocss/common/bootstrapTree.css?randomId=<%=Math.random()%>" rel="stylesheet">
 </head>
-<script type="text/javascript">
-</script>
-<body>
-	<ul class="glyphicon glyphicon-play" style="list-style-type:none;margin-left:0;padding:0;">
-	</ul>
+<script src="../../autojs/common/bootstrapTree.js?randomId=<%=Math.random()%>" type="text/javascript"></script>
+<body onload="addBootstrap()">
+	<div id="bootstrapTree">
+	</div>
 </body>
 </html>
     
