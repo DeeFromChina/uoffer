@@ -6,9 +6,9 @@
 <%@include file="loginHead.jsp"%>
 <title></title>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<style>
-</style>
+<script>
+</script>
 </head>
-<iframe src="loginPC.jsp" class="wh100" scrolling="no" frameborder="0" id="mainFrame"></iframe>
+<iframe src="" class="wi100" scrolling="no" frameborder="0" id="mainFrame"></iframe>
 </html>
 <%@include file="../common/bottom.jsp"%>

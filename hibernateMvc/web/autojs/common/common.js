@@ -64,7 +64,7 @@ function to(urlnum){
 function countFrameHeight(){
 	var pdoc = parent.document;
 	pdoc.getElementById("mainFrame").height = 0;
-	pdoc.getElementById("mainFrame").height = doc.body.scrollHeight;
+	pdoc.getElementById("mainFrame").height = doc.body.height;
 	pdoc.getElementById("mainFrame").style.marginTop = parent.$("#headTitle").height() - 10;//不知道为什么会多出10高度
 }
 /**
@@ -134,4 +134,36 @@ function closeWindow(objId){
 	if(divs.length == 0){
 		window.top.document.body.style.overflowY = "auto";
 	}
+}
+/**
+ * dataForm垂直居中
+ * 
+ * */
+function dataFormVcenter(){
+	var windowHeight = window.screen.availHeight;//屏幕可用工作区高度
+	
+	var formHeight = $('#dataForm').height();
+	var bodyHeight = $(parent.document.body).height();
+	var headHeight = 0;
+	if(parent.$("#headTitle") != undefined){
+		headHeight = $("#headTitle",parent.document).height() - 10;
+		console.log(parent.document.getElementById('headTitle').offsetHeight);
+		//bodyHeight = bodyHeight - parent.$("#headTitle").height() + 10;
+	}
+	var bh = 0;
+	if(parent.$("#bottomDiv") != undefined){
+		bh = parent.$("#bottomDiv").height();
+	}
+	
+	if(windowHeight < bh + formHeight + headHeight){
+		bodyHeight = bh + formHeight + headHeight;
+	}else{
+		bodyHeight = windowHeight;
+	}
+	console.log(headHeight);
+	console.log(screen.height);
+	doc.body.height = bodyHeight - headHeight - bh - 67;
+	console.log(doc.body.height);
+	var marginTH = (doc.body.height - formHeight)/3;
+	$('#dataForm').css("margin-top",marginTH);
 }

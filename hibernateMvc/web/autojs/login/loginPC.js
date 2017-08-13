@@ -1,3 +1,7 @@
+function init() {
+	dataFormVcenter();
+	countFrameHeight();
+}
 //初始化页面时验证是否记住了密码 
 //$(document).ready(function() {
 //	if ($.cookie("rmbUser") == "true") {
@@ -93,33 +97,7 @@ function changeRemeber() {
 	}
 }
 
-function init() {
-	//alert("11");
-	dataFormVcenter();
-	countFrameHeight();
-}
-/**
- * dataForm垂直居中
- * 
- * */
-function dataFormVcenter(){
-	console.log("1");
-	var formHeight = $('#dataForm').height();
-	var windowHeight = $(window).height();
-	if(parent.$("#headTitle") != undefined){
-		windowHeight = windowHeight - parent.$("#headTitle").height() + 10;
-	}
-	var bottomHeight = 0;
-	var bottomDiv = $("#bottomDiv");
-	if(bottomDiv != undefined){
-		bottomHeight = bottomDiv.offsetHeight;
-	}
-	if(windowHeight < formHeight){
-		windowHeight = formHeight + bottomHeight;
-	}
-	console.log(windowHeight);
-	doc.body.height = windowHeight;
-}
+
 function validateCode() {
 	if(!checkValue()){
 		return;
