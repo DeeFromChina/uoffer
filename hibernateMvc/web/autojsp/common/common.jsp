@@ -32,6 +32,7 @@ response.setDateHeader("Expires",0);
 <script src="../../autojs/common/page.js?randomId=<%=Math.random()%>" type="text/javascript"></script>
 <script src="../../autojs/common/ajaxSubmit.js?randomId=<%=Math.random()%>" type="text/javascript"></script>
 <script src="../../autojs/common/common.js?randomId=<%=Math.random()%>" type="text/javascript"></script>
+<script src="../../autojs/common/VCode.js?randomId=<%=Math.random()%>" type="text/javascript"></script>
 <script language="javascript">
 </script>
 <body>

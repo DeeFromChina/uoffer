@@ -22,7 +22,7 @@
 		<div class="headCenterDiv">
 			<center class="hi100">
 				<div class="btn-group hi99">
-					<button type="button" class="headButton" data-toggle="dropdown">
+					<button type="button" class="dropdown-toggle headButton" data-toggle="dropdown" aria-expanded="false">
 						看机会
 				        <span class="caret"></span>
 				    </button>

@@ -59,15 +59,6 @@ function to(urlnum){
 	top.location.href=page;
 }
 /**
- * 计算frame高度
- * */
-function countFrameHeight(){
-	var pdoc = parent.document;
-	pdoc.getElementById("mainFrame").height = 0;
-	pdoc.getElementById("mainFrame").height = doc.body.height;
-	pdoc.getElementById("mainFrame").style.marginTop = parent.$("#headTitle").height() - 10;//不知道为什么会多出10高度
-}
-/**
  * 打开新窗口
  * url:页面路径（http://localhost:8080/hibernateMvc/autojsp/+url）
  * title:窗口标题
@@ -136,6 +127,15 @@ function closeWindow(objId){
 	}
 }
 /**
+ * 计算frame高度
+ * */
+function countFrameHeight(){
+	var pdoc = parent.document;
+	pdoc.getElementById("mainFrame").height = 0;
+	pdoc.getElementById("mainFrame").height = doc.body.height;
+	//pdoc.getElementById("mainFrame").style.marginTop = parent.$("#headTitle").height() - 10;//不知道为什么会多出10高度
+}
+/**
  * dataForm垂直居中
  * 
  * */
@@ -147,8 +147,6 @@ function dataFormVcenter(){
 	var headHeight = 0;
 	if(parent.$("#headTitle") != undefined){
 		headHeight = $("#headTitle",parent.document).height() - 10;
-		console.log(parent.document.getElementById('headTitle').offsetHeight);
-		//bodyHeight = bodyHeight - parent.$("#headTitle").height() + 10;
 	}
 	var bh = 0;
 	if(parent.$("#bottomDiv") != undefined){
@@ -160,10 +158,7 @@ function dataFormVcenter(){
 	}else{
 		bodyHeight = windowHeight;
 	}
-	console.log(headHeight);
-	console.log(screen.height);
-	doc.body.height = bodyHeight - headHeight - bh - 67;
-	console.log(doc.body.height);
+	doc.body.height = bodyHeight - bh - 68;
 	var marginTH = (doc.body.height - formHeight)/3;
 	$('#dataForm').css("margin-top",marginTH);
 }

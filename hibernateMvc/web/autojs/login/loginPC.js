@@ -1,7 +1,39 @@
 function init() {
 	dataFormVcenter();
 	countFrameHeight();
+	parent.changeHeaderTitle();
+	getTran('1');
+	createValidateCode("vCode");
 }
+function getTran(ret) {
+	var trans1 = getid('transparent1');
+	var trans2 = getid('transparent2');
+	if (ret == '1') {
+		trans1.setAttribute("class", "triangle-up");
+		trans2.setAttribute("class", "");
+		getid("type").value="1";
+		$("#button1").addClass("checkedBtn");
+		$("#button1").removeClass("checkBtn");
+		$("#button2").addClass("checkBtn");
+		$("#button2").removeClass("checkedBtn");
+	}
+	if (ret == '2') {
+		trans2.setAttribute("class", "triangle-up");
+		trans1.setAttribute("class", "");
+		getid("type").value="2";
+		$("#button2").addClass("checkedBtn");
+		$("#button2").removeClass("checkBtn");
+		$("#button1").addClass("checkBtn");
+		$("#button1").removeClass("checkedBtn");
+	}
+}
+
+
+
+
+
+
+
 //初始化页面时验证是否记住了密码 
 //$(document).ready(function() {
 //	if ($.cookie("rmbUser") == "true") {
@@ -60,28 +92,6 @@ function changeColor4(){
 	}
 }
 var code;
-function getTran(ret) {
-	var trans1 = getid('transparent1');
-	var trans2 = getid('transparent2');
-	if (ret == '1') {
-		trans1.setAttribute("class", "triangle-up");
-		trans2.setAttribute("class", "");
-		getid("type").value="1";
-		getid("button1").style.background="#00B38A";
-		getid("button1").innerHTML="<font style='font-size:14px;' color='#FFF'>我是候选人</font>";
-		getid("button2").style.background="#FFF";
-		getid("button2").innerHTML="<font style='font-size:14px;' color='#00B38A'>我是HR/BOSS</font>";
-	}
-	if (ret == '2') {
-		trans2.setAttribute("class", "triangle-up");
-		trans1.setAttribute("class", "");
-		getid("type").value="2";
-		getid("button2").style.background="#00B38A";
-		getid("button2").innerHTML="<font style='font-size:14px;' color='#FFF'>我是HR/BOSS</font>";
-		getid("button1").style.background="#FFF";
-		getid("button1").innerHTML="<font style='font-size:14px;' color='#00B38A'>我是候选人</font>";
-	}
-}
 function changeRemeber() {
 	var remeberId = getid('remeberId').value;
 	if (remeberId == '1') {

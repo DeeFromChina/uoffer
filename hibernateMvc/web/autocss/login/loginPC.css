@@ -1,0 +1,66 @@
+.mainDiv{
+	background: #FFFFFF;
+	width: 800px;
+}
+.login-top{
+	width:100%;
+	border-collapse:separate;
+	border-spacing:0px 12.5px;
+}
+.checkedBtn{
+	background-color: #00B38A;
+	color:#FFFFFF;
+}
+.checkBtn{
+	background-color: #FFFFFF;
+	color:#00B38A;
+}
+.P-line > td{
+	border-bottom: 2px #00B38A solid;
+}
+.Parting-line{
+	height: 2px;
+	width: 800px;
+	background-color: #00B38A;
+}
+.input-class{
+	width: 381px;
+	height:41px;
+}
+.vCode-input{
+	width: 281px;
+	height:41px;
+}
+.vCode{
+	width: 100px;
+	height: 41px;
+	border: 1px solid #ccc;
+	display: inline-block;
+}
+.remeberImg{
+	width:16px;
+	height:16px;
+}
+.submitBtn{
+	font-size:14px;
+	width: 381px;
+	height:41px;
+	background-color: #00B38A;
+	border-color: #00B38A;
+}
+.submitBtn:hover{
+	background-color: #00B38A;
+	border-color: #00B38A;
+}
+.submitBtn.active{
+	background-color: #00B38A;
+	border-color: #00B38A;
+}
+.submitBtn:active{
+	background-color: #00B38A;
+	border-color: #00B38A;
+}
+.submitBtn:focus{
+	background-color: #00B38A;
+	border-color: #00B38A;
+}

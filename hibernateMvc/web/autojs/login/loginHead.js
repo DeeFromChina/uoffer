@@ -4,9 +4,9 @@ window.onresize=function(){
 }
 
 function init(){
-	changeHeaderTitle();
 	changBottomDiv();
 	$('#mainFrame').attr("src","loginPC.jsp");
+	//changeHeaderTitle();
 }
 /**
  * 改变头部标题栏
@@ -14,7 +14,6 @@ function init(){
  * */
 var list = new Array(3);
 function changeHeaderTitle(){
-	console.log("1");
 	 var headTitle = getid("headTitle");//头部标题栏
 	 var w = headTitle.offsetWidth;//头部标题栏（宽）
 	 var divs = headTitle.getElementsByTagName("div");//头部标题栏div群
@@ -157,9 +156,11 @@ function changeHeaderTitle(){
 			 }
 		 }
 	 }
-	 headCenterDiv.style.width = w - logoDiv.offsetWidth - headRightDiv.offsetWidth;
+	 var scrollWidth = 0;//滚动条宽度
+	 headCenterDiv.style.width = w - logoDiv.offsetWidth - headRightDiv.offsetWidth - scrollWidth;
 	 if(headRightDiv.offsetTop > 10){
 		 if(headCenterDiv.style.width < headCenterDiv.style.minWidth){
+			 headCenterDiv.style.width = headCenterDiv.style.width -16;
 			 headCenterDiv.style.minWidth = headCenterDiv.style.width;
 		 }
 	 }

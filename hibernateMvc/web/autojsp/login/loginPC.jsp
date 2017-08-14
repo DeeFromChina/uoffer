@@ -6,7 +6,7 @@
 <%@include file="../common/common.jsp"%>
 <title></title>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="stylesheet" href="../../autocss/login/login.css" type="text/css"/>
+<link rel="stylesheet" href="../../autocss/login/loginPC.css" type="text/css"/>
 <style>
 </style>
 </head>
@@ -40,7 +40,7 @@
 						</td>
 						<td />
 					</tr>
-					<tr>
+					<tr class="P-line">
 						<td />
 						<td class="textC" style="padding-left:60px;">
 								<div id="transparent1" style="margin:auto;"></div>
@@ -52,7 +52,6 @@
 					</tr>
 				</table>
 			</div>
-			<div class="Parting-line"></div>
 			<div class="mainDiv">
 				<table class="login-top">
 					<col class="wi28"/>
@@ -85,8 +84,8 @@
 									<td class="vCode-input">
 										<input type="text" id="inputCode" class="form-control">
 									</td>
-									<td class="vCode">
-										<div id="vCode2"></div>
+									<td>
+										<div id="vCode" class="vCode"></div>
 									</td>
 								</tr>
 							</table>
@@ -96,7 +95,7 @@
 						<td>
 						<td class="textL">
 							<input type="hidden" id="remeberId" value="1" />
-							<img id="remeber" src="../img/gou.png" class="remeberImg" onclick="changeRemeber()" />
+							<!-- <img id="remeber" src="../img/gou.png" class="remeberImg" onclick="changeRemeber()" /> -->
 							<font class="font-14 color9A9A9A">记住密码</font>
 						</td>
 						<td class="textR paddingRight19">
