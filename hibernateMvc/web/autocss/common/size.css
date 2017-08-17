@@ -26,6 +26,9 @@
 	height:100%;
 	width:100%;
 }
+.marginAuto{
+	margin:auto;
+}
 .marginLeft19{
 	margin-left:19px;
 }

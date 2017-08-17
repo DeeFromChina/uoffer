@@ -9,13 +9,13 @@
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Cache-control" content="no-cache">
 <meta http-equiv="Cache" content="no-cache">
-<link href="../../css/bootstrap.min.css?randomId=<%=Math.random()%>" rel="stylesheet">
-<link href="../../css/base.css?randomId=<%=Math.random()%>" rel="stylesheet">
-<link href="../../skins/all.css?randomId=<%=Math.random()%>" rel="stylesheet">
+<link href="<%=request.getContextPath() %>/css/bootstrap.min.css?randomId=<%=Math.random()%>" rel="stylesheet">
+<link href="<%=request.getContextPath() %>/css/base.css?randomId=<%=Math.random()%>" rel="stylesheet">
+<link href="<%=request.getContextPath() %>/skins/all.css?randomId=<%=Math.random()%>" rel="stylesheet">
 <!-- <link href="../css/bootstrap-datetimepicker.min.css" rel="stylesheet" /> -->
-<link rel="shortcut icon" href="../../img/title.ico" type="image/x-icon"/>
-<link rel="stylesheet" href="../../autocss/common/common.css?randomId=<%=Math.random()%>" type="text/css"/>
-<link rel="stylesheet" href="../../autocss/common/size.css?randomId=<%=Math.random()%>" type="text/css"/>
+<link rel="shortcut icon" href="<%=request.getContextPath() %>/img/title.ico" type="image/x-icon"/>
+<link rel="stylesheet" href="<%=request.getContextPath() %>/autocss/common/common.css?randomId=<%=Math.random()%>" type="text/css"/>
+<link rel="stylesheet" href="<%=request.getContextPath() %>/autocss/common/size.css?randomId=<%=Math.random()%>" type="text/css"/>
 <style>
 	.btn.dropdown-toggle{
 		background:#CCCCCC;
@@ -27,12 +27,12 @@ response.setHeader("Cache-Control","no-store");
 response.setHeader("Pragrma","no-cache");
 response.setDateHeader("Expires",0);
 %>
-<script src="../../js/jquery-3.1.1.min.js?randomId=<%=Math.random()%>" type="text/javascript"></script>
-<script src="../../js/bootstrap.min.js?randomId=<%=Math.random()%>"></script>
-<script src="../../autojs/common/page.js?randomId=<%=Math.random()%>" type="text/javascript"></script>
-<script src="../../autojs/common/ajaxSubmit.js?randomId=<%=Math.random()%>" type="text/javascript"></script>
-<script src="../../autojs/common/common.js?randomId=<%=Math.random()%>" type="text/javascript"></script>
-<script src="../../autojs/common/VCode.js?randomId=<%=Math.random()%>" type="text/javascript"></script>
+<script src="<%=request.getContextPath() %>/js/jquery-3.1.1.min.js?randomId=<%=Math.random()%>" type="text/javascript"></script>
+<script src="<%=request.getContextPath() %>/js/bootstrap.min.js?randomId=<%=Math.random()%>"></script>
+<script src="<%=request.getContextPath() %>/autojs/common/page.js?randomId=<%=Math.random()%>" type="text/javascript"></script>
+<script src="<%=request.getContextPath() %>/autojs/common/ajaxSubmit.js?randomId=<%=Math.random()%>" type="text/javascript"></script>
+<script src="<%=request.getContextPath() %>/autojs/common/common.js?randomId=<%=Math.random()%>" type="text/javascript"></script>
+<script src="<%=request.getContextPath() %>/autojs/common/VCode.js?randomId=<%=Math.random()%>" type="text/javascript"></script>
 <script language="javascript">
 </script>
 <body>

@@ -1,5 +1,4 @@
 function createValidateCode(codeName){
-	alert(codeName);
     var container = document.getElementById(codeName);
     var code = new vCode(container, {
         len: 4,

@@ -159,6 +159,10 @@ function dataFormVcenter(){
 		bodyHeight = windowHeight;
 	}
 	doc.body.height = bodyHeight - bh - 68;
-	var marginTH = (doc.body.height - formHeight)/3;
+	var marginTH = (doc.body.height - formHeight)/2;
 	$('#dataForm').css("margin-top",marginTH);
+}
+function setSrc(id,path){
+	path = "http://10.18.12.29:8080/hibernateMvc/img/" + path;
+	$('#'+id).attr('src',path);
 }

@@ -4,6 +4,7 @@ window.onresize=function(){
 }
 
 function init(){
+	setSrc('loginImg','U-Offerlogo.png');
 	changBottomDiv();
 	$('#mainFrame').attr("src","loginPC.jsp");
 	//changeHeaderTitle();
@@ -160,7 +161,7 @@ function changeHeaderTitle(){
 	 headCenterDiv.style.width = w - logoDiv.offsetWidth - headRightDiv.offsetWidth - scrollWidth;
 	 if(headRightDiv.offsetTop > 10){
 		 if(headCenterDiv.style.width < headCenterDiv.style.minWidth){
-			 headCenterDiv.style.width = headCenterDiv.style.width -16;
+//			 headCenterDiv.style.width = headCenterDiv.style.width -16;
 			 headCenterDiv.style.minWidth = headCenterDiv.style.width;
 		 }
 	 }

@@ -4,6 +4,9 @@
 .hand{
 	cursor:pointer;
 }
+.floatR{
+	float:right;
+}
 /* 两级下拉菜单 */
 .dropdown-submenu {  
     position: relative;  

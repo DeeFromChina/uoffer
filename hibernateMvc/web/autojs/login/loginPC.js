@@ -4,13 +4,12 @@ function init() {
 	parent.changeHeaderTitle();
 	getTran('1');
 	createValidateCode("vCode");
+	setSrc('remeber','gou.png');
 }
 function getTran(ret) {
-	var trans1 = getid('transparent1');
-	var trans2 = getid('transparent2');
 	if (ret == '1') {
-		trans1.setAttribute("class", "triangle-up");
-		trans2.setAttribute("class", "");
+		$('#transparent1').addClass("triangle-up");
+		$('#transparent2').removeClass("triangle-up");
 		getid("type").value="1";
 		$("#button1").addClass("checkedBtn");
 		$("#button1").removeClass("checkBtn");
@@ -18,8 +17,8 @@ function getTran(ret) {
 		$("#button2").removeClass("checkedBtn");
 	}
 	if (ret == '2') {
-		trans2.setAttribute("class", "triangle-up");
-		trans1.setAttribute("class", "");
+		$('#transparent2').addClass("triangle-up");
+		$('#transparent1').removeClass("triangle-up");
 		getid("type").value="2";
 		$("#button2").addClass("checkedBtn");
 		$("#button2").removeClass("checkBtn");

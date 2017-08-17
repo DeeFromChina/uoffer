@@ -16,7 +16,7 @@
 	<div class="headTitle" id="headTitle">
 		<div class="logoDiv">
 			<a href="#" class="centerDiv" align="right" onclick="alert('1')">
-				<img src="../../img/U-Offerlogo.png" class="loginImg">
+				<img src="" id="loginImg" class="loginImg">
 			</a>
 		</div>
 		<div class="headCenterDiv">
