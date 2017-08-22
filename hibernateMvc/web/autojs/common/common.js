@@ -1,3 +1,4 @@
+//var jspPath = "http://10.18.12.29:8080/hibernateMvc/autojsp/";
 var jspPath = "http://localhost:8080/hibernateMvc/autojsp/";
 var doc = document;
 function getid(id){
@@ -10,14 +11,28 @@ function getid(id){
  * index:多层
  * method:方法（this作为参数）
  * */
-function setList(listId,listValue,index,method){
+function setList(listId,placeholder,listValue,index,method){
 	var level = index;
+	var inn = "";
+	inn += "<div class=\"dropdown\">";
+	inn += "<input type=\"text\" id=\""+listId+"Value\" class=\"form-control w340\" readOnly=\"readOnly\" placeholder=\""+placeholder+"\" />";
+	inn += "<input type=\"hidden\" name=\""+listId+"\" />";
+	inn += "<button type=\"button\" class=\"btn dropdown-toggle selectBtn\" data-toggle=\"dropdown\">";
+	inn += "<span class=\"caret\"></span>";
+	inn += "</button>";
+	inn += "<ul class=\"dropdown-menu\" role=\"menu\" aria-labelledby=\"dropdownMenu selectMeum\">";
+	inn += addListChild(listId,listValue,index,method);
+	inn += "</ul>";
+	inn += "</div>";
+	getid(listId).innerHTML = inn;
+}
+function addListChild(listId,listValue,index,method){
+	var level = index;
+	var inn = "";
 	for(var i in listValue){
 		inn+="<li role='presentation' class='dropdown-submenu'>"
-				+"<a role='menuitem' id='"+listValue[i].id+"' name='"+listValue[i].type+"' onclick='"+method+"'>"
-					+"<font class=''>"
-						+listValue[i].value
-					+"</font>"
+				+"<a class='selectValue' role='menuitem' id='"+listValue[i].id+"' onclick='selectValue(this,'"+listId+"');"+method+"'>"
+					+listValue[i].value
 				+"</a>";
 		if(level > 1){
 			inn+="<ul class='dropdown-menu' style='height:250px;overflow-y:auto;'>";
@@ -26,17 +41,16 @@ function setList(listId,listValue,index,method){
 		}
 		inn+="</li>";
 	}
-	getid(listId).innerHTML = inn;
+	return inn;
 }
 /**
  * 选择下拉框
  * inputId:下拉显示框id
  * selectId:选择数据id
  * */
-function selectValue(inputId,selectId){
-	var input = getid(inputId);
-	var select = getid(selectId);
-	input.value = select.innerText;
+function selectValue(obj,targetId){
+	$("input[name='"+targetId+"']").val(obj.id);
+	$("#"+targetId+"Value").val(obj.innerText);
 }
 /**
  * url:跳转地址
@@ -57,6 +71,11 @@ function to(urlnum){
 	var timestamp = Date.parse(new Date()); 
 	page = jspPath + page + "?page=" + timestamp;
 	top.location.href=page;
+}
+function go(urlnum){
+	var page = pages[urlnum];
+	page = jspPath + page;
+	$('#mainFrame').attr("src",page);
 }
 /**
  * 打开新窗口
@@ -153,16 +172,46 @@ function dataFormVcenter(){
 		bh = parent.$("#bottomDiv").height();
 	}
 	
+	var flag = true;
 	if(windowHeight < bh + formHeight + headHeight){
 		bodyHeight = bh + formHeight + headHeight;
+		flag = false;
 	}else{
 		bodyHeight = windowHeight;
 	}
 	doc.body.height = bodyHeight - bh - 68;
-	var marginTH = (doc.body.height - formHeight)/2;
-	$('#dataForm').css("margin-top",marginTH);
+	if(flag){
+		var marginTH = (doc.body.height - formHeight)/2;
+		$('#dataForm').css("padding-top",marginTH);
+	}else{
+		$('#dataForm').css("padding-top",headHeight);
+		$('#dataForm').css("padding-bottom",bh);
+	}
 }
 function setSrc(id,path){
 	path = "http://10.18.12.29:8080/hibernateMvc/img/" + path;
 	$('#'+id).attr('src',path);
+}
+/**
+ * 判断长宽返回判定
+ * targetId:要判断的容器id
+ * flag:判断类型（width,height）
+ * size:判断大小
+ * trueS:大于判断大小时的返回值
+ * falseS:小于判断大小时的返回值
+ * */
+function judgeSize(targetId,flag,size,trueS,falseS){
+	if(flag == 'width'){
+		if($('#'+targetId).width() < size){
+			return falseS;
+		}else{
+			return trueS;
+		}
+	}else{
+		if($('#'+targetId).height() < size){
+			return falseS;
+		}else{
+			return trueS;
+		}
+	}
 }

@@ -99,7 +99,7 @@
 						<td>
 						<td class="textL">
 							<input type="hidden" id="remeberId" value="1" />
-							<img id="remeber" src="" class="remeberImg" onclick="changeRemeber()" />
+							<img id="remeber" class="remeberImg" onclick="changeRemeber()" />
 							<font class="font-14 color9A9A9A">记住密码</font>
 						</td>
 						<td class="textR paddingRight19">
@@ -111,11 +111,12 @@
 					</tr>
 					<tr>
 						<td/>
-						<td colspan="3">
+						<td colspan="2">
 							<button type="button" class="btn btn-primary submitBtn" onclick="openWindow('login/use_strategy.jsp','test',600,800)" data-toggle="button">
 								确认提交
 							</button>
 						</td>
+						<td/>
 					</tr>
 				</table>
 			</div>

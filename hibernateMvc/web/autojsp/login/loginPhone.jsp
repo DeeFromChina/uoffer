@@ -10,7 +10,7 @@
 <style>
 </style>
 </head>
-<script src="<%=request.getContextPath() %>/autojs/login/loginPhone.js"></script>
+<script src="<%=request.getContextPath() %>/autojs/login/loginPC.js"></script>
 <body bgcolor="#E0FFFF" onload="init()">
 	<form id="dataForm">
 		<center>
@@ -32,9 +32,9 @@
 						<td colspan="2" class="textC">
 							<input type="hidden" name="type" id="type"/>
 							<div class="btn-group btn-group-lg">
-								<button id="button1" type="button" class="btn btn-default w140"
+								<button id="button1" type="button" class="btn btn-default tranClass"
 									onclick="getTran('1')"><font>我是候选人</font></button>
-								<button id="button2" type="button" class="btn btn-default w140"
+								<button id="button2" type="button" class="btn btn-default tranClass"
 									onclick="getTran('2')"><font>我是HR/BOSS</font></button>
 							</div>
 						</td>
@@ -58,35 +58,31 @@
 			</div>
 			<div class="mainDiv">
 				<table class="login-top">
-					<col class="wi28"/>
 					<col class="wi25"/>
 					<col class="wi25"/>
-					<col class="wi22"/>
+					<col class="wi25"/>
+					<col class="wi25"/>
 					<tr>
-						<td class="textR">
-							<font class="font-14">邮箱/手机号码：</font>
+						<td width="25%"></td>
+						<td colspan="2">
+							<input type="text" id="name" name="name" class="form-control input-class" placeholder="邮箱/手机号码">
 						</td>
-						<td colspan="3">
-							<input type="text" id="name" name="name" class="form-control input-class">
-						</td>
+						<td></td>
 					</tr>
 					<tr>
-						<td class="textR">
-							<font class="font-14">密码：</font>
+						<td></td>
+						<td colspan="2">
+							<input type="password" id="password" name="password" class="form-control input-class" placeholder="密码">
 						</td>
-						<td colspan="3">
-							<input type="password" id="password" name="password" class="form-control input-class">
-						</td>
+						<td></td>
 					</tr>
 					<tr>
-						<td class="textR">
-							<font class="font-14">图形验证码：</font>
-						</td>
-						<td colspan="3">
+						<td></td>
+						<td colspan="2">
 							<table class="input-class">
 								<tr>
 									<td class="vCode-input">
-										<input type="text" id="inputCode" class="form-control">
+										<input type="text" id="inputCode" class="form-control" placeholder="输入验证码">
 									</td>
 									<td>
 										<div id="vCode" class="vCode"></div>
@@ -94,6 +90,7 @@
 								</tr>
 							</table>
 						</td>
+						<td></td>
 					</tr>
 					<tr>
 						<td>
@@ -102,7 +99,7 @@
 							<img id="remeber" src="" class="remeberImg" onclick="changeRemeber()" />
 							<font class="font-14 color9A9A9A">记住密码</font>
 						</td>
-						<td class="textR paddingRight19">
+						<td class="textR">
 							<a onclick="javascipt:top.location.href='check_email1.jsp'" class="font-14 color00B38A hand">
 								忘记密码？
 							</a>
@@ -111,11 +108,12 @@
 					</tr>
 					<tr>
 						<td/>
-						<td colspan="3">
+						<td colspan="2">
 							<button type="button" class="btn btn-primary submitBtn" onclick="openWindow('login/use_strategy.jsp','test',600,800)" data-toggle="button">
 								确认提交
 							</button>
 						</td>
+						<td/>
 					</tr>
 				</table>
 			</div>

@@ -57,17 +57,17 @@
 				        </li>
 				    </ul>
 			    </div>
-				<button type="button" class="headButton" onclick="to('5')">
+				<button type="button" class="headButton" onclick="to(5)">
 					联系助理
 			    </button>
 		    </center>
 		</div>
 		<div class="headRightDiv" id="headRightDiv">
 			<div class="centerDiv">
-				<button type="button" class="loginBtn" onclick="to('6')">
+				<button type="button" class="loginBtn" onclick="go(6)">
 					登录
 			    </button>
-			    <button type="button" class="registerBtn" onclick="to('7')">
+			    <button type="button" class="registerBtn" onclick="go(7)">
 			    	注册
 			    </button>
 		    </div>

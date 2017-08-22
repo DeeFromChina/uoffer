@@ -52,3 +52,19 @@
 button > font {
 	font-size:14px;
 }
+.selectInput{
+	display:inline;
+	margin-left:-10px;
+	width: 410px;
+}
+.selectBtn{
+	width:41px;
+	height:41px;
+	border:1px #CCCCCC solid;
+	background-color:#F5F8F9;
+}
+.selectMeum{
+	width: 381px;
+	max-height:120px;
+	overflow-y:auto;
+}

@@ -1,4 +1,5 @@
 function init() {
+	alert("1");
 	dataFormVcenter();
 	countFrameHeight();
 	parent.changeHeaderTitle();

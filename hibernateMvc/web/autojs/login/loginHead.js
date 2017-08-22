@@ -6,7 +6,8 @@ window.onresize=function(){
 function init(){
 	setSrc('loginImg','U-Offerlogo.png');
 	changBottomDiv();
-	$('#mainFrame').attr("src","loginPC.jsp");
+	var pageurl = judgeSize("mainFrame","width",800,"loginPC.jsp","loginPhone.jsp")
+	$('#mainFrame').attr("src",pageurl);
 	//changeHeaderTitle();
 }
 /**
