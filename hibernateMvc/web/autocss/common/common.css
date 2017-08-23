@@ -68,3 +68,16 @@ button > font {
 	max-height:120px;
 	overflow-y:auto;
 }
+/* 输入框右边按钮 */
+.rightBtn{
+	width:101px;
+	background:#00B38A;
+	color:#FFFFFF;
+}
+/* 倒数按钮 */
+.reciprocalBtn{
+	width:101px;
+	background:#FFFFFF;
+	color:#9A9A9A;
+	border:1px #9A9A9A solid;
+}

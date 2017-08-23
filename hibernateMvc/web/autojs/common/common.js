@@ -179,17 +179,19 @@ function dataFormVcenter(){
 	}else{
 		bodyHeight = windowHeight;
 	}
-	doc.body.height = bodyHeight - bh - 68;
 	if(flag){
+		doc.body.height = bodyHeight - bh - 68;
 		var marginTH = (doc.body.height - formHeight)/2;
 		$('#dataForm').css("padding-top",marginTH);
 	}else{
-		$('#dataForm').css("padding-top",headHeight);
+		doc.body.height = bodyHeight + 60;//给足够的边距
+		$('#dataForm').css("padding-top",headHeight+50);//dataForm远大于屏幕
 		$('#dataForm').css("padding-bottom",bh);
 	}
 }
 function setSrc(id,path){
-	path = "http://10.18.12.29:8080/hibernateMvc/img/" + path;
+//	path = "http://10.18.12.29:8080/hibernateMvc/img/" + path;
+	path = "http://192.168.10.163:8080/hibernateMvc/img/" + path;
 	$('#'+id).attr('src',path);
 }
 /**

@@ -1,33 +1,75 @@
+function init() {
+	dataFormVcenter();
+	countFrameHeight();
+	parent.changeHeaderTitle();
+	getTran('1');
+	createValidateCode("vCode");
+	setSrc('remeber','gou.png');
+}
+function getTran(ret) {
+	if (ret == '1') {
+		$('#transparent1').addClass("triangle-up");
+		$('#transparent2').removeClass("triangle-up");
+		getid("type").value="1";
+		$("#button1").addClass("checkedBtn");
+		$("#button1").removeClass("checkBtn");
+		$("#button2").addClass("checkBtn");
+		$("#button2").removeClass("checkedBtn");
+	}
+	if (ret == '2') {
+		$('#transparent2').addClass("triangle-up");
+		$('#transparent1').removeClass("triangle-up");
+		getid("type").value="2";
+		$("#button2").addClass("checkedBtn");
+		$("#button2").removeClass("checkBtn");
+		$("#button1").addClass("checkBtn");
+		$("#button1").removeClass("checkedBtn");
+	}
+	appearForm();
+}
+/**显示表单*/
+function appearForm(){
+	if(getid("type").value == '1'){
+		$("#form1").addClass("hidden");
+		$("#form2").removeClass("hidden");
+	}else{
+		$("#form2").addClass("hidden");
+		$("#form1").removeClass("hidden");
+	}
+}
+/**倒数*/
 var myVar;
-	var a = 60;
-	function daoshu(){
-		var phone = document.getElementById("offer_user_phone").value;
-		if(phone.length < 11 || isNaN(phone)){
-			alert("手机号码格式不正确！")
-			return;
-		}
-		getmsg();
-		myVar=setInterval(function(){myTimer()},1000);
-		a = 60;
+var second = 60;
+function Reciprocal(){
+//	var phone = document.getElementById("offer_user_phone").value;
+//	if(phone.length < 11 || isNaN(phone)){
+//		alert("手机号码格式不正确！")
+//		return;
+//	}
+//	getmsg();
+	var msgtime = $("#msgtime");
+	myVar = setInterval(function(){
+		myTimer(msgtime)
+	},1000);
+	second = 60;
+}
+function myTimer(msgtime){
+	if(second == 60){
+		msgtime.removeClass("rightBtn");
+		msgtime.addClass("reciprocalBtn");
+		msgtime.attr("disabled", "true");
 	}
-	function myTimer(){
-		if(a != 0){
-			a = a-1;
-			document.getElementById("msgtime").setAttribute("disabled", true);
-		}else{
-			clearInterval(myVar);
-			document.getElementById("msgtime").style.background="#00B38A";
-			document.getElementById("msgtime").style.color="#FFF";
-			document.getElementById("msgtime").style.border="1px #00B38A solid";
-			document.getElementById("msgtime").innerHTML="<font style='font-size:14px;'>获取</font>";
-			document.getElementById("msgtime").removeAttribute("disabled"); 
-			return;
-		}
-		document.getElementById("msgtime").style.background="#FFF";
-		document.getElementById("msgtime").style.color="#9A9A9A";
-		document.getElementById("msgtime").style.border="1px #9A9A9A solid";
-		document.getElementById("msgtime").innerHTML="<font style='font-size:14px;'>"+a+"秒</font>";
+	msgtime.html(second+"秒");
+	second = second-1;
+	if(second < 0){
+		clearInterval(myVar);
+		msgtime.addClass("rightBtn");
+		msgtime.removeClass("reciprocalBtn");
+		msgtime.removeAttr("disabled");
+		msgtime.html("获取");
+		return;
 	}
+}
     var phoneCode = ""; 
 	//头部
 	function changeColor1(der){
@@ -56,52 +98,9 @@ var myVar;
 			document.getElementById("button1").innerHTML="<font style='font-size:14px;' color='#00B38A'>我是候选人</font>";
 		}
 	}
-	function init() {
-//		code2 = createValidateCode('vCode2');
-//		getTran('1');
-//		var regit = document.getElementById('regit');
-//		regit.focus();
-//		var b = document.getElementById('button1');
-//		b.focus();
-//		var url = "register/jobList1.do";
-//		var formId = "registerForm";
-//		var data = ajaxSumbit(url, formId);
-//		addJob(data.nowJob);
-//		addJobF(data.jobF);
-//		addCity(data.city);
-	}
+	
 	//选择用户/企业
 	var code2;
-	function getTran(ret) {
-		var trans1 = document.getElementById('transparent1');
-		var trans2 = document.getElementById('transparent2');
-		if (ret == '1') {
-			trans1.setAttribute("class", "triangle-up");
-			trans2.setAttribute("class", "");
-			document.getElementById("type").value="1";
-			document.getElementById("button1").style.background="#00B38A";
-			document.getElementById("button1").innerHTML="<font style='font-size:14px;' color='#FFF'>我是候选人</font>";
-			document.getElementById("button2").style.background="#FFF";
-			document.getElementById("button2").innerHTML="<font style='font-size:14px;' color='#00B38A'>我是HR/BOSS</font>";
-			clearTable();
-			code2.update();
-			document.getElementById("firmTable").style.display="none";
-			document.getElementById("userTable").style.display="";
-		}
-		if (ret == '2') {
-			trans2.setAttribute("class", "triangle-up");
-			trans1.setAttribute("class", "");
-			document.getElementById("type").value="2";
-			document.getElementById("button2").style.background="#00B38A";
-			document.getElementById("button2").innerHTML="<font style='font-size:14px;' color='#FFF'>我是HR/BOSS</font>";
-			document.getElementById("button1").style.background="#FFF";
-			document.getElementById("button1").innerHTML="<font style='font-size:14px;' color='#00B38A'>我是候选人</font>";
-			clearTable();
-			code2.update();
-			document.getElementById("userTable").style.display="none";
-			document.getElementById("firmTable").style.display="";
-		}
-	}
 	//目前职位
 	function addJob(items){
 		var inn = "";
