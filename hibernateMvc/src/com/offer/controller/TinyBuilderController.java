@@ -24,47 +24,35 @@ import com.offer.model.OfferUser;
 import com.sun.accessibility.internal.resources.accessibility;
 
 
-@Controller
+
 public class TinyBuilderController{
 
 	public HttpSession httpSession;
 	
 	public List<Map<String, Object>> homeList = new ArrayList<Map<String, Object>>();
-	public Hashtable<String, String> form = new Hashtable<String, String>();
+	public Hashtable<String, Object> form = new Hashtable<String, Object>();
 	
 	protected SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 	protected SimpleDateFormat sdt = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-	protected SimpleDateFormat zwsdf = new SimpleDateFormat("yyyy年MM月dd日");
-	protected SimpleDateFormat zwsdff = new SimpleDateFormat("yyyy年MM月dd日 HH:mm:ss");
+	protected SimpleDateFormat ymd = new SimpleDateFormat("yyyy年MM月dd日");
+	protected SimpleDateFormat ymdhms = new SimpleDateFormat("yyyy年MM月dd日 HH:mm:ss");
 	
 	public static String SUCCESS = "success";
 	public static String ERROR = "error";
 	
-	public Hashtable<String, String> getForm() {
+	public Hashtable<String, Object> getForm() {
 		return form;
 	}
 
-	public void setForm(Hashtable<String, String> form) {
+	public void setForm(Hashtable<String, Object> form) {
 		this.form = form;
 	}
 	
-	@ResponseBody
-	@RequestMapping(value = "/controller", produces = "application/json")
-	public Map<String, Object> actionAllocator(HttpServletRequest request, @RequestBody String data) {
-		try {
-			setMap(request, data);
-//			homeData();
-			if("login".equalsIgnoreCase(form.get("action"))) return goAction();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return toJson(SUCCESS);
-	}
-	
-	private String setMap(HttpServletRequest request, String data){
+	public String setMap(HttpServletRequest request, String data){
 		if(request == null){
 			return "request error";
 		}
+		request.getParameter("action");
 		Map<String, String[]> map = request.getParameterMap();
 		if(map == null){
 			return "map error";
@@ -107,10 +95,6 @@ public class TinyBuilderController{
 		}
 	}
 	
-	public Map<String, Object> goAction(){
-		return null;
-	}
-	
 	public Map<String, Object> toJson(Object obj){
 		Map<String, Object> map = new HashMap<String, Object>();
 		String status = "1";
@@ -124,7 +108,7 @@ public class TinyBuilderController{
 	}
 	
 	public void putToForm(String record){
-		form = JSON.parseObject(record, new TypeReference<Hashtable<String, String>>(){});
+		form = JSON.parseObject(record, new TypeReference<Hashtable<String, Object>>(){});
 	}
 	
 	public boolean isIntegeter(Object obj){

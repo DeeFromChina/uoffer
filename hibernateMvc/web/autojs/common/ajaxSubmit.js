@@ -15,8 +15,11 @@ $.fn.serializeObject = function() {
 }
 
 function ajaxSumbit(urllink, formId) {
-	var link = "/hibernateMvc/controller.do?" + urllink;
-	var formIndex = "#" + formId;
+	var link = "/hibernateMvc/" + urllink;
+	var formIndex = "";
+	if(formId != undefined){
+		formIdex = "#" + formId;
+	}
 	var dataResult;
 	$.ajax({
 		url : link, // 自行按需配置好完整的url，包括ip和端口号

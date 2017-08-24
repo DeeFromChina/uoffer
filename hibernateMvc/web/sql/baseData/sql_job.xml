@@ -1,0 +1,5 @@
+<sqls>
+	<sql id="getAllJob">
+		SELECT * FROM job
+	</sql>
+</sqls>

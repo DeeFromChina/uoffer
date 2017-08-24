@@ -191,7 +191,8 @@ function dataFormVcenter(){
 }
 function setSrc(id,path){
 //	path = "http://10.18.12.29:8080/hibernateMvc/img/" + path;
-	path = "http://192.168.10.163:8080/hibernateMvc/img/" + path;
+//	path = "http://192.168.10.163:8080/hibernateMvc/img/" + path;
+	path = "http://localhost:8080/hibernateMvc/img/" + path;
 	$('#'+id).attr('src',path);
 }
 /**

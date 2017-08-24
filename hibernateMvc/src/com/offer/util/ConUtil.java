@@ -1,5 +1,6 @@
 package com.offer.util;
 
+import java.util.Hashtable;
 import java.util.Map;
 
 public interface ConUtil {
@@ -11,4 +12,5 @@ public interface ConUtil {
 	public Object mapToObject(Object target, Map<String, String> src) throws Exception;
 	
 	public Object map2Object(Object target, Map<String, Object> src) throws Exception;
+	
 }

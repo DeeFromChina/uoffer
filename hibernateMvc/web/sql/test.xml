@@ -1,6 +1,11 @@
 <sqls>
-	<sql orderBy="id">
+	<sql id="test1" orderBy="id">
 		SELECT * FROM offer_firm
+		{#param}
+		<param value="param"/>
+	</sql>
+	<sql id="test2" orderBy="id">
+		SELECT * FROM offer_firm2
 		{#param}
 		<param value="param"/>
 	</sql>

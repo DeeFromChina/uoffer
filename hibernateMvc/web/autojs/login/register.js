@@ -5,6 +5,9 @@ function init() {
 	getTran('1');
 	createValidateCode("vCode");
 	setSrc('remeber','gou.png');
+	var url = "login.do?action=register";
+	var data = ajaxSumbit(url);
+	console.log(data);
 }
 function getTran(ret) {
 	if (ret == '1') {

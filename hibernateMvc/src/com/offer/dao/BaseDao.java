@@ -29,4 +29,6 @@ public interface BaseDao {
 	public void updateBySql(String sql) throws Exception;
 	
 	public void sendByBatchSql(String[] sqls) throws Exception;
+	
+	public List<?> findByHql(String hql) throws Exception;
 }

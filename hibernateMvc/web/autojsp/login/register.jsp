@@ -11,7 +11,7 @@
 </style>
 </head>
 <script src="<%=request.getContextPath() %>/autojs/login/register.js"></script>
-<body bgcolor="#F5F8F9" onload="init()">
+<body bgcolor="#E0FFFF" onload="init()">
 	<form id="dataForm">
 	<center>
 		<div class="mainDiv">
