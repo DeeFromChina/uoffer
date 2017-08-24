@@ -69,7 +69,7 @@ public class TinyBuilderController{
 			}
 			form.clear();
 			form.put(entry.getKey(), entry.getValue()[0]);
-			putToForm(data);
+//			putToForm(data);
 		}
 		return SUCCESS;
 	}

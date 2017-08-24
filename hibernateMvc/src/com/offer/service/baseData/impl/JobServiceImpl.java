@@ -71,7 +71,7 @@ public class JobServiceImpl extends BaseServiceImpl implements JobService{
 		List<Tree> trees = new ArrayList<Tree>();
 		List<Tree> returnTree = new ArrayList<Tree>();
 		if(CacheClass.getCache("job") == null){
-			List<Job> jobs = (List<Job>) baseDao.findByHql("From job Order By pid ASC");
+			List<Job> jobs = (List<Job>) baseDao.findByHql("From Job");
 			for(Job job : jobs){
 				Tree tree = new Tree();
 				tree.setTitle(job.getName());
@@ -96,6 +96,9 @@ public class JobServiceImpl extends BaseServiceImpl implements JobService{
 					tree.setVisibility("0");
 				}else{
 					tree.setVisibility("1");
+				}
+				if(job.getPid() != null){
+					
 				}
 				tree.setPatherId(String.valueOf(job.getPid()));
 				trees.add(tree);

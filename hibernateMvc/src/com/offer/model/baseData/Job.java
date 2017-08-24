@@ -1,5 +1,6 @@
 package com.offer.model.baseData;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -12,17 +13,20 @@ public class Job {
 
 	@Id
 	@GeneratedValue
-    private int id;
+	@Column(name = "id")
+    private Integer id;
 
+	@Column(name = "name")
     private String name;
 
-    private int pid;
+	@Column(name = "pid")
+    private Integer pid;
 
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
@@ -34,11 +38,11 @@ public class Job {
 		this.name = name;
 	}
 
-	public int getPid() {
+	public Integer getPid() {
 		return pid;
 	}
 
-	public void setPid(int pid) {
+	public void setPid(Integer pid) {
 		this.pid = pid;
 	}
 }

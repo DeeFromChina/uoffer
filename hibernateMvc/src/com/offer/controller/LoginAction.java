@@ -29,7 +29,7 @@ public class LoginAction extends TinyBuilderController{
 		try {
 			setMap(request, data);
 			Object forward = null;
-			String action = getForm().get("action").toString();
+			String action = form.get("action").toString();
 			if("register".equalsIgnoreCase(action)) forward=register();
 			
 			return toJson(forward);
