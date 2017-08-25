@@ -85,6 +85,8 @@ public class JobServiceImpl extends BaseServiceImpl implements JobService{
 			CacheClass.setCache("jobTree",returnTree);
 			//保存job的数据
 			CacheClass.setCache("job",jobs);
+		}else if(table.get("all") != null){
+			returnTree = (List<Tree>) CacheClass.getCache("jobTree");
 		}
 		if(table.get("pid") != null){
 			List<Job> jobs = (List<Job>) CacheClass.getCache("job");

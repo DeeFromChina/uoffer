@@ -7,7 +7,8 @@ function init() {
 	setSrc('remeber','gou.png');
 	var url = "login.do?action=register";
 	var data = ajaxSumbit(url);
-	console.log(data);
+	addBootstrap(data);
+	console.log(data[0].title);
 }
 function getTran(ret) {
 	if (ret == '1') {

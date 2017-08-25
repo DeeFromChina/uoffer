@@ -43,6 +43,7 @@ public class LoginAction extends TinyBuilderController{
 		List<Tree> trees = new ArrayList<Tree>();
 		try {
 			Hashtable<String, Object> table = new Hashtable<String, Object>();
+			table.put("all", "true");
 			trees = jobService.getTree(table);
 		} catch (Exception e) {
 			e.printStackTrace();
