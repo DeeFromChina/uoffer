@@ -1,0 +1,24 @@
+.icheckbox_square-green >.hiddenCheckBox {
+	opacity:0;
+	width:100%;
+	height:100%;
+	margin:0;
+}
+.checkbox_title{
+	float:left;
+	font-size:16px;
+	width:100%;
+}
+.checkbox_cell{
+	width:20%;
+	padding:10px 10px;
+	min-width:150px;
+	float:left;
+	height:42px;
+}
+.checkbox_cell_value{
+	padding-left:10px;
+	color:#4F4F4F;
+	float:left;
+	font-size:16px;
+}

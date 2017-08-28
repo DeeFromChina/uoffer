@@ -76,7 +76,9 @@
 						<font class="font-14">求职方向：</font>
 					</td>
 					<td colspan="2">
-						<div class="input-group selectInput" id="jobType">
+						<div class="input-group wi100">
+							<input type="text" id="msgCode" name="jobType" class="form-control w280">
+							<button type="button" class="btn btn-default rightBtn"  onclick="Reciprocal()" id="msgtime">获取</button>
 						</div>
 					</td>
 					<td></td>

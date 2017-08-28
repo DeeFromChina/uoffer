@@ -42,7 +42,16 @@ function addOpenTree(obj,timestamp){
 }
 var num = 0;
 function appendBootstrap(obj,flag){
-	if(obj.visibility != '1'){
+	var vi = "";
+	if(obj.visibility != undefined){
+		vi = obj.visibility;
+	}
+	if(obj[0] != undefined){
+		if(obj[0].visibility != undefined){
+			vi = obj[0].visibility;
+		}
+	}
+	if(vi != '1'){
 		return;
 	}
 	var len = obj.length;
@@ -55,7 +64,7 @@ function appendBootstrap(obj,flag){
 	for(var i = 0; i < len; i++){
 		var o;
 		var timestamp = num++;
-		if(len != 1){
+		if(obj.length != undefined){
 			o = obj[i];
 		}else{
 			o = obj;
@@ -107,6 +116,5 @@ function getValue(v){
 function init(){
 	var url = "login.do?action=register";
 	var data = ajaxSumbit(url);
-	console.log(data);
 	addBootstrap(data);
 }

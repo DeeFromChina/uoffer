@@ -8,11 +8,10 @@ import com.offer.model.util.Tree;
 public class BuildTree {
 
 	public static List<Tree> buildTree(List<Tree> Data){
-		List<Tree> trees = Data;
+		List<Tree> trees = new ArrayList<Tree>();
 		for(Tree tree : Data){
 			String pid = tree.getPatherId();
 			if(pid == null){
-				trees.add(tree);
 				continue;
 			}
 			for(Tree parentTree : Data){
@@ -23,6 +22,13 @@ public class BuildTree {
 					}
 					parentTree.getContent().add(tree);
 				}
+			}
+		}
+		for(Tree tree : Data){
+			String pid = tree.getPatherId();
+			if(pid == null){
+				trees.add(tree);
+				continue;
 			}
 		}
 		return trees;

@@ -74,6 +74,19 @@ function myTimer(msgtime){
 		return;
 	}
 }
+function openJob(){
+	var url = "";
+	openWindow(url,title,width,height)
+}
+
+
+
+
+
+
+
+
+
     var phoneCode = ""; 
 	//头部
 	function changeColor1(der){

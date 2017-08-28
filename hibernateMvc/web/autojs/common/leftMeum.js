@@ -85,7 +85,7 @@ function addLeftMeum(){
 	if(len == undefined){
 		len = 1;
 	}
-	if(len != 1){
+	if(obj.length != undefined){
 		for(var i = 0; i < len; i++){
 			var substr = "";
 			meumLevel = obj[i].level;

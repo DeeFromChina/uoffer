@@ -1,8 +1,15 @@
+@import url("size.css");
+@import url("checkbox.css");
+@import url("leftMeum.css");
+@import url("bootstrapTree.css");
 .hidden{
 	display:none;
 }
 .hand{
 	cursor:pointer;
+}
+.floatL{
+	float:left;
 }
 .floatR{
 	float:right;

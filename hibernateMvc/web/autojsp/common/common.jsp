@@ -15,12 +15,6 @@
 <!-- <link href="../css/bootstrap-datetimepicker.min.css" rel="stylesheet" /> -->
 <link rel="shortcut icon" href="<%=request.getContextPath() %>/img/title.ico" type="image/x-icon"/>
 <link rel="stylesheet" href="<%=request.getContextPath() %>/autocss/common/common.css?randomId=<%=Math.random()%>" type="text/css"/>
-<link rel="stylesheet" href="<%=request.getContextPath() %>/autocss/common/size.css?randomId=<%=Math.random()%>" type="text/css"/>
-<style>
-	.btn.dropdown-toggle{
-		background:#CCCCCC;
-	}
-</style>
 </head>
 <%
 response.setHeader("Cache-Control","no-store");
@@ -33,6 +27,7 @@ response.setDateHeader("Expires",0);
 <script src="<%=request.getContextPath() %>/autojs/common/ajaxSubmit.js?randomId=<%=Math.random()%>" type="text/javascript"></script>
 <script src="<%=request.getContextPath() %>/autojs/common/common.js?randomId=<%=Math.random()%>" type="text/javascript"></script>
 <script src="<%=request.getContextPath() %>/autojs/common/VCode.js?randomId=<%=Math.random()%>" type="text/javascript"></script>
+<script src="<%=request.getContextPath() %>/autojs/common/checkbox.js?randomId=<%=Math.random()%>" type="text/javascript"></script>
 <script language="javascript">
 </script>
 <body>

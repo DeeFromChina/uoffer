@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.offer.model.baseData.Job;
+import com.offer.model.util.CheckBox;
 import com.offer.model.util.Tree;
 
 public interface JobService {
@@ -22,4 +23,6 @@ public interface JobService {
 	public void deleteById(String ids) throws Exception;
 	
 	public List<Tree> getTree(Hashtable<String, Object> table) throws Exception;
+	
+	public List<CheckBox> getCheckBox(Hashtable<String, Object> table) throws Exception;
 }
