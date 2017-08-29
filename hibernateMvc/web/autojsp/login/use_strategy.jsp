@@ -31,7 +31,7 @@ function testtest(){
 }
 </script>
 <body>
-	<div style="width:500px;height:500px;border:1px #000000 solid;float:left;" id="sidebar">
+	<!-- <div style="width:500px;height:500px;border:1px #000000 solid;float:left;" id="sidebar">
 		<div class="panel panel-default" style="width:100%;">
 	        <div class="panel-heading">
 	            <h4 class="panel-title">
@@ -52,7 +52,7 @@ function testtest(){
 	</div>
 	<div style="width:200px;height:500px;background:#444444;float:left;" id="test1">
 	</div>
-	<button onclick="testtest()">tasasdgfsdfg</button>
+	<button onclick="testtest()">tasasdgfsdfg</button> -->
 	<!-- <div class="panel panel-default" style="width:100%;">
 	        <div class="panel-heading">
 	            <h4 class="panel-title">
@@ -69,6 +69,163 @@ function testtest(){
 	            vice lomo.
 	        </div>
 	        </div>
+	    </div> -->
+	    <div style="width:100%;border:1px #000000 solid;height:200px;">
+		    <div class="checkbox_title" >
+		    	<!-- <a data-toggle="collapse" href="#test1_1"> -->
+		    		<!-- <div style="padding-bottom:40px;">
+				    	<div class="icheckbox_square-green floatL">
+						    <input type="hidden"/>
+						    <input type="checkbox" id="2" class="hiddenCheckBox hand" />
+				    	</div>
+					    <div class="checkbox_cell_value"> -->
+					    	test1
+					    <!-- </div> -->
+				    	<font style="float:right;">展开</font>
+				    <!-- </div> -->
+		    	<!-- </a> -->
+		    	<div class="collapse" id="test1_1" style="padding:10px;">
+		    	
+				    <div class="checkbox_cell">
+				    	<div class="icheckbox_square-green floatL">
+						    <input type="hidden"/>
+						    <input type="checkbox" id="2" class="hiddenCheckBox hand" />
+				    	</div>
+					    <div class="checkbox_cell_value">
+					    	test1_1
+					    </div>
+				    </div>
+				    <div class="checkbox_cell">
+				    	<div class="icheckbox_square-green floatL">
+						    <input type="hidden"/>
+						    <input type="checkbox" id="2" class="hiddenCheckBox hand" />
+				    	</div>
+					    <div class="checkbox_cell_value">
+					    	test1_1
+					    </div>
+				    </div>
+				    <div class="checkbox_cell">
+				    	<div class="icheckbox_square-green floatL">
+						    <input type="hidden"/>
+						    <input type="checkbox" id="2" class="hiddenCheckBox hand" />
+				    	</div>
+					    <div class="checkbox_cell_value">
+					    	test1_1
+					    </div>
+				    </div>
+				    <div class="checkbox_cell">
+				    	<div class="icheckbox_square-green floatL">
+						    <input type="hidden"/>
+						    <input type="checkbox" id="2" class="hiddenCheckBox hand" />
+				    	</div>
+					    <div class="checkbox_cell_value">
+					    	test1_1
+					    </div>
+				    </div>
+				    <div class="checkbox_cell">
+				    	<div class="icheckbox_square-green floatL">
+						    <input type="hidden"/>
+						    <input type="checkbox" id="2" class="hiddenCheckBox hand" />
+				    	</div>
+					    <div class="checkbox_cell_value">
+					    	test1_1
+					    </div>
+				    </div>
+				    <div class="checkbox_cell">
+				    	<div class="icheckbox_square-green floatL">
+						    <input type="hidden"/>
+						    <input type="checkbox" id="2" class="hiddenCheckBox hand" />
+				    	</div>
+					    <div class="checkbox_cell_value">
+					    	test1_1
+					    </div>
+				    </div>
+				    
+			    </div>
+		    </div>
+		    <div style="padding-top:20px;padding-left:20px;width:100%;float:left;" >
+		    	<a data-toggle="collapse" href="#test1_2">
+		    		test2
+			    	<font style="float:right;">展开</font>
+		    	</a>
+		    	<div class="collapse" id="test1_2" style="padding:10px;">
+				    <div class="checkbox_cell">
+				    	<div class="icheckbox_square-green floatL">
+						    <input type="hidden"/>
+						    <input type="checkbox" id="2" class="hiddenCheckBox hand" />
+				    	</div>
+					    <div class="checkbox_cell_value">
+					    	test1_1
+					    </div>
+				    </div>
+				    <div class="checkbox_cell">
+				    	<div class="icheckbox_square-green floatL">
+						    <input type="hidden"/>
+						    <input type="checkbox" id="2" class="hiddenCheckBox hand" />
+				    	</div>
+					    <div class="checkbox_cell_value">
+					    	test1_2
+					    </div>
+				    </div>
+				    <div class="checkbox_cell">
+				    	<div class="icheckbox_square-green floatL">
+						    <input type="hidden"/>
+						    <input type="checkbox" id="2" class="hiddenCheckBox hand" />
+				    	</div>
+					    <div class="checkbox_cell_value">
+					    	test1_3
+					    </div>
+				    </div>
+				    <div class="checkbox_cell">
+				    	<div class="icheckbox_square-green floatL">
+						    <input type="hidden"/>
+						    <input type="checkbox" id="2" class="hiddenCheckBox hand" />
+				    	</div>
+					    <div class="checkbox_cell_value">
+					    	test1_4
+					    </div>
+				    </div>
+				    <div class="checkbox_cell">
+				    	<div class="icheckbox_square-green floatL">
+						    <input type="hidden"/>
+						    <input type="checkbox" id="2" class="hiddenCheckBox hand" />
+				    	</div>
+					    <div class="checkbox_cell_value">
+					    	test1_5
+					    </div>
+				    </div>
+				    <div class="checkbox_cell">
+				    	<div class="icheckbox_square-green floatL">
+						    <input type="hidden"/>
+						    <input type="checkbox" id="2" class="hiddenCheckBox hand" />
+				    	</div>
+					    <div class="checkbox_cell_value">
+					    	test1_6
+					    </div>
+				    </div>
+			    </div>
+		    </div>
+	    </div>
+	    <!-- <div class="checkbox_cell" >
+	    	<div class="icheckbox_square-green floatL">
+			    <input type="hidden"/>
+			    <input type="checkbox" id="3" class="hiddenCheckBox hand" />
+	    	</div>
+	    	<div class="checkbox_cell_value">
+	    		test1_1_1
+	    	</div>
+	    </div>
+	    <div class="checkbox_cell" >
+	    	<div class="icheckbox_square-green floatL">
+			    <input type="hidden"/>
+			    <input type="checkbox" id="5" class="hiddenCheckBox hand" />
+		    </div>
+		    <div class="checkbox_cell_value">
+		    	test1_2
+		    </div>
+	    </div>
+	    <div class="checkbox_title" style="padding-left:0px;" >
+	    	test2
 	    </div> -->
 </body>
 </html>

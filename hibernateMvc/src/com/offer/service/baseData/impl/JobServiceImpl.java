@@ -129,16 +129,9 @@ public class JobServiceImpl extends BaseServiceImpl implements JobService{
 		}else if(table.get("all") != null){
 			returnCheckBoxs = (List<CheckBox>) CacheClass.getCache("jobCheckBox");
 		}
-		if(table.get("id") != null){
-			List<Job> jobs = (List<Job>) CacheClass.getCache("job");
-			for(Job job : jobs){
-				CheckBox checkBox = new CheckBox();
-				checkBox.setTitle(job.getName());
-				checkBox.setValue(String.valueOf(job.getId()));
-				checkBox.setPatherId(job.getPid() == null ? null : String.valueOf(job.getPid()));
-				checkBoxs.add(checkBox);
-			}
-			returnCheckBoxs = BuildCheckBox.buildCheckBox(checkBoxs);
+		if(table.get("count") != null){
+			returnCheckBoxs = (List<CheckBox>) CacheClass.getCache("jobCheckBox");
+			BuildCheckBox.selectCheckBox(returnCheckBoxs, returnInt(table.get("count")));
 		}
 		return returnCheckBoxs;
 	}

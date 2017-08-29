@@ -59,6 +59,17 @@ public class BaseServiceImpl implements BaseService {
 		}
 		return null;
 	}
+	
+	public int returnInt(Object obj){
+		try {
+			if(obj != null){
+				return Integer.valueOf(obj.toString());
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return 0;
+	}
 
 	public String returnString(Object obj){
 		try {

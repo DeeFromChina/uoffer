@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.offer.model.util.CheckBox;
 import com.offer.model.util.Tree;
 import com.offer.service.baseData.JobService;
 
@@ -40,14 +41,14 @@ public class LoginAction extends TinyBuilderController{
 	}
 
 	public Object register() {
-		List<Tree> trees = new ArrayList<Tree>();
+		List<CheckBox> checkBoxs = new ArrayList<CheckBox>();
 		try {
 			Hashtable<String, Object> table = new Hashtable<String, Object>();
-			table.put("id", "1");
-			trees = jobService.getTree(table);
+			table.put("count", "1");
+			checkBoxs = jobService.getCheckBox(table);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return trees;
+		return checkBoxs;
 	}
 }

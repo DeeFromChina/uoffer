@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.offer.model.util.CheckBox;
+import com.sun.org.apache.xml.internal.security.utils.IgnoreAllErrorHandler;
 
 public class BuildCheckBox {
 
@@ -32,5 +33,27 @@ public class BuildCheckBox {
 			}
 		}
 		return checkBoxs;
+	}
+	
+	/**
+	 * @param Data	数据
+	 * @param count 层数
+	 * 
+	 * 只取多少层的数据(count=2,只取1、2层的数据)
+	 * 
+	 */
+	public static void selectCheckBox(List<CheckBox> Data, int count){
+		if(count == 0){
+			return;
+		}
+		for(CheckBox checkBox : Data){
+			if(count == 1){
+				checkBox.setContent(null);
+				continue;
+			}
+			if(checkBox.getContent() != null){
+				selectCheckBox(checkBox.getContent(), count-1);
+			}
+		}
 	}
 }

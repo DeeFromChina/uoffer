@@ -5,9 +5,11 @@
 	margin:0;
 }
 .checkbox_title{
+	padding-top:20px;
+	padding-left:20px;
+	width:100%;
 	float:left;
 	font-size:16px;
-	width:100%;
 }
 .checkbox_cell{
 	width:20%;
