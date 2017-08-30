@@ -11,5 +11,6 @@
 <body onload="init()">
 	<div class="wh100" id="jobMeum">
     </div>
+    <button onclick="sumbit()">sumbit</button>
 </body>
 </html>

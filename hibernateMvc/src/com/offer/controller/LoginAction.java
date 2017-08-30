@@ -44,7 +44,7 @@ public class LoginAction extends TinyBuilderController{
 		List<CheckBox> checkBoxs = new ArrayList<CheckBox>();
 		try {
 			Hashtable<String, Object> table = new Hashtable<String, Object>();
-			table.put("count", "1");
+			table.put("count", "4");
 			checkBoxs = jobService.getCheckBox(table);
 		} catch (Exception e) {
 			e.printStackTrace();

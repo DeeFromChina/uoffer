@@ -55,5 +55,6 @@ public class BuildCheckBox {
 				selectCheckBox(checkBox.getContent(), count-1);
 			}
 		}
+		return;
 	}
 }

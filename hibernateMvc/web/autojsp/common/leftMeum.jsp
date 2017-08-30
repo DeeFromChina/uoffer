@@ -6,7 +6,7 @@
 <%@include file="../common/common.jsp"%>
 <title></title>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<link href="../../autocss/common/leftMeum.css?randomId=<%=Math.random()%>" rel="stylesheet">
+<%-- <link href="../../autocss/common/leftMeum.css?randomId=<%=Math.random()%>" rel="stylesheet"> --%>
 </head>
 <script src="../../autojs/common/leftMeum.js?randomId=<%=Math.random()%>" type="text/javascript"></script>
 <body onload="init()">

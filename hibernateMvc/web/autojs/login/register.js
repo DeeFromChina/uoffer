@@ -5,10 +5,8 @@ function init() {
 	getTran('1');
 	createValidateCode("vCode");
 	setSrc('remeber','gou.png');
-	var url = "login.do?action=register";
-	var data = ajaxSumbit(url);
-	addBootstrap(data);
-	console.log(data[0].title);
+//	var url = "login.do?action=register";
+//	var data = ajaxSumbit(url);
 }
 function getTran(ret) {
 	if (ret == '1') {
@@ -74,9 +72,13 @@ function myTimer(msgtime){
 		return;
 	}
 }
-function openJob(){
-	var url = "";
-	openWindow(url,title,width,height)
+function selectJob(){
+	var url = "public/job_checkbox.jsp";
+	var title = "选择您的求职方向";
+	var width = "600";
+	var height = "400";
+	var data = "?type=1";
+	openWindow(url+data,title,width,height);
 }
 
 

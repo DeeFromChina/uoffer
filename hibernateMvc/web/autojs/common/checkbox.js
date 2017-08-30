@@ -4,10 +4,62 @@
 //	});
 //	addCheckBox();
 //});
-function selectCheckBox(obj,formId,type){
-	
+function selectCheckBox(obj,formId,type,haveCheckBox,isMultiselect){
+	var str = "";
+	if(obj == undefined){
+		return;
+	}
+	var targetObj;
+	if(obj[0] != undefined){
+		for(var i = 0; i < obj.length; i++){
+			targetObj = searchCheckBoxType(obj[i],type);
+			if(targetObj != undefined){
+				break;
+			}
+		}
+	}else{
+		targetObj = searchCheckBoxType(obj,type);
+	}
+	if(targetObj != undefined){
+		str += appendCheckBoxTitle(targetObj,formId,haveCheckBox);
+	}
+	$("#"+formId).append(str);
+	$('.hiddenCheckBox').click(function(){
+		if(!isMultiselect){
+			$('.hiddenCheckBox').each(function(){
+				if($(this).parent().hasClass("checked")){
+					$(this).parent().removeClass("checked");
+				}
+			});
+		}
+		if($(this).parent().hasClass("checked")){
+			$(this).parent().removeClass("checked");
+		}else{
+			$(this).parent().addClass("checked");
+		}
+	});
 }
-function addCheckBox(obj,formId,haveCheckBox){
+function searchCheckBoxType(obj,type){
+	if(obj.value == type){
+		return obj;
+	}
+	if(obj.content != undefined){
+		var o = obj.content;
+		if(o[0] != undefined){
+			var targetObj;
+			for(var i = 0; i < o.length; i++){
+				targetObj = searchCheckBoxType(o[i],type);
+				if(targetObj != undefined){
+					break;
+				}
+			}
+			return targetObj;
+		}else{
+			return searchCheckBoxType(o,type);
+		}
+	}
+}
+function addCheckBox(obj,formId,haveCheckBox,isMultiselect){
 //	var data = '[{"title":"中餐","content":[{"title":"t1","content":"","type":"title"}],"type":"title"}';
 //	data += ',{"title":"西餐","type":"title","content":[{"title":"t2"}]}]';
 //	var obj = eval('(' + data + ')');
@@ -17,16 +69,26 @@ function addCheckBox(obj,formId,haveCheckBox){
 	}
 	if(obj[0] != undefined){
 		for(var i = 0; i < obj.length; i++){
-			str = appendCheckBoxTitle(obj[i],formId,haveCheckBox);
+			str += appendCheckBoxTitle(obj[i],formId,haveCheckBox);
 		}
 	}else{
-		str = appendCheckBoxTitle(obj,formId,haveCheckBox);
+		str += appendCheckBoxTitle(obj,formId,haveCheckBox);
 	}
-	console.log(str);
 	$("#"+formId).append(str);
-//	$('.hiddenCheckBox').click(function(){
-//		$(this).prev().val(this.id);
-//	});
+	$('.hiddenCheckBox').click(function(){
+		if(!isMultiselect){
+			$('.hiddenCheckBox').each(function(){
+				if($(this).parent().hasClass("checked")){
+					$(this).parent().removeClass("checked");
+				}
+			});
+		}
+		if($(this).parent().hasClass("checked")){
+			$(this).parent().removeClass("checked");
+		}else{
+			$(this).parent().addClass("checked");
+		}
+	});
 }
 
 //适合单类型的checkbox
@@ -43,18 +105,19 @@ function appendCheckBoxTitle(obj,name,haveCheckBox){
 	if(obj.content == undefined){
 		isCheck = true;
 	}
-	console.log(obj);
 	if(haveCheckBox){
 		if(!isCheck){
 			str += "<div class=\"checkbox_title\" >"
-						+"<a data-toggle=\"collapse\" href=\"#openMeum"+count+"\">"
+						+"<a data-toggle=\"collapse\" href=\"#openMeum"+count+"\" onclick=\"changeText(this)\">"
 							+"<div class=\"paddingBottom40\">"
 								+"<div class=\"icheckbox_square-green floatL\">"
+									+"<input type=\"hidden\" id=\""+obj.value+"\" value=\""+obj.title+"\" />"
 									+"<input type=\"checkbox\" name=\""+name+"\" class=\"hiddenCheckBox hand\" />"
 								+"</div>"
 								+"<div class=\"checkbox_cell_value\">"
 									+obj.title
 								+"</div>"
+								+"<font class=\"floatR\">展开</font>"
 							+"</div>"
 						+"</a>"
 					+"</div>";
@@ -62,6 +125,7 @@ function appendCheckBoxTitle(obj,name,haveCheckBox){
 			str += "<div class=\"checkbox_title\" >"
 						+"<div class=\"paddingBottom40\">"
 							+"<div class=\"icheckbox_square-green floatL\">"
+								+"<input type=\"hidden\" id=\""+obj.value+"\" value=\""+obj.title+"\" />"
 								+"<input type=\"checkbox\" name=\""+name+"\" class=\"hiddenCheckBox hand\" />"
 							+"</div>"
 							+"<div class=\"checkbox_cell_value\">"
@@ -73,8 +137,9 @@ function appendCheckBoxTitle(obj,name,haveCheckBox){
 	}else{
 		if(!isCheck){
 			str += "<div class=\"checkbox_title\" >"
-						+"<a data-toggle=\"collapse\" href=\"#openMeum"+count+"\">"
+						+"<a data-toggle=\"collapse\" href=\"#openMeum"+count+"\" onclick=\"changeText(this)\">"
 							+obj.title
+							+"<font class=\"floatR\">展开</font>"
 						+"</a>"
 					+"</div>";
 		}else{
@@ -85,7 +150,7 @@ function appendCheckBoxTitle(obj,name,haveCheckBox){
 		
 	}
 	if(!isCheck){
-		str += "<div class=\"collapse padding10\" id=\"openMeum"+count+"\" >";
+		str += "<div class=\"collapse padding10 checkbox_cell_div\" id=\"openMeum"+count+"\" >";
 		var o = obj.content
 		if(o[0] != undefined){
 			for(var i = 0; i < o.length; i++){
@@ -114,4 +179,36 @@ function appendCheckBoxContent(obj){
 				+"</div>"
 			+"</div>";
 	return str;
+}
+function changeText(obj){
+	if($(obj).attr("aria-expanded") == "true"){
+		$(obj).find("font").html("展开");
+	}else{
+		$(obj).find("font").html("收起");
+	}
+}
+function checkedValue(map){
+	var ids = "";
+	var values = "";
+	console.log("3");
+	$('.icheckbox_square-green').each(function(){
+		console.log("2");
+		if($(this).hasClass("checked")){
+			var id = $(this).find("input[type='hidden']").attr("id");
+			var value = $(this).find("input[type='hidden']").attr("value");
+			if(ids != ""){
+				ids += ",";
+				value += ",";
+			}
+			console.log(id);
+			ids += id;
+			values += value;
+		}
+	});
+	console.log(ids);
+	console.log(values);
+	console.log("1");
+	map["ids"] = ids;
+	map["values"] = values;
+	return map;
 }

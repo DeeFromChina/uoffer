@@ -71,6 +71,9 @@
 .colorFF0033{
 	color:#FF0033;
 }
+.bgColor000000{
+	background-color:#000000 !important;
+}
 .bgColorFF0000{
 	background-color:#FF0000;
 }
@@ -82,4 +85,11 @@
 }
 .brColor00B38A{
 	border-color: #00B38A;
+}
+.br1px000000solid{
+	border:1px #000000 solid;
+}
+.brbgColor000000{
+	background-color:#000000 !important;
+	border-color:#000000 !important;
 }

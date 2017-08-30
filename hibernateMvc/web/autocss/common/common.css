@@ -1,7 +1,6 @@
 @import url("size.css");
 @import url("checkbox.css");
 @import url("leftMeum.css");
-@import url("bootstrapTree.css");
 .hidden{
 	display:none;
 }
@@ -13,6 +12,9 @@
 }
 .floatR{
 	float:right;
+}
+.border-collapse{
+	border-collapse:collapse;
 }
 /* 两级下拉菜单 */
 .dropdown-submenu {  

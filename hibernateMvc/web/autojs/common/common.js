@@ -1,8 +1,9 @@
 //var jspPath = "http://10.18.12.29:8080/hibernateMvc/autojsp/";
 var jspPath = "http://localhost:8080/hibernateMvc/autojsp/";
 var doc = document;
+var map = {};
 function getid(id){
-	return doc.getElementById(id);
+	return document.getElementById(id);
 }
 /**
  * 填充下拉框
@@ -102,6 +103,7 @@ function openWindow(url,title,width,height){
 		
 	var timestamp = Date.parse(new Date());
 	timestamp = timestamp / 1000;
+	map["pageId"] = "myPage"+timestamp;
 	var pageStr = "<div class='modal fade' id='myPage"+timestamp+"' tabindex='-1' role='dialog' aria-labelledby='myModalLabel' aria-hidden='true'>"
 						+"<div class='modal-dialog' style='width:"+width+";height:"+height+";margin-top:"+marginTop+";'>"
 							+"<div class='modal-content'>"
@@ -151,7 +153,7 @@ function closeWindow(objId){
 function countFrameHeight(){
 	var pdoc = parent.document;
 	pdoc.getElementById("mainFrame").height = 0;
-	pdoc.getElementById("mainFrame").height = doc.body.height;
+	pdoc.getElementById("mainFrame").height = document.body.height;
 	//pdoc.getElementById("mainFrame").style.marginTop = parent.$("#headTitle").height() - 10;//不知道为什么会多出10高度
 }
 /**
@@ -179,12 +181,13 @@ function dataFormVcenter(){
 	}else{
 		bodyHeight = windowHeight;
 	}
+	var marginTH = 0;
 	if(flag){
-		doc.body.height = bodyHeight - bh - 68;
-		var marginTH = (doc.body.height - formHeight)/2;
+		document.body.height = bodyHeight - bh - 68;
+		marginTH = (document.body.height - formHeight)/2;
 		$('#dataForm').css("padding-top",marginTH);
 	}else{
-		doc.body.height = bodyHeight + 60;//给足够的边距
+		document.body.height = bodyHeight;//给足够的边距
 		$('#dataForm').css("padding-top",headHeight+50);//dataForm远大于屏幕
 		$('#dataForm').css("padding-bottom",bh);
 	}
@@ -215,6 +218,19 @@ function judgeSize(targetId,flag,size,trueS,falseS){
 			return falseS;
 		}else{
 			return trueS;
+		}
+	}
+}
+
+function setMap(){
+	var url = location.search;
+	if (url.indexOf("?") != -1) {
+		url = url.substring(1,url.length);
+		var params = url.split("&");
+		for(var i = 0; i < params.length; i++){
+			var key = params[i].split("=")[0];
+			var value = params[i].split("=")[1];
+			map[key] = value;
 		}
 	}
 }

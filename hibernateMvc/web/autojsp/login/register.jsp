@@ -76,9 +76,11 @@
 						<font class="font-14">求职方向：</font>
 					</td>
 					<td colspan="2">
-						<div class="input-group wi100">
-							<input type="text" id="msgCode" name="jobType" class="form-control w280">
-							<button type="button" class="btn btn-default rightBtn"  onclick="Reciprocal()" id="msgtime">获取</button>
+						<div class="input-group input-class border-collapse">
+							<input type="text" id="jobType" name="jobType" class="form-control">
+							<span class="input-group-addon hand">
+								<span class="glyphicon glyphicon-th" onclick="selectJob('jobType')"></span>
+							</span>
 						</div>
 					</td>
 					<td></td>
@@ -88,7 +90,11 @@
 						<font class="font-14">所在城市：</font>
 					</td>
 					<td colspan="2">
-						<div class="input-group selectInput" id="userCity">
+						<div class="input-group input-class border-collapse">
+							<input type="text" id="userCity" name="userCity" class="form-control">
+							<span class="input-group-addon hand">
+								<span class="glyphicon glyphicon-th"></span>
+							</span>
 						</div>
 					</td>
 					<td></td>
