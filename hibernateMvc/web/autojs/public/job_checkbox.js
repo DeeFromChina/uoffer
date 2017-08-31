@@ -7,9 +7,8 @@ function init(){
 	selectCheckBox(data,"jobMeum",type,true,false);
 }
 function sumbit(){
-	checkedValue(map);
-	console.log(map["ids"]);
-	console.log(map["values"]);
-	var objId = map["pageId"];
-	closeWindow(objId);
+	checkedValue();
+	mainFrameSetValue("jobType",map["ids"]);
+	mainFrameSetValue("jobTypeName",map["values"]);
+	closeWin();
 }

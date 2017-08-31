@@ -77,9 +77,10 @@
 					</td>
 					<td colspan="2">
 						<div class="input-group input-class border-collapse">
-							<input type="text" id="jobType" name="jobType" class="form-control">
+							<input type="hidden" id="jobType" name="jobType" />
+							<input type="text" id="jobTypeName" name="jobTypeName" class="form-control" />
 							<span class="input-group-addon hand">
-								<span class="glyphicon glyphicon-th" onclick="selectJob('jobType')"></span>
+								<span class="glyphicon glyphicon-th" onclick="selectJob()"></span>
 							</span>
 						</div>
 					</td>
@@ -93,7 +94,7 @@
 						<div class="input-group input-class border-collapse">
 							<input type="text" id="userCity" name="userCity" class="form-control">
 							<span class="input-group-addon hand">
-								<span class="glyphicon glyphicon-th"></span>
+								<span class="glyphicon glyphicon-th" onclick="selectCity()"></span>
 							</span>
 						</div>
 					</td>
@@ -146,7 +147,12 @@
 						<font class="font-14">目前职位：</font>
 					</td>
 					<td colspan="2">
-						<div class="input-group selectInput" id="userJob">
+						<div class="input-group input-class border-collapse">
+							<input type="hidden" id="jobType" name="jobType" />
+							<input type="text" id="jobTypeName" name="jobTypeName" class="form-control" />
+							<span class="input-group-addon hand">
+								<span class="glyphicon glyphicon-th" onclick="selectJob('jobType')"></span>
+							</span>
 						</div>
 					</td>
 					<td></td>
@@ -174,7 +180,7 @@
 						<font class="font-14">验证码：</font>
 					</td>
 					<td colspan="2">
-						<div class="input-group wi100">
+						<div class="input-group border-collapse wi100">
 							<input type="text" id="msgCode" name="msgCode" class="form-control w280">
 							<button type="button" class="btn btn-default rightBtn"  onclick="Reciprocal()" id="msgtime">获取</button>
 						</div>
@@ -200,7 +206,7 @@
 					<td></td>
 				</tr>
 			</table>
-			<table class="login-top">
+			<table class="login-top maringTop_12">
 				<col class="wi28"/>
 				<col class="wi25"/>
 				<col class="wi25"/>

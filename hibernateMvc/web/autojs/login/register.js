@@ -32,11 +32,11 @@ function getTran(ret) {
 /**显示表单*/
 function appearForm(){
 	if(getid("type").value == '1'){
-		$("#form1").addClass("hidden");
-		$("#form2").removeClass("hidden");
-	}else{
 		$("#form2").addClass("hidden");
 		$("#form1").removeClass("hidden");
+	}else{
+		$("#form1").addClass("hidden");
+		$("#form2").removeClass("hidden");
 	}
 }
 /**倒数*/
@@ -80,6 +80,14 @@ function selectJob(){
 	var data = "?type=1";
 	openWindow(url+data,title,width,height);
 }
+function selectCity(){
+	var url = "public/city_select.jsp";
+	var title = "选择您的城市";
+	var width = "600";
+	var height = "400";
+	var data = "?type=1";
+	openWindow(url+data,title,width,height);
+}
 
 
 
@@ -90,33 +98,6 @@ function selectJob(){
 
 
     var phoneCode = ""; 
-	//头部
-	function changeColor1(der){
-		der.style.background="#777777";
-	}
-	function changeColor2(der){
-		der.style.background="#32373C";
-	}
-	function changeColor3(der){
-		if(der.style.Color=="#00B38A"){
-			der.style.background="#00B38A";
-			der.style.Color="#FFF";
-		}
-	}
-	function changeColor4(){
-		if(document.getElementById("type").value=="1"){
-			document.getElementById("button1").style.background="#00B38A";
-			document.getElementById("button1").innerHTML="<font style='font-size:14px;' color='#FFF'>我是候选人</font>";
-			document.getElementById("button2").style.background="#FFF";
-			document.getElementById("button2").innerHTML="<font style='font-size:14px;' color='#00B38A'>我是HR/BOSS</font>";
-		}
-		if(document.getElementById("type").value=="2"){
-			document.getElementById("button2").style.background="#00B38A";
-			document.getElementById("button2").innerHTML="<font style='font-size:14px;' color='#FFF'>我是HR/BOSS</font>";
-			document.getElementById("button1").style.background="#FFF";
-			document.getElementById("button1").innerHTML="<font style='font-size:14px;' color='#00B38A'>我是候选人</font>";
-		}
-	}
 	
 	//选择用户/企业
 	var code2;

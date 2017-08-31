@@ -103,12 +103,12 @@ function openWindow(url,title,width,height){
 		
 	var timestamp = Date.parse(new Date());
 	timestamp = timestamp / 1000;
-	map["pageId"] = "myPage"+timestamp;
+	window.top.map["pageId"] = "myPage"+timestamp;
 	var pageStr = "<div class='modal fade' id='myPage"+timestamp+"' tabindex='-1' role='dialog' aria-labelledby='myModalLabel' aria-hidden='true'>"
 						+"<div class='modal-dialog' style='width:"+width+";height:"+height+";margin-top:"+marginTop+";'>"
 							+"<div class='modal-content'>"
 								+"<div class='modal-header'>"
-									+"<button type='button' class='close' data-dismiss='modal' aria-hidden='true' onclick='closeWindow(\"myPage"+timestamp+"\")'>"
+									+"<button type='button' id='close' class='close' data-dismiss='modal' aria-hidden='true' onclick='closeWindow(\"myPage"+timestamp+"\")'>"
 										+"&times;"
 									+"</button>"
 									+"<h4 class='modal-title' id='myModalLabel'>"
@@ -146,6 +146,9 @@ function closeWindow(objId){
 	if(divs.length == 0){
 		window.top.document.body.style.overflowY = "auto";
 	}
+}
+function closeWin(){
+	$(parent.document.getElementById("close")).click();
 }
 /**
  * 计算frame高度
@@ -221,7 +224,7 @@ function judgeSize(targetId,flag,size,trueS,falseS){
 		}
 	}
 }
-
+/**将url的传参放入map*/
 function setMap(){
 	var url = location.search;
 	if (url.indexOf("?") != -1) {
@@ -233,4 +236,48 @@ function setMap(){
 			map[key] = value;
 		}
 	}
+}
+/**
+ * 向mainFrame中的页面传值(适用于弹框向父页面传值)
+ * targetId:目标元素id
+ * value:目标元素赋的值
+ * */
+function mainFrameSetValue(targetId,value){
+	var mainFrame = parent.$('#mainFrame').contents();
+	mainFrame.find("#"+targetId).val(value);
+}
+
+
+function searchText(textId){
+	highLight(textId);
+}
+function highLight(textId){
+	var searchText = $('#'+textId).val();
+	var regExp = new RegExp(searchText, 'g');//全文检索
+	clearSelection();
+	$('font[class="ch_title"]').each(function () {
+	 	var html = $(this).html();
+	 	var newHtml = html.replace(regExp, '<span class="highlight">' + searchText + '</span>');
+	 	$(this).html(newHtml);
+	 	if(html.search(searchText) == -1){
+	 		return;
+	 	}
+	 	if($(this).parent().parent().attr('class') == "checkbox_cell"){
+	 		var checkbox_cell_div = $(this).parent().parent().parent();
+	 		if(!checkbox_cell_div.hasClass("in")){
+	 			checkbox_cell_div.addClass("in");
+	 			var id = checkbox_cell_div.attr("id");
+	 			$("#a"+id).addClass="collapsed";
+	 			changeText($("#a"+id)[0]);
+	 			$("#a"+id).attr("aria-expanded","true");
+	 		}
+	 	}
+ 	});
+}
+function clearSelection() {
+ 	$('font[class="ch_title"]').each(function () {
+	 	$(this).find('.highlight').each(function () {
+	 		$(this).replaceWith($(this).html());
+	 	});
+ 	});
 }

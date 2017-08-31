@@ -25,17 +25,22 @@ function selectCheckBox(obj,formId,type,haveCheckBox,isMultiselect){
 	}
 	$("#"+formId).append(str);
 	$('.hiddenCheckBox').click(function(){
+		var ischecked = false;
+		if($(this).parent().hasClass("checked")){
+			$(this).parent().removeClass("checked");
+		}else{
+			$(this).parent().addClass("checked");
+			ischecked = true;
+		}
 		if(!isMultiselect){
 			$('.hiddenCheckBox').each(function(){
 				if($(this).parent().hasClass("checked")){
 					$(this).parent().removeClass("checked");
 				}
 			});
-		}
-		if($(this).parent().hasClass("checked")){
-			$(this).parent().removeClass("checked");
-		}else{
-			$(this).parent().addClass("checked");
+			if(ischecked){
+				$(this).parent().addClass("checked");
+			} 
 		}
 	});
 }
@@ -76,17 +81,22 @@ function addCheckBox(obj,formId,haveCheckBox,isMultiselect){
 	}
 	$("#"+formId).append(str);
 	$('.hiddenCheckBox').click(function(){
+		var ischecked = false;
+		if($(this).parent().hasClass("checked")){
+			$(this).parent().removeClass("checked");
+		}else{
+			$(this).parent().addClass("checked");
+			ischecked = true;
+		}
 		if(!isMultiselect){
 			$('.hiddenCheckBox').each(function(){
 				if($(this).parent().hasClass("checked")){
 					$(this).parent().removeClass("checked");
 				}
 			});
-		}
-		if($(this).parent().hasClass("checked")){
-			$(this).parent().removeClass("checked");
-		}else{
-			$(this).parent().addClass("checked");
+			if(ischecked){
+				$(this).parent().addClass("checked");
+			} 
 		}
 	});
 }
@@ -108,14 +118,14 @@ function appendCheckBoxTitle(obj,name,haveCheckBox){
 	if(haveCheckBox){
 		if(!isCheck){
 			str += "<div class=\"checkbox_title\" >"
-						+"<a data-toggle=\"collapse\" href=\"#openMeum"+count+"\" onclick=\"changeText(this)\">"
+						+"<a data-toggle=\"collapse\" href=\"#openMeum"+count+"\" id=\"aopenMeum"+count+"\" onclick=\"changeText(this)\">"
 							+"<div class=\"paddingBottom40\">"
 								+"<div class=\"icheckbox_square-green floatL\">"
 									+"<input type=\"hidden\" id=\""+obj.value+"\" value=\""+obj.title+"\" />"
 									+"<input type=\"checkbox\" name=\""+name+"\" class=\"hiddenCheckBox hand\" />"
 								+"</div>"
 								+"<div class=\"checkbox_cell_value\">"
-									+obj.title
+									+"<font class=\"ch_title\">"+obj.title+"</font>"
 								+"</div>"
 								+"<font class=\"floatR\">展开</font>"
 							+"</div>"
@@ -129,7 +139,7 @@ function appendCheckBoxTitle(obj,name,haveCheckBox){
 								+"<input type=\"checkbox\" name=\""+name+"\" class=\"hiddenCheckBox hand\" />"
 							+"</div>"
 							+"<div class=\"checkbox_cell_value\">"
-								+obj.title
+								+"<font class=\"ch_title\">"+obj.title+"</font>"
 							+"</div>"
 						+"</div>"
 					+"</div>";
@@ -137,14 +147,14 @@ function appendCheckBoxTitle(obj,name,haveCheckBox){
 	}else{
 		if(!isCheck){
 			str += "<div class=\"checkbox_title\" >"
-						+"<a data-toggle=\"collapse\" href=\"#openMeum"+count+"\" onclick=\"changeText(this)\">"
-							+obj.title
+						+"<a data-toggle=\"collapse\" href=\"#openMeum"+count+"\" id=\"aopenMeum"+count+"\" onclick=\"changeText(this)\">"
+							+"<font class=\"ch_title\">"+obj.title+"</font>"
 							+"<font class=\"floatR\">展开</font>"
 						+"</a>"
 					+"</div>";
 		}else{
 			str += "<div class=\"checkbox_title\" >"
-						+obj.title
+						+"<font class=\"ch_title\">"+obj.title+"</font>"
 					+"</div>";
 		}
 		
@@ -172,27 +182,26 @@ function appendCheckBoxContent(obj){
 	var str = "";
 	str += "<div class=\"checkbox_cell\">"
 				+"<div class=\"icheckbox_square-green floatL\">"
+					+"<input type=\"hidden\" id=\""+obj.value+"\" value=\""+obj.title+"\" />"
 					+"<input type=\"checkbox\" class=\"hiddenCheckBox hand\" />"
 				+"</div>"
 				+"<div class=\"checkbox_cell_value\">"
-					+obj.title
+					+"<font class=\"ch_title\">"+obj.title+"</font>"
 				+"</div>"
 			+"</div>";
 	return str;
 }
 function changeText(obj){
 	if($(obj).attr("aria-expanded") == "true"){
-		$(obj).find("font").html("展开");
+		$(obj).find("font[class='floatR']").html("展开");
 	}else{
-		$(obj).find("font").html("收起");
+		$(obj).find("font[class='floatR']").html("收起");
 	}
 }
-function checkedValue(map){
+function checkedValue(){
 	var ids = "";
 	var values = "";
-	console.log("3");
 	$('.icheckbox_square-green').each(function(){
-		console.log("2");
 		if($(this).hasClass("checked")){
 			var id = $(this).find("input[type='hidden']").attr("id");
 			var value = $(this).find("input[type='hidden']").attr("value");
@@ -200,14 +209,10 @@ function checkedValue(map){
 				ids += ",";
 				value += ",";
 			}
-			console.log(id);
 			ids += id;
 			values += value;
 		}
 	});
-	console.log(ids);
-	console.log(values);
-	console.log("1");
 	map["ids"] = ids;
 	map["values"] = values;
 	return map;
