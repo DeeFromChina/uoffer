@@ -1,5 +1,8 @@
 package com.offer.controller;
 
+import java.util.ArrayList;
+import java.util.Hashtable;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -10,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.offer.model.util.CheckBox;
 import com.offer.service.baseData.JobService;
 
 /**
@@ -33,6 +37,7 @@ public class BaseDataManagerAction extends TinyBuilderController{
 			
 			if("addJob".equalsIgnoreCase(action)) forward=addJob();
 			if("getJob".equalsIgnoreCase(action)) forward=getJob();
+			if("getCity".equalsIgnoreCase(action)) forward=getCity();
 			
 			toJson(forward);
 		} catch (Exception e) {
@@ -57,5 +62,17 @@ public class BaseDataManagerAction extends TinyBuilderController{
 			e.printStackTrace();
 		}
 		return null;
+	}
+	
+	public Object getCity() {
+		List<CheckBox> checkBoxs = new ArrayList<CheckBox>();
+		try {
+			Hashtable<String, Object> table = new Hashtable<String, Object>();
+			table.put("count", "4");
+			checkBoxs = jobService.getCheckBox(table);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return checkBoxs;
 	}
 }

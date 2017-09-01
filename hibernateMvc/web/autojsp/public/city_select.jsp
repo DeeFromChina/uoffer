@@ -6,7 +6,7 @@
 <%@include file="../common/common.jsp"%>
 <title></title>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<script src="<%=request.getContextPath() %>/autojs/public/job_checkbox.js?randomId=<%=Math.random()%>" type="text/javascript"></script>
+<script src="<%=request.getContextPath() %>/autojs/public/city_select.js?randomId=<%=Math.random()%>" type="text/javascript"></script>
 </head>
 <body onload="init()">
 	<div class="input-group selectInput" id="Country">

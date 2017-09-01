@@ -67,7 +67,7 @@ public class ConUtilImpl implements ConUtil{
 			String methordName = "set";// + key.substring(0, 1).toUpperCase() + key.substring(1)
 			for (String s : key.split("_")) {
 			   methordName += s.substring(0,1).toUpperCase() + s.substring(1);
-         }
+			}
 			for (int i = 0; i < methods.length; i++) {
 				if (methods[i].getName().equalsIgnoreCase(methordName)) {
 					Class type = methods[i].getParameterTypes()[0];

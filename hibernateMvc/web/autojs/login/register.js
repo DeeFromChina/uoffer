@@ -85,7 +85,7 @@ function selectCity(){
 	var title = "选择您的城市";
 	var width = "600";
 	var height = "400";
-	var data = "?type=1";
+	var data = "";
 	openWindow(url+data,title,width,height);
 }
 
