@@ -5,6 +5,10 @@ import java.util.Hashtable;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.offer.dao.BaseDao;
 import com.offer.model.baseData.City;
 import com.offer.model.baseData.Job;
 import com.offer.model.util.CheckBox;
@@ -14,7 +18,11 @@ import com.offer.service.impl.BaseServiceImpl;
 import com.offer.util.BuildTree;
 import com.offer.util.CacheClass;
 
+@Service("cityService")
 public class CityServiceImpl extends BaseServiceImpl implements CityService{
+	
+	@Autowired
+	private BaseDao baseDao;
 
 	@Override
 	public City getById(int id) throws Exception {
@@ -54,8 +62,25 @@ public class CityServiceImpl extends BaseServiceImpl implements CityService{
 
 	@Override
 	public List<Tree> getTree(Hashtable<String, Object> table) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		List<Tree> trees = new ArrayList<Tree>();
+		List<Tree> returnTree = new ArrayList<Tree>();
+		if(CacheClass.getCache("cityTree") == null){
+			List<City> cities = new ArrayList<City>();
+			if(CacheClass.getCache("city") == null){
+				cities = (List<City>) baseDao.findByHql("From City");
+			}else {
+				cities = (List<City>) CacheClass.getCache("city");
+			}
+			trees = BuildTree.setTree(cities, "name", "id", "pid");
+			returnTree = BuildTree.buildTree(trees);
+			//保存job的树形数据
+			CacheClass.setCache("cityTree",returnTree);
+			//保存job的数据
+			CacheClass.setCache("city",cities);
+		}else if(table.get("all") != null){
+			returnTree = (List<Tree>) CacheClass.getCache("cityTree");
+		}
+		return returnTree;
 	}
 
 	@Override
@@ -65,27 +90,8 @@ public class CityServiceImpl extends BaseServiceImpl implements CityService{
 	}
 
 	@Override
-	public List<Map<String, String>> getCityList() throws Exception {
-		List<Tree> trees = new ArrayList<Tree>();
-		List<Tree> returnTree = new ArrayList<Tree>();
-		if(CacheClass.getCache("jobTree") == null){
-			List<Job> jobs = (List<Job>) baseDao.findByHql("From Job");
-			for(Job job : jobs){
-				Tree tree = new Tree();
-				tree.setTitle(job.getName());
-				tree.setValue(String.valueOf(job.getId()));
-				tree.setVisibility("1");
-				tree.setPatherId(job.getPid() == null ? null : String.valueOf(job.getPid()));
-				trees.add(tree);
-			}
-			returnTree = BuildTree.buildTree(trees);
-			//保存job的树形数据
-			CacheClass.setCache("jobTree",returnTree);
-			//保存job的数据
-			CacheClass.setCache("job",jobs);
-		}else if(table.get("all") != null){
-			returnTree = (List<Tree>) CacheClass.getCache("jobTree");
-		}
+	public List<Map<String, String>> getCityList(Hashtable<String, Object> table) throws Exception {
+		
 		return null;
 	}
 

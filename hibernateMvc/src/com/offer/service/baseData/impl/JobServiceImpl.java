@@ -1,16 +1,13 @@
 package com.offer.service.baseData.impl;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.offer.dao.BaseDao;
-import com.offer.model.OfferCollect;
 import com.offer.model.baseData.Job;
 import com.offer.model.util.CheckBox;
 import com.offer.model.util.Tree;
@@ -19,8 +16,6 @@ import com.offer.service.impl.BaseServiceImpl;
 import com.offer.util.BuildCheckBox;
 import com.offer.util.BuildTree;
 import com.offer.util.CacheClass;
-import com.offer.util.ChinaInitial;
-import com.offer.util.ConUtil;
 
 @Service("jobService")
 public class JobServiceImpl extends BaseServiceImpl implements JobService{
@@ -28,9 +23,6 @@ public class JobServiceImpl extends BaseServiceImpl implements JobService{
 	@Autowired
 	private BaseDao baseDao;
 	   
-	@Autowired
-	private ConUtil conUtil;
-
 	@Override
 	public Job getById(int id) throws Exception {
 		

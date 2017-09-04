@@ -15,28 +15,44 @@ function getid(id){
 function setList(listId,placeholder,listValue,index,method){
 	var level = index;
 	var inn = "";
-	inn += "<div class=\"dropdown\">";
-	inn += "<input type=\"text\" id=\""+listId+"Value\" class=\"form-control w340\" readOnly=\"readOnly\" placeholder=\""+placeholder+"\" />";
+	inn += "<div class=\"dropdown input-class marginAuto\">";
+	inn += "<div class=\"w340\">";
+	inn += "<input type=\"text\" id=\""+listId+"Value\" class=\"form-control\" readOnly=\"readOnly\" placeholder=\""+placeholder+"\" />";
 	inn += "<input type=\"hidden\" name=\""+listId+"\" />";
+	inn += "</div>";
 	inn += "<button type=\"button\" class=\"btn dropdown-toggle selectBtn\" data-toggle=\"dropdown\">";
 	inn += "<span class=\"caret\"></span>";
 	inn += "</button>";
-	inn += "<ul class=\"dropdown-menu\" role=\"menu\" aria-labelledby=\"dropdownMenu selectMeum\">";
-	inn += addListChild(listId,listValue,index,method);
-	inn += "</ul>";
+	if(listValue != ''){
+		inn += "<ul class=\"dropdown-menu selectMeum\" role=\"menu\" aria-labelledby=\"dropdownMenu\">";
+		inn += addListChild(listId,listValue,index,method);
+		inn += "</ul>";
+	}else{
+		inn += "<ul class=\"dropdown-menu selectMeum\" role=\"menu\" aria-labelledby=\"dropdownMenu\">";
+		inn+="<li role='presentation'>"
+				+"<a class='selectValue' role='menuitem' >"
+					+placeholder
+				+"</a>";
+		inn+="</li>";
+		inn += "</ul>";
+	}
 	inn += "</div>";
 	getid(listId).innerHTML = inn;
 }
 function addListChild(listId,listValue,index,method){
 	var level = index;
 	var inn = "";
+	var cls = "";
+	if(listValue.length > 1){
+		cls = "class='dropdown-submenu'";
+	}
 	for(var i in listValue){
-		inn+="<li role='presentation' class='dropdown-submenu'>"
-				+"<a class='selectValue' role='menuitem' id='"+listValue[i].id+"' onclick='selectValue(this,'"+listId+"');"+method+"'>"
+		inn+="<li role='presentation' "+cls+">"
+				+"<a class='selectValue' role='menuitem' id=\'"+listValue[i].id+"\' onclick=\'selectValue(this,\""+listId+"\");"+method+"\'>"
 					+listValue[i].value
 				+"</a>";
 		if(level > 1){
-			inn+="<ul class='dropdown-menu' style='height:250px;overflow-y:auto;'>";
+			inn+="<ul class='dropdown-menu selectMeum'>";
 			inn+=setList(listId,listValue,level-1,method);
 			inn+="</ul>";
 		}
@@ -247,7 +263,47 @@ function mainFrameSetValue(targetId,value){
 	mainFrame.find("#"+targetId).val(value);
 }
 
+/**
+ * 将tree转化成select所需的list
+ * 返回list
+ * data:treeData
+ * treeId:tree某节点下属子节点
+ * */
+function treeToSelect(data,treeId){
+	if(treeId == undefined){
+		for(var i = 0; i < data.length; i++){
+			data[i].content = "";
+			data[i].id = data[i].value; 
+			data[i].value = data[i].title;
+		}
+	}else {
+		var isPass = false;
+		for(var i = 0; i < data.length; i++){
+			if(data[i].id == treeId){
+				if(data[i].content != undefined){
+					data = treeToSelect(data[i].content,treeId);
+					console.log(data);
+					isPass = true;
+				}
+			}
+		}
+		if(!isPass){
+			var subData;
+			for(var i = 0; i < data.length; i++){
+				if(data[i].content != undefined){
+					subData = treeToSelect(data[i].content,treeId);
+				}
+				if(subData != undefined){
+					data = subData
+					break;
+				}
+			}
+		}
+	}
+	return data;
+}
 
+/**全文检索并以高光显示*/
 function searchText(textId){
 	highLight(textId);
 }

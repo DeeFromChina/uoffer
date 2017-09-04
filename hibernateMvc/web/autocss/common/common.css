@@ -81,6 +81,9 @@ button > font {
 	max-height:120px;
 	overflow-y:auto;
 }
+/* 下拉菜单元素样式 */
+.selectValue{
+}
 /* 输入框右边按钮 */
 .rightBtn{
 	width:101px;
@@ -93,4 +96,8 @@ button > font {
 	background:#FFFFFF;
 	color:#9A9A9A;
 	border:1px #9A9A9A solid;
+}
+.input-class{
+	width: 381px;
+	height:41px;
 }

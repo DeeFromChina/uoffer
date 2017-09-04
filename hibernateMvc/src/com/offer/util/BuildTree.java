@@ -74,7 +74,7 @@ public class BuildTree extends BaseUtil{
 		List<Tree> trees = new ArrayList<Tree>();
 		for(Tree tree : Data){
 			String pid = tree.getPatherId();
-			if(pid == null){
+			if(pid == null || "".equals(pid)){
 				continue;
 			}
 			for(Tree parentTree : Data){
@@ -89,7 +89,7 @@ public class BuildTree extends BaseUtil{
 		}
 		for(Tree tree : Data){
 			String pid = tree.getPatherId();
-			if(pid == null){
+			if(pid == null || "".equals(pid)){
 				trees.add(tree);
 				continue;
 			}
@@ -123,6 +123,8 @@ public class BuildTree extends BaseUtil{
 	/**
 	 * @param Data	数据
 	 * @param id	在某id下属
+	 * 
+	 * 只取某id下属的数据
 	 * 
 	 */
 	public static List<Tree> selectTreeOne(List<Tree> Data, String id){

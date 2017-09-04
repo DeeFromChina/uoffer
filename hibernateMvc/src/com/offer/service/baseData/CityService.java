@@ -26,5 +26,5 @@ public interface CityService {
 	
 	public List<CheckBox> getCheckBox(Hashtable<String, Object> table) throws Exception;
 	
-	public List<Map<String, String>> getCityList() throws Exception;
+	public List<Map<String, String>> getCityList(Hashtable<String, Object> table) throws Exception;
 }

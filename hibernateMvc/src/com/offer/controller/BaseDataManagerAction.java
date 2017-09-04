@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.offer.model.util.CheckBox;
+import com.offer.model.util.Tree;
+import com.offer.service.baseData.CityService;
 import com.offer.service.baseData.JobService;
 
 /**
@@ -26,6 +28,9 @@ public class BaseDataManagerAction extends TinyBuilderController{
 	
 	@Autowired
 	private JobService jobService;
+	
+	@Autowired
+	private CityService cityService;
 
 	@ResponseBody
 	@RequestMapping(value = "/baseData", produces = "application/json")
@@ -39,7 +44,7 @@ public class BaseDataManagerAction extends TinyBuilderController{
 			if("getJob".equalsIgnoreCase(action)) forward=getJob();
 			if("getCity".equalsIgnoreCase(action)) forward=getCity();
 			
-			toJson(forward);
+			return toJson(forward);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -65,14 +70,14 @@ public class BaseDataManagerAction extends TinyBuilderController{
 	}
 	
 	public Object getCity() {
-		List<CheckBox> checkBoxs = new ArrayList<CheckBox>();
+		List<Tree> trees = new ArrayList<Tree>();
 		try {
 			Hashtable<String, Object> table = new Hashtable<String, Object>();
-			table.put("count", "4");
-			checkBoxs = jobService.getCheckBox(table);
+			table.put("all", "true");
+			trees = cityService.getTree(table);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return checkBoxs;
+		return trees;
 	}
 }
