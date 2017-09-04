@@ -1,7 +1,10 @@
 package com.offer.util;
 
 import java.lang.reflect.Method;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.offer.model.baseData.Job;
 import com.offer.model.util.Tree;
 
-public class BuildTree {
+public class BuildTree extends BaseUtil{
 	
 	@Autowired
 	private ConUtil conUtil;
@@ -19,7 +22,7 @@ public class BuildTree {
 		Job job = new Job();
 		job.setId(1);
 		jobs.add(job);
-		setTree(jobs, "", "");
+//		setTree(jobs, "", "");
 		System.exit(0);
 	}
 	
@@ -30,40 +33,41 @@ public class BuildTree {
 	 * (List<job> jobs, String name, String id)name,id是job的属性
 	 * @return
 	 */
-	public static List<Tree> setTree(List<?> cls, String title, String value){
+	public static List<Tree> setTree(List<?> cls, String title, String value, String pid){
+		List<Tree> trees = new ArrayList<Tree>();
 		if(cls.size() == 0){
-			return null;
+			return trees;
 		}
-		Class<?> t = null;
 		Method[] methods = null;
-		if(cls.size() > 0){
-			t = cls.get(0).getClass();
-			methods = t.getMethods();
+		String Key = "get" + value.substring(0, 1).toUpperCase() + value.substring(1);
+		String Value = "get" + title.substring(0, 1).toUpperCase() + title.substring(1);
+		String Pid = "get" + pid.substring(0, 1).toUpperCase() + pid.substring(1);
+		
+		try {
+			for(int j = 0; j < cls.size(); j++){
+				methods = cls.get(j).getClass().getMethods();
+				Tree tree = new Tree();
+				for(int i = 0; i < methods.length; i++){
+					if (methods[i].getName().equalsIgnoreCase(Key)){
+						Object object = methods[i].invoke(cls.get(j), (Object[]) null);
+						tree.setValue(returnString(object));
+					}
+					if (methods[i].getName().equalsIgnoreCase(Value)) {
+						Object object = methods[i].invoke(cls.get(j), (Object[]) null);
+						tree.setTitle(returnString(object));
+					}
+					if (methods[i].getName().equalsIgnoreCase(Pid)) {
+						Object object = methods[i].invoke(cls.get(j), (Object[]) null);
+						tree.setPatherId(returnString(object));
+					}
+				}
+				tree.setVisibility("1");
+				trees.add(tree);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
-		String Key = "set" + value.substring(0, 1).toUpperCase() + value.substring(1);
-		String Value = "set" + title.substring(0, 1).toUpperCase() + title.substring(1);
-		for(int i = 0; i < methods.length; i++){
-			 if (methods[i].getName().equalsIgnoreCase(Key)){
-				 Class type = methods[i].getParameterTypes()[0];
-				 Object retValue = null;
-	             if (!type.getName().equalsIgnoreCase("java.lang.String") || "".equals(value) || value == null) retValue = null;
-//	             else retValue = conUtil.parseParamenter2(type, value);
-//	             methods[i].invoke(target, new Object[] { retValue });
-			 }
-		}
-		for(int i = 0; i < cls.size(); i++){
-			String 
-		}
-//		for(Job job : jobs){
-//			Tree tree = new Tree();
-//			tree.setTitle(job.getName());
-//			tree.setValue(String.valueOf(job.getId()));
-//			tree.setVisibility("1");
-//			tree.setPatherId(job.getPid() == null ? null : String.valueOf(job.getPid()));
-//			trees.add(tree);
-//		}
-//		returnTree = BuildTree.buildTree(trees);
-		return null;
+		return trees;
 	}
 
 	public static List<Tree> buildTree(List<Tree> Data){

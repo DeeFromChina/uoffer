@@ -74,14 +74,16 @@ public class JobServiceImpl extends BaseServiceImpl implements JobService{
 		List<Tree> returnTree = new ArrayList<Tree>();
 		if(CacheClass.getCache("jobTree") == null){
 			List<Job> jobs = (List<Job>) baseDao.findByHql("From Job");
-			for(Job job : jobs){
-				Tree tree = new Tree();
-				tree.setTitle(job.getName());
-				tree.setValue(String.valueOf(job.getId()));
-				tree.setVisibility("1");
-				tree.setPatherId(job.getPid() == null ? null : String.valueOf(job.getPid()));
-				trees.add(tree);
-			}
+//			for(Job job : jobs){
+//				Tree tree = new Tree();
+//				tree.setTitle(job.getName());
+//				tree.setValue(String.valueOf(job.getId()));
+//				tree.setVisibility("1");
+//				tree.setPatherId(job.getPid() == null ? null : String.valueOf(job.getPid()));
+//				trees.add(tree);
+//			}
+			//将jobs变成trees
+			trees = BuildTree.setTree(jobs, "name", "id", "pid");
 			returnTree = BuildTree.buildTree(trees);
 			//保存job的树形数据
 			CacheClass.setCache("jobTree",returnTree);
