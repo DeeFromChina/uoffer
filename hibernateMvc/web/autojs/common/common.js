@@ -17,7 +17,7 @@ function setList(listId,placeholder,listValue,index,method){
 	var inn = "";
 	inn += "<div class=\"dropdown input-class marginAuto\">";
 	inn += "<div class=\"w340\">";
-	inn += "<input type=\"text\" id=\""+listId+"Value\" class=\"form-control\" readOnly=\"readOnly\" placeholder=\""+placeholder+"\" />";
+	inn += "<input type=\"text\" id=\""+listId+"Value\" name=\""+listId+"Value\" class=\"form-control\" readOnly=\"readOnly\" placeholder=\""+placeholder+"\" />";
 	inn += "<input type=\"hidden\" name=\""+listId+"\" />";
 	inn += "</div>";
 	inn += "<button type=\"button\" class=\"btn dropdown-toggle selectBtn\" data-toggle=\"dropdown\">";
@@ -269,38 +269,46 @@ function mainFrameSetValue(targetId,value){
  * data:treeData
  * treeId:tree某节点下属子节点
  * */
-function treeToSelect(data,treeId){
-	if(treeId == undefined){
-		for(var i = 0; i < data.length; i++){
-			data[i].content = "";
-			data[i].id = data[i].value; 
-			data[i].value = data[i].title;
+function treeToSelect(pdata,treeId,flag){
+//	json对象赋值是指向存储地址，并不能直接赋值
+//	var sdata = pdata;
+	var sdata = newJson(pdata);
+	if(treeId == undefined || flag != undefined){
+		for(var i = 0; i < sdata.length; i++){
+			sdata[i].content = "";
+			sdata[i].id = sdata[i].value; 
+			sdata[i].value = sdata[i].title;
 		}
 	}else {
 		var isPass = false;
-		for(var i = 0; i < data.length; i++){
-			if(data[i].id == treeId){
-				if(data[i].content != undefined){
-					data = treeToSelect(data[i].content,treeId);
-					console.log(data);
+		for(var i = 0; i < sdata.length; i++){
+			if(sdata[i].value == treeId){
+				if(sdata[i].content != undefined){
+					sdata = treeToSelect(sdata[i].content,treeId,true);
 					isPass = true;
 				}
 			}
 		}
 		if(!isPass){
 			var subData;
-			for(var i = 0; i < data.length; i++){
-				if(data[i].content != undefined){
-					subData = treeToSelect(data[i].content,treeId);
+			for(var i = 0; i < sdata.length; i++){
+				if(sdata[i].content != undefined){
+					subData = treeToSelect(sdata[i].content,treeId);
 				}
 				if(subData != undefined){
-					data = subData
+					sdata = subData
 					break;
 				}
 			}
 		}
 	}
-	return data;
+	return sdata;
+}
+/*从一个json对象赋值到另一json对象*/
+function newJson(data){
+	var str = JSON.stringify(data);
+	var newData = $.parseJSON(str);
+	return newData;
 }
 
 /**全文检索并以高光显示*/

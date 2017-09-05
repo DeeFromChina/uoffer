@@ -10,5 +10,5 @@ var pages = {
 		4:"mainfirm_question.jsp",
 		5:"maincontact_assistant.jsp",
 		6:"login/loginPC.jsp",
-		7:"login/register.jsp"
+		7:"login/registerPC.jsp"
 	};

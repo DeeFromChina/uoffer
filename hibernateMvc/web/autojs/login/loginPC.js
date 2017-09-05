@@ -1,10 +1,11 @@
+var validateCode;
 function init() {
 	dataFormVcenter();
 	countFrameHeight();
 	parent.changeHeaderTitle();
-	getTran('1');
-	createValidateCode("vCode");
+	validateCode = createValidateCode("vCode");
 	setSrc('remeber','gou.png');
+	rememberMe();
 }
 function getTran(ret) {
 	if (ret == '1') {
@@ -26,36 +27,43 @@ function getTran(ret) {
 		$("#button1").removeClass("checkedBtn");
 	}
 }
-
-
-
-
-
-
-
-//初始化页面时验证是否记住了密码 
-//$(document).ready(function() {
-//	if ($.cookie("rmbUser") == "true") {
-//		$("#rmbUser").attr("checked", true);
-//		$("#name").val($.cookie("userName"));
-//		$("#password").val($.cookie("passWord"));
-//	}
-//});
-
+function goSubmit(){
+	var isPass = false;
+	isPass = checkValidateCode("inputCode");
+	isPass = checkValue();
+	if(!isPass){
+		return;
+	}
+	saveUserInfo();
+}
+function rememberMe(){
+	if ($.cookie("rmbUser") == "true") {
+		$("#name").val($.cookie("userName"));
+		$("#password").val($.cookie("passWord"));
+		$("#type").val($.cookie("type"));
+		getTran($("#type").val());
+	}else{
+		getTran('1');
+	}
+}
 //保存用户信息 
 function saveUserInfo() {
 	if (getid('remeberId').value == '1') {
 		var userName = $("#name").val();
 		var passWord = $("#password").val();
+		var type = $("#type").val();
 		$.cookie("rmbUser", "true", {
 			expires : 7
 		}); // 存储一个带7天期限的 cookie 
 		$.cookie("userName", userName, {
 			expires : 7
-		}); // 存储一个带7天期限的 cookie 
+		}); 
 		$.cookie("passWord", passWord, {
 			expires : 7
-		}); // 存储一个带7天期限的 cookie 
+		}); 
+		$.cookie("type", type, {
+			expires : 7
+		}); 
 	} else {
 		$.cookie("rmbUser", "false", {
 			expires : -1
@@ -66,42 +74,19 @@ function saveUserInfo() {
 		$.cookie("passWord", '', {
 			expires : -1
 		});
+		$.cookie("type", '', {
+			expires : -1
+		}); 
 	}
 }
 	
-	
-function changeColor3(der){
-	if(der.style.Color=="#00B38A"){
-		der.style.background="#00B38A";
-		der.style.Color="#FFF";
-	}
-}
-function changeColor4(){
-	if(getid("type").value=="1"){
-		getid("button1").style.background="#00B38A";
-		getid("button1").innerHTML="<font style='font-size:14px;' color='#FFF'>我是候选人</font>";
-		getid("button2").style.background="#FFF";
-		getid("button2").innerHTML="<font style='font-size:14px;' color='#00B38A'>我是HR/BOSS</font>";
-	}
-	if(getid("type").value=="2"){
-		getid("button2").style.background="#00B38A";
-		getid("button2").innerHTML="<font style='font-size:14px;' color='#FFF'>我是HR/BOSS</font>";
-		getid("button1").style.background="#FFF";
-		getid("button1").innerHTML="<font style='font-size:14px;' color='#00B38A'>我是候选人</font>";
-	}
-}
-var code;
 function changeRemeber() {
 	var remeberId = getid('remeberId').value;
 	if (remeberId == '1') {
-		getid('remeber').src = "../img/wangji.png";
-		getid('remeber').style.width = "16px";
-		getid('remeber').style.height = "16px";
+		setSrc('remeber','wangji.png');
 		getid('remeberId').value = '2';
 	} else if (remeberId == '2') {
-		getid('remeber').src = "../img/gou.png";
-		getid('remeber').style.width = "16px";
-		getid('remeber').style.height = "16px";
+		setSrc('remeber','gou.png');
 		getid('remeberId').value = '1';
 	}
 }
@@ -176,19 +161,9 @@ function validateCode() {
 	}
 	return;
 }
+
 function checkValue(){
 	if(!checkInput('name',"邮箱/手机号码","30",false)) return false;
 	if(!checkInput('password',"密码","30",false)) return false;
 	return true;
 }
-function test123(){
-	top.location.href='check_email1.jsp';
-}
-function test123123(){
-	var url = "action=login&b=3,2";
-	//var url = "login/user1.do";
-	alert(url);
-	var formId = "loginForm";
-	var data = ajaxSumbit(url, formId);
-}
-

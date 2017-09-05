@@ -26,6 +26,7 @@ response.setDateHeader("Expires",0);
 <script src="<%=request.getContextPath() %>/autojs/common/page.js?randomId=<%=Math.random()%>" type="text/javascript"></script>
 <script src="<%=request.getContextPath() %>/autojs/common/ajaxSubmit.js?randomId=<%=Math.random()%>" type="text/javascript"></script>
 <script src="<%=request.getContextPath() %>/autojs/common/common.js?randomId=<%=Math.random()%>" type="text/javascript"></script>
+<script src="<%=request.getContextPath() %>/autojs/common/checkUtil.js?randomId=<%=Math.random()%>" type="text/javascript"></script>
 <script src="<%=request.getContextPath() %>/autojs/common/VCode.js?randomId=<%=Math.random()%>" type="text/javascript"></script>
 <script src="<%=request.getContextPath() %>/autojs/common/checkbox.js?randomId=<%=Math.random()%>" type="text/javascript"></script>
 <script language="javascript">

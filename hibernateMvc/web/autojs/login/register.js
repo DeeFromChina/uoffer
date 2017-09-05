@@ -1,12 +1,11 @@
+var validateCode;
 function init() {
 	dataFormVcenter();
 	countFrameHeight();
 	parent.changeHeaderTitle();
 	getTran('1');
-	createValidateCode("vCode");
+	validateCode = createValidateCode("vCode");
 	setSrc('remeber','gou.png');
-//	var url = "login.do?action=register";
-//	var data = ajaxSumbit(url);
 }
 function getTran(ret) {
 	if (ret == '1') {
@@ -43,15 +42,16 @@ function appearForm(){
 var myVar;
 var second = 60;
 function Reciprocal(){
-//	var phone = document.getElementById("offer_user_phone").value;
-//	if(phone.length < 11 || isNaN(phone)){
-//		alert("手机号码格式不正确！")
-//		return;
-//	}
+	var phone = $("input[name='offer_user_phone']").val();
+	if(isNaN(phone) || phone.length < 11){
+		alert("手机号码格式不正确！")
+		return;
+	}
 //	getmsg();
 	var msgtime = $("#msgtime");
+	myTimer(msgtime);
 	myVar = setInterval(function(){
-		myTimer(msgtime)
+		myTimer(msgtime);
 	},1000);
 	second = 60;
 }
@@ -72,12 +72,16 @@ function myTimer(msgtime){
 		return;
 	}
 }
-function selectJob(){
+function selectJob(targetId,index){
 	var url = "public/job_checkbox.jsp";
 	var title = "选择您的求职方向";
 	var width = "600";
 	var height = "400";
-	var data = "?type=1";
+	var type = "1";
+	if(index == '2'){
+		type = "2";
+	}
+	var data = "?type="+type+"&targetId="+targetId+"&targetValue="+targetId+"Name&isMultiselect=false";
 	openWindow(url+data,title,width,height);
 }
 function selectCity(){
@@ -85,162 +89,9 @@ function selectCity(){
 	var title = "选择您的城市";
 	var width = "600";
 	var height = "400";
-	var data = "";
+	var data = "?type=3&target=city&targetId=userCity&targetValue=userCityName";
 	openWindow(url+data,title,width,height);
 }
-
-
-
-
-
-
-
-
-
-    var phoneCode = ""; 
-	
-	//选择用户/企业
-	var code2;
-	//目前职位
-	function addJob(items){
-		var inn = "";
-		for(var i in items){
-			inn = inn + "<li role='presentation'>"
-				+"<a role='menuitem' onclick='jobValue(" + items[i].id +",\"" + items[i].value +"\")'><font color='#000'>" + items[i].value
-				+"</font></a></li>";
-		}
-		document.getElementById("nowjob").innerHTML=inn;
-	}
-	function jobValue(ke, val){
-		document.getElementById("nowjobkey").value=ke;
-		document.getElementById("nowjobvalue").value=val;
-	}
-	//求职方向
-	function addJobF(items){
-		var inn = "";
-		for(var i in items){
-			inn = inn + "<li role='presentation'>"
-				+"<a role='menuitem' onclick='jobFValue(" + items[i].id +",\"" + items[i].value +"\")'><font color='#000'>" + items[i].value
-				+"</font></a></li>";
-		}
-		document.getElementById("jobF").innerHTML=inn;
-	}
-	function jobFValue(ke, val){
-		document.getElementById("jobFkey").value=ke;
-		document.getElementById("jobFvalue").value=val;
-	}
-	//所在城市
-	function addCity(items){
-		var inn = "";
-		for(var i in items){
-			inn = inn + "<li role='presentation'>"
-				+"<a role='menuitem' onclick='cityValue(" + items[i].id +",\"" + items[i].value +"\")'><font color='#000'>" + items[i].value
-				+"</font></a></li>";
-		}
-		document.getElementById("city").innerHTML=inn;
-	}
-	function cityValue(ke, val){
-		document.getElementById("citykey").value=ke;
-		document.getElementById("cityvalue").value=val;
-	}
-	function clearTable(){
-		$(".form-control").each(function () {
-			this.value = "";
-        });
-	}
-	function getmsg(){
-		phoneCode = Math.floor(Math.random()*9000)+1000;
-		var phone = document.getElementById("offer_user_phone").value;
-		var url = "register/getmsg1.do?code="+phoneCode;
-		if(phone == ""){
-			alert("请输入手机号码!")
-			return;
-		}
-		ajaxSumbitNoform(url,phone);
-	}
-	//同意
-	var isremeber = true;
-	function changeRemeber() {
-		var remeberId = document.getElementById('remeberId').value;
-		if (remeberId == '1') {
-			document.getElementById('remeber').src = "../img/wangji.png";
-			document.getElementById('remeber').style.width = "17px";
-			document.getElementById('remeber').style.height = "17px";
-			document.getElementById('remeberId').value = '2';
-			isremeber = false;
-		} else if (remeberId == '2') {
-			document.getElementById('remeber').src = "../img/gou.png";
-			document.getElementById('remeber').style.width = "17px";
-			document.getElementById('remeber').style.height = "17px";
-			document.getElementById('remeberId').value = '1';
-			isremeber = true;
-		}
-	}
-	function validateCode() {
-		if(!checkValue()){
-			return;
-		}
-		if(!isremeber){
-			alert("请同意协议!");
-			return;
-		}
-		var ispassword = false;
-		if(document.getElementById("type").value=="1"){
-			if(document.getElementById("offer_user_password").value === document.getElementById("offer_user_password_c").value){
-				ispassword = true;
-			}
-		}
-		if(document.getElementById("type").value=="2"){
-			if(document.getElementById("password").value === document.getElementById("password_c").value){
-				ispassword = true;
-			}
-		}
-		if(!ispassword){
-			alert("密码不一致！");
-			return;
-		}
-		var ispass = false;
-		ispass = true;//code2.verify(document.getElementById("inputCode2").value);
-		if (ispass) {
-			var url = "register/register1.do";
-			var formId = "registerForm";
-			var data = ajaxSumbit(url, formId);
-			$("#registerForm").populateForm(data);
-			if(data != 'success'){
-				/* if(data == 'undefined') {
-					return;
-				} */
-				if(data == 'error') {
-					alert('已经存在该账号！');
-				}
-				return;
-			}
-			//alert("注册成功，请先查看邮箱！");
-			top.location.href='user_check_msg.jsp';
-		}else{
-			alert("验证码输入有误！");
-			code2.update();
-		}
-		return;
-	}
-	function checkValue(){
-		if(document.getElementById("type").value=="1"){
-			if(!isEmail('email',"邮箱","30",false)) return false;
-			if(!checkInput('jobFkey',"求职方向","30",false)) return false;
-			if(!checkInput('citykey',"所在城市","30",false)) return false;
-			if(!checkpsw('offer_user_password',"密码","4","16",false)) return false;
-		}
-		if(document.getElementById("type").value=="2"){
-			if(!checkInput('offer_user_company',"公司","30",false)) return false;
-			if(!checkInput('offer_user_name',"目前职位","30",false)) return false;
-			if(!checkInput('nowjobkey',"职位","30",false)) return false;
-			if(!isEmail('offer_user_email',"邮箱","30",false)) return false;
-			if(!checkInput('offer_user_phone',"手机","11",false)) return false;
-			if(!checkpsw('password',"密码","4","16",false)) return false;
-			if(phoneCode != document.getElementById("msgCode").value) {
-				alert("手机验证码错误");
-				return false;
-			}
-		}
-		return true;
-	}
+function goSubmit(){
+	checkValidateCode("inputCode");
+}

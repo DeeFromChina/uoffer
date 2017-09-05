@@ -11,8 +11,13 @@
 <body onload="init()">
 	<input type="text" id="condition" />
  	<input type="button" value="search" onclick="searchText('condition')" />
-	<div class="wh100" id="jobMeum">
-    </div>
-    <button onclick="sumbit()">sumbit</button>
+ 	
+	<div id="jobMeum"></div>
+	
+    <div class="formBtnGroup">
+		<button type="button" class="btn btn-primary submitBtn" onclick="submit()">
+			确认
+		</button>
+	</div>
 </body>
 </html>

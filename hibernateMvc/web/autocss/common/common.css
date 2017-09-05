@@ -97,7 +97,49 @@ button > font {
 	color:#9A9A9A;
 	border:1px #9A9A9A solid;
 }
+.reciprocalBtn:hover{
+	color:#000000;
+}
+/*  ‰»ÎøÚ */
 .input-class{
 	width: 381px;
 	height:41px;
+}
+.formtable{
+	width:100%;
+	border-collapse:separate;
+	border-spacing:0px 12.5px;
+}
+.submitBtn{
+	font-size:14px;
+	min-width:100px;
+	height:41px;
+	background-color: #00B38A;
+	border-color: #00B38A;
+}
+.submitBtn:hover{
+	background-color: #00B38A;
+	border-color: #00B38A;
+}
+.submitBtn.active{
+	background-color: #00B38A;
+	border-color: #00B38A;
+}
+.submitBtn:active{
+	background-color: #00B38A;
+	border-color: #00B38A;
+}
+.submitBtn:focus{
+	background-color: #00B38A;
+	border-color: #00B38A;
+}
+.fixbottom{
+	position:fixed;
+	bottom:0;
+}
+.formBtnGroup{
+	width:100%;
+	position:fixed;
+	bottom:0;
+	text-align:center;
 }

@@ -10,16 +10,17 @@
 <style>
 </style>
 </head>
+<script src="<%=request.getContextPath() %>/js/jq_cookie/jquery.cookie.js"></script>
 <script src="<%=request.getContextPath() %>/autojs/login/loginPC.js"></script>
 <body bgcolor="#E0FFFF" onload="init()">
 	<form id="dataForm">
 		<center>
 			<div class="mainDiv">
 				<table class="login-top">
-					<col class="wi25"/>
-					<col class="wi25"/>
-					<col class="wi25"/>
-					<col class="wi25"/>
+					<col class="wi15"/>
+					<col class="wi35"/>
+					<col class="wi35"/>
+					<col class="wi15"/>
 					<tr>
 						<td />
 						<td colspan="2" class="textC">
@@ -58,28 +59,28 @@
 			</div>
 			<div class="mainDiv">
 				<table class="login-top">
-					<col class="wi25"/>
-					<col class="wi25"/>
-					<col class="wi25"/>
-					<col class="wi25"/>
+					<col class="wi10"/>
+					<col class="wi40"/>
+					<col class="wi40"/>
+					<col class="wi10"/>
 					<tr>
-						<td width="25%"></td>
+						<td></td>
 						<td colspan="2">
-							<input type="text" id="name" name="name" class="form-control input-class" placeholder="邮箱/手机号码">
+							<input type="text" id="name" name="name" class="form-control input-class-phone" placeholder="邮箱/手机号码">
 						</td>
 						<td></td>
 					</tr>
 					<tr>
 						<td></td>
 						<td colspan="2">
-							<input type="password" id="password" name="password" class="form-control input-class" placeholder="密码">
+							<input type="password" id="password" name="password" class="form-control input-class-phone" placeholder="密码">
 						</td>
 						<td></td>
 					</tr>
 					<tr>
 						<td></td>
 						<td colspan="2">
-							<table class="input-class">
+							<table class="input-class-phone">
 								<tr>
 									<td class="vCode-input">
 										<input type="text" id="inputCode" class="form-control" placeholder="输入验证码">
@@ -109,7 +110,7 @@
 					<tr>
 						<td/>
 						<td colspan="2">
-							<button type="button" class="btn btn-primary submitBtn" onclick="openWindow('login/use_strategy.jsp','test',600,800)" data-toggle="button">
+							<button type="button" class="btn btn-primary submitBtn" onclick="goSubmit()">
 								确认提交
 							</button>
 						</td>

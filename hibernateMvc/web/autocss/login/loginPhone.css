@@ -1,7 +1,7 @@
 .mainDiv{
 	background: #FFFFFF;
 	max-width: 800px;
-	width:100%;
+	width:90%;
 }
 .login-top{
 	width:100%;
@@ -28,17 +28,18 @@
 	width: 800px;
 	background-color: #00B38A;
 }
-.input-class{
+.input-class-phone{
 	max-width: 381px;
 	height:41px;
 	min-width:200px;
 }
 .vCode-input{
-	width: 281px;
+	max-width: 281px;
 	height:41px;
+	min-width:150px;
 }
 .vCode{
-	width: 100px;
+	width: 80px;
 	height: 41px;
 	border: 1px solid #ccc;
 	display: inline-block;

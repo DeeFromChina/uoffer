@@ -10,6 +10,7 @@
 <style>
 </style>
 </head>
+<script src="<%=request.getContextPath() %>/js/jq_cookie/jquery.cookie.js"></script>
 <script src="<%=request.getContextPath() %>/autojs/login/loginPC.js"></script>
 <body bgcolor="#E0FFFF" onload="init()">
 	<form id="dataForm">
@@ -112,7 +113,7 @@
 					<tr>
 						<td/>
 						<td colspan="2">
-							<button type="button" class="btn btn-primary submitBtn" onclick="openWindow('login/use_strategy.jsp','test',600,800)" data-toggle="button">
+							<button type="button" class="btn btn-primary submitBtn" onclick="goSubmit()">
 								确认提交
 							</button>
 						</td>

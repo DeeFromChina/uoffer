@@ -2,13 +2,17 @@ function init(){
 	setMap();
 	var url = "login.do?action=register";
 	var data = ajaxSumbit(url);
-//	addCheckBox(data,"jobMeum",true);
 	var type = map["type"];
-	selectCheckBox(data,"jobMeum",type,true,false);
+	if(map["isMultiselect"] == "false"){
+		selectCheckBox(data,"jobMeum",type,true,false);
+	}
+	if(map["isMultiselect"] == "true"){
+		selectCheckBox(data,"jobMeum",type,true,true);
+	}
 }
-function sumbit(){
+function submit(){
 	checkedValue();
-	mainFrameSetValue("jobType",map["ids"]);
-	mainFrameSetValue("jobTypeName",map["values"]);
+	mainFrameSetValue(map["targetId"],map["ids"]);
+	mainFrameSetValue(map["targetValue"],map["values"]);
 	closeWin();
 }
