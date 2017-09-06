@@ -61,12 +61,15 @@ public class BaseDataManagerAction extends TinyBuilderController{
 	}
 	
 	public Object getJob() {
+		List<CheckBox> checkBoxs = new ArrayList<CheckBox>();
 		try {
-			jobService.getMap(form);
+			Hashtable<String, Object> table = new Hashtable<String, Object>();
+			table.put("count", "4");
+			checkBoxs = jobService.getCheckBox(table);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return null;
+		return checkBoxs;
 	}
 	
 	public Object getCity() {

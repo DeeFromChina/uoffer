@@ -9,11 +9,12 @@ function checkValidateCode(checkInputId){
 		alert("验证码错误，请重新输入!");
 		return false;
 	}
+	return true;
 }
 
-function isEmpty(id,isEmpty){
+function isEmpty(val,name,isEmpty){
 	if(!isEmpty){
-		if($('#'+id).val() == ''){
+		if(val == ''){
 			alert("请输入"+name);
 			return false;
 		}
@@ -21,21 +22,21 @@ function isEmpty(id,isEmpty){
 	return true;
 }
 
-function checkInput(id,name,len,isEmpty){
-	if(!isEmpty(id,isEmpty)) return false;
-	if($('#'+id).val().length > len){
+function checkInput(val,name,len,isEmpty){
+	if(!isEmpty(val,name,isEmpty)) return false;
+	if(val.length > len){
 		alert(name+"长度过长");
 		return false;
 	}
 	return true;
 }
 
-function isEmail(id,name,len,isEmpty){
-	if(!isEmpty(id,isEmpty)) return false;
+function isEmail(val,name,isEmpty){
+	if(!isEmpty(val,name,isEmpty)) return false;
 	
-	if($('#'+id).val() == '') {
-		reg=/^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+((\.[a-zA-Z0-9_-]{2,3}){1,2})$/;
-		if(!reg.test($('#'+id).val())){
+	if(val != '') {
+		var reg=/^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+((\.[a-zA-Z0-9_-]{2,3}){1,2})$/;
+		if(!reg.test(val)){
 			alert("输入电子邮件格式不正确!");
 			return false;
 		}
@@ -43,24 +44,24 @@ function isEmail(id,name,len,isEmpty){
 	return true;
 }
 
-function checkpsw(id,name,slen,blen,isEmpty){
-	if(!isEmpty(id,isEmpty)) return false;
-	if($('#'+id).val().length > slen || $('#'+id).val().length < blen){
+function checkpsw(val,name,slen,blen,isEmpty){
+	if(!isEmpty(val,name,isEmpty)) return false;
+	if(val.length > slen || val.length < blen){
 		alert(name+"长度要在"+slen+"~"+blen+"之间");
 		return false;
 	}
 	return true;
 }
 
-function checkNum(id,name,len,isEmpty){
-	if(!isEmpty(id,isEmpty)) return false;
-	if($('#'+id).val() != ''){
-		if(isNaN($('#'+id).val())){
+function checkNum(val,name,len,isEmpty){
+	if(!isEmpty(val,name,isEmpty)) return false;
+	if(val != ''){
+		if(isNaN(val)){
 			alert(name+"不是数字形式！");
 			return false;
 		}
 	}
-	if($('#'+id).val().length > len){
+	if(val.length > len){
 		alert(name+"长度过长");
 		return false;
 	}

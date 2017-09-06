@@ -54,7 +54,7 @@ function ajaxSumbit(urllink, formId) {
 	var link = "/hibernateMvc/" + urllink;
 	var formIndex = "";
 	if(formId != undefined){
-		formIdex = "#" + formId;
+		formIndex = "#" + formId;
 	}
 	var dataResult;
 	$.ajax({

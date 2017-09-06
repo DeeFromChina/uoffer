@@ -30,10 +30,9 @@ function getTran(ret) {
 function goSubmit(){
 	var isPass = false;
 	isPass = checkValidateCode("inputCode");
+	if(!isPass) return;
 	isPass = checkValue();
-	if(!isPass){
-		return;
-	}
+	if(!isPass) return;
 	saveUserInfo();
 }
 function rememberMe(){

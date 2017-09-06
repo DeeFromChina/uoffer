@@ -434,7 +434,7 @@ function isEmail(id,name,len,isEmpty){
 	}
 	
 	if(document.getElementById(id).value!="") {
-		reg=/^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+((\.[a-zA-Z0-9_-]{2,3}){1,2})$/;
+		var reg=/^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+((\.[a-zA-Z0-9_-]{2,3}){1,2})$/;
 		if(!reg.test(document.getElementById(id).value)){
 			alert("输入电子邮件格式不正确!");
 			return false;

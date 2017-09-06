@@ -93,5 +93,36 @@ function selectCity(){
 	openWindow(url+data,title,width,height);
 }
 function goSubmit(){
-	checkValidateCode("inputCode");
+	var isPass = true;
+//	isPass = checkValidateCode("inputCode");
+	if(!isPass) return;
+	var form = "";
+	if($('#type').val() == '1'){
+		form = "form1";
+	}else{
+		form = "form2";
+	}
+	isPass = checkValue(form);
+	if(!isPass) return;
+	var url = "login.do?action=register";
+	var data = ajaxSumbit(url,form);
+}
+
+function checkValue(formId){
+	var form = $("#"+formId).serializeObject();
+	if(form == "1"){
+		if(!isEmail(form.email,"邮箱",false)) return false;
+		if(!checkInput(form.goJobId,"求职方向",11,false)) return false;
+		if(!checkInput(form.cityId,"所在城市",11,false)) return false;
+		if(!checkInput(form.password,"密码",30,false)) return false;
+	}
+	if(form == "2"){
+		if(!checkInput(form.companyName,"公司",80,false)) return false;
+		if(!checkInput(form.userName,"姓名",30,false)) return false;
+		if(!checkInput(form.jobName,"目前职位",11,false)) return false;
+		if(!isEmail(form.email,"邮箱",false)) return false;
+		if(!checkNum(form.phone,"手机",11,false)) return false;
+		if(!checkInput(form.password,"密码",30,false)) return false;
+	}
+	return true;
 }

@@ -1,6 +1,6 @@
 function init(){
 	setMap();
-	var url = "login.do?action=register";
+	var url = "baseData.do?action=getJob";
 	var data = ajaxSumbit(url);
 	var type = map["type"];
 	if(map["isMultiselect"] == "false"){

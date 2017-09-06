@@ -69,7 +69,7 @@ public class TinyBuilderController{
 			}
 			form.clear();
 			form.put(entry.getKey(), entry.getValue()[0]);
-//			putToForm(data);
+			putToForm(data);
 		}
 		return SUCCESS;
 	}
@@ -108,7 +108,8 @@ public class TinyBuilderController{
 	}
 	
 	public void putToForm(String record){
-		form = JSON.parseObject(record, new TypeReference<Hashtable<String, Object>>(){});
+		Hashtable<String, Object> dataForm = JSON.parseObject(record, new TypeReference<Hashtable<String, Object>>(){});
+		form.putAll(dataForm);
 	}
 	
 	public boolean isIntegeter(Object obj){

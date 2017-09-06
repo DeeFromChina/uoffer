@@ -12,7 +12,7 @@
 </head>
 <script src="<%=request.getContextPath() %>/autojs/login/register.js"></script>
 <body bgcolor="#E0FFFF" onload="init()">
-	<form id="dataForm">
+	<div id="dataForm">
 		<center>
 			<div class="mainDiv">
 				<table class="login-top">
@@ -57,156 +57,160 @@
 				</table>
 			</div>
 			<div class="mainDiv">
-				<table class="login-top" id="form1">
-					<col class="wi28"/>
-					<col class="wi25"/>
-					<col class="wi25"/>
-					<col class="wi22"/>
-					<tr>
-						<td class="textR">
-							<font class="font-14">邮箱：</font>
-						</td>
-						<td colspan="2">
-							<input type="text" name="email" class="form-control input-class" placeholder="请输入邮箱">
-						</td>
-						<td></td>
-					</tr>
-					<tr>
-						<td class="textR">
-							<font class="font-14">求职方向：</font>
-						</td>
-						<td colspan="2">
-							<div class="input-group input-class border-collapse">
-								<input type="hidden" id="jobType" name="jobType" />
-								<input type="text" id="jobTypeName" name="jobTypeName" class="form-control" />
-								<span class="input-group-addon hand">
-									<span class="glyphicon glyphicon-th" onclick="selectJob('jobType','1')"></span>
-								</span>
-							</div>
-						</td>
-						<td></td>
-					</tr>
-					<tr>
-						<td class="textR">
-							<font class="font-14">所在城市：</font>
-						</td>
-						<td colspan="2">
-							<div class="input-group input-class border-collapse">
-								<input type="hidden" id="userCity" name="userCity" />
-								<input type="text" id="userCityName" name="userCityName" class="form-control">
-								<span class="input-group-addon hand">
-									<span class="glyphicon glyphicon-th" onclick="selectCity()"></span>
-								</span>
-							</div>
-						</td>
-						<td></td>
-					</tr>
-					<tr>
-						<td class="textR">
-							<font class="font-14">密码：</font>
-						</td>
-						<td colspan="2">
-							<input type="password" name="offer_user_password" class="form-control input-class">
-						</td>
-						<td></td>
-					</tr>
-					<tr>
-						<td class="textR">
-							<font class="font-14">确认密码：</font>
-						</td>
-						<td colspan="2">
-							<input type="password" name="offer_user_password_c" class="form-control input-class">
-						</td>
-						<td></td>
-					</tr>
-				</table>
-				<table class="login-top" id="form2">
-					<col class="wi28"/>
-					<col class="wi25"/>
-					<col class="wi25"/>
-					<col class="wi22"/>
-					<tr>
-						<td class="textR">
-							<font class="font-14">公司：</font>
-						</td>
-						<td colspan="2">
-							<input type="text" name="offer_user_company" class="form-control input-class" placeholder="公司名称(全称)">
-						</td>
-						<td></td>
-					</tr>
-					<tr>
-						<td class="textR">
-							<font class="font-14">姓名：</font>
-						</td>
-						<td colspan="2">
-							<input type="text" name="offer_user_name" class="form-control input-class" placeholder="真实姓名或昵称">
-						</td>
-						<td></td>
-					</tr>
-					<tr>
-						<td class="textR">
-							<font class="font-14">目前职位：</font>
-						</td>
-						<td colspan="2">
-							<div class="input-group input-class border-collapse">
-								<input type="hidden" id="nowJobType" name="nowJobType" />
-								<input type="text" id="nowJobTypeName" name="nowJobTypeName" class="form-control" />
-								<span class="input-group-addon hand">
-									<span class="glyphicon glyphicon-th" onclick="selectJob('nowJobType','2')"></span>
-								</span>
-							</div>
-						</td>
-						<td></td>
-					</tr>
-					<tr>
-						<td class="textR">
-							<font class="font-14">邮箱：</font>
-						</td>
-						<td colspan="2">
-							<input type="text" name="offer_user_email" class="form-control input-class" placeholder="填写企业邮箱（不支持个人邮箱）">
-						</td>
-						<td></td>
-					</tr>
-					<tr>
-						<td class="textR">
-							<font class="font-14">手机：</font>
-						</td>
-						<td colspan="2">
-							<input type="text" name="offer_user_phone" class="form-control input-class" placeholder="支持中国大陆手机号">
-						</td>
-						<td></td>
-					</tr>
-					<tr>
-						<td class="textR">
-							<font class="font-14">验证码：</font>
-						</td>
-						<td colspan="2">
-							<div class="input-group border-collapse wi100">
-								<input type="text" id="msgCode" name="msgCode" class="form-control w280">
-								<button type="button" class="btn btn-default rightBtn"  onclick="Reciprocal()" id="msgtime">获取</button>
-							</div>
-						</td>
-						<td></td>
-					</tr>
-					<tr>
-						<td class="textR">
-							<font class="font-14">密码：</font>
-						</td>
-						<td colspan="2">
-							<input type="password" name="password" class="form-control input-class">
-						</td>
-						<td></td>
-					</tr>
-					<tr>
-						<td class="textR">
-							<font class="font-14">确认密码：</font>
-						</td>
-						<td colspan="2">
-							<input type="password" name="password_c" class="form-control input-class">
-						</td>
-						<td></td>
-					</tr>
-				</table>
+				<form id="form1">
+					<table class="login-top">
+						<col class="wi28"/>
+						<col class="wi25"/>
+						<col class="wi25"/>
+						<col class="wi22"/>
+						<tr>
+							<td class="textR">
+								<font class="font-14">邮箱：</font>
+							</td>
+							<td colspan="2">
+								<input type="text" name="email" class="form-control input-class" placeholder="请输入邮箱">
+							</td>
+							<td></td>
+						</tr>
+						<tr>
+							<td class="textR">
+								<font class="font-14">求职方向：</font>
+							</td>
+							<td colspan="2">
+								<div class="input-group input-class border-collapse">
+									<input type="hidden" id="goJobId" name="goJobId" />
+									<input type="text" id="goJobName" name="goJobName" class="form-control" />
+									<span class="input-group-addon hand">
+										<span class="glyphicon glyphicon-th" onclick="selectJob('jobType','1')"></span>
+									</span>
+								</div>
+							</td>
+							<td></td>
+						</tr>
+						<tr>
+							<td class="textR">
+								<font class="font-14">所在城市：</font>
+							</td>
+							<td colspan="2">
+								<div class="input-group input-class border-collapse">
+									<input type="hidden" id="cityId" name="cityId" />
+									<input type="text" id="cityName" name="cityName" class="form-control">
+									<span class="input-group-addon hand">
+										<span class="glyphicon glyphicon-th" onclick="selectCity()"></span>
+									</span>
+								</div>
+							</td>
+							<td></td>
+						</tr>
+						<tr>
+							<td class="textR">
+								<font class="font-14">密码：</font>
+							</td>
+							<td colspan="2">
+								<input type="password" name="password" class="form-control input-class">
+							</td>
+							<td></td>
+						</tr>
+						<tr>
+							<td class="textR">
+								<font class="font-14">确认密码：</font>
+							</td>
+							<td colspan="2">
+								<input type="password" name="password_c" class="form-control input-class">
+							</td>
+							<td></td>
+						</tr>
+					</table>
+				</form>
+				<form id="form2">
+					<table class="login-top">
+						<col class="wi28"/>
+						<col class="wi25"/>
+						<col class="wi25"/>
+						<col class="wi22"/>
+						<tr>
+							<td class="textR">
+								<font class="font-14">公司：</font>
+							</td>
+							<td colspan="2">
+								<input type="text" name="companyName" class="form-control input-class" placeholder="公司名称(全称)">
+							</td>
+							<td></td>
+						</tr>
+						<tr>
+							<td class="textR">
+								<font class="font-14">姓名：</font>
+							</td>
+							<td colspan="2">
+								<input type="text" name="userName" class="form-control input-class" placeholder="真实姓名或昵称">
+							</td>
+							<td></td>
+						</tr>
+						<tr>
+							<td class="textR">
+								<font class="font-14">目前职位：</font>
+							</td>
+							<td colspan="2">
+								<div class="input-group input-class border-collapse">
+									<input type="hidden" id="jobId" name="jobId" />
+									<input type="text" id="jobName" name="jobName" class="form-control" />
+									<span class="input-group-addon hand">
+										<span class="glyphicon glyphicon-th" onclick="selectJob('nowJobType','2')"></span>
+									</span>
+								</div>
+							</td>
+							<td></td>
+						</tr>
+						<tr>
+							<td class="textR">
+								<font class="font-14">邮箱：</font>
+							</td>
+							<td colspan="2">
+								<input type="text" name="email" class="form-control input-class" placeholder="填写企业邮箱（不支持个人邮箱）">
+							</td>
+							<td></td>
+						</tr>
+						<tr>
+							<td class="textR">
+								<font class="font-14">手机：</font>
+							</td>
+							<td colspan="2">
+								<input type="text" name="phone" class="form-control input-class" placeholder="支持中国大陆手机号">
+							</td>
+							<td></td>
+						</tr>
+						<tr>
+							<td class="textR">
+								<font class="font-14">验证码：</font>
+							</td>
+							<td colspan="2">
+								<div class="input-group border-collapse wi100">
+									<input type="text" id="msgCode" name="msgCode" class="form-control w280">
+									<button type="button" class="btn btn-default rightBtn"  onclick="Reciprocal()" id="msgtime">获取</button>
+								</div>
+							</td>
+							<td></td>
+						</tr>
+						<tr>
+							<td class="textR">
+								<font class="font-14">密码：</font>
+							</td>
+							<td colspan="2">
+								<input type="password" name="password" class="form-control input-class">
+							</td>
+							<td></td>
+						</tr>
+						<tr>
+							<td class="textR">
+								<font class="font-14">确认密码：</font>
+							</td>
+							<td colspan="2">
+								<input type="password" name="password_c" class="form-control input-class">
+							</td>
+							<td></td>
+						</tr>
+					</table>
+				</form>
 				<table class="login-top maringTop_12">
 					<col class="wi28"/>
 					<col class="wi25"/>
@@ -254,6 +258,6 @@
 				</table>
 			</div>
 		</center>
-	</form>
+	</div>
 </body>
 </html>
