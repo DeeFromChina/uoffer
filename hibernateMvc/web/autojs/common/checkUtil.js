@@ -22,8 +22,8 @@ function isEmpty(val,name,isEmpty){
 	return true;
 }
 
-function checkInput(val,name,len,isEmpty){
-	if(!isEmpty(val,name,isEmpty)) return false;
+function checkInput(val,name,len,isNull){
+	if(!isEmpty(val,name,isNull)) return false;
 	if(val.length > len){
 		alert(name+"长度过长");
 		return false;
@@ -31,8 +31,8 @@ function checkInput(val,name,len,isEmpty){
 	return true;
 }
 
-function isEmail(val,name,isEmpty){
-	if(!isEmpty(val,name,isEmpty)) return false;
+function isEmail(val,name,isNull){
+	if(!isEmpty(val,name,isNull)) return false;
 	
 	if(val != '') {
 		var reg=/^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+((\.[a-zA-Z0-9_-]{2,3}){1,2})$/;
@@ -44,8 +44,8 @@ function isEmail(val,name,isEmpty){
 	return true;
 }
 
-function checkpsw(val,name,slen,blen,isEmpty){
-	if(!isEmpty(val,name,isEmpty)) return false;
+function checkpsw(val,name,slen,blen,isNull){
+	if(!isEmpty(val,name,isNull)) return false;
 	if(val.length > slen || val.length < blen){
 		alert(name+"长度要在"+slen+"~"+blen+"之间");
 		return false;
@@ -53,8 +53,8 @@ function checkpsw(val,name,slen,blen,isEmpty){
 	return true;
 }
 
-function checkNum(val,name,len,isEmpty){
-	if(!isEmpty(val,name,isEmpty)) return false;
+function checkNum(val,name,len,isNull){
+	if(!isEmpty(val,name,isNull)) return false;
 	if(val != ''){
 		if(isNaN(val)){
 			alert(name+"不是数字形式！");

@@ -1,5 +1,7 @@
 package com.offer.model.userData;
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -46,6 +48,15 @@ public class User {
 	
 	@Column(name = "company_id")
 	private Integer companyId;
+	
+	@Column(name = "create_time")
+	private Date createTime;
+	
+	@Column(name = "update_time")
+	private Date updateTime;
+	
+	@Column(name = "last_time")
+	private Date lastTime;
 
 	public Integer getId() {
 		return id;
@@ -141,5 +152,29 @@ public class User {
 
 	public void setCompanyId(Integer companyId) {
 		this.companyId = companyId;
+	}
+
+	public Date getCreateTime() {
+		return createTime;
+	}
+
+	public void setCreateTime(Date createTime) {
+		this.createTime = createTime;
+	}
+
+	public Date getUpdateTime() {
+		return updateTime;
+	}
+
+	public void setUpdateTime(Date updateTime) {
+		this.updateTime = updateTime;
+	}
+
+	public Date getLastTime() {
+		return lastTime;
+	}
+
+	public void setLastTime(Date lastTime) {
+		this.lastTime = lastTime;
 	}
 }

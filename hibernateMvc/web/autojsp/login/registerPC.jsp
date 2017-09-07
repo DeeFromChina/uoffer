@@ -79,9 +79,9 @@
 							<td colspan="2">
 								<div class="input-group input-class border-collapse">
 									<input type="hidden" id="goJobId" name="goJobId" />
-									<input type="text" id="goJobName" name="goJobName" class="form-control" />
+									<input type="text" id="goJobName" name="goJobName" class="form-control" readOnly="readOnly"/>
 									<span class="input-group-addon hand">
-										<span class="glyphicon glyphicon-th" onclick="selectJob('jobType','1')"></span>
+										<span class="glyphicon glyphicon-th" onclick="selectJob()"></span>
 									</span>
 								</div>
 							</td>
@@ -94,7 +94,7 @@
 							<td colspan="2">
 								<div class="input-group input-class border-collapse">
 									<input type="hidden" id="cityId" name="cityId" />
-									<input type="text" id="cityName" name="cityName" class="form-control">
+									<input type="text" id="cityName" name="cityName" class="form-control" readOnly="readOnly">
 									<span class="input-group-addon hand">
 										<span class="glyphicon glyphicon-th" onclick="selectCity()"></span>
 									</span>
@@ -153,9 +153,9 @@
 							<td colspan="2">
 								<div class="input-group input-class border-collapse">
 									<input type="hidden" id="jobId" name="jobId" />
-									<input type="text" id="jobName" name="jobName" class="form-control" />
+									<input type="text" id="jobName" name="jobName" class="form-control" readOnly="readOnly"/>
 									<span class="input-group-addon hand">
-										<span class="glyphicon glyphicon-th" onclick="selectJob('nowJobType','2')"></span>
+										<span class="glyphicon glyphicon-th" onclick=""></span>
 									</span>
 								</div>
 							</td>

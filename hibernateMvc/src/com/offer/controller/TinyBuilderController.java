@@ -21,6 +21,7 @@ import com.alibaba.fastjson.TypeReference;
 import com.mysql.fabric.xmlrpc.base.Array;
 import com.offer.controller.BaseController;
 import com.offer.model.OfferUser;
+import com.offer.util.RedisJava;
 import com.sun.accessibility.internal.resources.accessibility;
 
 
@@ -31,6 +32,7 @@ public class TinyBuilderController{
 	
 	public List<Map<String, Object>> homeList = new ArrayList<Map<String, Object>>();
 	public Hashtable<String, Object> form = new Hashtable<String, Object>();
+	public Map<String, Object> redisMap = new HashMap<String, Object>();
 	
 	protected SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 	protected SimpleDateFormat sdt = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -39,6 +41,8 @@ public class TinyBuilderController{
 	
 	public static String SUCCESS = "success";
 	public static String ERROR = "error";
+	public boolean isMsg = false;
+	public String isRedirect = "0";
 	
 	public Hashtable<String, Object> getForm() {
 		return form;
@@ -60,6 +64,7 @@ public class TinyBuilderController{
 		if(map.get("action") == null || map.get("action").length == 0){
 			return "action error";
 		}
+		form.clear();
 		for(Map.Entry<String, String[]> entry : map.entrySet()){
 			if(entry.getKey() == null){
 				return entry.getValue()+" error";
@@ -67,11 +72,14 @@ public class TinyBuilderController{
 			if(entry.getValue() == null){
 				return entry.getKey()+" error";
 			}
-			form.clear();
 			form.put(entry.getKey(), entry.getValue()[0]);
-			putToForm(data);
 		}
+		putToForm(data);
 		return SUCCESS;
+	}
+	
+	private void sessionToForm(HttpServletRequest request){
+		RedisJava.openRedis(redisMap);
 	}
 	
 	private void homeData() throws Exception{
@@ -95,15 +103,34 @@ public class TinyBuilderController{
 		}
 	}
 	
+	public String addMessage(String msg){
+		isMsg = true;
+		return msg;
+	}
+	
+	public String redirect(String str) {
+		isRedirect = "2";
+		return str;
+	}
+	
+	public String redirect(String str, boolean isTop) {
+		isRedirect = "3";
+		return str;
+	}
+	
 	public Map<String, Object> toJson(Object obj){
 		Map<String, Object> map = new HashMap<String, Object>();
 		String status = "1";
 		if(obj != null){
-			status = "0";
+			status = isRedirect;
 		}
 		map.put("time", sdt.format(new Date()));
 		map.put("status", status);
-		map.put("data", obj);
+		if (isMsg) {
+			map.put("msg", obj);
+		}else {
+			map.put("data", obj);
+		}
 		return map;
 	}
 	
@@ -131,6 +158,17 @@ public class TinyBuilderController{
 			return "";
 		}
 		return "";
+	}
+	
+	public void checkRequired(String... params) throws Exception {
+		for(int i = 0; i < params.length; i++){
+			if(form.get(params[i]) == null){
+				throw new Exception(params[i]);
+			}
+			if("".equals(form.get(params[i]))){
+				throw new Exception(params[i]);
+			}
+		}
 	}
 	
 }

@@ -1,40 +1,53 @@
 package com.offer.util;
 
-import java.awt.image.RescaleOp;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import com.alibaba.druid.sql.visitor.functions.Function;
 
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.Pipeline;
-import redis.clients.jedis.Response;
 import redis.clients.jedis.Transaction;
 
 public class RedisJava {
+	
+	public static boolean openRedis(Map<String, Object> redisMap) {
+		try{
+			Jedis jedis = new Jedis("localhost");
+			System.out.println("服务正在运行: "+jedis.ping());
+			redisMap.put("jedis", jedis);
+			return true;
+		}catch(Exception e){
+			System.err.println("连接失败");
+			e.printStackTrace();
+		}
+		return false;
+	}
 
 	public static void main(String[] args) {
+//		openRedis();
         //连接本地的 Redis 服务
-        Jedis jedis = new Jedis("localhost");
+//        Jedis jedis = new Jedis("localhost");
         //分布式存储redis缓存数据
 //        Jedis jedis1 = new Jedis("127.0.0.1");
 //        Jedis jedis2 = new Jedis("127.0.0.2");
 //        Jedis jedis3 = new Jedis("127.0.0.3");
-        System.out.println("连接成功");
+//        System.out.println("连接成功");
         //查看服务是否运行
-        System.out.println("服务正在运行: "+jedis.ping());
+//        System.out.println("服务正在运行: "+jedis.ping());
         //清除所有数据
 //        jedis.flushAll();
 //        System.out.println(jedis.get("myKey"));
-        Set<String> keys = jedis.keys("myL*"); 
-        Iterator<String> it=keys.iterator() ;   
-        while(it.hasNext()){   
-            String key = it.next();   
-            System.out.println(key);   
-        }
+        
+//        Set<String> keys = jedis.keys("myL*"); 
+//        Iterator<String> it=keys.iterator() ;   
+//        while(it.hasNext()){   
+//            String key = it.next();   
+//            System.out.println(key);   
+//        }
+        
 //        pipline(jedis);
 	}
 	private static void common(Jedis jedis){

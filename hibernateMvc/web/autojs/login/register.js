@@ -72,16 +72,13 @@ function myTimer(msgtime){
 		return;
 	}
 }
-function selectJob(targetId,index){
+function selectJob(){
 	var url = "public/job_checkbox.jsp";
 	var title = "选择您的求职方向";
 	var width = "600";
 	var height = "400";
 	var type = "1";
-	if(index == '2'){
-		type = "2";
-	}
-	var data = "?type="+type+"&targetId="+targetId+"&targetValue="+targetId+"Name&isMultiselect=false";
+	var data = "?type="+type+"&targetId=goJobId&targetValue=goJobName&isMultiselect=false";
 	openWindow(url+data,title,width,height);
 }
 function selectCity(){
@@ -89,7 +86,7 @@ function selectCity(){
 	var title = "选择您的城市";
 	var width = "600";
 	var height = "400";
-	var data = "?type=3&target=city&targetId=userCity&targetValue=userCityName";
+	var data = "?type=3&target=city&targetId=cityId&targetValue=cityName";
 	openWindow(url+data,title,width,height);
 }
 function goSubmit(){
@@ -97,32 +94,39 @@ function goSubmit(){
 //	isPass = checkValidateCode("inputCode");
 	if(!isPass) return;
 	var form = "";
+	var param = "";
 	if($('#type').val() == '1'){
 		form = "form1";
+		param = "&type=1";
 	}else{
 		form = "form2";
+		param = "&type=2";
 	}
-	isPass = checkValue(form);
+//	isPass = checkValue(form);
 	if(!isPass) return;
-	var url = "login.do?action=register";
+	var url = "login.do?action=register"+param;
 	var data = ajaxSumbit(url,form);
 }
 
 function checkValue(formId){
 	var form = $("#"+formId).serializeObject();
-	if(form == "1"){
+	if(formId == "form1"){
 		if(!isEmail(form.email,"邮箱",false)) return false;
 		if(!checkInput(form.goJobId,"求职方向",11,false)) return false;
 		if(!checkInput(form.cityId,"所在城市",11,false)) return false;
 		if(!checkInput(form.password,"密码",30,false)) return false;
 	}
-	if(form == "2"){
+	if(formId == "form2"){
 		if(!checkInput(form.companyName,"公司",80,false)) return false;
 		if(!checkInput(form.userName,"姓名",30,false)) return false;
-		if(!checkInput(form.jobName,"目前职位",11,false)) return false;
+		if(!checkInput(form.jobId,"目前职位",11,false)) return false;
 		if(!isEmail(form.email,"邮箱",false)) return false;
 		if(!checkNum(form.phone,"手机",11,false)) return false;
 		if(!checkInput(form.password,"密码",30,false)) return false;
+	}
+	if(form.password != form.password_c){
+		alert("两次输入密码不一致，请重新输入!");
+		return false;
 	}
 	return true;
 }

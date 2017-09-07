@@ -11,6 +11,7 @@ $.fn.serializeObject = function() {
 			data[this.name] = this.value || '';
 		}
 	});
+	dataForm = data;
 	return data;
 }
 
@@ -75,8 +76,18 @@ function ajaxSumbit(urllink, formId) {
         		alert("请重新登陆！");
         		top.location.href = "../index.jsp";
         	}
+        	if(result.msg != undefined){
+        		alert(result.msg);
+        		return;
+        	}
         	if(result.status == '1'){
         		alert("数据错误！");
+        	}
+        	if(result.status == '2'){
+        		parent.$('#mainFrame').attr("src",jspPath+result.data.toString());
+        	}
+        	if(result.status == '3'){
+        		top.location.href = jspPath+result.data.toString();
         	}
         	dataResult = result.data;
         }

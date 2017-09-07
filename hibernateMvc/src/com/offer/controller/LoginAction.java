@@ -10,8 +10,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.offer.model.userData.User;
 import com.offer.service.baseData.JobService;
 import com.offer.service.userData.UserService;
+import com.offer.util.BaseUtil;
 
 
 @Controller
@@ -42,10 +44,23 @@ public class LoginAction extends TinyBuilderController{
 
 	public Object register() {
 		try {
-			form.get("");
+			if(form.get("type") == null){
+				return ERROR;
+			}
+			if(!"1".equals(form.get("type")) && !"2".equals(form.get("type"))){
+				return ERROR;
+			}
+			if("1".equals(form.get("type"))){
+//				checkRequired("email", "goJobId", "cityId", "password");
+			}
+			if("2".equals(form.get("type"))){
+//				checkRequired("companyName", "userName", "jobId", "email", "phone", "password");
+			}
+//			userService.save(form);
 		} catch (Exception e) {
 			e.printStackTrace();
+			return addMessage(e.getMessage()+"不能为空!");
 		}
-		return null;
+		return redirect("login/login.jsp",true);
 	}
 }

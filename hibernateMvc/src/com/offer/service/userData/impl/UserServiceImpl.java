@@ -3,16 +3,22 @@ package com.offer.service.userData.impl;
 import java.util.Hashtable;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.offer.dao.BaseDao;
 import com.offer.model.userData.User;
 import com.offer.model.util.CheckBox;
 import com.offer.model.util.Tree;
 import com.offer.service.impl.BaseServiceImpl;
 import com.offer.service.userData.UserService;
+import com.offer.util.BaseUtil;
 
 @Service("userService")
 public class UserServiceImpl extends BaseServiceImpl implements UserService {
+	
+	@Autowired
+	private BaseDao baseDao;
 
 	@Override
 	public User getById(int id) throws Exception {
@@ -22,8 +28,11 @@ public class UserServiceImpl extends BaseServiceImpl implements UserService {
 
 	@Override
 	public void save(Hashtable<String, Object> table) throws Exception {
-		// TODO Auto-generated method stub
-		
+		User user = new User();
+		BaseUtil.tableToObject(user, table);
+		if(user != null){
+			baseDao.save(user);
+		}
 	}
 
 	@Override

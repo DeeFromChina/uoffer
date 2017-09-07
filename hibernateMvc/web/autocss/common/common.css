@@ -143,3 +143,19 @@ button > font {
 	bottom:0;
 	text-align:center;
 }
+.circleA {
+    width: 25px;
+    height: 25px;
+    background: #00B38A;
+    -moz-border-radius: 50%;
+    -webkit-border-radius: 50%;
+    border-radius: 50%;
+}
+.circleB {
+    width: 25px;
+    height: 25px;
+    -moz-border-radius: 50%;
+    -webkit-border-radius: 50%;
+    border-radius: 50%;
+    border:1px #CCCCCC solid;
+}
