@@ -23,22 +23,20 @@
 			<center class="hi100" id="centerTitle">
 				<div class="btn-group hi99">
 					<button type="button" class="headButton" id="title1">
-					1
 				    </button>
 				    <ul class="dropdown-menu pull-right headMeumBtn">
 				    </ul>
 				</div>
-				<button type="button" class="headButton" id="title2">
-				2
-			    </button>
-				<!-- <button type="button" class="headButton hidden"  id="title3">
-			    </button> -->
 		    </center>
 		</div>
 		<div class="headRightDiv" id="headRightDiv">
-			<button type="button" class="headButton floatR" id="title4">
-			4
-		    </button>
+			<div class="btn-group hi99">
+				<button type="button" class="headButton floatR" id="rightTitle" data-toggle="dropdown" aria-expanded="false">
+					<span class="caret"></span>
+			    </button>
+			    <ul class="dropdown-menu pull-right headMeumBtn" id="rightUl">
+			    </ul>
+			</div>
 		</div>
 	</div>
 </body>

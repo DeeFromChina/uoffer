@@ -6,11 +6,47 @@ window.onresize=function(){
 function init(){
 	setSrc('loginImg','U-Offerlogo.png');
 	changBottomDiv();
-	var url = "login.do?action=register"+param;
-	var data = ajaxSumbit(url,form);
-//	var pageurl = judgeSize("mainFrame","width",800,"loginPC.jsp","loginPhone.jsp");
-//	$('#mainFrame').attr("src",pageurl);
-	//changeHeaderTitle();
+	var url = "userData.do?action=getTop";
+	var data = ajaxSumbit(url);
+	var centerTitle = jQuery.parseJSON(data.centerTitle);
+	var userImg = jQuery.parseJSON(data.userImg);
+	var rightTitle = jQuery.parseJSON(data.rightTitle);
+	setTitle(centerTitle);
+	setRightTitle(userImg, rightTitle);
+	var pageurl = judgeSize("mainFrame","width",800,"userData/add_information_frame.jsp","userData/add_information_frame.jsp");
+	$('#mainFrame').attr("src",jspPath+pageurl);
+}
+function setTitle(data){
+	if(data.length == 0){
+		return;
+	}
+	$('#title1').append(data[0].title);
+	$('#title1').attr('onclick',data[0].url);
+	var str = "";
+	for(var i in data){
+		if(i == 0){
+			continue;
+		}
+		str += "<button type=\"button\" class=\"headButton\" id=\"title"+(i+1)+"\" onclick=\""+data[i].url+"\">"
+					+data[i].title
+				+"</button>";
+	}
+	$('#centerTitle').append(str);
+}
+function setRightTitle(userImg, data){
+	var img = "<img id='userImg' class='rightImg'/>";
+	$('#rightTitle').prepend(img);
+	setSrc('userImg',userImg[0].url);
+	
+	var str = "";
+	for(var i in data){
+		str += "<li>"
+					+"<a onclick=\""+data[i].url+"\" class=\"headMeum\">"
+						+"<font>"+data[i].title+"</font>"
+					+"</a>"
+				+"</li>";
+	}
+	$('#rightUl').append(str);
 }
 /**
  * 改变头部标题栏
@@ -71,8 +107,8 @@ function changeHeaderTitle(){
 	 var hiddenbtn;
 	 var appearbtn;
 	 var isPass = true;
-	 if(headRightDiv.offsetTop > 10){
-/*		 if(w < 580 || headRightDiv.offsetHeight > headTitle.offsetHeight){
+	 /*	 if(headRightDiv.offsetTop > 10){
+		 if(w < 580 || headRightDiv.offsetHeight > headTitle.offsetHeight){
 			 for(var i = 0; i < rightDivs.length; i++){
 				 if(rightDivs[i].getAttribute("class") == "centerDiv hidden"){
 					 isPass = false;
@@ -95,7 +131,7 @@ function changeHeaderTitle(){
 			 headRightDiv.style.minWidth = headRightDivWidthMethod(headRightDiv);
 			 //重新定义中间块
 			 headCenterDiv.style.width = w - logoDiv.offsetWidth - headRightDiv.offsetWidth;
-		 }*/
+		 }
 	 }else{
 		 if(w > 579){
 			 for(var i = 0; i < rightDivs.length; i++){
@@ -119,7 +155,7 @@ function changeHeaderTitle(){
 			 headRightDiv.style.minWidth = headRightDivWidthMethod(headRightDiv) + 5;
 			 headCenterDiv.removeAttribute("style");
 		 }
-	 }
+	 }*/
 	 
 	 //改变中间块形态
 	 var headCenterDivMeumDiv1 = headCenterDiv.getElementsByTagName("div")[0];
@@ -134,15 +170,17 @@ function changeHeaderTitle(){
 			 centerBtnsWidth += 80;//按钮最小固定宽度
 		 }
 		 if(headCenterDivOffsetWidth > centerBtnsWidth + 10){
-			 if(headCenterDivMeumButtons[i].getAttribute("style") != undefined && headCenterDivMeumButtons[i].getAttribute("style") != ''){
-				 removeHeadLiMeum(i,div1Ul,headCenterDivMeumButtons[i]);
-				 headCenterDivMeumButtons[i].removeAttribute("style");
-				 list[i] = 'false';
-			 }
+			 logoDiv.style.display="";
+//			 if(headCenterDivMeumButtons[i].getAttribute("style") != undefined && headCenterDivMeumButtons[i].getAttribute("style") != ''){
+////				 removeHeadLiMeum(i,div1Ul,headCenterDivMeumButtons[i]);
+////				 headCenterDivMeumButtons[i].removeAttribute("style");
+//				 list[i] = 'false';
+//			 }
 		 }else{
-			 headCenterDivMeumButtons[i].style.display = "none";
+//			 headCenterDivMeumButtons[i].style.display = "none";
 			 if(list[i] != 'true'){
-				 addHeadLiMeum(i,div1Ul,headCenterDiv);
+				 logoDiv.style.display="none";
+//				 addHeadLiMeum(i,div1Ul,headCenterDiv);
 				 list[i] = 'true';
 			 }
 		 }
@@ -152,9 +190,10 @@ function changeHeaderTitle(){
 		 for(var i = 0; i < nums; i++){
 			 centerBtnsWidth += headCenterDivMeumButtons[i].offsetWidth;
 			 if(headCenterDivOffsetWidth <= centerBtnsWidth + 10){
-				 headCenterDivMeumButtons[i].style.display = "none";
+//				 headCenterDivMeumButtons[i].style.display = "none";
 				 if(list[i] != 'true'){
-					 addHeadLiMeum(i,div1Ul,headCenterDiv);
+					 logoDiv.style.display="none";
+//					 addHeadLiMeum(i,div1Ul,headCenterDiv);
 					 list[i] = 'true';
 				 }
 			 }
@@ -166,6 +205,7 @@ function changeHeaderTitle(){
 		 if(headCenterDiv.style.width < headCenterDiv.style.minWidth){
 //			 headCenterDiv.style.width = headCenterDiv.style.width -16;
 			 headCenterDiv.style.minWidth = headCenterDiv.style.width;
+			 logoDiv.style.display="none";
 		 }
 	 }
 }
@@ -207,6 +247,7 @@ function addHeadLiMeum(num,target,headCenterDiv){
 	}
 	target.innerHTML = str;
 	$('#title1').addClass("dropdown-toggle");
+	$('#title1').append("<span class=\"caret\"></span>");
 	$('#title1').attr("data-toggle","dropdown");
 	$('#title1').attr("aria-expanded","false");
 }
@@ -220,6 +261,7 @@ function removeHeadLiMeum(num,target,btn){
     });
 	if($('.newname')[0] == undefined){
 		$('#title1').parent().removeClass("open");
+		$('#title1').find('span').remove();
 		$('#title1').removeClass("dropdown-toggle");
 		$('#title1').removeAttr("data-toggle","dropdown");
 		$('#title1').removeAttr("aria-expanded","false");

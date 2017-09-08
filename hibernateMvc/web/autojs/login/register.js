@@ -2,7 +2,6 @@ var validateCode;
 function init() {
 	dataFormVcenter();
 	countFrameHeight();
-	parent.changeHeaderTitle();
 	getTran('1');
 	validateCode = createValidateCode("vCode");
 	setSrc('remeber','gou.png');

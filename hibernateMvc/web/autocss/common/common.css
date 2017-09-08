@@ -143,6 +143,11 @@ button > font {
 	bottom:0;
 	text-align:center;
 }
+.rightImg{
+	width:30px;
+	height:30px;
+	border-radius: 10px;
+}
 .circleA {
     width: 25px;
     height: 25px;
@@ -158,4 +163,13 @@ button > font {
     -webkit-border-radius: 50%;
     border-radius: 50%;
     border:1px #CCCCCC solid;
+}
+.mainDiv{
+	background: #FFFFFF;
+	width: 800px;
+}
+.mainDiv_table{
+	width:100%;
+	border-collapse:separate;
+	border-spacing:0px 12.5px;
 }

@@ -2,6 +2,14 @@
 var jspPath = "http://localhost:8080/hibernateMvc/autojsp/";
 var doc = document;
 var map = {};
+
+$(".dropdown .form-control").click(function(){
+	if(this.parentNode.getElementsByTagName("button") == undefined){
+		return;
+	}
+	this.parentNode.getElementsByTagName("button")[0].click();
+});
+
 function getid(id){
 	return document.getElementById(id);
 }

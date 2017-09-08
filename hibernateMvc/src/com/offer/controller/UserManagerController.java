@@ -33,18 +33,31 @@ public class UserManagerController extends TinyBuilderController {
 	}
 	
 	private Object getTop(){
-		List<Map<String, String>> list = new ArrayList<Map<String, String>>();
-		Map<String, String> map = new HashMap<String, String>();
+		Map<String, Object> titleMap = new HashMap<String, Object>();
 		
-		map.put("title", "面试邀请");
-		map.put("url", "go('')");
-		list.add(map);
-		map.clear();
+		StringBuffer centerTitle = new StringBuffer();
+		centerTitle.append("[");
+		centerTitle.append("{\"title\":\"面试邀请\",\"url\":\"go(\'\')\"}");
+		centerTitle.append(",");
+		centerTitle.append("{\"title\":\"我的简历\",\"url\":\"go(\'\')\"}");
+		centerTitle.append("]");
 		
-		map.put("title", "我的简历");
-		map.put("url", "go('')");
-		list.add(map);
-		map.clear();
-		return null;
+		StringBuffer userImg = new StringBuffer();
+		userImg.append("[");
+		userImg.append("{\"url\":\"changjinglu.jpg\"}");
+		userImg.append("]");
+		
+		StringBuffer rightTitle = new StringBuffer();
+		rightTitle.append("[");
+		rightTitle.append("{\"title\":\"个人设置\",\"url\":\"go(\'\')\"}");
+		rightTitle.append(",");
+		rightTitle.append("{\"title\":\"退出\",\"url\":\"go(\'\')\"}");
+		rightTitle.append("]");
+		
+		titleMap.put("centerTitle", centerTitle);
+		titleMap.put("userImg", userImg);
+		titleMap.put("rightTitle", rightTitle);
+		
+		return titleMap;
 	}
 }
