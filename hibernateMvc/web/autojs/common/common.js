@@ -23,7 +23,7 @@ function getid(id){
 function setList(listId,placeholder,listValue,index,method){
 	var level = index;
 	var inn = "";
-	inn += "<div class=\"dropdown input-class marginAuto\">";
+	inn += "<div class=\"dropdown input-class\">";
 	inn += "<div class=\"w340\">";
 	inn += "<input type=\"text\" id=\""+listId+"Value\" name=\""+listId+"Value\" class=\"form-control\" readOnly=\"readOnly\" placeholder=\""+placeholder+"\" />";
 	inn += "<input type=\"hidden\" name=\""+listId+"\" />";
@@ -51,7 +51,7 @@ function addListChild(listId,listValue,index,method){
 	var level = index;
 	var inn = "";
 	var cls = "";
-	if(listValue.length > 1){
+	if(level > 1){
 		cls = "class='dropdown-submenu'";
 	}
 	for(var i in listValue){

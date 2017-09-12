@@ -1,32 +1,52 @@
-	function init() {
-//		var url = "user/resumeAddInformationPage1.do";
-//		var formId = "userInformationForm";
-//		var data = ajaxSumbit(url, formId);
-//		dataName = data.dataName;
-//		addCheckJob(data.nowJobList);
-//		if(data.offerUserName != undefined){
-//			editCheckJob(data.jobId1,data.jobId2, data.jobvalue1, data.jobvalue2);
-//			setSexValue(data.offerUserSex);
-//		}
-//		$("#userInformationForm").populateForm(data);
-		parent.document.getElementById("iframe1").height=document.body.scrollHeight;
-		parent.document.getElementById("myTabContent").style.height=document.body.scrollHeight;
-		parent.dataFormVcenter();
-		parent.countFrameHeight();
+function init() {
+	parent.document.getElementById("iframe1").height=document.body.scrollHeight;
+	parent.document.getElementById("myTabContent").style.height=document.body.scrollHeight;
+	parent.dataFormVcenter();
+	parent.countFrameHeight();
+	
+	getTran('1');
+	subWorkTime();
+	setSrc('zhihu','zhihu.png');
+	setSrc('github','github.png');
+	setSrc('blog','blog.png');
+	setSrc('personlink','personlink.png');
+	
+	var url = "baseData.do?action=getJob";
+	var data = ajaxSumbit(url);
+	addCheckBox(data,"jobMeum","1",true,true);
+}
+function getTran(ret) {
+	if (ret == '1') {
+		getid("sex").value="1";
+		$("#btn1").addClass("checkedBtn");
+		$("#btn1").removeClass("checkBtn");
+		$("#btn2").addClass("checkBtn");
+		$("#btn2").removeClass("checkedBtn");
 	}
-	//性别
-	function setSexValue(id) {
-		if(id == 1){
-			document.getElementById("sex1").style="color:#FFF;background-color:#00B38A;border-color:#00B38A;width:121px;height:41px;";
-			document.getElementById("sex2").style="color:#00B38A;background-color:#FFF;border-color:#00B38A;width:121px;height:41px;";
-			document.getElementById("offerUserSex").value="1";
-		}
-		if(id == 0){
-			document.getElementById("sex2").style="color:#FFF;background-color:#00B38A;border-color:#00B38A;width:121px;height:41px;";
-			document.getElementById("sex1").style="color:#00B38A;background-color:#FFF;border-color:#00B38A;width:121px;height:41px;";
-			document.getElementById("offerUserSex").value="0";
-		}
+	if (ret == '2') {
+		getid("sex").value="2";
+		$("#btn2").addClass("checkedBtn");
+		$("#btn2").removeClass("checkBtn");
+		$("#btn1").addClass("checkBtn");
+		$("#btn1").removeClass("checkedBtn");
 	}
+}
+var workTime = "["
+				+"{\"id\":\"2\",\"value\":\"3年以下\"},"
+				+"{\"id\":\"3\",\"value\":\"3年\"},"
+				+"{\"id\":\"4\",\"value\":\"4年\"},"
+				+"{\"id\":\"5\",\"value\":\"5年\"},"
+				+"{\"id\":\"6\",\"value\":\"6年\"},"
+				+"{\"id\":\"7\",\"value\":\"7年\"},"
+				+"{\"id\":\"8\",\"value\":\"8年\"},"
+				+"{\"id\":\"9\",\"value\":\"9年\"},"
+				+"{\"id\":\"10\",\"value\":\"10年\"},"
+				+"{\"id\":\"11\",\"value\":\"10年以上\"}"
+				+"]";
+function subWorkTime(){
+	var data = jQuery.parseJSON(workTime);;
+	setList("workTime","请选择您的工作年限",data,0,"");
+}
 	//工作年限
 	function workTimeValue(time){
 		document.getElementById("offerUserWorktime").value=time;
