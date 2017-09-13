@@ -1,9 +1,4 @@
 function init() {
-	parent.document.getElementById("iframe1").height=document.body.scrollHeight;
-	parent.document.getElementById("myTabContent").style.height=document.body.scrollHeight;
-	parent.dataFormVcenter();
-	parent.countFrameHeight();
-	
 	getTran('1');
 	subWorkTime();
 	setSrc('zhihu','zhihu.png');
@@ -13,7 +8,12 @@ function init() {
 	
 	var url = "baseData.do?action=getJob";
 	var data = ajaxSumbit(url);
-	addCheckBox(data,"jobMeum","1",true,true);
+	selectChkLimit1(data,"jobMeum","1",true,true);
+	
+	parent.document.getElementById("iframe1").height=document.body.scrollHeight;
+	parent.document.getElementById("myTabContent").style.height=document.body.scrollHeight;
+	parent.dataFormVcenter();
+	parent.countFrameHeight();
 }
 function getTran(ret) {
 	if (ret == '1') {

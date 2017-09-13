@@ -1,9 +1,4 @@
-//jQuery(function($){
-//	$('.hiddenCheckBox').click(function(){
-//		$(this).prev().val(this.id);
-//	});
-//	addCheckBox();
-//});
+//2层式checkbox
 function selectCheckBox(obj,formId,type,haveCheckBox,isMultiselect){
 	var str = "";
 	if(obj == undefined){
@@ -44,6 +39,7 @@ function selectCheckBox(obj,formId,type,haveCheckBox,isMultiselect){
 		}
 	});
 }
+//找到某id下的checkbox
 function searchCheckBoxType(obj,type){
 	if(obj.value == type){
 		return obj;
@@ -64,20 +60,33 @@ function searchCheckBoxType(obj,type){
 		}
 	}
 }
-function addCheckBox(obj,formId,haveCheckBox,isMultiselect){
-//	var data = '[{"title":"中餐","content":[{"title":"t1","content":"","type":"title"}],"type":"title"}';
-//	data += ',{"title":"西餐","type":"title","content":[{"title":"t2"}]}]';
-//	var obj = eval('(' + data + ')');
+
+//某层以下单层checkbox
+function selectChkLimit1(obj,formId,type,haveCheckBox,isMultiselect){
 	var str = "";
 	if(obj == undefined){
 		return;
 	}
+	var targetObj;
 	if(obj[0] != undefined){
 		for(var i = 0; i < obj.length; i++){
-			str += appendCheckBoxTitle(obj[i],formId,haveCheckBox);
+			targetObj = searchCheckBoxType(obj[i],type);
+			if(targetObj != undefined){
+				break;
+			}
 		}
 	}else{
-		str += appendCheckBoxTitle(obj,formId,haveCheckBox);
+		targetObj = searchCheckBoxType(obj,type);
+	}
+	if(targetObj != undefined){
+		var o = targetObj.content;
+		if(o[0] != undefined){
+			for(var i = 0; i < o.length; i++){
+				str += appendCheckBoxContent(o[i]);
+			}
+		}else{
+			str += appendCheckBoxContent(o);
+		}
 	}
 	$("#"+formId).append(str);
 	$('.hiddenCheckBox').click(function(){
@@ -101,7 +110,44 @@ function addCheckBox(obj,formId,haveCheckBox,isMultiselect){
 	});
 }
 
-//适合单类型的checkbox
+//function addCheckBox(obj,formId,haveCheckBox,isMultiselect){
+////	var data = '[{"title":"中餐","content":[{"title":"t1","content":"","type":"title"}],"type":"title"}';
+////	data += ',{"title":"西餐","type":"title","content":[{"title":"t2"}]}]';
+////	var obj = eval('(' + data + ')');
+//	var str = "";
+//	if(obj == undefined){
+//		return;
+//	}
+//	if(obj[0] != undefined){
+//		for(var i = 0; i < obj.length; i++){
+//			str += appendCheckBoxTitle(obj[i],formId,haveCheckBox);
+//		}
+//	}else{
+//		str += appendCheckBoxTitle(obj,formId,haveCheckBox);
+//	}
+//	$("#"+formId).append(str);
+//	$('.hiddenCheckBox').click(function(){
+//		var ischecked = false;
+//		if($(this).parent().hasClass("checked")){
+//			$(this).parent().removeClass("checked");
+//		}else{
+//			$(this).parent().addClass("checked");
+//			ischecked = true;
+//		}
+//		if(!isMultiselect){
+//			$('.hiddenCheckBox').each(function(){
+//				if($(this).parent().hasClass("checked")){
+//					$(this).parent().removeClass("checked");
+//				}
+//			});
+//			if(ischecked){
+//				$(this).parent().addClass("checked");
+//			} 
+//		}
+//	});
+//}
+
+
 var count = 0;
 function appendCheckBoxTitle(obj,name,haveCheckBox){
 	var str = "";
