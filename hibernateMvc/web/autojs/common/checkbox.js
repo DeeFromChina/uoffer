@@ -82,10 +82,10 @@ function selectChkLimit1(obj,formId,type,haveCheckBox,isMultiselect){
 		var o = targetObj.content;
 		if(o[0] != undefined){
 			for(var i = 0; i < o.length; i++){
-				str += appendCheckBoxContent(o[i]);
+				str += appendCheckBoxContent(o[i],formId);
 			}
 		}else{
-			str += appendCheckBoxContent(o);
+			str += appendCheckBoxContent(o,formId);
 		}
 	}
 	$("#"+formId).append(str);
@@ -210,10 +210,10 @@ function appendCheckBoxTitle(obj,name,haveCheckBox){
 		var o = obj.content
 		if(o[0] != undefined){
 			for(var i = 0; i < o.length; i++){
-				str += appendCheckBoxContent(o[i]);
+				str += appendCheckBoxContent(o[i],name);
 			}
 		}else{
-			str += appendCheckBoxContent(o);
+			str += appendCheckBoxContent(o,name);
 		}
 		str += "</div>";
 	}
@@ -221,7 +221,7 @@ function appendCheckBoxTitle(obj,name,haveCheckBox){
 	return str;
 }
 
-function appendCheckBoxContent(obj){
+function appendCheckBoxContent(obj,name){
 	if(obj.title == undefined){
 		return "";
 	}
@@ -229,7 +229,7 @@ function appendCheckBoxContent(obj){
 	str += "<div class=\"checkbox_cell\">"
 				+"<div class=\"icheckbox_square-green floatL\">"
 					+"<input type=\"hidden\" id=\""+obj.value+"\" value=\""+obj.title+"\" />"
-					+"<input type=\"checkbox\" class=\"hiddenCheckBox hand\" />"
+					+"<input type=\"checkbox\" name=\""+name+"\" class=\"hiddenCheckBox hand\" />"
 				+"</div>"
 				+"<div class=\"checkbox_cell_value\">"
 					+"<font class=\"ch_title\">"+obj.title+"</font>"
@@ -244,16 +244,16 @@ function changeText(obj){
 		$(obj).find("font[class='floatR']").html("收起");
 	}
 }
-function checkedValue(){
+function checkedValue(checkDivId){
 	var ids = "";
 	var values = "";
-	$('.icheckbox_square-green').each(function(){
+	$('#'+checkDivId).find("div[class^='icheckbox_square-green']").each(function(){
 		if($(this).hasClass("checked")){
 			var id = $(this).find("input[type='hidden']").attr("id");
 			var value = $(this).find("input[type='hidden']").attr("value");
 			if(ids != ""){
 				ids += ",";
-				value += ",";
+				values += ",";
 			}
 			ids += id;
 			values += value;
@@ -262,4 +262,29 @@ function checkedValue(){
 	map["ids"] = ids;
 	map["values"] = values;
 	return map;
+}
+//可选择的数量
+function checkedNum(formId,num){
+	checkedLister(formId,num,"");
+}
+//选择时添加事件
+function checkedMethod(formId,method){
+	checkedLister(formId,0,method);
+}
+function checkedLister(formId,num,method){
+	$('#'+formId).find("div[class='icheckbox_square-green floatL']").each(function(){
+		$(this).on("click",function(){
+		    var chkedCount = 0;
+		    $('#'+formId).find("div[class='icheckbox_square-green floatL checked']").each(function(){
+		    	chkedCount++;
+		    });
+		    if(num > 0){
+		    	if(chkedCount > num){
+		    		$(this).removeClass('checked');
+		    		return;
+		    	}
+		    }
+		    eval(method);
+		});
+	});
 }

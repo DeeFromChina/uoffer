@@ -31,7 +31,7 @@
 			<tr>
 				<td></td>
 				<td colspan="3">
-					<input type="text" name="email" class="form-control input-class" placeholder="请输入邮箱">
+					<input type="text" name="name" class="form-control input-class" placeholder="请输入邮箱">
 				</td>
 			</tr>
 			<tr>
@@ -74,13 +74,52 @@
 			<tr>
 				<td></td>
 				<td colspan="3">
+					<input type="hidden" id="gojobId" name="gojobId"/>
 					<div id="jobMeum"></div>
 				</td>
+			</tr>
+			<tr hide="title1">
+				<td></td>
+				<th colspan="3">
+					<font class="font-14">您在<font id="title1"></font>岗位上有多长时间的工作经验</font>
+				</th>
+			</tr>
+			<tr hide="title1">
+				<td></td>
+				<th colspan="3">
+					<div class="input-group selectInput" id="workTime1"></div>
+				</th>
+			</tr>
+			<tr hide="title2">
+				<td></td>
+				<th colspan="3">
+					<font class="font-14">您在<font id="title2"></font>岗位上有多长时间的工作经验</font>
+				</th>
+			</tr>
+			<tr hide="title2">
+				<td></td>
+				<th colspan="3">
+					<div class="input-group selectInput" id="workTime2"></div>
+				</th>
 			</tr>
 			<tr>
 				<td></td>
 				<th colspan="3">
-					<font class="font-14">您擅长哪些工作技能？（请用逗号分隔你的技能特长）</font>
+					<font class="font-14">您擅长哪些工作技能？</font>
+				</th>
+			</tr>
+			<tr>
+				<td></td>
+				<td colspan="3">
+					<input type="hidden" id="skill" name="skill"/>
+					<div id="skillMeum"></div>
+				</td>
+			</tr>
+			<tr hide="otherskill">
+				<td></td>
+				<th colspan="3" valign="middle">
+					<font class="font-14 floatL">其他:</font>
+					<input type="text" name="otherskill" class="form-control input-class">
 				</th>
 			</tr>
 			<tr>
@@ -96,11 +135,11 @@
 				<td></td>
 				<td>
 					<img id="zhihu" class="urlImg floatL"/>
-					<input type="text" name="email" class="form-control marginLeft49 wi70" placeholder="请输入你的知乎ID">
+					<input type="text" name="zhihu" class="form-control marginLeft49 wi70" placeholder="请输入你的知乎ID">
 				</td>
 				<td>
 					<img id="github" class="urlImg floatL"/>
-					<input type="text" name="email" class="form-control marginLeft49 wi70" placeholder="请输入你的知乎ID">
+					<input type="text" name="github" class="form-control marginLeft49 wi70" placeholder="请输入你的知乎ID">
 				</td>
 				<td></td>
 			</tr>
@@ -108,11 +147,20 @@
 				<td></td>
 				<td>
 					<img id="blog" class="urlImg floatL"/>
-					<input type="text" name="email" class="form-control marginLeft49 wi70" placeholder="请输入你的知乎ID">
+					<input type="text" name="blog" class="form-control marginLeft49 wi70" placeholder="请输入你的知乎ID">
 				</td>
 				<td>
 					<img id="personlink" class="urlImg floatL"/>
-					<input type="text" name="email" class="form-control marginLeft49 wi70" placeholder="请输入你的知乎ID">
+					<input type="text" name="personlink" class="form-control marginLeft49 wi70" placeholder="请输入你的知乎ID">
+				</td>
+				<td></td>
+			</tr>
+			<tr>
+				<td></td>
+				<td colspan="2" class="textC">
+					<button type="button" class="btn btn-primary submitBtn" onclick="goSubmit()">
+						确认提交
+					</button>
 				</td>
 				<td></td>
 			</tr>

@@ -1,6 +1,7 @@
 package com.offer.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.List;
 import java.util.Map;
@@ -13,10 +14,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.offer.model.baseData.Skill;
 import com.offer.model.util.CheckBox;
 import com.offer.model.util.Tree;
 import com.offer.service.baseData.CityService;
 import com.offer.service.baseData.JobService;
+import com.offer.service.baseData.SkillService;
 
 /**
  * @author sammy
@@ -31,6 +34,9 @@ public class BaseDataManagerAction extends TinyBuilderController{
 	
 	@Autowired
 	private CityService cityService;
+	
+	@Autowired
+	private SkillService skillService;
 
 	@ResponseBody
 	@RequestMapping(value = "/baseData", produces = "application/json")
@@ -82,5 +88,15 @@ public class BaseDataManagerAction extends TinyBuilderController{
 			e.printStackTrace();
 		}
 		return trees;
+	}
+	
+	public Object getSkill() {
+		List<Skill> skills = new ArrayList<Skill>();
+		try {
+//			skills = skillService.
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return skills;
 	}
 }

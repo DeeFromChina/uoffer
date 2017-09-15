@@ -1,6 +1,7 @@
 package com.offer.util.impl;
 
 import java.io.File;
+import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -20,13 +21,15 @@ public class Dom4jXmlTestImpl{
 
 	public static void main(String[] args) {
 		try {
-			String path = System.getProperty("user.dir");
-			path += "\\web\\sql\\test.xml";
-			File file = new File(path);
-			if (file.exists()) {
-				System.out.println(path);
-			}
-			new test().initSqlXml(path);
+//			String path = System.getProperty("user.dir");
+//			path += "\\web\\sql\\test.xml";
+//			File file = new File(path);
+//			if (file.exists()) {
+//				System.out.println(path);
+//			}
+//			new test().initSqlXml(path);
+			Hashtable<String, String> hashtable = new Hashtable<String, String>();
+			hashtable.put("a", null);
 
 		} catch (Exception e) {
 			e.printStackTrace();

@@ -1,6 +1,9 @@
 function init() {
 	getTran('1');
 	subWorkTime();
+	var workTimeData = jQuery.parseJSON(workTime);
+	setList("workTime1","请选择您的工作年限",workTimeData,0,"");
+	setList("workTime2","请选择您的工作年限",workTimeData,0,"");
 	setSrc('zhihu','zhihu.png');
 	setSrc('github','github.png');
 	setSrc('blog','blog.png');
@@ -9,11 +12,15 @@ function init() {
 	var url = "baseData.do?action=getJob";
 	var data = ajaxSumbit(url);
 	selectChkLimit1(data,"jobMeum","1",true,true);
+	checkedLister("jobMeum",2,"selectWorkTime()");
 	
 	parent.document.getElementById("iframe1").height=document.body.scrollHeight;
 	parent.document.getElementById("myTabContent").style.height=document.body.scrollHeight;
 	parent.dataFormVcenter();
 	parent.countFrameHeight();
+	
+	$("tr[hide^='title']").attr("class","hidden");
+	$("tr[hide='otherskill']").attr("class","hidden");
 }
 function getTran(ret) {
 	if (ret == '1') {
@@ -44,186 +51,40 @@ var workTime = "["
 				+"{\"id\":\"11\",\"value\":\"10年以上\"}"
 				+"]";
 function subWorkTime(){
-	var data = jQuery.parseJSON(workTime);;
+	var data = jQuery.parseJSON(workTime);
 	setList("workTime","请选择您的工作年限",data,0,"");
 }
-	//工作年限
-	function workTimeValue(time){
-		document.getElementById("offerUserWorktime").value=time;
-	}
-	//添加职位
-	function addCheckJob(items){
-		var jobs = "<table width='100%'>";
-		var j = 1;
-		for(var i in items){
-			if(j == 1){
-				jobs = jobs + "<tr>";
-			}
-			jobs = jobs + "<td class='textL' style='padding-top:20px;padding-bottom:24px;width:29px;'>"
-							+"<div class='icheckbox_square-green hover' onclick='jobId(this)' id='"+items[i].id+"'>"
-								+"<input type='hidden' value='"+items[i].value+"'/>"
-								+"<input tabindex='2' type='checkbox' style='opacity:0;'>"
-							+"</div>"
-						+"</td>"
-						+"<td class='textL' style='padding-top:20px;padding-bottom:24px;'><font style='font-size:14px;color:#4F4F4F;'>&nbsp;&nbsp;"+items[i].value+"</font></td>";
-			if(j == 4){
-				jobs = jobs + "</tr>";
-				j = 1;
-			}else{
-				j = j+1;
-			}
+function selectWorkTime(){
+	var data = jQuery.parseJSON(workTime);
+	checkedValue("jobMeum");
+	$("tr[hide^='title']").attr("class","hidden");
+	if(map["ids"].indexOf(",") > -1){
+		var values = map["values"].split(",");
+		for(var i in values){
+			$("tr[hide^='title']").each(function(){
+				$(this).removeAttr("class");
+			});
+			$('#title'+(parseInt(i)+1)).html(values[i]);
 		}
-		jobs = jobs + "</table>";
-		document.getElementById('checkJob').innerHTML=jobs;
-		
-	}
-	function editCheckJob(job1, job2, jobname1, jobname2){
-		if(job1 != undefined){
-			document.getElementById(job1).setAttribute("class","icheckbox_square-green checked");
-			editworkyears(job1, jobname1, 1);
-		}
-		if(job2 != undefined){
-			document.getElementById(job2).setAttribute("class","icheckbox_square-green checked");
-			editworkyears(job2, jobname2, 2);
+	}else{
+		if(map["ids"] != ""){
+			$("tr[hide='title1']").each(function(){
+				$(this).removeAttr("class");
+			});
+			$('#title1').html(map["values"]);
 		}
 	}
-	//职位
-	function jobId(job){
-		var jobNum = 1;
-		if(job.getAttribute('class') == "icheckbox_square-green checked"){
-			delworkyears(job);
-			job.setAttribute("class","icheckbox_square-green hover");
-		}
-		else if(job.getAttribute('class') == "icheckbox_square-green hover"){
-			$(".checked").each(function () {
-				jobNum = jobNum + 1;
-	        });
-			if(jobNum > 2){
-				alert("最多选择两项");
-				return;
-			}
-			addworkyears(job);
-			job.setAttribute("class","icheckbox_square-green checked");
-		}
+	$('#gojobId').val(map["ids"]);
+}
+function selectOtherSkill(){
+	var data = jQuery.parseJSON(workTime);
+	checkedValue("skillMeum");
+	$("tr[hide^='title']").attr("class","hidden");
+	if(map["values"].indexOf("其他") > -1){
+		$("tr[hide='otherskill']").removeAttr("class");
 	}
-	//职位年限
-	function addworkyears(obj){
-		var jobId;
-		var jobName;
-		var jobtitle;
-		if(document.getElementById("job1").getElementsByTagName("td")[0] == undefined){
-			jobId = "job1";
-			jobName = "jobyear1";
-			jobtitle = "job1_title";
-		}else if(document.getElementById("job2").getElementsByTagName("td")[0] == undefined){
-			jobId = "job2";
-			jobName = "jobyear2";
-			jobtitle = "job2_title";
-		}
-		document.getElementById(jobtitle).innerHTML = "<td colspan='2'>您在"+obj.getElementsByTagName("input")[0].value+"岗位上有多长时间的工作经验</td>";
-		document.getElementById(jobId).innerHTML = ""
-		 +"<td class='textL'>"
-		 	+"<div class='input-group' style='margin-left:-10px !important;width: 90% !important'>"
-				+"<div class='dropdown'>"
-			 		+"<input type='text' name='"+jobName+"' id='"+jobName+"' class='form-control' style='width: 340px;' readonly>"
-			 		+"<button type='button' style='width:41px;height:41px !important;background-color:#F5F8F9;border:1px #CCCCCC solid;' class='btn dropdown-toggle' id='dropdownMenu1' data-toggle='dropdown'>"
-			 			+"<span class='caret'></span>"
-			 		+"</button>"
-				 	+"<ul class='dropdown-menu' role='menu' aria-labelledby='dropdownMenu1' style='width: 381px;height:150px;overflow-y:auto;'>"
-				 		+"<li role='presentation'>"
-// 				 			+"<a role='menuitem' tabindex='-1' href='#' onclick=\"workTime('1年','"+jobName+"')\"><font color='#4F4F4F'>1年</font></a>"
-// 				 			+"<a role='menuitem' tabindex='-1' href='#' onclick=\"workTime('一至三年','"+jobName+"')\"><font color='#4F4F4F'>一至三年</font></a>"
-// 				 			+"<a role='menuitem' tabindex='-1' href='#' onclick=\"workTime('三至五年','"+jobName+"')\"><font color='#4F4F4F'>三至五年</font></a>"
-// 				 			+"<a role='menuitem' tabindex='-1' href='#' onclick=\"workTime('五年以上','"+jobName+"')\"><font color='#4F4F4F'>五年以上</font></a>"
- 				 			+"<a role='menuitem' tabindex='-1' onclick=\"workTime('3年以下','"+jobName+"')\"><font color='#4F4F4F'>3年以下</font></a>"
-							+"<a role='menuitem' tabindex='-1' onclick=\"workTime('3年','"+jobName+"')\"><font color='#4F4F4F'>3年</font></a>"
-							+"<a role='menuitem' tabindex='-1' onclick=\"workTime('4年','"+jobName+"')\"><font color='#4F4F4F'>4年</font></a>"
-							+"<a role='menuitem' tabindex='-1' onclick=\"workTime('5年','"+jobName+"')\"><font color='#4F4F4F'>5年</font></a>"
-							+"<a role='menuitem' tabindex='-1' onclick=\"workTime('6年','"+jobName+"')\"><font color='#4F4F4F'>6年</font></a>"
-							+"<a role='menuitem' tabindex='-1' onclick=\"workTime('7年','"+jobName+"')\"><font color='#4F4F4F'>7年</font></a>"
-							+"<a role='menuitem' tabindex='-1' onclick=\"workTime('8年','"+jobName+"')\"><font color='#4F4F4F'>8年</font></a>"
-							+"<a role='menuitem' tabindex='-1' onclick=\"workTime('9年','"+jobName+"')\"><font color='#4F4F4F'>9年</font></a>"
-							+"<a role='menuitem' tabindex='-1' onclick=\"workTime('10年','"+jobName+"')\"><font color='#4F4F4F'>10年</font></a>"
-							+"<a role='menuitem' tabindex='-1' onclick=\"workTime('10年以上','"+jobName+"')\"><font color='#4F4F4F'>10年以上</font></a>"
-				 		+"</li>"
-				 	+"</ul>"
-		 		+"</div>"
-		 	+"</div>"
-		 +"</td>"
-		 ;
-		 click();
-	}
-	function editworkyears(jobId, jobN, a){
-		var jobId;
-		var jobName;
-		var jobtitle;
-		if(a == 1){
-			jobId = "job1";
-			jobName = "jobyear1";
-			jobtitle = "job1_title";
-		}
-		if(a == 2){
-			jobId = "job2";
-			jobName = "jobyear2";
-			jobtitle = "job2_title";
-		}
-		document.getElementById(jobtitle).innerHTML = "<td colspan='2'>您在"+jobN+"岗位上有多长时间的工作经验</td>";
-		document.getElementById(jobId).innerHTML = ""
-		 +"<td class='textL'>"
-		 	+"<div class='input-group' style='margin-left:-10px !important;width: 90% !important'>"
-				+"<div class='dropdown'>"
-			 		+"<input type='text' name='"+jobName+"' id='"+jobName+"' class='form-control' style='width: 340px;' readonly>"
-			 		+"<button type='button' style='width:41px;height:41px !important;background-color:#F5F8F9;border:1px #CCCCCC solid;' class='btn dropdown-toggle' id='dropdownMenu1' data-toggle='dropdown'>"
-			 			+"<span class='caret'></span>"
-			 		+"</button>"
-				 	+"<ul class='dropdown-menu' role='menu' aria-labelledby='dropdownMenu1' style='width: 381px;height:150px;overflow-y:auto;'>"
-				 		+"<li role='presentation'>"
-// 				 			+"<a role='menuitem' tabindex='-1' onclick=\"workTime('1年','"+jobName+"')\"><font color='#4F4F4F'>1年</font></a>"
-// 				 			+"<a role='menuitem' tabindex='-1' onclick=\"workTime('一至三年','"+jobName+"')\"><font color='#4F4F4F'>一至三年</font></a>"
-// 				 			+"<a role='menuitem' tabindex='-1' onclick=\"workTime('三至五年','"+jobName+"')\"><font color='#4F4F4F'>三至五年</font></a>"
-// 				 			+"<a role='menuitem' tabindex='-1' onclick=\"workTime('五年以上','"+jobName+"')\"><font color='#4F4F4F'>五年以上</font></a>"
-							+"<a role='menuitem' tabindex='-1' onclick=\"workTime('3年以下','"+jobName+"')\"><font color='#4F4F4F'>3年以下</font></a>"
-							+"<a role='menuitem' tabindex='-1' onclick=\"workTime('3年','"+jobName+"')\"><font color='#4F4F4F'>3年</font></a>"
-							+"<a role='menuitem' tabindex='-1' onclick=\"workTime('4年','"+jobName+"')\"><font color='#4F4F4F'>4年</font></a>"
-							+"<a role='menuitem' tabindex='-1' onclick=\"workTime('5年','"+jobName+"')\"><font color='#4F4F4F'>5年</font></a>"
-							+"<a role='menuitem' tabindex='-1' onclick=\"workTime('6年','"+jobName+"')\"><font color='#4F4F4F'>6年</font></a>"
-							+"<a role='menuitem' tabindex='-1' onclick=\"workTime('7年','"+jobName+"')\"><font color='#4F4F4F'>7年</font></a>"
-							+"<a role='menuitem' tabindex='-1' onclick=\"workTime('8年','"+jobName+"')\"><font color='#4F4F4F'>8年</font></a>"
-							+"<a role='menuitem' tabindex='-1' onclick=\"workTime('9年','"+jobName+"')\"><font color='#4F4F4F'>9年</font></a>"
-							+"<a role='menuitem' tabindex='-1' onclick=\"workTime('10年','"+jobName+"')\"><font color='#4F4F4F'>10年</font></a>"
-							+"<a role='menuitem' tabindex='-1' onclick=\"workTime('10年以上','"+jobName+"')\"><font color='#4F4F4F'>10年以上</font></a>"
-				 		+"</li>"
-				 	+"</ul>"
-		 		+"</div>"
-		 	+"</div>"
-		 +"</td>"
-		 ;
-		 click();
-	}
-	function delworkyears(job){
-		var title="您在"+job.getElementsByTagName("input")[0].value+"岗位上有多长时间的工作经验";
-		if(document.getElementById("job1_title").innerText == title){
-			document.getElementById("job1_title").innerHTML = "";
-			document.getElementById("job1").innerHTML = "";
-		}else if(document.getElementById("job2_title").innerText == title){
-			document.getElementById("job2_title").innerHTML = "";
-			document.getElementById("job2").innerHTML = "";
-		}
-	}
-	function workTime(jobval,jobName){
-		document.getElementById(jobName).value=jobval;
-	}
-	function replaceAll(str, str1, str2) {
-		var lstr = ""
-		for (var i in str.split(str1)) {
-			str = str.replace(str1, str2);
-		}
-		for (var i in str.split(str2)) {
-			if (str.split(str2)[i] != '') lstr += str.split(str2)[i] + ",";
-		}
-		lstr = lstr.substring(0, lstr.length - 1);
-		return lstr;
-	}
+	$('#skill').val(map["ids"]);
+}
 	//下一步
 	function goSubmit(){
 		var jobs = "";

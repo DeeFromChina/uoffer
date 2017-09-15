@@ -37,26 +37,4 @@
 	width:16px;
 	height:16px;
 }
-.submitBtn{
-	font-size:14px;
-	width: 381px;
-	height:41px;
-	background-color: #00B38A;
-	border-color: #00B38A;
-}
-.submitBtn:hover{
-	background-color: #00B38A;
-	border-color: #00B38A;
-}
-.submitBtn.active{
-	background-color: #00B38A;
-	border-color: #00B38A;
-}
-.submitBtn:active{
-	background-color: #00B38A;
-	border-color: #00B38A;
-}
-.submitBtn:focus{
-	background-color: #00B38A;
-	border-color: #00B38A;
-}
+

@@ -1,17 +1,16 @@
-package com.offer.dao;
+package com.offer.dao.common;
 
 import java.io.Serializable;
 import java.util.Hashtable;
 import java.util.List;
-import java.util.Map;
 
 public interface BaseDao {
 
 	public Object findField(Class<?> t, Serializable id) throws Exception;
 
-	public List<?> findField(Class<?> t, Map<String, String> map) throws Exception;
+	public List<?> findField(Class<?> t, Hashtable<String, Object> map) throws Exception;
 
-	public List<Map<String, String>> findBySql(String sql) throws Exception;
+	public List<Hashtable<String, Object>> findBySql(String sql) throws Exception;
 
 	public void save(Object object) throws Exception;
 	
@@ -23,7 +22,7 @@ public interface BaseDao {
 
 	public void deleteByIds(Serializable[] ids, Class<?> t) throws Exception;
 	
-	public List<Map<String, String>> findByQuery(String path, Map<String, String> params) throws Exception;
+	public List<Hashtable<String, Object>> findByQuery(String path, Hashtable<String, Object> params) throws Exception;
 	
 	public void deleteBySql(String sql) throws Exception;
 	
