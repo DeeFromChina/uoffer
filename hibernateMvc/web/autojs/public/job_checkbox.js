@@ -11,7 +11,7 @@ function init(){
 	}
 }
 function submit(){
-	checkedValue();
+	checkedValue("jobMeum");
 	mainFrameSetValue(map["targetId"],map["ids"]);
 	mainFrameSetValue(map["targetValue"],map["values"]);
 	closeWin();

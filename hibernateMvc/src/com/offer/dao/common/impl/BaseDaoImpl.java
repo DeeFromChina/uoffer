@@ -7,7 +7,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Hashtable;
 import java.util.List;
 import java.util.Map;
 
@@ -18,12 +17,14 @@ import org.hibernate.criterion.CriteriaSpecification;
 import org.hibernate.jdbc.Work;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate4.HibernateTemplate;
+import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
 
 import com.offer.dao.common.BaseDao;
 import com.offer.util.BaseUtil;
 import com.offer.util.ConUtil;
 import com.offer.util.Dom4jXml;
-
+@Service("BaseDaoImpl")
 public class BaseDaoImpl implements BaseDao{
 
 	@Autowired
@@ -54,30 +55,30 @@ public class BaseDaoImpl implements BaseDao{
 		return null;
 	}
 	
-	public List<?> findField(Class<?> t, Hashtable<String, Object> table) throws Exception{
+	public List<?> findField(Class<?> t, Map<String, Object> map) throws Exception{
 		try {
 			Object vo = t.newInstance();
-			BaseUtil.tableToObject(vo, table);
-			return findFields(t, table);
+			BaseUtil.mapToObject(vo, map);
+			return findFields(t, map);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return null;
 	}
 	
-	private List<?> findFields(Class<?> t, Hashtable<String, Object> table) throws Exception{
+	private List<?> findFields(Class<?> t, Map<String, Object> map) throws Exception{
 		try {
-			String[] keyParams = new String[table.size()];
-			Object[] valueParams = new Object[table.size()];
+			String[] keyParams = new String[map.size()];
+			Object[] valueParams = new Object[map.size()];
 			StringBuffer hql = new StringBuffer();
 			hql.append("FROM ");
 			String tableName = t.getName();
 			tableName = tableName.substring(tableName.lastIndexOf(".")+1, tableName.length());
 			hql.append(tableName+" a ");
-			if(table != null){
+			if(map != null){
 				hql.append(" WHERE 1=1 ");
 				int i = 0;
-				for(Map.Entry<String, Object> entry : table.entrySet()){
+				for(Map.Entry<String, Object> entry : map.entrySet()){
 					hql.append(" AND ");
 					hql.append(" a."+entry.getKey()+"=:"+entry.getKey());
 					keyParams[i] = entry.getKey();
@@ -92,12 +93,12 @@ public class BaseDaoImpl implements BaseDao{
 		return null;
 	}
 	
-	public List<Hashtable<String, Object>> findBySql(String sql) throws Exception{
+	public List<Map<String, Object>> findBySql(String sql) throws Exception{
 		SessionFactory sessionFactory = hibernateTemplate.getSessionFactory();
 		Session session = sessionFactory.getCurrentSession();
 		SQLQuery query = session.createSQLQuery(sql);
 		query.setResultTransformer(CriteriaSpecification.ALIAS_TO_ENTITY_MAP);
-		List<Hashtable<String, Object>> list = query.list();
+		List<Map<String, Object>> list = query.list();
 		return list;
 	}
 	
@@ -150,7 +151,7 @@ public class BaseDaoImpl implements BaseDao{
 		}
 	}
 	
-	public List<Hashtable<String, Object>> findByQuery(String path, Hashtable<String, Object> params) throws Exception{
+	public List<Map<String, Object>> findByQuery(String path, Map<String, Object> params) throws Exception{
 		try {
 			FILE_PATH = FILE_PATH.replace("/WEB-INF/classes/", "");
 			path = FILE_PATH + path;

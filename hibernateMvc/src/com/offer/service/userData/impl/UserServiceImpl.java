@@ -1,12 +1,14 @@
 package com.offer.service.userData.impl;
 
-import java.util.Hashtable;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.test.context.jdbc.Sql;
 
-import com.offer.dao.BaseDao;
+import com.offer.dao.common.BaseDao;
 import com.offer.model.userData.User;
 import com.offer.model.util.CheckBox;
 import com.offer.model.util.Tree;
@@ -27,9 +29,9 @@ public class UserServiceImpl extends BaseServiceImpl implements UserService {
 	}
 
 	@Override
-	public void save(Hashtable<String, Object> table) throws Exception {
+	public void save(Map<String, Object> map) throws Exception {
 		User user = new User();
-		BaseUtil.tableToObject(user, table);
+		BaseUtil.mapToObject(user, map);
 		if(user != null){
 			baseDao.save(user);
 		}
@@ -42,7 +44,7 @@ public class UserServiceImpl extends BaseServiceImpl implements UserService {
 	}
 
 	@Override
-	public List<Hashtable<String, Object>> getMap(Hashtable<String, Object> table) throws Exception {
+	public List<Map<String, Object>> getMap(Map<String, Object> map) throws Exception {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -60,15 +62,43 @@ public class UserServiceImpl extends BaseServiceImpl implements UserService {
 	}
 
 	@Override
-	public List<Tree> getTree(Hashtable<String, Object> table) throws Exception {
+	public List<Tree> getTree(Map<String, Object> map) throws Exception {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public List<CheckBox> getCheckBox(Hashtable<String, Object> table) throws Exception {
+	public List<CheckBox> getCheckBox(Map<String, Object> map) throws Exception {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public User getByAccount(String account, String password) throws Exception {
+		StringBuffer hql = new StringBuffer();
+		hql.append("FROM User WHERE ");
+		Integer phone = BaseUtil.returnInt(account);
+		if(phone != 0){
+			hql.append("phone=" + phone);
+		}else{
+			account = BaseUtil.returnString(account);
+			if("".equals(account)){
+				throw new Exception("账号有误");
+			}
+			hql.append("email='" + account + "'");
+		}
+		User user = new User();
+		List<User> users = (List<User>) baseDao.findByHql(hql.toString());
+		if(users != null && users.size() == 1){
+			user = users.get(0);
+			password = BaseUtil.returnString(password);
+			if(!password.equals(user.getPassword())){
+				throw new Exception("密码有误");
+			}
+		}else{
+			throw new Exception("账号有误");
+		}
+		return user;
 	}
 
 }

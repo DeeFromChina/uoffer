@@ -33,6 +33,7 @@ public class LoginAction extends TinyBuilderController{
 			Object forward = null;
 			String action = form.get("action").toString();
 			
+			if("login".equalsIgnoreCase(action)) forward = login();
 			if("register".equalsIgnoreCase(action)) forward = register();
 			
 			return toJson(forward);
@@ -42,7 +43,24 @@ public class LoginAction extends TinyBuilderController{
 		return toJson(SUCCESS);
 	}
 
-	public Object register() {
+	private Object login() {
+		try {
+			if(form.get("type") == null){
+				return ERROR;
+			}
+			if(!"1".equals(form.get("type")) && !"2".equals(form.get("type"))){
+				return ERROR;
+			}
+//				checkRequired("email", "goJobId", "cityId", "password");
+			userService.save(form);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return addMessage(e.getMessage()+"不能为空!");
+		}
+		return redirect("login/login.jsp", "保存成功", true);
+	}
+	
+	private Object register() {
 		try {
 			if(form.get("type") == null){
 				return ERROR;
@@ -61,6 +79,6 @@ public class LoginAction extends TinyBuilderController{
 			e.printStackTrace();
 			return addMessage(e.getMessage()+"不能为空!");
 		}
-		return redirect("login/login.jsp",true);
+		return redirect("login/login.jsp", "保存成功", true);
 	}
 }

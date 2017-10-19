@@ -29,11 +29,13 @@ function getTran(ret) {
 }
 function goSubmit(){
 	var isPass = false;
-	isPass = checkValidateCode("inputCode");
-	if(!isPass) return;
-	isPass = checkValue();
-	if(!isPass) return;
+//	isPass = checkValidateCode("inputCode");
+//	if(!isPass) return;
+//	isPass = checkValue();
+//	if(!isPass) return;
 	saveUserInfo();
+	var url = "login.do?action=register"+param;
+	var data = ajaxSumbit(url,form);
 }
 function rememberMe(){
 	if ($.cookie("rmbUser") == "true") {

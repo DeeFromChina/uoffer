@@ -1,7 +1,6 @@
 package com.offer.dao;
 
 import java.io.Serializable;
-import java.util.Hashtable;
 import java.util.List;
 import java.util.Map;
 

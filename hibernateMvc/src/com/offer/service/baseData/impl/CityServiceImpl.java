@@ -1,7 +1,6 @@
 package com.offer.service.baseData.impl;
 
 import java.util.ArrayList;
-import java.util.Hashtable;
 import java.util.List;
 import java.util.Map;
 
@@ -10,7 +9,6 @@ import org.springframework.stereotype.Service;
 
 import com.offer.dao.BaseDao;
 import com.offer.model.baseData.City;
-import com.offer.model.baseData.Job;
 import com.offer.model.util.CheckBox;
 import com.offer.model.util.Tree;
 import com.offer.service.baseData.CityService;
@@ -31,7 +29,7 @@ public class CityServiceImpl extends BaseServiceImpl implements CityService{
 	}
 
 	@Override
-	public void save(Hashtable<String, Object> table) throws Exception {
+	public void save(Map<String, Object> map) throws Exception {
 		// TODO Auto-generated method stub
 		
 	}
@@ -43,7 +41,7 @@ public class CityServiceImpl extends BaseServiceImpl implements CityService{
 	}
 
 	@Override
-	public List<Hashtable<String, Object>> getMap(Hashtable<String, Object> table) throws Exception {
+	public List<Map<String, Object>> getMap(Map<String, Object> map) throws Exception {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -61,7 +59,7 @@ public class CityServiceImpl extends BaseServiceImpl implements CityService{
 	}
 
 	@Override
-	public List<Tree> getTree(Hashtable<String, Object> table) throws Exception {
+	public List<Tree> getTree(Map<String, Object> map) throws Exception {
 		List<Tree> trees = new ArrayList<Tree>();
 		List<Tree> returnTree = new ArrayList<Tree>();
 		if(CacheClass.getCache("cityTree") == null){
@@ -77,20 +75,20 @@ public class CityServiceImpl extends BaseServiceImpl implements CityService{
 			CacheClass.setCache("cityTree",returnTree);
 			//保存job的数据
 			CacheClass.setCache("city",cities);
-		}else if(table.get("all") != null){
+		}else if(map.get("all") != null){
 			returnTree = (List<Tree>) CacheClass.getCache("cityTree");
 		}
 		return returnTree;
 	}
 
 	@Override
-	public List<CheckBox> getCheckBox(Hashtable<String, Object> table) throws Exception {
+	public List<CheckBox> getCheckBox(Map<String, Object> map) throws Exception {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public List<Map<String, String>> getCityList(Hashtable<String, Object> table) throws Exception {
+	public List<Map<String, String>> getCityList(Map<String, Object> map) throws Exception {
 		
 		return null;
 	}

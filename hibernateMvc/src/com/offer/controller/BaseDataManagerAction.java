@@ -2,7 +2,6 @@ package com.offer.controller;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Hashtable;
 import java.util.List;
 import java.util.Map;
 
@@ -69,9 +68,9 @@ public class BaseDataManagerAction extends TinyBuilderController{
 	public Object getJob() {
 		List<CheckBox> checkBoxs = new ArrayList<CheckBox>();
 		try {
-			Hashtable<String, Object> table = new Hashtable<String, Object>();
-			table.put("count", "4");
-			checkBoxs = jobService.getCheckBox(table);
+			Map<String, Object> map = new HashMap<String, Object>();
+			map.put("count", "4");
+			checkBoxs = jobService.getCheckBox(map);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -81,9 +80,9 @@ public class BaseDataManagerAction extends TinyBuilderController{
 	public Object getCity() {
 		List<Tree> trees = new ArrayList<Tree>();
 		try {
-			Hashtable<String, Object> table = new Hashtable<String, Object>();
-			table.put("all", "true");
-			trees = cityService.getTree(table);
+			Map<String, Object> map = new HashMap<String, Object>();
+			map.put("all", "true");
+			trees = cityService.getTree(map);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

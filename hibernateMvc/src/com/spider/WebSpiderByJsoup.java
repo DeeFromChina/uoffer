@@ -1,4 +1,4 @@
-package spider;
+package com.spider;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -7,8 +7,8 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.RandomAccessFile;
 
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
+//import org.jsoup.Jsoup;
+//import org.jsoup.nodes.Document;
 
 public class WebSpiderByJsoup {
 	
@@ -18,10 +18,10 @@ public class WebSpiderByJsoup {
 
 	public static void getWuMaoW(){
         String url = "https://www.zhihu.com/question/30692237";
-        Document doc = null;
+//        Document doc = null;
         PrintWriter pw = null;  
         try {
-            doc = Jsoup.connect(url).get();
+//            doc = Jsoup.connect(url).get();
 //            Elements div = doc.getElementsByTag("div");
             File file = new File("e:/30692237.txt");
             if(!file.exists()){
@@ -31,7 +31,7 @@ public class WebSpiderByJsoup {
 //            String title = doc.getElementsByAttributeValue("class","QuestionHeader-title").text();
 //            html.append(title);
 //            System.out.println(html.toString());
-            writeTxtFile(doc.html(),file);
+//            writeTxtFile(doc.html(),file);
             
 //            System.out.println(doc.html());
 //            Elements listDiv = doc.getElementsByAttributeValue("class", "post");

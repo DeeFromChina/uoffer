@@ -23,7 +23,8 @@ public class UserManagerController extends TinyBuilderController {
 			Object forward = null;
 			String action = form.get("action").toString();
 			
-			if("getTop".equalsIgnoreCase(action)) forward=getTop();
+			if("getTop".equalsIgnoreCase(action)) forward = getTop();
+			if("userInformation".equalsIgnoreCase(action)) forward = userInformation();
 			
 			return toJson(forward);
 		} catch (Exception e) {
@@ -59,5 +60,9 @@ public class UserManagerController extends TinyBuilderController {
 		titleMap.put("rightTitle", rightTitle);
 		
 		return titleMap;
+	}
+	
+	private Object userInformation(){
+		return null;
 	}
 }

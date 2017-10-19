@@ -1,14 +1,16 @@
 package com.offer.service.baseData.impl;
 
-import java.util.Hashtable;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.offer.dao.common.BaseDao;
 import com.offer.model.baseData.Skill;
 import com.offer.service.baseData.SkillService;
 
+@Service("skillService")
 public class SkillServiceImpl implements SkillService {
 
 	@Autowired
@@ -21,7 +23,7 @@ public class SkillServiceImpl implements SkillService {
 	}
 
 	@Override
-	public void save(Hashtable<String, Object> table) throws Exception {
+	public void save(Map<String, Object> map) throws Exception {
 		// TODO Auto-generated method stub
 		
 	}
@@ -33,8 +35,8 @@ public class SkillServiceImpl implements SkillService {
 	}
 
 	@Override
-	public List<Hashtable<String, Object>> getTable(Hashtable<String, Object> table) throws Exception {
-		List<Hashtable<String, Object>> list = baseDao.findBySql("From Skill");
+	public List<Map<String, Object>> getMap(Map<String, Object> map) throws Exception {
+		List<Map<String, Object>> list = baseDao.findBySql("From Skill");
 		return null;
 	}
 

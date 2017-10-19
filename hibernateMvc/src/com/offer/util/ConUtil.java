@@ -1,6 +1,5 @@
 package com.offer.util;
 
-import java.util.Hashtable;
 import java.util.Map;
 
 public interface ConUtil {

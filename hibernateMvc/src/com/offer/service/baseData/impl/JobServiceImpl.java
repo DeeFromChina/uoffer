@@ -1,8 +1,8 @@
 package com.offer.service.baseData.impl;
 
 import java.util.ArrayList;
-import java.util.Hashtable;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -30,9 +30,8 @@ public class JobServiceImpl extends BaseServiceImpl implements JobService{
 	}
 
 	@Override
-	public void save(Hashtable<String, Object> table) throws Exception {
+	public void save(Map<String, Object> map) throws Exception {
 		Job job = new Job();
-//		job = (Job) conUtil.tableToObject(job, table);
 		baseDao.save(job);
 	}
 
@@ -43,7 +42,7 @@ public class JobServiceImpl extends BaseServiceImpl implements JobService{
 	}
 
 	@Override
-	public List<Hashtable<String, Object>> getMap(Hashtable<String, Object> table) throws Exception {
+	public List<Map<String, Object>> getMap(Map<String, Object> map) throws Exception {
 		
 		return null;
 	}
@@ -61,7 +60,7 @@ public class JobServiceImpl extends BaseServiceImpl implements JobService{
 	}
 	
 	@Override
-	public List<Tree> getTree(Hashtable<String, Object> table) throws Exception {
+	public List<Tree> getTree(Map<String, Object> map) throws Exception {
 		List<Tree> trees = new ArrayList<Tree>();
 		List<Tree> returnTree = new ArrayList<Tree>();
 		if(CacheClass.getCache("jobTree") == null){
@@ -81,16 +80,16 @@ public class JobServiceImpl extends BaseServiceImpl implements JobService{
 			CacheClass.setCache("jobTree",returnTree);
 			//保存job的数据
 			CacheClass.setCache("job",jobs);
-		}else if(table.get("all") != null){
+		}else if(map.get("all") != null){
 			returnTree = (List<Tree>) CacheClass.getCache("jobTree");
 		}
-		if(table.get("id") != null){
+		if(map.get("id") != null){
 			List<Job> jobs = (List<Job>) CacheClass.getCache("job");
 			for(Job job : jobs){
 				Tree tree = new Tree();
 				tree.setTitle(job.getName());
 				tree.setValue(String.valueOf(job.getId()));
-				if(table.get("id").equals(String.valueOf(job.getId()))){
+				if(map.get("id").equals(String.valueOf(job.getId()))){
 					tree.setVisibility("0");
 				}else{
 					tree.setVisibility("1");
@@ -103,7 +102,7 @@ public class JobServiceImpl extends BaseServiceImpl implements JobService{
 		return returnTree;
 	}
 	
-	public List<CheckBox> getCheckBox(Hashtable<String, Object> table) throws Exception{
+	public List<CheckBox> getCheckBox(Map<String, Object> map) throws Exception{
 		List<CheckBox> checkBoxs = new ArrayList<CheckBox>();
 		List<CheckBox> returnCheckBoxs = new ArrayList<CheckBox>();
 		if(CacheClass.getCache("jobCheckBox") == null){
@@ -120,12 +119,12 @@ public class JobServiceImpl extends BaseServiceImpl implements JobService{
 			CacheClass.setCache("jobCheckBox",returnCheckBoxs);
 			//保存job的数据
 			CacheClass.setCache("job",jobs);
-		}else if(table.get("all") != null){
+		}else if(map.get("all") != null){
 			returnCheckBoxs = (List<CheckBox>) CacheClass.getCache("jobCheckBox");
 		}
-		if(table.get("count") != null){
+		if(map.get("count") != null){
 			returnCheckBoxs = (List<CheckBox>) CacheClass.getCache("jobCheckBox");
-			BuildCheckBox.selectCheckBox(returnCheckBoxs, returnInt(table.get("count")));
+			BuildCheckBox.selectCheckBox(returnCheckBoxs, returnInt(map.get("count")));
 		}
 		return returnCheckBoxs;
 	}

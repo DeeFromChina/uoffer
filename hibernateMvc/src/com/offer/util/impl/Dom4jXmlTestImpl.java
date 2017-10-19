@@ -1,7 +1,7 @@
 package com.offer.util.impl;
 
 import java.io.File;
-import java.util.Hashtable;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -28,8 +28,8 @@ public class Dom4jXmlTestImpl{
 //				System.out.println(path);
 //			}
 //			new test().initSqlXml(path);
-			Hashtable<String, String> hashtable = new Hashtable<String, String>();
-			hashtable.put("a", null);
+			Map<String, String> map = new HashMap<String, String>();
+			map.put("a", null);
 
 		} catch (Exception e) {
 			e.printStackTrace();

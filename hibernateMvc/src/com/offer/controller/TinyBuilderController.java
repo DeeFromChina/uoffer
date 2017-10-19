@@ -4,7 +4,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.Hashtable;
 import java.util.List;
 import java.util.Map;
 
@@ -31,7 +30,7 @@ public class TinyBuilderController{
 	public HttpSession httpSession;
 	
 	public List<Map<String, Object>> homeList = new ArrayList<Map<String, Object>>();
-	public Hashtable<String, Object> form = new Hashtable<String, Object>();
+	public Map<String, Object> form = new HashMap<String, Object>();
 	public Map<String, Object> redisMap = new HashMap<String, Object>();
 	
 	protected SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
@@ -44,11 +43,11 @@ public class TinyBuilderController{
 	public boolean isMsg = false;
 	public String isRedirect = "0";
 	
-	public Hashtable<String, Object> getForm() {
+	public Map<String, Object> getForm() {
 		return form;
 	}
 
-	public void setForm(Hashtable<String, Object> form) {
+	public void setForm(Map<String, Object> form) {
 		this.form = form;
 	}
 	
@@ -108,14 +107,20 @@ public class TinyBuilderController{
 		return msg;
 	}
 	
-	public String redirect(String str) {
+	public String[] redirect(String str, String msg) {
 		isRedirect = "2";
-		return str;
+		String[] returnMsg = new String[2];
+		returnMsg[0] = str;
+		returnMsg[1] = msg;
+		return returnMsg;
 	}
 	
-	public String redirect(String str, boolean isTop) {
+	public String[] redirect(String str, String msg, boolean isTop) {
 		isRedirect = "3";
-		return str;
+		String[] returnMsg = new String[2];
+		returnMsg[0] = str;
+		returnMsg[1] = msg;
+		return returnMsg;
 	}
 	
 	public Map<String, Object> toJson(Object obj){
@@ -135,7 +140,7 @@ public class TinyBuilderController{
 	}
 	
 	public void putToForm(String record){
-		Hashtable<String, Object> dataForm = JSON.parseObject(record, new TypeReference<Hashtable<String, Object>>(){});
+		Map<String, Object> dataForm = JSON.parseObject(record, new TypeReference<Map<String, Object>>(){});
 		form.putAll(dataForm);
 	}
 	

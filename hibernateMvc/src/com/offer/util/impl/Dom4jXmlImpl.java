@@ -3,7 +3,6 @@ package com.offer.util.impl;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -134,11 +133,11 @@ public class Dom4jXmlImpl implements Dom4jXml {
 			Document document = reader.read(new File(path));
 			// 获取根节点元素对象
 			Element root = document.getRootElement();
-			Hashtable<String, String> table = new Hashtable<String, String>();
+			Map<String, String> map = new HashMap<String, String>();
 			// 遍历
-			nodes(root,table,sqlId);
+			nodes(root,map,sqlId);
 //			System.out.println(table.get(sqlId));
-			return table.get(sqlId);
+			return map.get(sqlId);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -146,13 +145,13 @@ public class Dom4jXmlImpl implements Dom4jXml {
 	}
 	
 	// 遍历当前节点下的所有节点
-	private static void nodes(Element node, Hashtable<String, String> table, String sqlId) {
+	private static void nodes(Element node, Map<String, String> map, String sqlId) {
 		if("sql".equals(node.getName())){
 			List<Attribute> list = node.attributes();
 			for (Attribute attribute : list) {
 				if("id".equals(attribute.getName()) && sqlId.equals(attribute.getValue())){
 					if(node.getText() != null){
-						table.put(sqlId, node.getText());
+						map.put(sqlId, node.getText());
 					}
 					break;
 				}
@@ -161,7 +160,7 @@ public class Dom4jXmlImpl implements Dom4jXml {
 		Iterator<Element> iterator = node.elementIterator();
 		while (iterator.hasNext()) {
 			Element e = iterator.next();
-			nodes(e, table, sqlId);
+			nodes(e, map, sqlId);
 		}
 	}
 }
