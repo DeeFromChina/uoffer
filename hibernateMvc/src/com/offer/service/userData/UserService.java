@@ -26,4 +26,6 @@ public interface UserService {
 	public List<CheckBox> getCheckBox(Map<String, Object> map) throws Exception;
 	
 	public User getByAccount(String account, String password) throws Exception;
+	
+	public int checkUserResume(int userId) throws Exception;
 }

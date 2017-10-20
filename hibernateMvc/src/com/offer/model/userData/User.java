@@ -43,9 +43,6 @@ public class User {
 	@Column(name = "user_status")
 	private Integer userStatus;
 	
-	@Column(name = "company_name")
-	private String companyName;
-	
 	@Column(name = "company_id")
 	private Integer companyId;
 	
@@ -136,14 +133,6 @@ public class User {
 
 	public void setUserStatus(Integer userStatus) {
 		this.userStatus = userStatus;
-	}
-
-	public String getCompanyName() {
-		return companyName;
-	}
-
-	public void setCompanyName(String companyName) {
-		this.companyName = companyName;
 	}
 
 	public Integer getCompanyId() {

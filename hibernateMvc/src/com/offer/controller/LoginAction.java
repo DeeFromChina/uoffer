@@ -44,6 +44,7 @@ public class LoginAction extends TinyBuilderController{
 	}
 
 	private Object login() {
+		String pageName = "userData/add_information_frame.jsp";
 		try {
 			if(form.get("type") == null){
 				return ERROR;
@@ -51,13 +52,29 @@ public class LoginAction extends TinyBuilderController{
 			if(!"1".equals(form.get("type")) && !"2".equals(form.get("type"))){
 				return ERROR;
 			}
-//				checkRequired("email", "goJobId", "cityId", "password");
-			userService.save(form);
+//			checkRequired("email", "goJobId", "cityId", "password");
+			String account = BaseUtil.returnString(form.get("name"));
+			String password = BaseUtil.returnString(form.get("password"));
+			User user = userService.getByAccount(account, password);
+			if(user == null){
+				throw new Exception("用户不存在");
+			}
+			int pageNum = userService.checkUserResume(user.getId());
+			switch (pageNum) {
+				case 1: pageName = "resume_add_information.jsp";
+				case 2: pageName = "resume_add_planjob.jsp";
+				case 3: pageName = "resume_add_questionnaire.jsp";
+				case 4: pageName = "resume_add_workexperience.jsp";
+				case 5: pageName = "resume_add_information.jsp";
+				case 6: 
+					pageName = "resume_add_information.jsp";
+					return redirect("login/login.jsp", "保存成功", true);
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
-			return addMessage(e.getMessage()+"不能为空!");
+			return addMessage(e.getMessage());
 		}
-		return redirect("login/login.jsp", "保存成功", true);
+		return redirect(pageName, "", true);
 	}
 	
 	private Object register() {
@@ -77,7 +94,7 @@ public class LoginAction extends TinyBuilderController{
 //			userService.save(form);
 		} catch (Exception e) {
 			e.printStackTrace();
-			return addMessage(e.getMessage()+"不能为空!");
+			return addMessage(e.getMessage());
 		}
 		return redirect("login/login.jsp", "保存成功", true);
 	}

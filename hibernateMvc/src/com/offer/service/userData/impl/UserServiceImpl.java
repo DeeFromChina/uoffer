@@ -10,6 +10,7 @@ import org.springframework.test.context.jdbc.Sql;
 
 import com.offer.dao.common.BaseDao;
 import com.offer.model.userData.User;
+import com.offer.model.userData.UserResume;
 import com.offer.model.util.CheckBox;
 import com.offer.model.util.Tree;
 import com.offer.service.impl.BaseServiceImpl;
@@ -33,6 +34,7 @@ public class UserServiceImpl extends BaseServiceImpl implements UserService {
 		User user = new User();
 		BaseUtil.mapToObject(user, map);
 		if(user != null){
+			user.setUserType(returnInt(map.get("type")));
 			baseDao.save(user);
 		}
 	}
@@ -77,28 +79,53 @@ public class UserServiceImpl extends BaseServiceImpl implements UserService {
 	public User getByAccount(String account, String password) throws Exception {
 		StringBuffer hql = new StringBuffer();
 		hql.append("FROM User WHERE ");
-		Integer phone = BaseUtil.returnInt(account);
-		if(phone != 0){
-			hql.append("phone=" + phone);
-		}else{
-			account = BaseUtil.returnString(account);
-			if("".equals(account)){
+		if(!BaseUtil.isEmail(account)){
+			Integer phone = BaseUtil.returnInt(account);
+			if(phone != 0){
+				hql.append("phone=" + phone);
+			}else{
 				throw new Exception("账号有误");
 			}
+		}else{
 			hql.append("email='" + account + "'");
 		}
 		User user = new User();
 		List<User> users = (List<User>) baseDao.findByHql(hql.toString());
 		if(users != null && users.size() == 1){
 			user = users.get(0);
-			password = BaseUtil.returnString(password);
 			if(!password.equals(user.getPassword())){
 				throw new Exception("密码有误");
 			}
-		}else{
-			throw new Exception("账号有误");
+		}else if(users.size() > 1){
+			throw new Exception("用户有误");
 		}
 		return user;
+	}
+
+	@Override
+	public int checkUserResume(int userId) throws Exception {
+		String hql = "FROM UserResume WHERE userId = " + String.valueOf(userId);
+		List<UserResume> userResumes = (List<UserResume>) baseDao.findByHql(hql);
+		if(userResumes == null || userResumes.size() == 0){
+			return 0;
+		}else if(userResumes.size() == 1){
+			UserResume userResume = userResumes.get(0);
+			if(userResume.getFinish1() == 0){
+				return 1;
+			}
+			if(userResume.getFinish2() == 0){
+				return 2;
+			}
+			if(userResume.getFinish3() == 0){
+				return 3;
+			}
+			if(userResume.getFinish4() == 0){
+				return 4;
+			}
+			return 5;
+		}else{
+			return 6;
+		}
 	}
 
 }

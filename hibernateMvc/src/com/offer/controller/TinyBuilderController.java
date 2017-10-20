@@ -168,10 +168,10 @@ public class TinyBuilderController{
 	public void checkRequired(String... params) throws Exception {
 		for(int i = 0; i < params.length; i++){
 			if(form.get(params[i]) == null){
-				throw new Exception(params[i]);
+				throw new Exception(params[i]+"不能为空!");
 			}
 			if("".equals(form.get(params[i]))){
-				throw new Exception(params[i]);
+				throw new Exception(params[i]+"不能为空!");
 			}
 		}
 	}

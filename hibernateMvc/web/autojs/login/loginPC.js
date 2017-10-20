@@ -34,8 +34,14 @@ function goSubmit(){
 //	isPass = checkValue();
 //	if(!isPass) return;
 	saveUserInfo();
-	var url = "login.do?action=register"+param;
-	var data = ajaxSumbit(url,form);
+	var param = "";
+	if($('#type').val() == '1'){
+		param = "&type=1";
+	}else{
+		param = "&type=2";
+	}
+	var url = "login.do?action=login"+param;
+	var data = ajaxSumbit(url,"dataForm");
 }
 function rememberMe(){
 	if ($.cookie("rmbUser") == "true") {
