@@ -6,9 +6,9 @@
 <%@include file="../common/common.jsp"%>
 <title></title>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<link href="../../autocss/common/bootstrapTree.css?randomId=<%=Math.random()%>" rel="stylesheet">
+<link href="<%=baseCss %>common/bootstrapTree.css?randomId=<%=Math.random()%>" rel="stylesheet">
 </head>
-<script src="../../autojs/common/bootstrapTree.js?randomId=<%=Math.random()%>" type="text/javascript"></script>
+<script src="<%=baseJs %>common/bootstrapTree.js?randomId=<%=Math.random()%>" type="text/javascript"></script>
 <body onload="init()">
 	<div id="bootstrapTree">
 	</div>

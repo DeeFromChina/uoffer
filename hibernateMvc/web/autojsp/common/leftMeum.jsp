@@ -8,7 +8,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <%-- <link href="../../autocss/common/leftMeum.css?randomId=<%=Math.random()%>" rel="stylesheet"> --%>
 </head>
-<script src="../../autojs/common/leftMeum.js?randomId=<%=Math.random()%>" type="text/javascript"></script>
+<script src="<%=baseJs %>common/leftMeum.js?randomId=<%=Math.random()%>" type="text/javascript"></script>
 <body onload="init()">
 	<div class="leftMeum" id="leftMeum">
     </div>

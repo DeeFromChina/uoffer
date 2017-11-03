@@ -6,12 +6,12 @@
 <%@include file="common.jsp"%>
 <title></title>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="stylesheet" href="<%=request.getContextPath() %>/autocss/login/loginHead.css" type="text/css"/>
-<link rel="stylesheet" href="<%=request.getContextPath() %>/autocss/login/loginHead580.css" type="text/css"/>
+<link rel="stylesheet" href="<%=baseCss %>login/loginHead.css" type="text/css"/>
+<link rel="stylesheet" href="<%=baseCss %>login/loginHead580.css" type="text/css"/>
 <style>
 </style>
 </head>
-<script src="<%=request.getContextPath() %>/autojs/common/top.js?randomId=<%=Math.random()%>"></script>
+<script src="<%=baseJs %>common/top.js?randomId=<%=Math.random()%>"></script>
 <body onload="init()">
 	<div class="headTitle" id="headTitle">
 		<div class="logoDiv">

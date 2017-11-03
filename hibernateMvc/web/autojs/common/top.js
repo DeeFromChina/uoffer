@@ -13,8 +13,15 @@ function init(){
 	var rightTitle = jQuery.parseJSON(data.rightTitle);
 	setTitle(centerTitle);
 	setRightTitle(userImg, rightTitle);
-	var pageurl = judgeSize("mainFrame","width",800,"userData/add_information_frame.jsp","userData/add_information_frame.jsp");
-	$('#mainFrame').attr("src",jspPath+pageurl);
+	
+	var url = "";
+	if(data.type == "1"){
+		url = "userData.do?action=userToPage";
+	}
+	var data = ajaxSumbit(url);
+//	var pageurl = judgeSize("mainFrame","width",800,"userData/add_information_frame.jsp","userData/add_information_frame.jsp");
+//	var pageurl = judgeSize("mainFrame","width",800,data,data);
+//	$('#mainFrame').attr("src",jspPath+pageurl);
 }
 function setTitle(data){
 	if(data.length == 0){

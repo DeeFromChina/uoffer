@@ -17,11 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
-import com.mysql.fabric.xmlrpc.base.Array;
-import com.offer.controller.BaseController;
-import com.offer.model.OfferUser;
 import com.offer.util.RedisJava;
-import com.sun.accessibility.internal.resources.accessibility;
 
 
 
@@ -74,6 +70,7 @@ public class TinyBuilderController{
 			form.put(entry.getKey(), entry.getValue()[0]);
 		}
 		putToForm(data);
+		httpSession = request.getSession();
 		return SUCCESS;
 	}
 	
@@ -107,27 +104,57 @@ public class TinyBuilderController{
 		return msg;
 	}
 	
-	public String[] redirect(String str, String msg) {
+	/**
+	 * frame里的页面跳转
+	 * @return
+	 */
+	public Object[] redirect(String str, Object param, String msg) {
 		isRedirect = "2";
-		String[] returnMsg = new String[2];
+		Object[] returnMsg = new String[3];
 		returnMsg[0] = str;
-		returnMsg[1] = msg;
+		returnMsg[1] = param;
+		returnMsg[2] = msg;
 		return returnMsg;
 	}
 	
-	public String[] redirect(String str, String msg, boolean isTop) {
-		isRedirect = "3";
-		String[] returnMsg = new String[2];
+	/**
+	 * 最外层跳转
+	 * isTop: 1在top层跳转,2在frame层跳转()
+	 * @return
+	 */
+	public Object[] redirect(String str, Object param, String msg, boolean isTop) {
+		if(isTop){
+			isRedirect = "3";
+		}else{
+			isRedirect = "2";
+		}
+		Object[] returnMsg = new String[3];
 		returnMsg[0] = str;
-		returnMsg[1] = msg;
+		returnMsg[1] = param;
+		returnMsg[2] = msg;
 		return returnMsg;
 	}
+	
+	/**
+	 * 先在top层跳转,再在frame层跳转
+	 * @return
+	 */
+//	public Object[] redirect(String topPath, String framePath, Object param, String msg){
+//		isRedirect = "4";
+//		Object[] returnMsg = new String[4];
+//		returnMsg[0] = topPath;
+//		returnMsg[1] = framePath;
+//		returnMsg[2] = msg;
+//		returnMsg[3] = param;
+//		return returnMsg;
+//	}
 	
 	public Map<String, Object> toJson(Object obj){
 		Map<String, Object> map = new HashMap<String, Object>();
 		String status = "1";
 		if(obj != null){
 			status = isRedirect;
+			isRedirect = "0";
 		}
 		map.put("time", sdt.format(new Date()));
 		map.put("status", status);

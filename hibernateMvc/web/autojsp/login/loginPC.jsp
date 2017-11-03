@@ -6,12 +6,12 @@
 <%@include file="../common/common.jsp"%>
 <title></title>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="stylesheet" href="<%=request.getContextPath() %>/autocss/login/loginPC.css" type="text/css"/>
+<link rel="stylesheet" href="<%=baseCss %>login/loginPC.css" type="text/css"/>
 <style>
 </style>
 </head>
-<script src="<%=request.getContextPath() %>/js/jq_cookie/jquery.cookie.js"></script>
-<script src="<%=request.getContextPath() %>/autojs/login/loginPC.js"></script>
+<script src="<%=baseJs2 %>jq_cookie/jquery.cookie.js"></script>
+<script src="<%=baseJs %>login/loginPC.js"></script>
 <body bgcolor="#E0FFFF" onload="init()">
 	<form id="dataForm">
 		<center>

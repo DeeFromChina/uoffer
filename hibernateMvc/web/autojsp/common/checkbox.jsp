@@ -6,9 +6,9 @@
 <%@include file="../common/common.jsp"%>
 <title></title>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<link href="../../autocss/common/checkbox.css?randomId=<%=Math.random()%>" rel="stylesheet">
+<link href="<%=baseCss %>common/checkbox.css?randomId=<%=Math.random()%>" rel="stylesheet">
 </head>
-<script src="../../autojs/common/checkbox.js?randomId=<%=Math.random()%>" type="text/javascript"></script>
+<script src="<%=baseJs %>common/checkbox.js?randomId=<%=Math.random()%>" type="text/javascript"></script>
 <body>
 	<div class="leftMeum" id="leftMeum">
 			<!-- <div style="font-size:16px;width:100%;">

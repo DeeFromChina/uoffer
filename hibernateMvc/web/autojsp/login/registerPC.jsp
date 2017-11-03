@@ -5,12 +5,12 @@
 <%@include file="../common/common.jsp"%>
 <title></title>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="stylesheet" href="<%=request.getContextPath() %>/autocss/login/loginPC.css" type="text/css"/>
-<link rel="stylesheet" href="<%=request.getContextPath() %>/autocss/login/register.css" type="text/css"/>
+<link rel="stylesheet" href="<%=baseCss %>login/loginPC.css" type="text/css"/>
+<link rel="stylesheet" href="<%=baseCss %>login/register.css" type="text/css"/>
 <style>
 </style>
 </head>
-<script src="<%=request.getContextPath() %>/autojs/login/register.js"></script>
+<script src="<%=baseJs %>login/register.js"></script>
 <body bgcolor="#E0FFFF" onload="init()">
 	<div id="dataForm">
 		<center>

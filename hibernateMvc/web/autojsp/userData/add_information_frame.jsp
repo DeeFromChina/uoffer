@@ -7,7 +7,7 @@
 <title></title>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 </head>
-<script src="<%=request.getContextPath() %>/autojs/userData/add_information_frame.js"></script>
+<script src="<%=baseJs %>userData/add_information_frame.js"></script>
 <body bgcolor="#E0FFFF" onload="init()">
 <form id="dataForm">
 	<center>
@@ -28,19 +28,19 @@
 						</a>
 					</td>
 					<td class="textC">
-						<a href="#home" data-toggle="tab">
+						<a href="#resume_add_planjob" data-toggle="tab">
 							<div class="circleB floatL"></div>
 							<font class="font-18 floatL">&nbsp;&nbsp;期望工作 </font>
 						</a>
 					</td>
 					<td class="textC">
-						<a href="#home" data-toggle="tab">
+						<a href="#resume_add_workexperience" data-toggle="tab">
 							<div class="circleB floatL"></div>
 							<font class="font-18 floatL">&nbsp;&nbsp;个人经历 </font>
 						</a>
 					</td>
 					<td class="textC">
-						<a href="#home" data-toggle="tab">
+						<a href="#resume_add_questionnaire" data-toggle="tab">
 							<div class="circleB floatL"></div>
 							<font class="font-18 floatL">&nbsp;&nbsp;调查问卷 </font>
 						</a>
@@ -49,21 +49,21 @@
 				</tr>
 			</table>
 			<div id="myTabContent" class="tab-content wi00">
-			    <div class="tab-pane fade in active" id="resume_add_information">
+			    <!-- <div class="tab-pane fade" id="resume_add_information">
 			        <iframe class="wh100" src="resume_add_information.jsp" scrolling="no" frameborder="0" id="iframe1" name="iframe1"></iframe>
+			    </div> -->
+			    <div class="tab-pane fade in active" id="resume_add_planjob">
+			        <iframe class="wh100" src="resume_add_planjob.jsp" scrolling="no" frameborder="0" id="iframe2" name="iframe2"></iframe>
 			    </div>
-			    <div class="tab-pane fade" id="accountinformation" style="height:100%;padding-top:128px;">
-			        <iframe height="100%" width="100%" src="" scrolling="auto" frameborder="0" marginheight="0px" marginwidth="0px" style="background:#FFF;" id="iframe2" name="iframe2"></iframe>
+			    <div class="tab-pane fade" id="resume_add_workexperience">
+			        <iframe class="wh100" src="resume_add_workexperience.jsp" scrolling="no" frameborder="0" id="iframe3" name="iframe3"></iframe>
 			    </div>
-			    <div class="tab-pane fade" id="qiuzhi" style="height:100%;padding-top:128px;">
-			        <iframe height="100%" width="100%" src="" scrolling="yes" frameborder="0" marginheight="0px" marginwidth="0px" style="background:#FFF;" id="iframe3" name="iframe3"></iframe>
-			    </div>
-			    <div class="tab-pane fade" id="tuijian" style="height:100%;padding-top:128px;">
-			        <iframe height="100%" width="100%" src="" scrolling="auto" frameborder="0" marginheight="0px" marginwidth="0px" style="background:#FFF;" id="iframe4" name="iframe4"></iframe>
+			    <div class="tab-pane fade" id="resume_add_questionnaire">
+			        <iframe class="wh100" src="resume_add_questionnaire.jsp" scrolling="no" frameborder="0" id="iframe4" name="iframe4"></iframe>
 			    </div>
 			</div>
 		</div>
 	</center>
-	</form>
+</form>
 </body>
 </html>

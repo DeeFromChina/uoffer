@@ -5,7 +5,7 @@
 <head>
 <%@include file="../common/common.jsp"%>
 <title></title>
-<script src="<%=request.getContextPath() %>/autojs/public/city_select.js?randomId=<%=Math.random()%>" type="text/javascript"></script>
+<script src="<%=baseJs %>public/city_select.js?randomId=<%=Math.random()%>" type="text/javascript"></script>
 </head>
 <body onload="init()">
 	<form id="dataForm">

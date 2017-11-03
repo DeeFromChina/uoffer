@@ -44,7 +44,6 @@ public class LoginAction extends TinyBuilderController{
 	}
 
 	private Object login() {
-		String pageName = "userData/add_information_frame.jsp";
 		try {
 			if(form.get("type") == null){
 				return ERROR;
@@ -59,22 +58,13 @@ public class LoginAction extends TinyBuilderController{
 			if(user == null){
 				throw new Exception("用户不存在");
 			}
-			int pageNum = userService.checkUserResume(user.getId());
-			switch (pageNum) {
-				case 1: pageName = "resume_add_information.jsp";
-				case 2: pageName = "resume_add_planjob.jsp";
-				case 3: pageName = "resume_add_questionnaire.jsp";
-				case 4: pageName = "resume_add_workexperience.jsp";
-				case 5: pageName = "resume_add_information.jsp";
-				case 6: 
-					pageName = "resume_add_information.jsp";
-					return redirect("login/login.jsp", "保存成功", true);
-			}
+			httpSession.setAttribute("type", form.get("type"));
+			httpSession.setAttribute("user", user);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return addMessage(e.getMessage());
 		}
-		return redirect(pageName, "", true);
+		return redirect("common/frame.jsp", "", "", true);
 	}
 	
 	private Object register() {
@@ -96,6 +86,6 @@ public class LoginAction extends TinyBuilderController{
 			e.printStackTrace();
 			return addMessage(e.getMessage());
 		}
-		return redirect("login/login.jsp", "保存成功", true);
+		return redirect("login/login.jsp", "", "保存成功", true);
 	}
 }

@@ -6,9 +6,9 @@
 <%@include file="../common/common.jsp"%>
 <title></title>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="stylesheet" href="<%=request.getContextPath() %>/autocss/userData/resume_add_information.css" type="text/css"/>
+<link rel="stylesheet" href="<%=baseCss %>userData/resume_add_information.css" type="text/css"/>
 </head>
-<script src="<%=request.getContextPath() %>/autojs/userData/resume_add_information.js"></script>
+<script src="<%=baseJs %>userData/resume_add_information.js"></script>
 <body onload="init()">
 <form id="dataForm">
 	<center>

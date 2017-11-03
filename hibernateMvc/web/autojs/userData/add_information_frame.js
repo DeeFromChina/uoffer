@@ -9,9 +9,12 @@
 //			setSexValue(data.offerUserSex);
 //		}
 //		$("#userInformationForm").populateForm(data);
+		console.log("test");
 		dataFormVcenter();
 		countFrameHeight();
 		parent.changeHeaderTitle();
+		var pageName = top.map["param"];
+//		$("#"+pageName).addClass("in active");
 	}
 	//性别
 	function setSexValue(id) {
