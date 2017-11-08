@@ -164,6 +164,22 @@ button > font {
     border-radius: 50%;
     border:1px #CCCCCC solid;
 }
+.circleChkA {
+    width: 14px;
+    height: 14px;
+    background: #00B38A;
+    -moz-border-radius: 50%;
+    -webkit-border-radius: 50%;
+    border-radius: 50%;
+}
+.circleChkB {
+    width: 14px;
+    height: 14px;
+    -moz-border-radius: 50%;
+    -webkit-border-radius: 50%;
+    border-radius: 50%;
+    border:1px #CCCCCC solid;
+}
 .mainDiv{
 	background: #FFFFFF;
 	width: 800px;
@@ -188,11 +204,10 @@ button > font {
 	background-color: #00B38A;
 	border-color: #00B38A;
 }
-.submitBtn:active{
-	background-color: #00B38A;
-	border-color: #00B38A;
-}
 .submitBtn:focus{
 	background-color: #00B38A;
 	border-color: #00B38A;
+}
+.textarea80{
+	height:80px;
 }

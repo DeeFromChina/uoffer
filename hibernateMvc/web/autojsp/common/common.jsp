@@ -9,6 +9,7 @@ String baseJs = request.getContextPath() + "/autojs/";
 String baseCss2 = request.getContextPath() + "/css/";
 String baseCss = request.getContextPath() + "/autocss/";
 String baseJsp = request.getContextPath() + "/autojsp/";
+String baseImg = request.getContextPath() + "/img/";
 %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>

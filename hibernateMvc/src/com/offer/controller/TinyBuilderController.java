@@ -163,6 +163,7 @@ public class TinyBuilderController{
 		}else {
 			map.put("data", obj);
 		}
+		isMsg = false;
 		return map;
 	}
 	

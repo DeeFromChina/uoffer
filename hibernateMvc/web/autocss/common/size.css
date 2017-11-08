@@ -1,5 +1,14 @@
+.w30{
+	width:30px;
+}
+.w70{
+	width:70px;
+}
 .w140{
 	width:140px;
+}
+.w200{
+	width:200px;
 }
 .w280{
 	width:280px;
@@ -37,6 +46,9 @@
 .wi40{
 	width:40%;
 }
+.wi50{
+	width:50%;
+}
 .wi70{
 	width:70%;
 }
@@ -49,11 +61,18 @@
 .h41{
 	height:41px;
 }
+.h80{
+	height:80px;
+}
 .hi99{
 	height:99%;
 }
 .hi100{
 	height:100%;
+}
+.wh-18{
+	height:18px;
+	width:18px;
 }
 .wh100{
 	height:100%;
@@ -82,6 +101,9 @@
 }
 .paddingBottom40{
 	padding-bottom:40px;
+}
+font {
+	font-family: Georgia, "Times New Roman", Times, serif;
 }
 .font-14{
 	font-size:14px;

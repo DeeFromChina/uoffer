@@ -89,7 +89,7 @@ public class UserServiceImpl extends BaseServiceImpl implements UserService {
 		}else{
 			hql.append("email='" + account + "'");
 		}
-		User user = new User();
+		User user = null;
 		List<User> users = (List<User>) baseDao.findByHql(hql.toString());
 		if(users != null && users.size() == 1){
 			user = users.get(0);

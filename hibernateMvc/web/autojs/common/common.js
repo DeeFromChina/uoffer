@@ -20,11 +20,11 @@ function getid(id){
  * index:多层
  * method:方法（this作为参数）
  * */
-function setList(listId,placeholder,listValue,index,method){
+function setList(listId,placeholder,listValue,index,method,widthClass){
 	var level = index;
 	var inn = "";
 	inn += "<div class=\"dropdown input-class\">";
-	inn += "<div class=\"w340\">";
+	inn += "<div class=\""+widthClass+"\">";
 	inn += "<input type=\"text\" id=\""+listId+"Value\" name=\""+listId+"Value\" class=\"form-control\" readOnly=\"readOnly\" placeholder=\""+placeholder+"\" />";
 	inn += "<input type=\"hidden\" name=\""+listId+"\" />";
 	inn += "</div>";

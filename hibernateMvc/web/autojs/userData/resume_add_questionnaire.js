@@ -1,59 +1,52 @@
+var data;
+function init() {
+	parent.document.getElementById("iframe4").height=document.body.scrollHeight;
+	parent.document.getElementById("myTabContent").style.height=document.body.scrollHeight;
+	parent.dataFormVcenter();
+	parent.countFrameHeight();
+
+	$(".circleChkB").click(function(){
+		selected(this);
+	});
+	
+	var url = "baseData.do?action=getCity";
+	data = ajaxSumbit(url);
+	var currencyData = treeToSelect(data);
+	setList("currency1","请选择您的币种",currencyData,0,"","w140");
+	$("#currency1").find("div[class='dropdown input-class']").addClass("marginAuto");
+	setList("currency2","请选择您的币种",currencyData,0,"","w140");
+	$("#currency2").find("div[class='dropdown input-class']").addClass("marginAuto");
+}
+function selected(obj){
+	$(".circleChkA").each(function () {
+		if(obj.id.indexOf('j') > -1 && this.id.indexOf('j') > -1){
+			$(this).removeClass("circleChkA");
+			$(this).addClass("circleChkB");
+		}
+		if(obj.id.indexOf('i') > -1 && this.id.indexOf('i') > -1){
+			$(this).removeClass("circleChkA");
+			$(this).addClass("circleChkB");
+		}
+	});
+	if(obj.id.indexOf('j') > -1){
+		$("#jobstatus").val(obj.id);
+	}
+	if(obj.id.indexOf('i') > -1){
+		$("#intime").val(obj.id);
+	}
+	$(obj).removeClass("circleChkB");
+	$(obj).addClass("circleChkA");
+}
+
 var dataName;
 	var phoneCode;
 	//头部
-	function changeColor1(der){
-		der.style.background="#777777";
-	}
-	function changeColor2(der){
-		der.style.background="#32373C";
-	}
-	function init() {
-		if(isResetLogin()) {
-			alert("登陆超时!");
-			top.location.href='login.jsp';
-		}
-		else{
-			var url = "user/resumeAddQuestionnairePage1.do";
-			var formId = "saveresumeAddQuestionnaireForm";
-			var data = ajaxSumbit(url, formId);
-			dataName = data.dataName;
-			addli(data.moneytypeList,"money1");
-			addli(data.moneytypeList,"money2");
-			$("#saveresumeAddQuestionnaireForm").populateForm(data);
-			var jobstatus = document.getElementById("jobstatus").value;
-			if (jobstatus != "") {
-				document.getElementById(jobstatus).setAttribute("class","circleA");
-			}
-			var intime = document.getElementById("intime").value;
-			if (intime != "") {
-				document.getElementById(intime).setAttribute("class","circleA");
-			}
-			moneysum();
-		}
-	}
 	function jobId(job){
 		if(job.getAttribute('class') == "icheckbox_square-green checked"){
 			job.setAttribute("class","icheckbox_square-green hover");
 		}
 		else if(job.getAttribute('class') == "icheckbox_square-green hover"){
 			job.setAttribute("class","icheckbox_square-green checked");
-		}
-	}
-	function selected(obj){
-		$(".circleA").each(function () {
-			if(obj.id.indexOf('j') > -1 && this.id.indexOf('j') > -1){
-				this.setAttribute("class","circleB");
-			}
-			if(obj.id.indexOf('i') > -1 && this.id.indexOf('i') > -1){
-				this.setAttribute("class","circleB");
-			}
-		});
-		obj.setAttribute("class","circleA");
-		if(obj.id.indexOf('j') > -1){
-			document.getElementById("jobstatus").value=obj.id;
-		}
-		if(obj.id.indexOf('i') > -1){
-			document.getElementById("intime").value=obj.id;
 		}
 	}
 	function addli(items,liId){

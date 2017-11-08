@@ -1,0 +1,24 @@
+.chk_table {
+	width:100%;
+	border-collapse:separate;
+	border-spacing:0px 14px;
+}
+.input-group > .w280{
+	width:280px;
+}
+.selectMeum {
+	width: 181px;
+	max-height:120px;
+	overflow-y:auto;
+}
+.input-class {
+	width: 200px;
+	height:41px;
+}
+.submitBtn{
+	font-size:14px;
+	width: 140px;
+	height:41px;
+	background-color: #00B38A;
+	border-color: #00B38A;
+}

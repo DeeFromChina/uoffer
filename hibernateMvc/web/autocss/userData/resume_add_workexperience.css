@@ -1,0 +1,43 @@
+.newBtn {
+	font-size:14px;
+	color:#00B389;
+	border:1px #00B389 solid;
+	background-color:#FFF;
+	width:101px;
+	float:right;
+}
+.submitBtn{
+	font-size:14px;
+	width: 140px;
+	height:41px;
+	background-color: #00B38A;
+	border-color: #00B38A;
+}
+.detailDiv{
+	width:100%;
+	min-height:200px;
+}
+.detail{
+	width:100%;
+	min-height:75px;
+	padding:10px;
+	border:1px #00B38A solid;
+	margin-top:10px;
+}
+.detail > table {
+	width:100%;
+	border-collapse:separate;
+	border-spacing:0px 10px;
+}
+.editBtn:hover{
+	width:100px;
+	height:50px;
+	overflow:hidden;
+	transition: all 1s ease;
+}
+.editBtn {
+	width:50px;
+	height:50px;
+	overflow:hidden;
+	transition: all 1s ease;
+}
