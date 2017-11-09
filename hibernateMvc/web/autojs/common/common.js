@@ -108,8 +108,9 @@ function go(urlnum){
  * title:窗口标题
  * width:窗口宽度
  * height:窗口高度
+ * closeFlag:是否在关闭时调用closeListener()方法
  * */
-function openWindow(url,title,width,height){
+function openWindow(url,title,width,height,closeFlag,win){
 	doc = window.top.document;
 	if(url != ''){
 		url = "http://localhost:8080/hibernateMvc/autojsp/" + url;
@@ -124,6 +125,13 @@ function openWindow(url,title,width,height){
 			marginTop = titleHeiight;
 		}
 	}
+	
+	if(closeFlag != undefined && closeFlag == 'true'){
+		closeFlag = 'true';
+		window.top.map["targetPage"] = win;
+	}else{
+		closeFlag = 'false';
+	}
 		
 	var timestamp = Date.parse(new Date());
 	timestamp = timestamp / 1000;
@@ -132,9 +140,9 @@ function openWindow(url,title,width,height){
 						+"<div class='modal-dialog' style='width:"+width+";height:"+height+";margin-top:"+marginTop+";'>"
 							+"<div class='modal-content'>"
 								+"<div class='modal-header'>"
-									+"<button type='button' id='close' class='close' data-dismiss='modal' aria-hidden='true' onclick='closeWindow(\"myPage"+timestamp+"\")'>"
+									+"<a id='close' class='close' data-dismiss='modal' aria-hidden='true' onclick='closeWindow(\"myPage"+timestamp+"\","+closeFlag+")'>"
 										+"&times;"
-									+"</button>"
+									+"</a>"
 									+"<h4 class='modal-title' id='myModalLabel'>"
 										+title
 									+"</h4>"
@@ -162,7 +170,11 @@ function openWindow(url,title,width,height){
  * 关闭遮罩层
  * objId:打开窗口id
  * */
-function closeWindow(objId){
+function closeWindow(objId,closeFlag,win){
+	if(closeFlag){
+		var dom = window.top.map["targetPage"];
+		$(dom.getElementById('dataFormDisDiv')).remove();
+	}
 	$("#"+objId).modal('hide');
 	$("#"+objId).remove();
 	var pageGroup = window.top.document.getElementById("pageGroup");

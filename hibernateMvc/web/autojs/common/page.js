@@ -4,6 +4,7 @@
  * 
  * */
 var pages = {
+		"imgPath":"/hibernateMvc/img/",
 		1:"login/use_strategy.jsp",
 		2:"user_question.jsp",
 		3:"firm_strategy.jsp",

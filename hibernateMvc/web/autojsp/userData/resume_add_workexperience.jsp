@@ -28,7 +28,7 @@
 					<font class="font-18">工作经历<font color="#00B389">*</font></font>
 				</td>
 				<td>
-					<button type="button" class="btn btn-primary newBtn" onclick="goAddWorks()" id="addworkbutton">
+					<button type="button" class="btn btn-primary newBtn" onclick="addForm('work')" id="addworkbutton">
 						新增
 					</button>
 				</td>

@@ -7,6 +7,7 @@
 <title></title>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <script>
+var testy = "y";
 </script>
 </head>
 <iframe src="" class="wi100" scrolling="no" frameborder="0" id="mainFrame"></iframe>

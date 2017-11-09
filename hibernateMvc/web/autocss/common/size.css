@@ -49,6 +49,12 @@
 .wi50{
 	width:50%;
 }
+.wi60{
+	width:60%;
+}
+.wi65{
+	width:65%;
+}
 .wi70{
 	width:70%;
 }
@@ -128,6 +134,9 @@ font {
 }
 .colorFF0033{
 	color:#FF0033;
+}
+.colorFFFFFF{
+	color:#FFFFFF;
 }
 .bgColorFFFFFF{
 	background-color:#FFFFFF !important;

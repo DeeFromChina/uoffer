@@ -1,3 +1,4 @@
+var test = "a";
 function init() {
 	parent.document.getElementById("iframe3").height=document.body.scrollHeight;
 	parent.document.getElementById("myTabContent").style.height=document.body.scrollHeight;
@@ -6,7 +7,7 @@ function init() {
 }
 function addDiv(){
 	var str = '';
-	var baseImg = <%=baseImg %>;
+	var baseImg = pages["imgPath"];
 	for(var i in items){
 		str += '<div class="detail">'
 				+ '<table>'
@@ -53,6 +54,15 @@ function addDiv(){
 				+ '</table>'
 			+ '</div>';
 	}
+}
+function addForm(type){
+	var url = "userData/resume_add_workexperience_add.jsp";
+	var title = "new";
+	var width = "600";
+	var height = "400";
+	var data = "?type="+type;
+	openWindow(url+data,title,width,height,"true",window.parent.document);
+	$(window.parent.document.getElementById('dataForm')).append('<div id="dataFormDisDiv" class="modal-backdrop fade in"></div>');
 }
 function addmsgDivEdus(items){
 	var div1 = "";
