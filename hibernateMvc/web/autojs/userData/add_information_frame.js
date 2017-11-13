@@ -16,6 +16,18 @@
 		var pageName = top.map["param"];
 //		$("#"+pageName).addClass("in active");
 	}
+function clickMe(obj){
+	$(".circleA").each(function(){
+		$(this).removeClass("circleA");
+		$(this).addClass("circleB");
+	});
+	$(".color00B38A").each(function(){
+		$(this).removeClass("color00B38A");
+	});
+	$(obj).find("div").addClass("circleA");
+	$(obj).find("font").addClass("color00B38A");
+}
+	
 	//性别
 	function setSexValue(id) {
 		if(id == 1){

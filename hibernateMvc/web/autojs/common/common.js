@@ -21,6 +21,9 @@ function getid(id){
  * method:方法（this作为参数）
  * */
 function setList(listId,placeholder,listValue,index,method,widthClass){
+	if(widthClass == undefined){
+		widthClass = "wi100";
+	}
 	var level = index;
 	var inn = "";
 	inn += "<div class=\"dropdown input-class\">";

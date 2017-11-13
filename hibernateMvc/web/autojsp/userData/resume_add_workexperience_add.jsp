@@ -6,21 +6,9 @@
 <%@include file="../common/common.jsp"%>
 <title></title>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="stylesheet" href="<%=baseCss %>userData/resume_add_workexperience.css?randomId=<%=Math.random()%>" type="text/css"/>
+<link rel="stylesheet" href="<%=baseCss %>userData/resume_add_workexperience_add.css?randomId=<%=Math.random()%>" type="text/css"/>
 </head>
 <script src="<%=baseJs %>userData/resume_add_workexperience_add.js?randomId=<%=Math.random()%>"></script>
-<script>
-function init(){
-	$(".form_datetime2").datetimepicker({
-	    format: "yyyy-mm-dd",
-	    autoclose:true,
-	    startView: 'month',
-	    minView:'month',
-	    maxView:'decade',
-	    language:'zh-CN'
-	});
-}
-</script>
 <body onload="init()">
 <form id="dataForm">
 	<center>
@@ -32,7 +20,7 @@ function init(){
 			<tr>
 				<td></td>
 				<td class="textR paddingRight19">
-					<font class="font-14"><font color="#FF0000">*</font>公司名称 :</font>
+					<font color="#FF0000">*</font><font class="font-14" id="name"></font>
 				</td>
 				<td>
 					<input type="text" name="email" class="form-control input-class">
@@ -42,11 +30,16 @@ function init(){
 			<tr>
 				<td></td>
 				<td class="textR paddingRight19">
-					<font class="font-14"><font color="#FF0000">*</font>工作时间 :</font>
+					<font color="#FF0000">*</font><font class="font-14" id="time"></font>
 				</td>
 				<td>
-					<div class='input-append date form_datetime2'>
-					    <input type='text' class='date-control' readonly>
+					<div class='input-append date form_datetime'>
+					    <input type='text' class='date-control form-control' readonly>
+					    <span class="add-on"><i class="icon-th"></i></span>
+					</div>
+					<div class="timeLink">~</div>
+					<div class='input-append date form_datetime'>
+					    <input type='text' class='date-control form-control' readonly>
 					    <span class="add-on"><i class="icon-th"></i></span>
 					</div>
 				</td>
@@ -55,7 +48,7 @@ function init(){
 			<tr>
 				<td></td>
 				<td class="textR paddingRight19">
-					<font class="font-14"><font color="#FF0000">*</font>公司名称 :</font>
+					<font color="#FF0000">*</font><font class="font-14" id="job"></font>
 				</td>
 				<td>
 					<input type="text" name="email" class="form-control input-class">
@@ -65,10 +58,50 @@ function init(){
 			<tr>
 				<td></td>
 				<td class="textR paddingRight19">
-					<font class="font-14"><font color="#FF0000">*</font>公司名称 :</font>
+					<font color="#FF0000">*</font><font class="font-14" id="jobDescription"></font>
 				</td>
 				<td>
 					<input type="text" name="email" class="form-control input-class">
+				</td>
+				<td></td>
+			</tr>
+			<tr>
+				<td></td>
+				<td class="textR paddingRight19">
+					<font color="#FF0000">*</font><font class="font-14" id="jobBelong"></font>
+				</td>
+				<td>
+					<input type="text" name="email" class="form-control input-class">
+				</td>
+				<td></td>
+			</tr>
+			<tr>
+				<td></td>
+				<td class="textR paddingRight19">
+					<font color="#FF0000">*</font><font class="font-14" id="level"></font>
+				</td>
+				<td>
+					<input type="text" name="email" class="form-control input-class">
+				</td>
+				<td></td>
+			</tr>
+			<tr>
+				<td></td>
+				<td class="textR paddingRight19" valign="top">
+					<font class="font-14" id="descript1"></font>
+				</td>
+				<td>
+					<textarea class="form-control" rows="8"></textarea>
+				</td>
+				<td></td>
+			</tr>
+			<tr>
+				<td></td>
+				<td class="textR paddingRight19" valign="top">
+					<font class="font-14" id="descript2"></font>
+				</td>
+				<td>
+					<textarea class="form-control" rows="8"></textarea>
 				</td>
 				<td></td>
 			</tr>

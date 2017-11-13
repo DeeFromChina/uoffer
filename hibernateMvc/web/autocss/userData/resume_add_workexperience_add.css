@@ -1,0 +1,15 @@
+.form_datetime{
+	width:150px;
+	float:left;
+}
+td{
+	white-space: nowrap;
+}
+.timeLink{
+	width:30px;
+	height:41px;
+	line-height:41px;
+	float:left;
+	text-align: center;
+	padding:auto;
+}

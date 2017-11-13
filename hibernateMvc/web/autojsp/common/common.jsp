@@ -24,14 +24,14 @@ String baseImg = request.getContextPath() + "/img/";
 <link href="<%=baseCss2 %>bootstrap.min.css?randomId=<%=Math.random()%>" rel="stylesheet">
 <link href="<%=baseCss2 %>base.css?randomId=<%=Math.random()%>" rel="stylesheet">
 <link href="<%=basePath %>/skins/all.css?randomId=<%=Math.random()%>" rel="stylesheet">
-<link href="<%=baseCss2 %>bootstrap-datetimepicker.min.css" rel="stylesheet" />
+<link href="<%=baseCss2 %>bootstrap-datetimepicker.min.css?randomId=<%=Math.random()%>" rel="stylesheet" />
 <link rel="shortcut icon" href="<%=basePath %>/img/title.ico" type="image/x-icon"/>
 <link rel="stylesheet" href="<%=baseCss %>common/common.css?randomId=<%=Math.random()%>" type="text/css"/>
 </head>
 <script src="<%=baseJs2 %>jquery-3.1.1.min.js?randomId=<%=Math.random()%>" type="text/javascript"></script>
 <script src="<%=baseJs2 %>bootstrap.min.js?randomId=<%=Math.random()%>"></script>
-<script src="<%=baseJs2 %>bootstrap-datetimepicker.js" type="text/javascript"></script>
-<script src="<%=baseJs2 %>locales/bootstrap-datetimepicker.zh-CN.js" type="text/javascript"></script>
+<script src="<%=baseJs2 %>bootstrap-datetimepicker.js?randomId=<%=Math.random()%>" type="text/javascript"></script>
+<script src="<%=baseJs2 %>locales/bootstrap-datetimepicker.zh-CN.js?randomId=<%=Math.random()%>" type="text/javascript"></script>
 <script src="<%=baseJs %>common/page.js?randomId=<%=Math.random()%>" type="text/javascript"></script>
 <script src="<%=baseJs %>common/ajaxSubmit.js?randomId=<%=Math.random()%>" type="text/javascript"></script>
 <script src="<%=baseJs %>common/common.js?randomId=<%=Math.random()%>" type="text/javascript"></script>

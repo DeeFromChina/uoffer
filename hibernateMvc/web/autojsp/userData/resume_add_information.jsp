@@ -6,9 +6,9 @@
 <%@include file="../common/common.jsp"%>
 <title></title>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="stylesheet" href="<%=baseCss %>userData/resume_add_information.css" type="text/css"/>
+<link rel="stylesheet" href="<%=baseCss %>userData/resume_add_information.css?randomId=<%=Math.random()%>" type="text/css"/>
 </head>
-<script src="<%=baseJs %>userData/resume_add_information.js"></script>
+<script src="<%=baseJs %>userData/resume_add_information.js?randomId=<%=Math.random()%>"></script>
 <body onload="init()">
 <form id="dataForm">
 	<center>
@@ -158,8 +158,8 @@
 			<tr>
 				<td></td>
 				<td colspan="2" class="textC">
-					<button type="button" class="btn btn-primary submitBtn" onclick="goSubmit()">
-						确认提交
+					<button type="button" class="btn btn-primary submitBtn" onclick="goNext()">
+						下一步
 					</button>
 				</td>
 				<td></td>

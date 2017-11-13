@@ -102,10 +102,10 @@ function appendBootstrap(obj,flag){
 	return str;
 }
 function addBootstrap(obj){
-//	var data = '[{"title":"中餐","content":{"title":"ct1","visibility":"1","click":"0"},"value":"1","visibility":"1","click":"1"}';
-//	data += ',{"title":"西餐","content":{"title":"ct1","content":[{"title":"cct1","visibility":"1","click":"1"},{"title":"cct2","visibility":"1"}],"visibility":"0","click":"1"},"value":"","visibility":"1","click":"1"}]';
-//	
-//	var obj = eval('(' + data + ')');
+	var data = '[{"title":"中餐","content":{"title":"ct1","visibility":"1","click":"0"},"value":"1","visibility":"1","click":"1"}';
+	data += ',{"title":"西餐","content":{"title":"ct1","content":[{"title":"cct1","visibility":"1","click":"1"},{"title":"cct2","visibility":"1"}],"visibility":"0","click":"1"},"value":"","visibility":"1","click":"1"}]';
+	
+	var obj = eval('(' + data + ')');
 	var str = "";
 	str = addOpenTree(obj,-1);
 	$("#bootstrapTree").append(str);
@@ -114,7 +114,8 @@ function getValue(v){
 	alert(v);
 }
 function init(){
-	var url = "login.do?action=register";
-	var data = ajaxSumbit(url);
-	addBootstrap(data);
+//	var url = "login.do?action=register";
+//	var data = ajaxSumbit(url);
+//	addBootstrap(data);
+	addBootstrap("");
 }

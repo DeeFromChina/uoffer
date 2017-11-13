@@ -2,8 +2,8 @@ function init() {
 	getTran('1');
 	subWorkTime();
 	var workTimeData = jQuery.parseJSON(workTime);
-	setList("workTime1","请选择您的工作年限",workTimeData,0,"");
-	setList("workTime2","请选择您的工作年限",workTimeData,0,"");
+	setList("workTime1","请选择您的工作年限",workTimeData,0,"","w340");
+	setList("workTime2","请选择您的工作年限",workTimeData,0,"","w340");
 	setSrc('zhihu','zhihu.png');
 	setSrc('github','github.png');
 	setSrc('blog','blog.png');
@@ -52,7 +52,7 @@ var workTime = "["
 				+"]";
 function subWorkTime(){
 	var data = jQuery.parseJSON(workTime);
-	setList("workTime","请选择您的工作年限",data,0,"");
+	setList("workTime","请选择您的工作年限",data,0,"","w340");
 }
 function selectWorkTime(){
 	var data = jQuery.parseJSON(workTime);
@@ -85,7 +85,11 @@ function selectOtherSkill(){
 	}
 	$('#skill').val(map["ids"]);
 }
-	//下一步
+//下一步
+function goNext(){
+	$(window.parent.document.getElementById("page2")).click();
+}
+
 	function goSubmit(){
 		var jobs = "";
 		$(".checked").each(function () {

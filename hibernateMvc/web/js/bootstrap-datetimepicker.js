@@ -284,7 +284,8 @@
 			if (this.forceParse) {
 				this.update();
 			}
-			this.place();
+			//2017-11-10
+			this.place(20,0,0);
 			$(window).on('resize', $.proxy(this.place, this));
 			if (e) {
 				e.stopPropagation();
@@ -422,7 +423,8 @@
 			this.updateNavArrows();
 		},
 
-		place: function () {
+//		2017-11-10修改定位
+		place: function (t,l,z) {
 			if (this.isInline) return;
 
 			var index_highest = 0;
@@ -432,7 +434,7 @@
 					index_highest = index_current;
 				}
 			});
-			var zIndex = index_highest + 10;
+			var zIndex = index_highest + 10 + z;
 
 			var offset, top, left, containerOffset;
 			if (this.container instanceof $) {
@@ -462,8 +464,8 @@
 				top = offset.top + this.height;
 			}
 
-			top = top - containerOffset.top;
-			left = left - containerOffset.left;
+			top = top - containerOffset.top + t;
+			left = left - containerOffset.left + l;
 			
 			this.picker.css({
 				top:    top,
@@ -700,7 +702,8 @@
 				year += 1;
 			}
 			yearCont.html(html);
-			this.place();
+			//2017-11-10
+			this.place(20,0,0);
 		},
 
 		updateNavArrows: function () {
@@ -1632,9 +1635,9 @@
 		},
 		headTemplate:     '<thead>' +
 							  '<tr>' +
-							  '<th class="prev"><i class="icon-arrow-left"/></th>' +
+							  '<th class="prev"><i class="glyphicon icon-arrow-left"/></th>' +
 							  '<th colspan="5" class="switch"></th>' +
-							  '<th class="next"><i class="icon-arrow-right"/></th>' +
+							  '<th class="next"><i class="glyphicon icon-arrow-right"/></th>' +
 							  '</tr>' +
 			'</thead>',
 		headTemplateV3:   '<thead>' +

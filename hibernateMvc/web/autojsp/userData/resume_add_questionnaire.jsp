@@ -162,7 +162,7 @@
 			<tr>
 				<td></td>
 				<td colspan="3">
-					<textarea class="h80 wi80" name="offerRequestNextJob" id="offerRequestNextJob"></textarea>
+					<textarea class="form-control wi80" rows="8"></textarea>
 				</td>
 			</tr>
 			<tr>
