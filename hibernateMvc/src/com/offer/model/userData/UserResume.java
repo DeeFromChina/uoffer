@@ -39,6 +39,45 @@ public class UserResume {
 	@Column(name = "other_skill")
 	private String otherSkill;
 	
+	@Column(name = "now_residence")
+	private String nowResidence;
+	
+	@Column(name = "go_job_city")
+	private String goJobCity;
+	
+	@Column(name = "company_nature")
+	private String companyNature;
+	
+	@Column(name = "company_scale")
+	private String companyScale;
+	
+	@Column(name = "now_job_status")
+	private String nowJobStatus;
+	
+	@Column(name = "in_time")
+	private String inTime;
+	
+	@Column(name = "currency1")
+	private String currency1;
+	
+	@Column(name = "monthmoney1")
+	private String month_Money1;
+	
+	@Column(name = "month1")
+	private String month1;
+	
+	@Column(name = "currency2")
+	private String currency2;
+	
+	@Column(name = "monthmoney2")
+	private String month_Money2;
+	
+	@Column(name = "month2")
+	private String month2;
+	
+	@Column(name = "remark")
+	private String remark;
+	
 	@Column(name = "finish1")
 	private Integer finish1;
 	
@@ -153,5 +192,109 @@ public class UserResume {
 
 	public void setFinish4(Integer finish4) {
 		this.finish4 = finish4;
+	}
+
+	public String getNowResidence() {
+		return nowResidence;
+	}
+
+	public void setNowResidence(String nowResidence) {
+		this.nowResidence = nowResidence;
+	}
+
+	public String getGoJobCity() {
+		return goJobCity;
+	}
+
+	public void setGoJobCity(String goJobCity) {
+		this.goJobCity = goJobCity;
+	}
+
+	public String getCompanyNature() {
+		return companyNature;
+	}
+
+	public void setCompanyNature(String companyNature) {
+		this.companyNature = companyNature;
+	}
+
+	public String getCompanyScale() {
+		return companyScale;
+	}
+
+	public void setCompanyScale(String companyScale) {
+		this.companyScale = companyScale;
+	}
+
+	public String getNowJobStatus() {
+		return nowJobStatus;
+	}
+
+	public void setNowJobStatus(String nowJobStatus) {
+		this.nowJobStatus = nowJobStatus;
+	}
+
+	public String getInTime() {
+		return inTime;
+	}
+
+	public void setInTime(String inTime) {
+		this.inTime = inTime;
+	}
+
+	public String getCurrency1() {
+		return currency1;
+	}
+
+	public void setCurrency1(String currency1) {
+		this.currency1 = currency1;
+	}
+
+	public String getMonth_Money1() {
+		return month_Money1;
+	}
+
+	public void setMonth_Money1(String month_Money1) {
+		this.month_Money1 = month_Money1;
+	}
+
+	public String getMonth1() {
+		return month1;
+	}
+
+	public void setMonth1(String month1) {
+		this.month1 = month1;
+	}
+
+	public String getCurrency2() {
+		return currency2;
+	}
+
+	public void setCurrency2(String currency2) {
+		this.currency2 = currency2;
+	}
+
+	public String getMonth_Money2() {
+		return month_Money2;
+	}
+
+	public void setMonth_Money2(String month_Money2) {
+		this.month_Money2 = month_Money2;
+	}
+
+	public String getMonth2() {
+		return month2;
+	}
+
+	public void setMonth2(String month2) {
+		this.month2 = month2;
+	}
+
+	public String getRemark() {
+		return remark;
+	}
+
+	public void setRemark(String remark) {
+		this.remark = remark;
 	}
 }

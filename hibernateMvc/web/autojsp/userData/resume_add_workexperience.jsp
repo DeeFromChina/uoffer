@@ -106,12 +106,12 @@
 			<tr>
 				<td></td>
 				<td class="textC">
-					<button type="button" class="btn btn-primary submitBtn" onclick="goSubmit()">
+					<button type="button" class="btn btn-primary submitBtn" onclick="goBack()">
 						上一步
 					</button>
 				</td>
 				<td class="textC">
-					<button type="button" class="btn btn-primary submitBtn" onclick="goSubmit()">
+					<button type="button" class="btn btn-primary submitBtn" onclick="goNext()">
 						下一步
 					</button>
 				</td>

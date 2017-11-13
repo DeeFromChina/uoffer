@@ -1,10 +1,18 @@
-var test = "a";
 function init() {
 	parent.document.getElementById("iframe3").height=document.body.scrollHeight;
 	parent.document.getElementById("myTabContent").style.height=document.body.scrollHeight;
 	parent.dataFormVcenter();
 	parent.countFrameHeight();
 }
+//下一步
+function goNext(){
+	$(window.parent.document.getElementById("page4")).click();
+}
+//上一步
+function goBack(){
+	$(window.parent.document.getElementById("page2")).click();
+}
+
 function addDiv(){
 	var str = '';
 	var baseImg = pages["imgPath"];

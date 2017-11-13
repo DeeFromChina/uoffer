@@ -40,6 +40,11 @@ public class UserManagerController extends TinyBuilderController {
 	}
 	
 	private Object getTop(){
+		User user = (User) httpSession.getAttribute("user");
+		if(user == null){
+			return addMessage("没有找到用户");
+		}
+		
 		Map<String, Object> titleMap = new HashMap<String, Object>();
 		
 		StringBuffer centerTitle = new StringBuffer();
@@ -49,9 +54,13 @@ public class UserManagerController extends TinyBuilderController {
 		centerTitle.append("{\"title\":\"我的简历\",\"url\":\"go(\'\')\"}");
 		centerTitle.append("]");
 		
+		String userIcon = "changjinglu.jpg";
+		if(user.getUserType() == 1){
+			
+		}
 		StringBuffer userImg = new StringBuffer();
 		userImg.append("[");
-		userImg.append("{\"url\":\"changjinglu.jpg\"}");
+		userImg.append("{\"url\":\""+ userIcon +"\"}");
 		userImg.append("]");
 		
 		StringBuffer rightTitle = new StringBuffer();

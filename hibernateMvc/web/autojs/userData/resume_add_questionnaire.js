@@ -37,6 +37,10 @@ function selected(obj){
 	$(obj).removeClass("circleChkB");
 	$(obj).addClass("circleChkA");
 }
+//上一步
+function goBack(){
+	$(window.parent.document.getElementById("page3")).click();
+}
 
 var dataName;
 	var phoneCode;

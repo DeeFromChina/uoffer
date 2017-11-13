@@ -4,6 +4,19 @@ function init() {
 	parent.dataFormVcenter();
 	parent.countFrameHeight();
 }
+//下一步
+function goNext(){
+	$(window.parent.document.getElementById("page3")).click();
+}
+//上一步
+function goBack(){
+	$(window.parent.document.getElementById("page1")).click();
+}
+
+
+
+
+
 var dataName = "";
 	//修改
 	function editId(items, type){

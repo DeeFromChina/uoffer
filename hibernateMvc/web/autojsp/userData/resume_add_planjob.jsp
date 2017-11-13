@@ -25,20 +25,16 @@
 				<tr>
 					<td></td>
 					<th colspan="3">
-						<font class="font-14">工作地点<font class="colorFF0033">*</font></font>
+						<font class="font-14">现居住地<font class="colorFF0033">*</font></font>
 					</th>
 				</tr>
 				<tr>
 					<td></td>
-					<td colspan="3">
-						<div class="input-group input-class border-collapse">
-							<input type="hidden" id="cityId" name="cityId" />
-							<input type="text" id="cityName" name="cityName" class="form-control" readOnly="readOnly">
-							<span class="input-group-addon hand">
-								<span class="glyphicon glyphicon-th" onclick="selectCity()"></span>
-							</span>
-						</div>
+					<td colspan="2">
+						<input type="hidden" id="gojobId" name="gojobId"/>
+						<div id="jobMeum"></div>
 					</td>
+					<td></td>
 				</tr>
 				<tr>
 					<td></td>
@@ -57,7 +53,20 @@
 				<tr>
 					<td></td>
 					<th colspan="3">
-						<font class="font-14">您对哪个阶段的公司感兴趣？（可多选）<font class="colorFF0033">*</font></font>
+						<font class="font-14">期望公司性质<font class="colorFF0033">*</font></font>
+					</th>
+				</tr>
+				<tr>
+					<td></td>
+					<td colspan="3">
+						<input type="hidden" id="gojobId" name="gojobId"/>
+						<div id="jobMeum"></div>
+					</td>
+				</tr>
+				<tr>
+					<td></td>
+					<th colspan="3">
+						<font class="font-14">期望公司规模<font class="colorFF0033">*</font></font>
 					</th>
 				</tr>
 				<tr>
@@ -70,12 +79,12 @@
 				<tr>
 					<td></td>
 					<td class="textC">
-						<button type="button" class="btn btn-primary skipBtn" onclick="goSubmit()">
+						<button type="button" class="btn btn-primary skipBtn" onclick="goBack()">
 							上一步
 						</button>
 					</td>
 					<td class="textC">
-						<button type="button" class="btn btn-primary skipBtn" onclick="goSubmit()">
+						<button type="button" class="btn btn-primary skipBtn" onclick="goNext()">
 							下一步
 						</button>
 					</td>

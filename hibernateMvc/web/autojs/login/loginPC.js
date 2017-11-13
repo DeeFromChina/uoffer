@@ -174,3 +174,11 @@ function checkValue(){
 	if(!checkInput('password',"密码","30",false)) return false;
 	return true;
 }
+function enter(e){
+	console.log(e);
+	 var keynum;
+    keynum = window.event ? e.keyCode : e.which;
+    if(keynum == 13){
+    	goSubmit();
+    }
+}

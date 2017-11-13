@@ -142,12 +142,24 @@
 					<table class="wi100">
 						<tr>
 							<td class="w200">
-								<div class="input-group selectInput" id="currency2"></div>
+								<div class="input-group selectInput" id="currency1"></div>
 							</td>
 							<td class="w140">
 								<input type="text" name="monthmoney" id="monthmoney" onchange="moneysum()" class="form-control">
 							</td>
-							<td id="summoney" width="90px">万/年</td>
+							<td class="w30 textC">
+								<font class="font-14">每月</font>
+							</td>
+							<td class="w30 textC">
+								<font class="font-14">X</font>
+							</td>
+							<td class="w140">
+								<input type="text" name="monthmoney" id="monthmoney" onchange="moneysum()" class="form-control">
+							</td>
+							<td class="w30 textC">
+								<font class="font-14">月</font>
+							</td>
+							<td id="summoney" width="90px">= 0 万/年</td>
 							<td/>
 						</tr>
 					</table>
@@ -191,7 +203,7 @@
 			<tr>
 				<td></td>
 				<td class="textC">
-					<button type="button" class="btn btn-primary submitBtn" onclick="goSubmit()">
+					<button type="button" class="btn btn-primary submitBtn" onclick="goBack()">
 						上一步
 					</button>
 				</td>

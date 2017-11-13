@@ -6,12 +6,12 @@
 <%@include file="../common/common.jsp"%>
 <title></title>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="stylesheet" href="<%=baseCss %>login/loginPC.css" type="text/css"/>
+<link rel="stylesheet" href="<%=baseCss %>login/loginPC.css?randomId=<%=Math.random()%>" type="text/css"/>
 <style>
 </style>
 </head>
-<script src="<%=baseJs2 %>jq_cookie/jquery.cookie.js"></script>
-<script src="<%=baseJs %>login/loginPC.js"></script>
+<script src="<%=baseJs2 %>jq_cookie/jquery.cookie.js?randomId=<%=Math.random()%>"></script>
+<script src="<%=baseJs %>login/loginPC.js?randomId=<%=Math.random()%>"></script>
 <body bgcolor="#E0FFFF" onload="init()">
 	<form id="dataForm">
 		<center>
@@ -68,7 +68,7 @@
 							<font class="font-14">邮箱/手机号码：</font>
 						</td>
 						<td colspan="3">
-							<input type="text" id="name" name="name" class="form-control input-class">
+							<input type="text" id="name" name="name" class="form-control input-class" onkeydown="enter(event)">
 						</td>
 					</tr>
 					<tr>
@@ -76,7 +76,7 @@
 							<font class="font-14">密码：</font>
 						</td>
 						<td colspan="3">
-							<input type="password" id="password" name="password" class="form-control input-class">
+							<input type="password" id="password" name="password" class="form-control input-class" onkeydown="enter(event)">
 						</td>
 					</tr>
 					<tr>
@@ -87,7 +87,7 @@
 							<table class="input-class">
 								<tr>
 									<td class="vCode-input">
-										<input type="text" id="inputCode" class="form-control">
+										<input type="text" id="inputCode" class="form-control" onkeydown="enter(event)">
 									</td>
 									<td>
 										<div id="vCode" class="vCode"></div>
@@ -113,7 +113,7 @@
 					<tr>
 						<td/>
 						<td colspan="2">
-							<button type="button" class="btn btn-primary submitBtn" onclick="goSubmit()">
+							<button type="button" class="btn btn-primary submitBtn">
 								确认提交
 							</button>
 						</td>
