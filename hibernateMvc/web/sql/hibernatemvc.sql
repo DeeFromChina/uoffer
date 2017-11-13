@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50051
 File Encoding         : 65001
 
-Date: 2017-10-20 18:33:58
+Date: 2017-11-13 18:19:57
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -44,15 +44,15 @@ CREATE TABLE `city` (
   `remark` varchar(255) default NULL,
   `status` int(2) default NULL COMMENT '0:正常状态，1:隐藏，2:待删除',
   PRIMARY KEY  (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=36 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of city
 -- ----------------------------
 INSERT INTO `city` VALUES ('1', '中国', null, '0', '2017-09-06 10:47:34', null, null, null, null);
-INSERT INTO `city` VALUES ('2', '广东省', '1', '0', '2017-09-06 10:47:40', null, null, null, null);
-INSERT INTO `city` VALUES ('3', '深圳市', '2', '0', '2017-09-06 10:47:44', null, null, null, null);
-INSERT INTO `city` VALUES ('4', '南山区', '3', '0', '2017-09-06 10:47:46', null, null, null, null);
+INSERT INTO `city` VALUES ('2', '广东省', '1', '0', '2017-11-13 15:45:55', null, null, null, null);
+INSERT INTO `city` VALUES ('3', '深圳市', '2', '0', '2017-11-13 15:46:12', null, null, null, null);
+INSERT INTO `city` VALUES ('4', '南山区', '3', '0', '0000-00-00 00:00:00', null, null, null, null);
 
 -- ----------------------------
 -- Table structure for company
@@ -66,6 +66,28 @@ CREATE TABLE `company` (
 
 -- ----------------------------
 -- Records of company
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for file_table
+-- ----------------------------
+DROP TABLE IF EXISTS `file_table`;
+CREATE TABLE `file_table` (
+  `id` int(11) NOT NULL auto_increment,
+  `table_name` varchar(255) default NULL,
+  `table_id` int(11) default NULL,
+  `file_real_name` varchar(255) default NULL,
+  `file_new_name` varchar(255) default NULL,
+  `file_path` varchar(500) default NULL,
+  `create_time` datetime default NULL,
+  `create_user_id` int(11) default NULL,
+  `file_suffix` varchar(50) default NULL,
+  `file_size` double default NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of file_table
 -- ----------------------------
 
 -- ----------------------------
@@ -181,7 +203,7 @@ CREATE TABLE `user` (
 -- ----------------------------
 -- Records of user
 -- ----------------------------
-INSERT INTO `user` VALUES ('1', '12321@34534.cvn', null, '123', null, null, '3', '1', null, null, null, null, null, null);
+INSERT INTO `user` VALUES ('1', '123123@cc.com', null, '123', null, null, '3', '1', null, null, null, null, null, null);
 INSERT INTO `user` VALUES ('2', '123', null, '3123', null, null, null, '1', null, null, null, null, null, null);
 
 -- ----------------------------
@@ -202,6 +224,7 @@ CREATE TABLE `user_resume` (
   `finish2` int(1) default NULL,
   `finish3` int(1) default NULL,
   `finish4` int(1) default NULL,
+  `go_job_city` varchar(255) default NULL,
   PRIMARY KEY  (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
