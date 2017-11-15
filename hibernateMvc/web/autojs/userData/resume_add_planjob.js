@@ -3,9 +3,17 @@ function init() {
 	parent.document.getElementById("myTabContent").style.height=document.body.scrollHeight;
 	parent.dataFormVcenter();
 	parent.countFrameHeight();
+
+	console.log(top.map["userResumeId"]);
+	if(top.map["userResumeId"] != undefined){
+		$("#userResumeId").val(top.map["userResumeId"]);
+	}
 }
 //下一步
 function goNext(){
+	var url = "userData.do?action=userPlanjob";
+	var formId = "dataForm";
+	var data = ajaxSumbit(url,formId);
 	$(window.parent.document.getElementById("page3")).click();
 }
 //上一步

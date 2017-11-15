@@ -48,6 +48,7 @@ function setList(listId,placeholder,listValue,index,method,widthClass){
 		inn += "</ul>";
 	}
 	inn += "</div>";
+	console.log(listId);
 	getid(listId).innerHTML = inn;
 }
 function addListChild(listId,listValue,index,method){

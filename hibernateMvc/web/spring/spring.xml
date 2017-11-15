@@ -8,5 +8,6 @@ http://www.springframework.org/schema/context/spring-context-3.0.xsd
 	<!-- 引入属性文件 -->
 	<context:property-placeholder location="/spring/config.properties" />
 	
+	<bean class="com.offer.interceptor.InitDataLoadFilter"/>
 
 </beans>

@@ -1,0 +1,39 @@
+<sqls>
+	<sql id="queryUserExperienceName">
+		SELECT
+			detail.id,
+			(
+				CASE 
+					WHEN detail.ename = detail.sname 
+					THEN 
+						IF(
+							@named = (select @named := detail.ename),
+							CONCAT(detail.sname,(@i := @i + 1)),
+							CONCAT(detail.sname,(@i := 1))
+						) 
+					ELSE "" END 
+			) AS dname 
+			FROM
+				(
+					SELECT
+						experience.id,
+						experience.name AS ename,
+						sube.name AS sname
+					FROM
+						user_experience experience
+					LEFT JOIN (
+							SELECT
+								experience.name
+							FROM
+								user_experience experience
+							GROUP BY
+								experience.name
+							HAVING
+								count(experience.name) > 1
+						) sube ON experience.name = sube.name {#param}
+						ORDER BY ename DESC
+				) detail,
+				(SELECT @i := 0) AS it 
+	</sql>
+	
+</sqls>

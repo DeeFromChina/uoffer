@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50051
 File Encoding         : 65001
 
-Date: 2017-11-13 18:19:57
+Date: 2017-11-15 20:19:15
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -44,7 +44,7 @@ CREATE TABLE `city` (
   `remark` varchar(255) default NULL,
   `status` int(2) default NULL COMMENT '0:正常状态，1:隐藏，2:待删除',
   PRIMARY KEY  (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=36 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of city
@@ -84,11 +84,17 @@ CREATE TABLE `file_table` (
   `file_suffix` varchar(50) default NULL,
   `file_size` double default NULL,
   PRIMARY KEY  (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of file_table
 -- ----------------------------
+INSERT INTO `file_table` VALUES ('1', 'test', '12', null, null, null, null, null, null, null);
+INSERT INTO `file_table` VALUES ('2', 'test', '12', null, null, null, null, null, null, null);
+INSERT INTO `file_table` VALUES ('3', 't', '12', null, null, null, null, null, null, null);
+INSERT INTO `file_table` VALUES ('4', 'test', '12', null, null, null, null, null, null, null);
+INSERT INTO `file_table` VALUES ('5', 't1', '12', null, null, null, null, null, null, null);
+INSERT INTO `file_table` VALUES ('6', 't1', '12', null, null, null, null, null, null, null);
 
 -- ----------------------------
 -- Table structure for function
@@ -203,8 +209,33 @@ CREATE TABLE `user` (
 -- ----------------------------
 -- Records of user
 -- ----------------------------
-INSERT INTO `user` VALUES ('1', '123123@cc.com', null, '123', null, null, '3', '1', null, null, null, null, null, null);
-INSERT INTO `user` VALUES ('2', '123', null, '3123', null, null, null, '1', null, null, null, null, null, null);
+INSERT INTO `user` VALUES ('1', '123123@cc.com', null, '123', null, null, '3', '1', '1', null, null, null, null, null);
+INSERT INTO `user` VALUES ('2', '123', null, '3123', null, null, null, '1', '1', null, null, null, null, null);
+
+-- ----------------------------
+-- Table structure for user_experience
+-- ----------------------------
+DROP TABLE IF EXISTS `user_experience`;
+CREATE TABLE `user_experience` (
+  `id` int(11) NOT NULL auto_increment,
+  `type` varchar(2) default NULL,
+  `name` varchar(255) default NULL,
+  `start_time` datetime default NULL,
+  `endTime` datetime default NULL,
+  `job` varchar(50) default NULL,
+  `job_description` varchar(500) default NULL,
+  `job_belong` varchar(255) default NULL,
+  `level` varchar(2) default NULL,
+  `descript1` varchar(500) default NULL,
+  `descript2` varchar(500) default NULL,
+  `user_resume_id` int(11) default NULL,
+  `user_id` int(11) default NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of user_experience
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for user_resume
@@ -213,6 +244,7 @@ DROP TABLE IF EXISTS `user_resume`;
 CREATE TABLE `user_resume` (
   `id` int(11) NOT NULL auto_increment,
   `user_id` int(11) default NULL,
+  `name` varchar(50) default NULL,
   `sex` char(2) default NULL,
   `work_time` char(2) default NULL,
   `go_job_id1` int(11) default NULL,
@@ -220,11 +252,23 @@ CREATE TABLE `user_resume` (
   `work_time1` char(2) default NULL,
   `work_time2` char(2) default NULL,
   `other_skill` varchar(255) default NULL COMMENT '其他',
+  `now_residence` varchar(255) default NULL,
+  `go_job_city` varchar(255) default NULL,
+  `company_nature` varchar(255) default NULL,
+  `company_scale` varchar(255) default NULL,
+  `now_job_status` varchar(2) default NULL,
+  `in_time` varchar(2) default NULL,
+  `currency1` varchar(2) default NULL,
+  `month_money1` double(11,2) default NULL,
+  `month1` int(2) default NULL,
+  `currency2` varchar(2) default NULL,
+  `month_money2` double(11,2) default NULL,
+  `month2` int(2) default NULL,
+  `remark` varchar(500) default NULL,
   `finish1` int(1) default NULL,
   `finish2` int(1) default NULL,
   `finish3` int(1) default NULL,
   `finish4` int(1) default NULL,
-  `go_job_city` varchar(255) default NULL,
   PRIMARY KEY  (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 

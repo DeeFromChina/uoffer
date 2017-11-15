@@ -18,6 +18,9 @@ public class UserResume {
 	@Column(name = "user_id")
 	private Integer userId;
 	
+	@Column(name = "name")
+	private String name;
+	
 	@Column(name = "sex")
 	private String sex;
 	
@@ -60,20 +63,20 @@ public class UserResume {
 	@Column(name = "currency1")
 	private String currency1;
 	
-	@Column(name = "monthmoney1")
-	private String month_Money1;
+	@Column(name = "month_money1")
+	private Double monthMoney1;
 	
 	@Column(name = "month1")
-	private String month1;
+	private Integer month1;
 	
 	@Column(name = "currency2")
 	private String currency2;
 	
-	@Column(name = "monthmoney2")
-	private String month_Money2;
+	@Column(name = "month_money2")
+	private Double monthMoney2;
 	
 	@Column(name = "month2")
-	private String month2;
+	private Integer month2;
 	
 	@Column(name = "remark")
 	private String remark;
@@ -104,6 +107,14 @@ public class UserResume {
 
 	public void setUserId(Integer userId) {
 		this.userId = userId;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public String getSex() {
@@ -250,22 +261,6 @@ public class UserResume {
 		this.currency1 = currency1;
 	}
 
-	public String getMonth_Money1() {
-		return month_Money1;
-	}
-
-	public void setMonth_Money1(String month_Money1) {
-		this.month_Money1 = month_Money1;
-	}
-
-	public String getMonth1() {
-		return month1;
-	}
-
-	public void setMonth1(String month1) {
-		this.month1 = month1;
-	}
-
 	public String getCurrency2() {
 		return currency2;
 	}
@@ -274,27 +269,43 @@ public class UserResume {
 		this.currency2 = currency2;
 	}
 
-	public String getMonth_Money2() {
-		return month_Money2;
-	}
-
-	public void setMonth_Money2(String month_Money2) {
-		this.month_Money2 = month_Money2;
-	}
-
-	public String getMonth2() {
-		return month2;
-	}
-
-	public void setMonth2(String month2) {
-		this.month2 = month2;
-	}
-
 	public String getRemark() {
 		return remark;
 	}
 
 	public void setRemark(String remark) {
 		this.remark = remark;
+	}
+
+	public Double getMonthMoney1() {
+		return monthMoney1;
+	}
+
+	public void setMonthMoney1(Double monthMoney1) {
+		this.monthMoney1 = monthMoney1;
+	}
+
+	public Integer getMonth1() {
+		return month1;
+	}
+
+	public void setMonth1(Integer month1) {
+		this.month1 = month1;
+	}
+
+	public Double getMonthMoney2() {
+		return monthMoney2;
+	}
+
+	public void setMonthMoney2(Double monthMoney2) {
+		this.monthMoney2 = monthMoney2;
+	}
+
+	public Integer getMonth2() {
+		return month2;
+	}
+
+	public void setMonth2(Integer month2) {
+		this.month2 = month2;
 	}
 }

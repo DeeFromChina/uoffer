@@ -6,6 +6,9 @@ function init() {
 }
 //下一步
 function goNext(){
+	var url = "userData.do?action=userExperience";
+	var formId = "dataForm";
+	var data = ajaxSumbit(url,formId);
 	$(window.parent.document.getElementById("page4")).click();
 }
 //上一步

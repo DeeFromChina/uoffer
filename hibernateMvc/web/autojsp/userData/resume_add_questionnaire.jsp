@@ -142,7 +142,7 @@
 					<table class="wi100">
 						<tr>
 							<td class="w200">
-								<div class="input-group selectInput" id="currency1"></div>
+								<div class="input-group selectInput" id="currency2"></div>
 							</td>
 							<td class="w140">
 								<input type="text" name="monthmoney" id="monthmoney" onchange="moneysum()" class="form-control">

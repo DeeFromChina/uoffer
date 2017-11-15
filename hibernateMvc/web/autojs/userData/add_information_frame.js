@@ -9,12 +9,11 @@
 //			setSexValue(data.offerUserSex);
 //		}
 //		$("#userInformationForm").populateForm(data);
-		console.log("test");
 		dataFormVcenter();
 		countFrameHeight();
 		parent.changeHeaderTitle();
 		var pageName = top.map["param"];
-//		$("#"+pageName).addClass("in active");
+		$("#"+pageName).addClass("in active");
 	}
 function clickMe(obj){
 	$(".circleA").each(function(){

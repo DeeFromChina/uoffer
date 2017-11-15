@@ -18,6 +18,11 @@
 			<col class="wi65"/>
 			<col class="wi10"/>
 			<tr>
+				<td colspan="4" class="textR">
+					<a class="font-14">选择历史模板</a>
+				</td>
+			</tr>
+			<tr>
 				<td></td>
 				<td class="textR paddingRight19">
 					<font color="#FF0000">*</font><font class="font-14" id="name"></font>

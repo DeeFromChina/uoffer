@@ -87,6 +87,11 @@ function selectOtherSkill(){
 }
 //下一步
 function goNext(){
+//	var url = "userData.do?action=userInformation";
+//	var formId = "dataForm";
+//	var data = ajaxSumbit(url,formId);
+	var data = "1";
+	top.map["userResumeId"] = data;
 	$(window.parent.document.getElementById("page2")).click();
 }
 

@@ -11,6 +11,7 @@
 <script src="<%=baseJs %>userData/resume_add_planjob.js"></script>
 <body onload="init()">
 	<form id="dataForm">
+		<input type="hidden" id="userResumeId" name="userResumeId"/>
 		<center>
 			<table class="mainDiv_table bgColorFFFFFF">
 				<col class="wi15"/>

@@ -1,12 +1,10 @@
 package com.offer.service.userData.impl;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.test.context.jdbc.Sql;
 
 import com.offer.dao.common.BaseDao;
 import com.offer.model.userData.User;
@@ -33,7 +31,7 @@ public class UserServiceImpl extends BaseServiceImpl implements UserService {
 	public void save(Map<String, Object> map) throws Exception {
 		User user = new User();
 		BaseUtil.mapToObject(user, map);
-		if(user != null){
+		if((user.getEmail() != null || user.getPhone() != null) && user.getPassword() != null){
 			user.setUserType(returnInt(map.get("type")));
 			baseDao.save(user);
 		}
@@ -104,7 +102,7 @@ public class UserServiceImpl extends BaseServiceImpl implements UserService {
 
 	@Override
 	public int checkUserResume(int userId) throws Exception {
-		String hql = "FROM UserResume WHERE userId = " + String.valueOf(userId);
+		String hql = "FROM UserResume WHERE userId=" + String.valueOf(userId);
 		List<UserResume> userResumes = (List<UserResume>) baseDao.findByHql(hql);
 		if(userResumes == null || userResumes.size() == 0){
 			return 0;
@@ -122,7 +120,7 @@ public class UserServiceImpl extends BaseServiceImpl implements UserService {
 			if(userResume.getFinish4() == 0){
 				return 4;
 			}
-			return 5;
+			return 1;
 		}else{
 			return 6;
 		}
