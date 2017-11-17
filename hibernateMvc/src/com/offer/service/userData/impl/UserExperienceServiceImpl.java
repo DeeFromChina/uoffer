@@ -13,7 +13,7 @@ import com.offer.service.impl.BaseServiceImpl;
 import com.offer.service.userData.UserExperienceService;
 import com.offer.util.BaseUtil;
 
-public class UserExperienceServiceImpl extends BaseServiceImpl implements UserExperienceService {
+public class UserExperienceServiceImpl implements UserExperienceService {
 
 	@Autowired
 	private BaseDao baseDao;
@@ -64,7 +64,7 @@ public class UserExperienceServiceImpl extends BaseServiceImpl implements UserEx
 	public List<UserExperience> getByUserId(int userId) throws Exception {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("userId", userId);
-		baseDao.findByQuery("sql/userData/sql_user", params)
+		baseDao.findByQuery("sql/userData/sql_user", map);
 		List<UserExperience> userExperiences = (List<UserExperience>) baseDao.findField(UserExperience.class, map);
 		return userExperiences;
 	}

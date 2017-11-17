@@ -39,7 +39,7 @@ function selectCheckBox(obj,formId,type,haveCheckBox,isMultiselect){
 		}
 	});
 }
-//找到某id下的checkbox
+//找到某id下的checkbox(type = id)
 function searchCheckBoxType(obj,type){
 	if(obj.value == type){
 		return obj;
@@ -61,14 +61,25 @@ function searchCheckBoxType(obj,type){
 	}
 }
 
-//某层以下单层checkbox
-function selectChkLimit1(obj,formId,type,haveCheckBox,isMultiselect){
+//某层以下单层checkbox(type="false",将所有数据列出来，单层(不管子项))
+function selectChkLimit1(obj,formId,type,isMultiselect){
 	var str = "";
 	if(obj == undefined){
 		return;
 	}
 	var targetObj;
-	if(obj[0] != undefined){
+	var obj0 = obj[0];
+	if(type == "false"){
+		if(obj0 != undefined){
+			for(var i in obj){
+				str += appendCheckBoxContent(obj[i],formId);
+			}
+		}else{
+			str += appendCheckBoxContent(obj,formId);
+		}
+		obj0 = undefined;
+	}
+	if(obj0 != undefined){
 		for(var i = 0; i < obj.length; i++){
 			targetObj = searchCheckBoxType(obj[i],type);
 			if(targetObj != undefined){
@@ -76,7 +87,9 @@ function selectChkLimit1(obj,formId,type,haveCheckBox,isMultiselect){
 			}
 		}
 	}else{
-		targetObj = searchCheckBoxType(obj,type);
+		if(type != "false"){
+			targetObj = searchCheckBoxType(obj,type);
+		}
 	}
 	if(targetObj != undefined){
 		var o = targetObj.content;

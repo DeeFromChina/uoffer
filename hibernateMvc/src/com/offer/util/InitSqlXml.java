@@ -66,6 +66,7 @@ public class InitSqlXml {
 		for(Map.Entry<String, String>  entry : params.entrySet()){
 			sql = sql.replace("{#"+entry.getKey()+"}", entry.getValue());
 		}
+		System.out.println(sql);
 		return sql;
 	}
 }

@@ -13,12 +13,13 @@ import com.offer.model.util.CheckBox;
 import com.offer.model.util.Tree;
 import com.offer.service.baseData.JobService;
 import com.offer.service.impl.BaseServiceImpl;
+import com.offer.util.BaseUtil;
 import com.offer.util.BuildCheckBox;
 import com.offer.util.BuildTree;
 import com.offer.util.CacheClass;
 
 @Service("jobService")
-public class JobServiceImpl extends BaseServiceImpl implements JobService{
+public class JobServiceImpl implements JobService{
 
 	@Autowired
 	private BaseDao baseDao;
@@ -124,7 +125,7 @@ public class JobServiceImpl extends BaseServiceImpl implements JobService{
 		}
 		if(map.get("count") != null){
 			returnCheckBoxs = (List<CheckBox>) CacheClass.getCache("jobCheckBox");
-			BuildCheckBox.selectCheckBox(returnCheckBoxs, returnInt(map.get("count")));
+			BuildCheckBox.selectCheckBox(returnCheckBoxs, BaseUtil.returnInt(map.get("count")));
 		}
 		return returnCheckBoxs;
 	}

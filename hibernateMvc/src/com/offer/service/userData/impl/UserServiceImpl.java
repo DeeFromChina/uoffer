@@ -16,7 +16,7 @@ import com.offer.service.userData.UserService;
 import com.offer.util.BaseUtil;
 
 @Service("userService")
-public class UserServiceImpl extends BaseServiceImpl implements UserService {
+public class UserServiceImpl implements UserService {
 	
 	@Autowired
 	private BaseDao baseDao;
@@ -32,7 +32,7 @@ public class UserServiceImpl extends BaseServiceImpl implements UserService {
 		User user = new User();
 		BaseUtil.mapToObject(user, map);
 		if((user.getEmail() != null || user.getPhone() != null) && user.getPassword() != null){
-			user.setUserType(returnInt(map.get("type")));
+			user.setUserType(BaseUtil.returnInt(map.get("type")));
 			baseDao.save(user);
 		}
 	}

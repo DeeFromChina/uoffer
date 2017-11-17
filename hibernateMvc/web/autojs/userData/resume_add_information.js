@@ -11,7 +11,7 @@ function init() {
 	
 	var url = "baseData.do?action=getJob";
 	var data = ajaxSumbit(url);
-	selectChkLimit1(data,"jobMeum","1",true,true);
+	selectChkLimit1(data,"jobMeum","1",true);
 	checkedLister("jobMeum",2,"selectWorkTime()");
 	
 	parent.document.getElementById("iframe1").height=document.body.scrollHeight;
@@ -20,7 +20,7 @@ function init() {
 	parent.countFrameHeight();
 	
 	$("tr[hide^='title']").attr("class","hidden");
-	$("tr[hide='otherskill']").attr("class","hidden");
+	$("tr[hide^='otherskill']").attr("class","hidden");
 }
 function getTran(ret) {
 	if (ret == '1') {
@@ -75,22 +75,34 @@ function selectWorkTime(){
 		}
 	}
 	$('#gojobId').val(map["ids"]);
+	
+	var url = "baseData.do?action=getSkill&ids="+map["ids"];
+	var data = ajaxSumbit(url);
+	
+	$('.hiddenCheckBox').unbind();//因为要清除数据，得先把绑定事件去除，不然会造成事件冲突，可以注释试一下效果
+	$("#skillMeum").html("");
+	selectChkLimit1(data,"skillMeum","false",true);
+	checkedLister("skillMeum",5,"selectOtherSkill()");
+	
+	$("#otherskill").val("");
+	$("tr[hide^='otherskill']").attr("class","hidden");
 }
+
 function selectOtherSkill(){
-	var data = jQuery.parseJSON(workTime);
 	checkedValue("skillMeum");
-	$("tr[hide^='title']").attr("class","hidden");
 	if(map["values"].indexOf("其他") > -1){
-		$("tr[hide='otherskill']").removeAttr("class");
+		$("tr[hide^='otherskill']").removeAttr("class");
+	}else{
+		$("#otherskill").val("");
+		$("tr[hide^='otherskill']").attr("class","hidden");
 	}
 	$('#skill').val(map["ids"]);
 }
 //下一步
 function goNext(){
-//	var url = "userData.do?action=userInformation";
-//	var formId = "dataForm";
-//	var data = ajaxSumbit(url,formId);
-	var data = "1";
+	var url = "userData.do?action=userInformation";
+	var formId = "dataForm";
+	var data = ajaxSumbit(url,formId);
 	top.map["userResumeId"] = data;
 	$(window.parent.document.getElementById("page2")).click();
 }

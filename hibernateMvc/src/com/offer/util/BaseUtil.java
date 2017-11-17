@@ -16,6 +16,9 @@ public class BaseUtil {
 	
 	public static String returnString(Object object) {
 		try {
+			if(object instanceof Integer){
+				return String.valueOf(object);
+			}
 			return object.toString();
 		} catch (Exception e) {
 			return "";

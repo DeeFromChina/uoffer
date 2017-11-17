@@ -37,6 +37,7 @@ public class TinyBuilderController{
 	public static String SUCCESS = "success";
 	public static String ERROR = "error";
 	public static String SAVEERROR = "保存失败";
+	public static String SESSIONERROR = "session数据有误";
 	public boolean isMsg = false;
 	public String isRedirect = "0";
 	

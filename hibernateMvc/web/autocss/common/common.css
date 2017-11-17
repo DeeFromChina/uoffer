@@ -16,6 +16,9 @@
 .border-collapse{
 	border-collapse:collapse;
 }
+.lineHeight41{
+	line-height:41px;
+}
 .highlight {
 	background: yellow;
 	color: red; 

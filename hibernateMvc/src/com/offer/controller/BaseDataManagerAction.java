@@ -48,6 +48,7 @@ public class BaseDataManagerAction extends TinyBuilderController{
 			if("addJob".equalsIgnoreCase(action)) forward=addJob();
 			if("getJob".equalsIgnoreCase(action)) forward=getJob();
 			if("getCity".equalsIgnoreCase(action)) forward=getCity();
+			if("getSkill".equalsIgnoreCase(action)) forward=getSkill();
 			
 			return toJson(forward);
 		} catch (Exception e) {
@@ -90,12 +91,19 @@ public class BaseDataManagerAction extends TinyBuilderController{
 	}
 	
 	public Object getSkill() {
-		List<Skill> skills = new ArrayList<Skill>();
 		try {
-//			skills = skillService.
+			List<Map<String, Object>> list = skillService.findByJobId(form.get("ids").toString());
+			if(list != null){
+				Map<String, Object> map = new HashMap<String, Object>();
+				map.put("skillName", "其他");
+				map.put("skillId", "other");
+				list.add(map);
+				List<CheckBox> checkBoxs = skillService.getCheckBox(list);
+				return checkBoxs;
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return skills;
+		return "";
 	}
 }

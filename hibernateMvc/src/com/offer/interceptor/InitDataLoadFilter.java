@@ -30,9 +30,9 @@ public class InitDataLoadFilter {
 			}
 		}
 		
-		Map<String, String> params = new HashMap<String, String>();
-		params.put("param", "where 1=1");
-		String sql = InitSqlXml.buildSql(params, "queryUserExperienceName");
+//		Map<String, String> params = new HashMap<String, String>();
+//		params.put("param", "where 1=1");
+//		String sql = InitSqlXml.buildSql(params, "queryUserExperienceName");
 	}
 
 }

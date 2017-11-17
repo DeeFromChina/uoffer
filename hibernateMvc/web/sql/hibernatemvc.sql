@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50051
 File Encoding         : 65001
 
-Date: 2017-11-15 20:19:15
+Date: 2017-11-17 19:21:21
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -146,6 +146,25 @@ INSERT INTO `job` VALUES ('4', 'test2', null);
 INSERT INTO `job` VALUES ('5', '硬件', '1');
 
 -- ----------------------------
+-- Table structure for job_skill
+-- ----------------------------
+DROP TABLE IF EXISTS `job_skill`;
+CREATE TABLE `job_skill` (
+  `id` int(11) NOT NULL auto_increment,
+  `job_id` int(11) default NULL,
+  `skill_id` int(11) default NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of job_skill
+-- ----------------------------
+INSERT INTO `job_skill` VALUES ('1', '2', '2');
+INSERT INTO `job_skill` VALUES ('2', '2', '1');
+INSERT INTO `job_skill` VALUES ('3', '3', '2');
+INSERT INTO `job_skill` VALUES ('4', '5', '2');
+
+-- ----------------------------
 -- Table structure for skill
 -- ----------------------------
 DROP TABLE IF EXISTS `skill`;
@@ -270,11 +289,12 @@ CREATE TABLE `user_resume` (
   `finish3` int(1) default NULL,
   `finish4` int(1) default NULL,
   PRIMARY KEY  (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of user_resume
 -- ----------------------------
+INSERT INTO `user_resume` VALUES ('1', '1', 'name', '1', '2', null, null, '4', '5', 'qita', null, null, null, null, null, null, null, null, null, null, null, null, null, '0', null, null, null);
 
 -- ----------------------------
 -- Table structure for user_skill

@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.offer.model.baseData.Skill;
+import com.offer.model.util.CheckBox;
 
 public interface SkillService {
 
@@ -18,4 +19,8 @@ public interface SkillService {
 	public void deleteByIds(String ids) throws Exception;
    
 	public void deleteById(String ids) throws Exception;
+	
+	public List<CheckBox> getCheckBox(List<Map<String, Object>> list) throws Exception;
+	
+	public List<Map<String, Object>> findByJobId(String ids) throws Exception;
 }

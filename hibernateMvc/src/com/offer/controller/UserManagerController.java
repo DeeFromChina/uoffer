@@ -116,6 +116,11 @@ public class UserManagerController extends TinyBuilderController {
 	
 	private Object userInformation(){
 		try {
+			User user = (User) httpSession.getAttribute("user");
+			if(user == null){
+				return SESSIONERROR;
+			}
+			form.put("userId", user.getId());
 			Integer userResumeId = userResumeService.save(form);
 			if(userResumeId == 0){
 				return addMessage(SAVEERROR);

@@ -13,7 +13,7 @@ import com.offer.service.userData.UserResumeService;
 import com.offer.util.BaseUtil;
 
 @Service("userResumeService")
-public class UserResumeServiceImpl extends BaseServiceImpl implements UserResumeService {
+public class UserResumeServiceImpl implements UserResumeService {
 
 	@Autowired
 	private BaseDao baseDao;

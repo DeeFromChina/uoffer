@@ -12,12 +12,11 @@ import com.offer.model.baseData.City;
 import com.offer.model.util.CheckBox;
 import com.offer.model.util.Tree;
 import com.offer.service.baseData.CityService;
-import com.offer.service.impl.BaseServiceImpl;
 import com.offer.util.BuildTree;
 import com.offer.util.CacheClass;
 
 @Service("cityService")
-public class CityServiceImpl extends BaseServiceImpl implements CityService{
+public class CityServiceImpl implements CityService{
 	
 	@Autowired
 	private BaseDao baseDao;

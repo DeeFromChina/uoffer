@@ -112,14 +112,20 @@
 				<td></td>
 				<td colspan="3">
 					<input type="hidden" id="skill" name="skill"/>
-					<div id="skillMeum"></div>
+					<div id="skillMeum">
+					</div>
 				</td>
 			</tr>
-			<tr hide="otherskill">
+			<tr hide="otherskill1">
 				<td></td>
-				<th colspan="3" valign="middle">
-					<font class="font-14 floatL">其他:</font>
-					<input type="text" name="otherskill" class="form-control input-class">
+				<th colspan="3">
+					<font class="font-14">其他</font>
+				</th>
+			</tr>
+			<tr hide="otherskill2">
+				<td></td>
+				<th colspan="3">
+					<input type="text" id="otherskill" name="otherskill" class="form-control input-class">
 				</th>
 			</tr>
 			<tr>
