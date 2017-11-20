@@ -113,7 +113,7 @@
 					<tr>
 						<td/>
 						<td colspan="2">
-							<button type="button" class="btn btn-primary submitBtn">
+							<button type="button" class="btn btn-primary submitBtn" onclick="goSubmit()">
 								确认提交
 							</button>
 						</td>

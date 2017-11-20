@@ -85,7 +85,7 @@ public class BaseUtil {
 				return true;
 			}
 			if(obj instanceof String){
-				if("".equals(obj.toString())){
+				if("".equals(obj.toString().trim())){
 					return true;
 				}
 			}else if(obj instanceof Integer){

@@ -20,6 +20,7 @@ import com.offer.model.userData.UserResume;
 import com.offer.service.userData.UserResumeService;
 import com.offer.service.userData.UserService;
 import com.offer.util.BaseUtil;
+import com.offer.util.EncodeUtil;
 
 @Controller
 public class UserManagerController extends TinyBuilderController {
@@ -125,7 +126,7 @@ public class UserManagerController extends TinyBuilderController {
 			if(userResumeId == 0){
 				return addMessage(SAVEERROR);
 			}
-			return userResumeId;
+			return EncodeUtil.IDEncoder(userResumeId);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -134,7 +135,10 @@ public class UserManagerController extends TinyBuilderController {
 	
 	private Object userPlanjob(){
 		try {
-			
+			if(BaseUtil.isNull(form.get("userResumeId"))){
+				return null;
+			}
+			int userResumeId = EncodeUtil.changeId(form.get("userResumeId").toString());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

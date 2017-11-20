@@ -1,86 +1,17 @@
-package com.spider;
+package com.offer.util;
 
 import java.security.MessageDigest;
 
-import org.hibernate.dialect.function.VarArgsSQLFunction;
-
 import sun.misc.BASE64Encoder;
 
-public class VisitWebPage {
-	
-	public static void main(String[] args){
-//		for(int i = 0; i < 10; i++){
-//			System.out.println(i%2);
-//		}
-//		test();
-//		String encode = IDEncoder(2345);
-//		changeId(encode);
-		Object o = new Object();
-		o = "a";
-		if(o instanceof String){
-			System.out.println("1");
-		}
-	}
+public class EncodeUtil {
 
-	public static void test() {
-		int id = 3000;
-		String idString = String.valueOf(id) + "D3d0Q0f0UHsvRYqDW39qqmYipEYQ1FzU";
-		char[] ids = idString.toCharArray();
-		try {
-			MessageDigest sha = MessageDigest.getInstance("SHA");
-			BASE64Encoder encoder = new BASE64Encoder();
-			String pString = encoder.encode(sha.digest(idString.getBytes()));
-			char[] pids = pString.toCharArray();
-			String[] newpassword = new String[pids.length+ids.length+1];
-			StringBuffer newp = new StringBuffer();
-			int newpasswordcount = 0;
-			int idscount = 0;
-			System.out.println(pString);
-			for(int i = 0; i < newpassword.length; i++){
-				if(i == 0){
-					newpassword[i] = String.valueOf(returnAsciiCode(ids.length));
-					newp.append(newpassword[i]);
-					System.out.println(newpassword[i]);
-					continue;
-				}
-				if(i%2 == 1){
-					if(idscount < ids.length){
-						newpassword[i] = String.valueOf(ids[idscount]);
-						System.out.println(newpassword[i]);
-						newp.append(newpassword[i]);
-						idscount++;
-					}else{
-						if(pids.length <= newpasswordcount){
-							break;
-						}
-						newpassword[i] = String.valueOf(pids[newpasswordcount]);
-						newp.append(newpassword[i]);
-						System.out.println(newpassword[i]);
-						newpasswordcount++;
-					}
-				}else{
-					if(pids.length <= newpasswordcount){
-						break;
-					}
-					newpassword[i] = String.valueOf(pids[newpasswordcount]);
-					newp.append(newpassword[i]);
-					System.out.println(newpassword[i]);
-					newpasswordcount++;
-				}
-			}
-			System.out.println(newp.toString());
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-	
 	public static String IDEncoder(Integer id) {
 		String idString = String.valueOf(id);
 		try {
 			MessageDigest sha = MessageDigest.getInstance("SHA");
 			BASE64Encoder encoder = new BASE64Encoder();
 			String idCode = encoder.encode(sha.digest(idString.getBytes()));
-			System.out.println(idCode);
 			
 			//String to char[]
 			char[] ids = idString.toCharArray();
@@ -98,7 +29,6 @@ public class VisitWebPage {
 				}
 				if(i%2 == 1){
 					if(idsCount < ids.length){
-//						newID.append(String.valueOf(returnAsciiCode(Integer.valueOf(ids[idsCount]))));
 						Integer subId = Integer.parseInt(String.valueOf(ids[idsCount]));
 						newID.append(String.valueOf(returnAsciiCode(subId)));
 						idsCount++;
@@ -117,7 +47,6 @@ public class VisitWebPage {
 					idCodeCount++;
 				}
 			}
-			System.out.println(newID.toString());
 			return newID.toString();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -142,7 +71,6 @@ public class VisitWebPage {
 				}
 			}
 		}
-		System.out.println(id.toString());
 		return Integer.valueOf(id.toString());
 	}
 	
@@ -212,4 +140,5 @@ public class VisitWebPage {
 		}
 		return str;
 	}
+
 }
