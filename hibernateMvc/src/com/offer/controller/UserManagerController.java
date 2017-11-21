@@ -101,10 +101,10 @@ public class UserManagerController extends TinyBuilderController {
 			int pageNum;
 			pageNum = userService.checkUserResume(user.getId());
 			switch (pageNum) {
-			case 1: pageName = "resume_add_information";
-			case 2: pageName = "resume_add_planjob.jsp";
-			case 3: pageName = "resume_add_questionnaire.jsp";
-			case 4: pageName = "resume_add_workexperience.jsp";
+			case 1: pageName = "resume_add_information";break;
+			case 2: pageName = "resume_add_planjob.jsp";break;
+			case 3: pageName = "resume_add_questionnaire.jsp";break;
+			case 4: pageName = "resume_add_workexperience.jsp";break;
 			case 6: 
 				pageName = "resume_add_information.jsp";
 				return redirect("common/frame.jsp", "", "很多份简历", true);
@@ -117,15 +117,16 @@ public class UserManagerController extends TinyBuilderController {
 	
 	private Object userInformation(){
 		try {
-			User user = (User) httpSession.getAttribute("user");
-			if(user == null){
-				return SESSIONERROR;
-			}
-			form.put("userId", user.getId());
-			Integer userResumeId = userResumeService.save(form);
-			if(userResumeId == 0){
-				return addMessage(SAVEERROR);
-			}
+//			User user = (User) httpSession.getAttribute("user");
+//			if(user == null){
+//				return SESSIONERROR;
+//			}
+//			form.put("userId", user.getId());
+//			Integer userResumeId = userResumeService.save(form);
+//			if(userResumeId == 0){
+//				return addMessage(SAVEERROR);
+//			}
+			int userResumeId = 1;
 			return EncodeUtil.IDEncoder(userResumeId);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -139,6 +140,10 @@ public class UserManagerController extends TinyBuilderController {
 				return null;
 			}
 			int userResumeId = EncodeUtil.changeId(form.get("userResumeId").toString());
+			UserResume userResume = userResumeService.getById(userResumeId);
+			BaseUtil.mapToObject(userResume, form);
+			userResumeService.update(userResume);
+			return EncodeUtil.IDEncoder(1);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

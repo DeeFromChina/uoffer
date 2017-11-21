@@ -38,6 +38,15 @@ public class BaseDaoImpl implements BaseDao{
 	
 	private String FILE_PATH = this.getClass().getClassLoader().getResource("").getPath();
 	
+	public Object getById(Class<?> t, Serializable id) throws Exception{
+		try{
+			return this.hibernateTemplate.get(t, id);
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
 	public Object findField(Class<?> t, Serializable id) throws Exception{
 		try {
 			StringBuffer hql = new StringBuffer();

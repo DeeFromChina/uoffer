@@ -77,7 +77,7 @@ function selectWorkTime(){
 	$('#gojobId').val(map["ids"]);
 	
 	var url = "baseData.do?action=getSkill&ids="+map["ids"];
-	var data = ajaxSumbit(url);
+	data = ajaxSumbit(url);
 	
 	$('.hiddenCheckBox').unbind();//因为要清除数据，得先把绑定事件去除，不然会造成事件冲突，可以注释试一下效果
 	$("#skillMeum").html("");
@@ -106,45 +106,3 @@ function goNext(){
 	top.map["userResumeId"] = data;
 	$(window.parent.document.getElementById("page2")).click();
 }
-
-	function goSubmit(){
-		var jobs = "";
-		$(".checked").each(function () {
-			if(jobs != ""){
-				jobs = jobs + ",";
-			}
-			jobs = jobs + this.id
-        });
-		document.getElementById("jobs").value=jobs;
-		if(!checkValue()) return;
-		var offerUserDescription = document.getElementById('offerUserDescription').value;
-		offerUserDescription = replaceAll(offerUserDescription, "，", ",");
-		document.getElementById('offerUserDescription').value = offerUserDescription;
-		var url = "user/saveResumeAddInformation1.do";
-		var formId = "userInformationForm";
-		var data = ajaxSumbit(url, formId);
-		if(data == "success"){
-			top.location.href='resume_add_planjob.jsp';
-		}else{
-			alert("保存出错！");
-		}
-	}
-	function booleanInfot(url){
-		if(dataName == '1'){
-			top.location.href=url;
-		}else{
-			alert("请先填写好您的简历信息！");
-		}
-	}
-	function checkValue(){
-		if(!checkInput('offerUserName',"姓名","30",false)) return false;
-		if(!checkInput('offerUserSex',"性别","30",false)) return false;
-		if(!checkInput('offerUserWorktime',"工作年限","30",false)) return false;
-		if(!checkInput('jobs',"工作岗位","30",false)) return false;
-		if(!checkInput('offerUserDescription',"工作技能","200",true)) return false;
-		if(!checkInput('offerUserZhihu',"知乎ID","30",true)) return false;
-		if(!checkInput('offerUserBlog',"blog地址","30",true)) return false;
-		if(!checkInput('offerUserGithub',"github账号","30",true)) return false;
-		if(!checkInput('offerUserPersonWeb',"个人网站","30",true)) return false;
-		return true;
-	}

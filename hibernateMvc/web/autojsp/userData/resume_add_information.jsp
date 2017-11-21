@@ -31,7 +31,7 @@
 			<tr>
 				<td></td>
 				<td colspan="3">
-					<input type="text" name="name" class="form-control input-class" placeholder="请输入邮箱">
+					<input type="text" name="name" class="form-control input-class" placeholder="请输入名称">
 				</td>
 			</tr>
 			<tr>

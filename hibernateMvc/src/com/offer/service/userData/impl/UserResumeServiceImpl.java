@@ -20,8 +20,7 @@ public class UserResumeServiceImpl implements UserResumeService {
 	
 	@Override
 	public UserResume getById(int id) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		return (UserResume) baseDao.getById(UserResume.class, id);
 	}
 
 	@Override
@@ -39,8 +38,16 @@ public class UserResumeServiceImpl implements UserResumeService {
 
 	@Override
 	public void update(UserResume userResume) throws Exception {
-		// TODO Auto-generated method stub
-		
+		try{
+			if(userResumePlanJob(userResume)){
+				userResume.setFinish2(1);
+			}else{
+				userResume.setFinish2(0);
+			}
+			baseDao.update(userResume);
+		}catch(Exception e){
+			e.printStackTrace();
+		}
 	}
 
 	@Override
@@ -61,7 +68,7 @@ public class UserResumeServiceImpl implements UserResumeService {
 		
 	}
 	
-	private boolean userResumeInformation(UserResume userResume){
+	private boolean userResumePlanJob(UserResume userResume){
 		if(BaseUtil.isNull(userResume.getName())){
 			return false;
 		}
@@ -81,6 +88,22 @@ public class UserResumeServiceImpl implements UserResumeService {
 			return false;
 		}
 		if(BaseUtil.isNull(userResume.getWorkTime2())){
+			return false;
+		}
+		return true;
+	}
+	
+	private boolean userResumeInformation(UserResume userResume){
+		if(BaseUtil.isNull(userResume.getNowResidence())){
+			return false;
+		}
+		if(BaseUtil.isNull(userResume.getGoJobCity())){
+			return false;
+		}
+		if(BaseUtil.isNull(userResume.getCompanyNature())){
+			return false;
+		}
+		if(BaseUtil.isNull(userResume.getCompanyScale())){
 			return false;
 		}
 		return true;

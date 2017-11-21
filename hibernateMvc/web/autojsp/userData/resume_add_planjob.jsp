@@ -32,8 +32,7 @@
 				<tr>
 					<td></td>
 					<td colspan="2">
-						<input type="hidden" id="gojobId" name="gojobId"/>
-						<div id="jobMeum"></div>
+						<input type="text" name="nowResidence" class="form-control input-class" placeholder="请输入名称">
 					</td>
 					<td></td>
 				</tr>
@@ -46,8 +45,8 @@
 				<tr>
 					<td></td>
 					<td colspan="2">
-						<input type="hidden" id="gojobId" name="gojobId"/>
-						<div id="jobMeum"></div>
+						<input type="hidden" id="goJobCity" name="goJobCity"/>
+						<div id="cityMeum"></div>
 					</td>
 					<td></td>
 				</tr>
@@ -60,8 +59,7 @@
 				<tr>
 					<td></td>
 					<td colspan="3">
-						<input type="hidden" id="gojobId" name="gojobId"/>
-						<div id="jobMeum"></div>
+						<div class="input-group selectInput" id="companyNature"></div>
 					</td>
 				</tr>
 				<tr>
@@ -73,8 +71,7 @@
 				<tr>
 					<td></td>
 					<td colspan="3">
-						<input type="hidden" id="gojobId" name="gojobId"/>
-						<div id="jobMeum"></div>
+						<div class="input-group selectInput" id="companyScale"></div>
 					</td>
 				</tr>
 				<tr>

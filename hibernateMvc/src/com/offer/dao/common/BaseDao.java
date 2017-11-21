@@ -6,7 +6,9 @@ import java.util.Map;
 
 public interface BaseDao {
 
-	public Object findField(Class<?> t, Serializable id) throws Exception;
+	public Object getById(Class<?> t, Serializable id) throws Exception;
+	
+//	public Object findField(Class<?> t, Serializable id) throws Exception;
 
 	public List<?> findField(Class<?> t, Map<String, Object> map) throws Exception;
 
