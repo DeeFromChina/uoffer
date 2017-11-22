@@ -12,6 +12,7 @@
 <body onload="init()">
 <form id="dataForm">
 	<center>
+	<input type="hidden" id="userResumeId" name="userResumeId" />
 	<table class="mainDiv_table bgColorFFFFFF">
 			<col class="wi15"/>
 			<col class="wi35"/>

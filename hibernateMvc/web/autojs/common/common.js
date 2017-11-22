@@ -111,10 +111,13 @@ function go(urlnum){
  * title:窗口标题
  * width:窗口宽度
  * height:窗口高度
- * closeFlag:是否在关闭时调用closeListener()方法
+ * dom:目标页面document
  * */
-function openWindow(url,title,width,height,closeFlag,win){
+function openWindow(url,title,width,height,targetDocument){
 	doc = window.top.document;
+	if(targetDocument != undefined){
+		window.top.map["targetpage"]=targetDocument;
+	}
 	if(url != ''){
 		url = "http://localhost:8080/hibernateMvc/autojsp/" + url;
 	}
@@ -129,13 +132,6 @@ function openWindow(url,title,width,height,closeFlag,win){
 		}
 	}
 	
-	if(closeFlag != undefined && closeFlag == 'true'){
-		closeFlag = 'true';
-		window.top.map["targetPage"] = win;
-	}else{
-		closeFlag = 'false';
-	}
-		
 	var timestamp = Date.parse(new Date());
 	timestamp = timestamp / 1000;
 	window.top.map["pageId"] = "myPage"+timestamp;
@@ -143,7 +139,7 @@ function openWindow(url,title,width,height,closeFlag,win){
 						+"<div class='modal-dialog' style='width:"+width+";height:"+height+";margin-top:"+marginTop+";'>"
 							+"<div class='modal-content'>"
 								+"<div class='modal-header'>"
-									+"<a id='close' class='close' data-dismiss='modal' aria-hidden='true' onclick='closeWindow(\"myPage"+timestamp+"\","+closeFlag+")'>"
+									+"<a id='close' class='close' data-dismiss='modal' aria-hidden='true' onclick='closeWindow(\"myPage"+timestamp+"\")'>"
 										+"&times;"
 									+"</a>"
 									+"<h4 class='modal-title' id='myModalLabel'>"
@@ -168,15 +164,17 @@ function openWindow(url,title,width,height,closeFlag,win){
 	if($(doc.body).height() - titleHeiight < height){
 		$(obj).css("overflow-y","auto");
 	}
+	$(obj).draggable();
 }
 /**
  * 关闭遮罩层
  * objId:打开窗口id
  * */
-function closeWindow(objId,closeFlag,win){
-	if(closeFlag){
-		var dom = window.top.map["targetPage"];
-		$(dom.getElementById('dataFormDisDiv')).remove();
+function closeWindow(objId){
+	if(window.top.map["targetpage"] != undefined){
+		var targetDocument = window.top.map["targetpage"];
+		targetDocument.getElementById("closeListenerBtn").click();
+		window.top.map["targetpage"]=undefined;
 	}
 	$("#"+objId).modal('hide');
 	$("#"+objId).remove();

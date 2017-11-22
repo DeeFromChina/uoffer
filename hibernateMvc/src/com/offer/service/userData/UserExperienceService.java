@@ -9,7 +9,7 @@ public interface UserExperienceService {
 
 	public UserExperience getById(int id) throws Exception;
 
-	public void save(Map<String, Object> map) throws Exception;
+	public Integer save(Map<String, Object> map) throws Exception;
 
 	public void update(UserExperience userExperience) throws Exception;
 
@@ -20,4 +20,6 @@ public interface UserExperienceService {
 	public void deleteById(String ids) throws Exception;
 	
 	public List<UserExperience> getByUserId(int userId) throws Exception;
+	
+	public List<UserExperience> getByUserResumeId(int userResumeId) throws Exception;
 }

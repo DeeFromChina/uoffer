@@ -112,15 +112,10 @@
 			</tr>
 			<tr>
 				<td></td>
-				<td class="textC">
-					<!-- <button type="button" class="btn btn-primary submitBtn" onclick="goSubmit()">
-						上一步
-					</button> -->
-				</td>
-				<td class="textC">
-					<!-- <button type="button" class="btn btn-primary submitBtn" onclick="goSubmit()">
-						下一步
-					</button> -->
+				<td colspan="2" class="textC">
+					<button type="button" class="btn btn-primary submitBtn" onclick="goSubmit()">
+						保存
+					</button>
 				</td>
 				<td></td>
 			</tr>

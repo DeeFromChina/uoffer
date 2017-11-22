@@ -48,10 +48,10 @@ public class UserExperience {
 	private String descript2;
 	
 	@Column(name = "user_resume_id")
-	private String userResumeId;
+	private Integer userResumeId;
 	
 	@Column(name = "user_id")
-	private String userId;
+	private Integer userId;
 
 	public Integer getId() {
 		return id;
@@ -141,19 +141,19 @@ public class UserExperience {
 		this.descript2 = descript2;
 	}
 
-	public String getUserResumeId() {
+	public Integer getUserResumeId() {
 		return userResumeId;
 	}
 
-	public void setUserResumeId(String userResumeId) {
+	public void setUserResumeId(Integer userResumeId) {
 		this.userResumeId = userResumeId;
 	}
 
-	public String getUserId() {
+	public Integer getUserId() {
 		return userId;
 	}
 
-	public void setUserId(String userId) {
+	public void setUserId(Integer userId) {
 		this.userId = userId;
 	}
 }

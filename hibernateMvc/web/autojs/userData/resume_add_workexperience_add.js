@@ -30,3 +30,11 @@ function init(){
 	    language:'zh-CN'
 	});
 }
+function goSubmit(){
+	var url = "userData.do?action=userExperience";
+	var formId = "dataForm";
+	var data = ajaxSumbit(url,formId);
+	var targetDocument = window.top.map["targetpage"];
+	targetDocument.getElementById("userResumeId").value = data;
+	closeWin();
+}

@@ -959,7 +959,7 @@ if (typeof jQuery === 'undefined') {
     keyboard: true,
     show: true
   }
-
+  
   Modal.prototype.toggle = function (_relatedTarget) {
     return this.isShown ? this.hide() : this.show(_relatedTarget)
   }
@@ -1101,13 +1101,14 @@ if (typeof jQuery === 'undefined') {
   Modal.prototype.backdrop = function (callback) {
     var that = this
     var animate = this.$element.hasClass('fade') ? 'fade' : ''
-
+    	   	
     if (this.isShown && this.options.backdrop) {
       var doAnimate = $.support.transition && animate
 
       this.$backdrop = $(document.createElement('div'))
         .addClass('modal-backdrop ' + animate)
-        .appendTo(this.$body)
+        .appendTo(window.top.document.body)
+//        .appendTo(this.$body)
 
       this.$element.on('click.dismiss.bs.modal', $.proxy(function (e) {
         if (this.ignoreBackdropClick) {
@@ -1148,6 +1149,7 @@ if (typeof jQuery === 'undefined') {
     } else if (callback) {
       callback()
     }
+    
   }
 
   // these following methods are used to handle overflowing modals

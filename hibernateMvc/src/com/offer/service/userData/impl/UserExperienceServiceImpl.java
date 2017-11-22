@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.offer.dao.common.BaseDao;
 import com.offer.model.userData.UserExperience;
@@ -12,7 +13,9 @@ import com.offer.model.userData.UserResume;
 import com.offer.service.impl.BaseServiceImpl;
 import com.offer.service.userData.UserExperienceService;
 import com.offer.util.BaseUtil;
+import com.offer.util.EncodeUtil;
 
+@Service("userExperienceService")
 public class UserExperienceServiceImpl implements UserExperienceService {
 
 	@Autowired
@@ -20,20 +23,26 @@ public class UserExperienceServiceImpl implements UserExperienceService {
 	
 	@Override
 	public UserExperience getById(int id) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		return (UserExperience) baseDao.getById(UserExperience.class, id);
 	}
 
 	@Override
-	public void save(Map<String, Object> map) throws Exception {
+	public Integer save(Map<String, Object> map) throws Exception {
+		int userResumeId;
 		if(map.get("userResumeId") == null){
 			UserResume userResume = new UserResume();
 			baseDao.save(userResume);
-			map.put("userResumeId", userResume.getId());
+			userResumeId = userResume.getId();
+		}else{
+			userResumeId = EncodeUtil.changeId(map.get("userResumeId").toString());
 		}
+		
 		UserExperience userExperience = new UserExperience();
 		BaseUtil.mapToObject(userExperience, map);
+		userExperience.setUserResumeId(userResumeId);
 		baseDao.save(userExperience);
+		
+		return userResumeId;
 	}
 
 	@Override
@@ -65,6 +74,14 @@ public class UserExperienceServiceImpl implements UserExperienceService {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("userId", userId);
 		baseDao.findByQuery("sql/userData/sql_user", map);
+		List<UserExperience> userExperiences = (List<UserExperience>) baseDao.findField(UserExperience.class, map);
+		return userExperiences;
+	}
+	
+	@Override
+	public List<UserExperience> getByUserResumeId(int userResumeId) throws Exception {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("userResumeId", userResumeId);
 		List<UserExperience> userExperiences = (List<UserExperience>) baseDao.findField(UserExperience.class, map);
 		return userExperiences;
 	}
