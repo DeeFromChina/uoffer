@@ -45,5 +45,5 @@ function submit(){
 		mainFrameSetValue(map["targetId"],form.city);
 		mainFrameSetValue(map["targetValue"],form.cityValue);
 	}
-	closeWin();
+	closeWin("citySelect");
 }

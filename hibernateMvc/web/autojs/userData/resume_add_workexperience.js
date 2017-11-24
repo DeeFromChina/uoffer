@@ -1,25 +1,29 @@
 function init() {
+	search();
+	
 	parent.document.getElementById("iframe3").height=document.body.scrollHeight;
 	parent.document.getElementById("myTabContent").style.height=document.body.scrollHeight;
 	parent.dataFormVcenter();
 	parent.countFrameHeight();
 }
-//下一步
-function goNext(){
-	var url = "userData.do?action=userExperience";
-	var formId = "dataForm";
-	var data = ajaxSumbit(url,formId);
-	$(window.parent.document.getElementById("page4")).click();
+function search(){
+	var userResumeId = $("#userResumeId").val();
+	userResumeId = "BBNWoZK3kTsExUV00Ywo1G5jlUKKs=";
+	var url = "userData.do?action=userExperienceList?type=work&userResumeId="+userResumeId;
+	var data = ajaxSumbit(url);
+	var str = addDiv(data);
+	$("#workDiv").append(str);
+	
+//	url = "userData.do?action=userExperienceList?type=edu&userResumeId="+userResumeId;
+//	data = ajaxSumbit(url);
+//	str = addDiv(data);
 }
-//上一步
-function goBack(){
-	$(window.parent.document.getElementById("page2")).click();
-}
-
-function addDiv(){
+function addDiv(items){
 	var str = '';
 	var baseImg = pages["imgPath"];
-	for(var i in items){
+	for(var i = 0; i < items.length; i++){
+		var startTime = getLocalTime(items[i].startTime,"yyyy/MM/dd");
+		var endTime = getLocalTime(items[i].endTime,"yyyy/MM/dd");
 		str += '<div class="detail">'
 				+ '<table>'
 					+ '<tr>'
@@ -27,26 +31,39 @@ function addDiv(){
 							+ '<img src="'+baseImg+'firm.png" class="wh-18"/>'
 						+ '</td>'
 						+ '<td>'
-							+ '<font class="font-14">'+items[i].title+'</font>'
+							+ '<font class="font-14">'+items[i].name+'</font>'
 						+ '</td>'
 						+ '<td class="textR w140">'
-							+'<font class="font-14">'+items[i].time+'</font>'
+							+'<font class="font-14">'+startTime+'~'+endTime+'</font>'
 						+ '</td>'
 					+ '</tr>'
 					+ '<tr>'
-						+ '<td rowspan="3"></td>'
-						+ '<td colspan="2">'+items[i].name+'</td>'
+						+ '<td rowspan="6"></td>'
+						+ '<td colspan="2">'+items[i].job+'</td>'
 					+ '</tr>'
 					+ '<tr>'
 						+ '<td colspan="2">'
 							+ '<font class="font-14">'
-								+ items[i].description
+								+ items[i].jobDescription
+							+ '</font>'
+						+ '</td>'
+					+ '</tr>'
+					+ '<tr>'
+						+ '<td colspan="2">'+items[i].jobBelong+'</td>'
+					+ '</tr>'
+					+ '<tr>'
+					+ '<td colspan="2">'+items[i].level+'</td>'
+					+ '</tr>'
+					+ '<tr>'
+						+ '<td colspan="2">'
+							+ '<font class="font-14">'
+								+ items[i].descript1
 							+ '</font>'
 						+ '</td>'
 					+ '</tr>'
 					+ '<tr>'
 						+ '<td colspan="2">'
-							+ '<font class="font-14">'+items[i].description2+'</font>'
+							+ '<font class="font-14">'+items[i].descript2+'</font>'
 						+ '</td>'
 					+ '</tr>'
 					+ '<tr>'
@@ -65,17 +82,36 @@ function addDiv(){
 				+ '</table>'
 			+ '</div>';
 	}
+	return str;
 }
 function addForm(type){
 	var url = "userData/resume_add_workexperience_add.jsp";
-	var title = "new";
+	var title = "";
+	if(type == 'work'){
+		title = "工作信息填写";
+	}
+	if(type == 'edu'){
+		title = "工作信息填写";
+	}
 	var width = "600";
 	var height = "400";
 	var data = "?type="+type;
-	openWindow(url+data,title,width,height,document);
+	var pageId = "userExperience";
+	openWindow(pageId,url+data,title,width,height,document);
 }
 function closeListener(){
-	console.log($("#userResumeId").val());
+	search();
+}
+//下一步
+function goNext(){
+	var url = "userData.do?action=userExperience";
+	var formId = "dataForm";
+	var data = ajaxSumbit(url,formId);
+	$(window.parent.document.getElementById("page4")).click();
+}
+//上一步
+function goBack(){
+	$(window.parent.document.getElementById("page2")).click();
 }
 
 

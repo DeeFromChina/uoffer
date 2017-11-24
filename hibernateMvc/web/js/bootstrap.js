@@ -939,6 +939,7 @@ if (typeof jQuery === 'undefined') {
     this.originalBodyPad     = null
     this.scrollbarWidth      = 0
     this.ignoreBackdropClick = false
+    this.cover				 = null
 
     if (this.options.remote) {
       this.$element
@@ -1104,8 +1105,10 @@ if (typeof jQuery === 'undefined') {
     	   	
     if (this.isShown && this.options.backdrop) {
       var doAnimate = $.support.transition && animate
+      var fadeId = this.options.cover ? this.options.cover : ''
 
       this.$backdrop = $(document.createElement('div'))
+      	.attr("id",fadeId)
         .addClass('modal-backdrop ' + animate)
         .appendTo(window.top.document.body)
 //        .appendTo(this.$body)

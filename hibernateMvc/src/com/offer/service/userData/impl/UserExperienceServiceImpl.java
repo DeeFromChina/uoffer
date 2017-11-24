@@ -79,9 +79,10 @@ public class UserExperienceServiceImpl implements UserExperienceService {
 	}
 	
 	@Override
-	public List<UserExperience> getByUserResumeId(int userResumeId) throws Exception {
+	public List<UserExperience> getByUserResumeIdAndType(int userResumeId, String type) throws Exception {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("userResumeId", userResumeId);
+		map.put("type", type);
 		List<UserExperience> userExperiences = (List<UserExperience>) baseDao.findField(UserExperience.class, map);
 		return userExperiences;
 	}

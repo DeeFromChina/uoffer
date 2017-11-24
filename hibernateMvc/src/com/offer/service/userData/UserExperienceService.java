@@ -21,5 +21,5 @@ public interface UserExperienceService {
 	
 	public List<UserExperience> getByUserId(int userId) throws Exception;
 	
-	public List<UserExperience> getByUserResumeId(int userResumeId) throws Exception;
+	public List<UserExperience> getByUserResumeIdAndType(int userResumeId, String type) throws Exception;
 }

@@ -78,7 +78,8 @@ function selectJob(){
 	var height = "400";
 	var type = "1";
 	var data = "?type="+type+"&targetId=goJobId&targetValue=goJobName&isMultiselect=false";
-	openWindow(url+data,title,width,height);
+	var pageId = "jobCheckbox";
+	openWindow(pageId,url+data,title,width,height);
 }
 function selectCity(){
 	var url = "public/city_select.jsp";
@@ -86,7 +87,8 @@ function selectCity(){
 	var width = "600";
 	var height = "400";
 	var data = "?type=3&target=city&targetId=cityId&targetValue=cityName";
-	openWindow(url+data,title,width,height);
+	var pageId = "citySelect";
+	openWindow(pageId,url+data,title,width,height);
 }
 function goSubmit(){
 	var isPass = true;

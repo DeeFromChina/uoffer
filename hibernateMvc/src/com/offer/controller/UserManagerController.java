@@ -155,9 +155,9 @@ public class UserManagerController extends TinyBuilderController {
 	
 	private Object userExperienceList(){
 		try {
-			if(!BaseUtil.isNull(form.get("userExperienceId"))){
-				int userExperienceId = EncodeUtil.changeId(form.get("userExperienceId").toString());
-				List<UserExperience> userExperiences = userExperienceService.getByUserResumeId(userExperienceId);
+			if(!BaseUtil.isNull(form.get("userResumeId")) && !BaseUtil.isNull(form.get("type"))){
+				int userResumeId = EncodeUtil.changeId(form.get("userResumeId").toString());
+				List<UserExperience> userExperiences = userExperienceService.getByUserResumeIdAndType(userResumeId,form.get("type").toString());
 				return userExperiences;
 			}
 			return "";

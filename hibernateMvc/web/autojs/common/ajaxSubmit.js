@@ -98,14 +98,6 @@ function ajaxSumbit(urllink, formId) {
         		map["param"] = result.data[1];
         		top.location.href = jspPath+result.data[0];
         	}
-//        	if(result.status == '4'){
-//        		if(result.data[2].toString != ''){
-//        			alert(result.data[2]);
-//        		}
-//        		map["subPage"] = result.data[1];
-//        		map["param"] = result.data[3];
-//        		top.location.href = jspPath+result.data[0];
-//        	}
         	dataResult = result.data;
         }
 	});

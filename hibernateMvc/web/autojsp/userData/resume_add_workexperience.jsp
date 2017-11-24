@@ -38,8 +38,8 @@
 			<tr>
 				<td></td>
 				<td colspan="2">
-					<div class="detailDiv">
-						<div class="detail">
+					<div id="workDiv" class="detailDiv">
+						<%-- <div class="detail">
 							<table>
 								<tr>
 									<td class='w30'>
@@ -80,7 +80,7 @@
 									</td>
 								</tr>
 							</table>
-						</div>
+						</div> --%>
 					</div>
 				</td>
 				<td></td>

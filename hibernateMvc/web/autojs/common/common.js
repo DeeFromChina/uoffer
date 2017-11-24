@@ -113,11 +113,9 @@ function go(urlnum){
  * height:窗口高度
  * dom:目标页面document
  * */
-function openWindow(url,title,width,height,targetDocument){
+function openWindow(pageId,url,title,width,height,targetDocument){
 	doc = window.top.document;
-	if(targetDocument != undefined){
-		window.top.map["targetpage"]=targetDocument;
-	}
+	
 	if(url != ''){
 		url = "http://localhost:8080/hibernateMvc/autojsp/" + url;
 	}
@@ -135,11 +133,14 @@ function openWindow(url,title,width,height,targetDocument){
 	var timestamp = Date.parse(new Date());
 	timestamp = timestamp / 1000;
 	window.top.map["pageId"] = "myPage"+timestamp;
+	if(targetDocument != undefined){
+		window.top.map[pageId]=targetDocument;
+	}
 	var pageStr = "<div class='modal fade' id='myPage"+timestamp+"' tabindex='-1' role='dialog' aria-labelledby='myModalLabel' aria-hidden='true'>"
 						+"<div class='modal-dialog' style='width:"+width+";height:"+height+";margin-top:"+marginTop+";'>"
 							+"<div class='modal-content'>"
 								+"<div class='modal-header'>"
-									+"<a id='close' class='close' data-dismiss='modal' aria-hidden='true' onclick='closeWindow(\"myPage"+timestamp+"\")'>"
+									+"<a id='"+pageId+"' class='close' data-dismiss='modal' aria-hidden='true' onclick='closeWindow(\"myPage"+timestamp+"\",\""+pageId+"\")'>"
 										+"&times;"
 									+"</a>"
 									+"<h4 class='modal-title' id='myModalLabel'>"
@@ -155,10 +156,10 @@ function openWindow(url,title,width,height,targetDocument){
 	$(pageGroup).append(pageStr);
 	var obj = doc.getElementById("myPage"+timestamp);
 	if(divs.length > 0){
-		$(obj).modal({backdrop: 'static', keyboard: false, backdrop: null});
+		$(obj).modal({backdrop: 'static', keyboard: false, backdrop: null, cover: "myPage"+timestamp});
 		$(obj).css("padding-left","0");
 	}else{
-		$(obj).modal({backdrop: 'static', keyboard: false});
+		$(obj).modal({backdrop: 'static', keyboard: false, cover: "myPage"+timestamp});
 	}
 	doc.body.style.overflowY = "hidden";
 	if($(doc.body).height() - titleHeiight < height){
@@ -170,11 +171,11 @@ function openWindow(url,title,width,height,targetDocument){
  * 关闭遮罩层
  * objId:打开窗口id
  * */
-function closeWindow(objId){
-	if(window.top.map["targetpage"] != undefined){
-		var targetDocument = window.top.map["targetpage"];
+function closeWindow(objId,pageId){
+	if(window.top.map[pageId] != undefined){
+		var targetDocument = window.top.map[pageId];
 		targetDocument.getElementById("closeListenerBtn").click();
-		window.top.map["targetpage"]=undefined;
+		window.top.map[pageId]=undefined;
 	}
 	$("#"+objId).modal('hide');
 	$("#"+objId).remove();
@@ -183,9 +184,10 @@ function closeWindow(objId){
 	if(divs.length == 0){
 		window.top.document.body.style.overflowY = "auto";
 	}
+	$(window.top.document.getElementById(objId)).remove();
 }
-function closeWin(){
-	$(parent.document.getElementById("close")).click();
+function closeWin(pageId){
+	$(parent.document.getElementById(pageId)).click();
 }
 /**
  * 计算frame高度
@@ -331,6 +333,40 @@ function newJson(data){
 	var newData = $.parseJSON(str);
 	return newData;
 }
+/*时间戳转化yyyy-MM-dd*/
+function getLocalTime(seconds,type) {     
+    var date = new Date(seconds);
+    var year = date.getFullYear();
+    var month = date.getMonth();
+    var day = date.getDate();
+    var hour = date.getHours();
+    var minute = date.getMinutes();
+    var second = date.getSeconds();
+    if(month < 10){
+    	month = "0"+month;
+    }
+    if(day < 10){
+    	day = "0"+day;
+    }
+    if(type == 'yyyy-MM-dd'){
+    	return year+"-"+month+"-"+day;
+    }
+    else if(type == 'yyyy/MM/dd'){
+    	return year+"/"+month+"/"+day;
+    }
+    else if(type == 'yyyy-MM-dd HH:mm:ss'){
+    	return year+"-"+month+"-"+day+" "+hour+":"+minute+":"+secord;
+    }
+    else if(type == 'yyyy年MM月dd日 HH:mm:ss'){
+    	return year+"年"+month+"月"+day+"日 "+hour+":"+minute+":"+secord;
+    }
+    else if(type == 'yyyy年MM月dd日'){
+    	return year+"年"+month+"月"+day+"日";
+    }
+    else{
+    	return year+"-"+month+"-"+day;
+    }
+ } 
 
 /**全文检索并以高光显示*/
 function searchText(textId){
