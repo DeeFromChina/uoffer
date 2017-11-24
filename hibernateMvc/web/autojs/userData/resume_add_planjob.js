@@ -1,17 +1,3 @@
-var companyNature = "["
-				+"{\"id\":\"1\",\"value\":\"创业公司\"},"
-				+"{\"id\":\"2\",\"value\":\"上市企业\"},"
-				+"{\"id\":\"3\",\"value\":\"国营企业\"},"
-				+"{\"id\":\"4\",\"value\":\"外资企业\"},"
-				+"{\"id\":\"5\",\"value\":\"政府机构\"}"
-				+"]";
-var companyScale = "["
-				+"{\"id\":\"1\",\"value\":\"少于50人\"},"
-				+"{\"id\":\"2\",\"value\":\"50-100人\"},"
-				+"{\"id\":\"3\",\"value\":\"100-500人\"},"
-				+"{\"id\":\"4\",\"value\":\"500-1000人\"},"
-				+"{\"id\":\"5\",\"value\":\"1000人以上\"}"
-				+"]";
 function init() {
 	var url = "baseData.do?action=getCity";
 	var data = ajaxSumbit(url);

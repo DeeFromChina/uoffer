@@ -80,6 +80,24 @@ function selectValue(obj,targetId){
 	$("input[name='"+targetId+"']").val(obj.id);
 	$("#"+targetId+"Value").val(obj.innerText);
 }
+/*向ObjId元素赋值*/
+function setValue(objId,val){
+	//$("#"+objId+"Value").val();
+}
+/**
+ * 在业务字典找到对应单词
+ * key:一级类型
+ * val:里面的key
+ * */
+function getWord(key,val){
+	var obj = jQuery.parseJSON(key);
+	for(var i in obj){
+		if(obj[i].id == val){
+			return obj[i].value;
+		}
+	}
+	return "";
+}
 /**
  * url:跳转地址
  * isPass:是否能跳转;
@@ -367,6 +385,11 @@ function getLocalTime(seconds,type) {
     	return year+"-"+month+"-"+day;
     }
  } 
+
+/*用于校验对象是否为空，空就返回空字符串*/
+function returnString(obj){
+	return obj == undefined ? "" : obj;
+}
 
 /**全文检索并以高光显示*/
 function searchText(textId){

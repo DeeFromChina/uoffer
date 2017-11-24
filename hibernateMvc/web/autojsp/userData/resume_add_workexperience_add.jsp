@@ -73,10 +73,16 @@
 			<tr>
 				<td></td>
 				<td class="textR paddingRight19">
-					<font color="#FF0000">*</font><font class="font-14" id="jobBelong"></font>
+					<font color="#FF0000">*</font><font class="font-14" id="jobBelongTitle"></font>
 				</td>
 				<td>
-					<input type="text" name="email" class="form-control input-class">
+					<div class="input-group input-class border-collapse">
+						<input type="hidden" id="jobBelong" name="jobBelong" />
+						<input type="text" id="jobBelongName" name="jobBelongName" class="form-control" readOnly="readOnly"/>
+						<span class="input-group-addon hand">
+							<span class="glyphicon glyphicon-th" onclick="selectJob()"></span>
+						</span>
+					</div>
 				</td>
 				<td></td>
 			</tr>

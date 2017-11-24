@@ -100,7 +100,7 @@
 			<tr>
 				<td></td>
 				<td colspan="2">
-					<div class="detailDiv"></div>
+					<div id="eduDiv" class="detailDiv"></div>
 				</td>
 				<td></td>
 			</tr>

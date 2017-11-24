@@ -272,9 +272,8 @@ function checkedValue(checkDivId){
 			values += value;
 		}
 	});
-	map["ids"] = ids;
-	map["values"] = values;
-	return map;
+	window.top.map["ids"] = ids;
+	window.top.map["values"] = values;
 }
 //可选择的数量
 function checkedNum(formId,num){

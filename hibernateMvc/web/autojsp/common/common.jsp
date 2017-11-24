@@ -34,6 +34,7 @@ String baseImg = request.getContextPath() + "/img/";
 <script src="<%=baseJs2 %>bootstrap-datetimepicker.js?randomId=<%=Math.random()%>" type="text/javascript"></script>
 <script src="<%=baseJs2 %>locales/bootstrap-datetimepicker.zh-CN.js?randomId=<%=Math.random()%>" type="text/javascript"></script>
 <script src="<%=baseJs %>common/page.js?randomId=<%=Math.random()%>" type="text/javascript"></script>
+<script src="<%=baseJs %>common/dictionaries.js?randomId=<%=Math.random()%>" type="text/javascript"></script>
 <script src="<%=baseJs %>common/ajaxSubmit.js?randomId=<%=Math.random()%>" type="text/javascript"></script>
 <script src="<%=baseJs %>common/common.js?randomId=<%=Math.random()%>" type="text/javascript"></script>
 <script src="<%=baseJs %>common/checkUtil.js?randomId=<%=Math.random()%>" type="text/javascript"></script>

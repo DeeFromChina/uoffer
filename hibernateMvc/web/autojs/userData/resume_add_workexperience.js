@@ -11,17 +11,34 @@ function search(){
 	userResumeId = "BBNWoZK3kTsExUV00Ywo1G5jlUKKs=";
 	var url = "userData.do?action=userExperienceList?type=work&userResumeId="+userResumeId;
 	var data = ajaxSumbit(url);
-	var str = addDiv(data);
+	var str = addDiv(data,"work");
+	$("#workDiv").html("");
 	$("#workDiv").append(str);
 	
-//	url = "userData.do?action=userExperienceList?type=edu&userResumeId="+userResumeId;
-//	data = ajaxSumbit(url);
-//	str = addDiv(data);
+	url = "userData.do?action=userExperienceList?type=edu&userResumeId="+userResumeId;
+	data = ajaxSumbit(url);
+	str = addDiv(data,"edu");
+	$("#eduDiv").html("");
+	$("#eduDiv").append(str);
 }
-function addDiv(items){
+function addDiv(items,type){
 	var str = '';
 	var baseImg = pages["imgPath"];
-	for(var i = 0; i < items.length; i++){
+	var jobDescription = "";
+	if(type == 'work'){
+		jobDescription = "工作描述:";
+	}
+	if(type == 'edu'){
+		jobDescription = "专业描述:";
+	}
+	for(var i in items){
+		var level = "";
+		if(type == 'work'){
+			level = getWord(companyNature,returnString(items[i].level));
+		}
+		if(type == 'edu'){
+			level = getWord(education,returnString(items[i].level));
+		}
 		var startTime = getLocalTime(items[i].startTime,"yyyy/MM/dd");
 		var endTime = getLocalTime(items[i].endTime,"yyyy/MM/dd");
 		str += '<div class="detail">'
@@ -39,31 +56,35 @@ function addDiv(items){
 					+ '</tr>'
 					+ '<tr>'
 						+ '<td rowspan="6"></td>'
-						+ '<td colspan="2">'+items[i].job+'</td>'
+						+ '<td colspan="2">'+returnString(items[i].job)+'</td>'
+					+ '</tr>'
+					+ '<tr>'
+						+ '<td colspan="2" class="font-14">'+jobDescription+'</td>'
 					+ '</tr>'
 					+ '<tr>'
 						+ '<td colspan="2">'
 							+ '<font class="font-14">'
-								+ items[i].jobDescription
+								+ returnString(items[i].jobDescription)
 							+ '</font>'
 						+ '</td>'
 					+ '</tr>'
 					+ '<tr>'
-						+ '<td colspan="2">'+items[i].jobBelong+'</td>'
-					+ '</tr>'
-					+ '<tr>'
-					+ '<td colspan="2">'+items[i].level+'</td>'
+						+ '<td colspan="2" class="color9A9A9A">'
+							+returnString(items[i].jobBelong)
+							+"|"
+							+level
+						+'</td>'
 					+ '</tr>'
 					+ '<tr>'
 						+ '<td colspan="2">'
 							+ '<font class="font-14">'
-								+ items[i].descript1
+								+ returnString(items[i].descript1)
 							+ '</font>'
 						+ '</td>'
 					+ '</tr>'
 					+ '<tr>'
 						+ '<td colspan="2">'
-							+ '<font class="font-14">'+items[i].descript2+'</font>'
+							+ '<font class="font-14">'+returnString(items[i].descript2)+'</font>'
 						+ '</td>'
 					+ '</tr>'
 					+ '<tr>'
@@ -100,7 +121,7 @@ function addForm(type){
 	openWindow(pageId,url+data,title,width,height,document);
 }
 function closeListener(){
-	search();
+	init();
 }
 //下一步
 function goNext(){

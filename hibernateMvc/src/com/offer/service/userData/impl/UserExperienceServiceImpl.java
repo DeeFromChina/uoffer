@@ -14,6 +14,7 @@ import com.offer.service.impl.BaseServiceImpl;
 import com.offer.service.userData.UserExperienceService;
 import com.offer.util.BaseUtil;
 import com.offer.util.EncodeUtil;
+import com.offer.util.InitSqlXml;
 
 @Service("userExperienceService")
 public class UserExperienceServiceImpl implements UserExperienceService {
@@ -79,12 +80,18 @@ public class UserExperienceServiceImpl implements UserExperienceService {
 	}
 	
 	@Override
-	public List<UserExperience> getByUserResumeIdAndType(int userResumeId, String type) throws Exception {
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("userResumeId", userResumeId);
-		map.put("type", type);
-		List<UserExperience> userExperiences = (List<UserExperience>) baseDao.findField(UserExperience.class, map);
-		return userExperiences;
+	public List<Map<String, Object>> getByUserResumeIdAndType(int userResumeId, String type) throws Exception {
+		String param = "where 1=1 ";
+		if(userResumeId > 0){
+			param += "AND e.user_resume_id = " + userResumeId;
+		}
+		if(!"".equals(type)){
+			param += "AND e.type = " + type;
+		}
+		Map<String, String> params = new HashMap<String, String>();
+		params.put("param", param);
+		String sql = InitSqlXml.buildSql(params, "queryUserExperience");
+		return baseDao.findBySql(sql);
 	}
 
 }
