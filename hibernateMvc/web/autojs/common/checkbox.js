@@ -180,7 +180,7 @@ function appendCheckBoxTitle(obj,name,haveCheckBox){
 						+"<a data-toggle=\"collapse\" href=\"#openMeum"+count+"\" id=\"aopenMeum"+count+"\" onclick=\"changeText(this)\">"
 							+"<div class=\"paddingBottom40\">"
 								+"<div class=\"icheckbox_square-green floatL\">"
-									+"<input type=\"hidden\" id=\""+obj.value+"\" value=\""+obj.title+"\" />"
+									+"<input type=\"hidden\" id=\""+name+"_"+obj.value+"\" value=\""+obj.title+"\" />"
 									+"<input type=\"checkbox\" name=\""+name+"\" class=\"hiddenCheckBox hand\" />"
 								+"</div>"
 								+"<div class=\"checkbox_cell_value\">"
@@ -194,7 +194,7 @@ function appendCheckBoxTitle(obj,name,haveCheckBox){
 			str += "<div class=\"checkbox_title\" >"
 						+"<div class=\"paddingBottom40\">"
 							+"<div class=\"icheckbox_square-green floatL\">"
-								+"<input type=\"hidden\" id=\""+obj.value+"\" value=\""+obj.title+"\" />"
+								+"<input type=\"hidden\" id=\""+name+"_"+obj.value+"\" value=\""+obj.title+"\" />"
 								+"<input type=\"checkbox\" name=\""+name+"\" class=\"hiddenCheckBox hand\" />"
 							+"</div>"
 							+"<div class=\"checkbox_cell_value\">"
@@ -241,7 +241,7 @@ function appendCheckBoxContent(obj,name){
 	var str = "";
 	str += "<div class=\"checkbox_cell\">"
 				+"<div class=\"icheckbox_square-green floatL\">"
-					+"<input type=\"hidden\" id=\""+obj.value+"\" value=\""+obj.title+"\" />"
+					+"<input type=\"hidden\" id=\""+name+"_"+obj.value+"\" value=\""+obj.title+"\" />"
 					+"<input type=\"checkbox\" name=\""+name+"\" class=\"hiddenCheckBox hand\" />"
 				+"</div>"
 				+"<div class=\"checkbox_cell_value\">"
@@ -267,6 +267,9 @@ function checkedValue(checkDivId){
 			if(ids != ""){
 				ids += ",";
 				values += ",";
+			}
+			if(id.indexOf(checkDivId) > -1){
+				id = id.replace(checkDivId+"_","");
 			}
 			ids += id;
 			values += value;

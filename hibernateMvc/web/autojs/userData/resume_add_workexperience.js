@@ -8,7 +8,7 @@ function init() {
 }
 function search(){
 	var userResumeId = $("#userResumeId").val();
-	userResumeId = "BBNWoZK3kTsExUV00Ywo1G5jlUKKs=";
+//	userResumeId = "BBNWoZK3kTsExUV00Ywo1G5jlUKKs=";
 	var url = "userData.do?action=userExperienceList?type=work&userResumeId="+userResumeId;
 	var data = ajaxSumbit(url);
 	var str = addDiv(data,"work");
@@ -32,6 +32,7 @@ function addDiv(items,type){
 		jobDescription = "专业描述:";
 	}
 	for(var i in items){
+		var user
 		var level = "";
 		if(type == 'work'){
 			level = getWord(companyNature,returnString(items[i].level));
@@ -56,7 +57,7 @@ function addDiv(items,type){
 					+ '</tr>'
 					+ '<tr>'
 						+ '<td rowspan="6"></td>'
-						+ '<td colspan="2">'+returnString(items[i].job)+'</td>'
+						+ '<td colspan="2">'+returnString(items[i].jobName)+'</td>'
 					+ '</tr>'
 					+ '<tr>'
 						+ '<td colspan="2" class="font-14">'+jobDescription+'</td>'

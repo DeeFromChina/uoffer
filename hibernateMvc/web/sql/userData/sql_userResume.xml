@@ -36,12 +36,13 @@
 				) detail,
 				(SELECT @i := 0) AS it 
 	</sql>
+	<!-- 用户经历列表 -->
 	<sql id="queryUserExperience">
 		SELECT
 			e.id AS id,
 			e.name AS name,
 			e.type AS type,
-			e.start_time AS start_time,
+			e.start_time AS startTime,
 			e.end_time AS endTime,
 			e.job AS job,
 			j.name AS jobName,
@@ -53,5 +54,16 @@
 		FROM
 			user_experience e
 		LEFT JOIN job j ON j.id = e.job {#param}
+	</sql>
+	<!-- 用户简历技能列表 -->
+	<sql id="queryUserResumeSkill">
+		SELECT 
+			rs.id AS id,
+			rs.skill_id AS skillId,
+			rs.user_resume_id AS userResumeId,
+			s.name AS skillName 
+		FROM
+			user_resume_skill rs
+		LEFT JOIN skill s ON s.id = rs.skill_id {#param}
 	</sql>
 </sqls>

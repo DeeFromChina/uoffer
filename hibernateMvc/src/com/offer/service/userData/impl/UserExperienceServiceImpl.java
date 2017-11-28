@@ -83,10 +83,10 @@ public class UserExperienceServiceImpl implements UserExperienceService {
 	public List<Map<String, Object>> getByUserResumeIdAndType(int userResumeId, String type) throws Exception {
 		String param = "where 1=1 ";
 		if(userResumeId > 0){
-			param += "AND e.user_resume_id = " + userResumeId;
+			param += " AND e.user_resume_id = " + userResumeId;
 		}
 		if(!"".equals(type)){
-			param += "AND e.type = " + type;
+			param += " AND e.type = '" + type + "'";
 		}
 		Map<String, String> params = new HashMap<String, String>();
 		params.put("param", param);

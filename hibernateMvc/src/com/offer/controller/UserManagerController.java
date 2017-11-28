@@ -12,11 +12,14 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.alibaba.druid.sql.visitor.functions.Isnull;
+import com.mysql.fabric.HashShardMapping;
 import com.offer.model.userData.User;
 import com.offer.model.userData.UserExperience;
 import com.offer.model.userData.UserResume;
 import com.offer.service.userData.UserExperienceService;
 import com.offer.service.userData.UserResumeService;
+import com.offer.service.userData.UserResumeSkillService;
 import com.offer.service.userData.UserService;
 import com.offer.util.BaseUtil;
 import com.offer.util.EncodeUtil;
@@ -31,6 +34,9 @@ public class UserManagerController extends TinyBuilderController {
 	private UserResumeService userResumeService;
 	
 	@Autowired
+	private UserResumeSkillService userResumeSkillService;
+	
+	@Autowired
 	private UserExperienceService userExperienceService;
 	
 	@ResponseBody
@@ -43,7 +49,9 @@ public class UserManagerController extends TinyBuilderController {
 			
 			if("getTop".equalsIgnoreCase(action)) forward = getTop();
 			if("userToPage".equalsIgnoreCase(action)) forward = userToPage();
-			if("userInformation".equalsIgnoreCase(action)) forward = userInformation();
+			if("queryUserInformation".equalsIgnoreCase(action)) forward = queryUserInformation();
+			if("queryUserResumeSkills".equalsIgnoreCase(action)) forward = queryUserResumeSkills();
+			if("saveUserInformation".equalsIgnoreCase(action)) forward = saveUserInformation();
 			if("userPlanjob".equalsIgnoreCase(action)) forward = userPlanjob();
 			if("userExperienceList".equalsIgnoreCase(action)) forward = userExperienceList();
 			if("userExperience".equalsIgnoreCase(action)) forward = userExperience();
@@ -118,18 +126,65 @@ public class UserManagerController extends TinyBuilderController {
 		return redirect("userData/add_information_frame.jsp", pageName, "", false);
 	}
 	
-	private Object userInformation(){
+	private Object queryUserInformation(){
 		try {
-//			User user = (User) httpSession.getAttribute("user");
-//			if(user == null){
-//				return SESSIONERROR;
-//			}
-//			form.put("userId", user.getId());
-//			Integer userResumeId = userResumeService.save(form);
-//			if(userResumeId == 0){
-//				return addMessage(SAVEERROR);
-//			}
-			int userResumeId = 1;
+			if(!BaseUtil.isNull(form.get("userResumeId"))){
+				int userResumeId = EncodeUtil.changeId(form.get("userResumeId").toString());
+				UserResume userResume = userResumeService.getById(userResumeId);
+				Map<String, Object> map = new HashMap<String, Object>();
+				BaseUtil.objectToMap(map, userResume);
+				String goJobId = "";
+				if(!BaseUtil.isNull(userResume.getGoJobId1())){
+					goJobId = userResume.getGoJobId1().toString();
+				}
+				if(!BaseUtil.isNull(userResume.getGoJobId2())){
+					if(!"".equals(goJobId)){
+						goJobId += ",";
+					}
+					goJobId += userResume.getGoJobId2().toString();
+				}
+				map.put("gojobId", goJobId);
+				map.remove("id");
+				return map;
+			}
+			return "";
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	private Object queryUserResumeSkills(){
+		try {
+			if(!BaseUtil.isNull(form.get("userResumeId"))){
+				Integer userResumeId = EncodeUtil.changeId(form.get("userResumeId").toString());
+				return userResumeSkillService.getByUserResumeId(userResumeId);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	private Object saveUserInformation(){
+		try {
+			User user = (User) httpSession.getAttribute("user");
+			if(user == null){
+				return SESSIONERROR;
+			}
+			form.put("userId", user.getId());
+			Integer userResumeId = 0;
+			if(!BaseUtil.isNull(form.get("userResumeId"))){
+				userResumeId = EncodeUtil.changeId(form.get("userResumeId").toString());
+				UserResume userResume = userResumeService.getById(userResumeId);
+				BaseUtil.mapToObject(userResume, form);
+				userResumeService.update(userResume);
+			}else{
+				userResumeId = userResumeService.save(form);
+			}
+			if(userResumeId == 0){
+				return addMessage(SAVEERROR);
+			}
 			return EncodeUtil.IDEncoder(userResumeId);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -169,15 +224,14 @@ public class UserManagerController extends TinyBuilderController {
 	private Object userExperience(){
 		try {
 			int userResumeId;
-//			if(BaseUtil.isNull(form.get("userExperienceId"))){
-//				userResumeId = userExperienceService.save(form);
-//			}else{
-//				int userExperienceId = EncodeUtil.changeId(form.get("userExperienceId").toString());
-//				UserExperience userExperience = userExperienceService.getById(userExperienceId);
-//				userExperienceService.update(userExperience);
-//				userResumeId = userExperience.getUserResumeId();
-//			}
-			userResumeId = 1;
+			if(BaseUtil.isNull(form.get("userExperienceId"))){
+				userResumeId = userExperienceService.save(form);
+			}else{
+				int userExperienceId = EncodeUtil.changeId(form.get("userExperienceId").toString());
+				UserExperience userExperience = userExperienceService.getById(userExperienceId);
+				userExperienceService.update(userExperience);
+				userResumeId = userExperience.getUserResumeId();
+			}
 			return EncodeUtil.IDEncoder(userResumeId);
 		} catch (Exception e) {
 			e.printStackTrace();

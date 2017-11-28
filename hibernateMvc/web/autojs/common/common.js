@@ -81,8 +81,15 @@ function selectValue(obj,targetId){
 	$("#"+targetId+"Value").val(obj.innerText);
 }
 /*向ObjId元素赋值*/
-function setValue(objId,val){
-	//$("#"+objId+"Value").val();
+function setValue(objId,val,type){
+	if(type == 'select'){
+		$("input[name='"+objId+"']").val(val);
+		var context = $("#"+objId).find("a[id='"+val+"']").text();
+		$("#"+objId+"Value").val(context);
+	}
+	if(type == 'checkbox'){
+		$('#'+objId).find("input[id='"+objId+"_"+val+"']").parent().addClass("checked");
+	}
 }
 /**
  * 在业务字典找到对应单词
@@ -352,7 +359,10 @@ function newJson(data){
 	return newData;
 }
 /*时间戳转化yyyy-MM-dd*/
-function getLocalTime(seconds,type) {     
+function getLocalTime(seconds,type) { 
+	if(seconds == undefined){
+		return "";
+	}
     var date = new Date(seconds);
     var year = date.getFullYear();
     var month = date.getMonth();
@@ -385,11 +395,6 @@ function getLocalTime(seconds,type) {
     	return year+"-"+month+"-"+day;
     }
  } 
-
-/*用于校验对象是否为空，空就返回空字符串*/
-function returnString(obj){
-	return obj == undefined ? "" : obj;
-}
 
 /**全文检索并以高光显示*/
 function searchText(textId){

@@ -22,6 +22,17 @@ function isEmpty(val,name,isEmpty){
 	return true;
 }
 
+/*用于校验对象是否为空，空就返回空字符串*/
+function returnString(obj){
+	return obj == undefined ? "" : obj;
+}
+function isNull(obj){
+	if(obj != undefined && obj != null && obj != ""){
+		return false;
+	}
+	return true;
+}
+
 function checkInput(val,name,len,isNull){
 	if(!isEmpty(val,name,isNull)) return false;
 	if(val.length > len){

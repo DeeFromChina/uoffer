@@ -12,6 +12,7 @@
 <body onload="init()">
 <form id="dataForm">
 	<center>
+		<input type="hidden" id="userResumeId" name="userResumeId" />
 		<table class="mainDiv_table bgColorFFFFFF">
 			<col class="wi15"/>
 			<col class="wi35"/>
@@ -125,7 +126,7 @@
 			<tr hide="otherskill2">
 				<td></td>
 				<th colspan="3">
-					<input type="text" id="otherskill" name="otherskill" class="form-control input-class">
+					<input type="text" id="otherSkill" name="otherSkill" class="form-control input-class">
 				</th>
 			</tr>
 			<tr>

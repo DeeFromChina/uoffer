@@ -26,6 +26,14 @@ public class UserResumeServiceImpl implements UserResumeService {
 	@Override
 	public Integer save(Map<String, Object> map) throws Exception {
 		UserResume userResume = new UserResume();
+		if(!BaseUtil.isNull(map.get("gojobId"))){
+			if(map.get("gojobId").toString().indexOf(",") > -1){
+				map.put("goJobId1", map.get("gojobId").toString().split(",")[0]);
+				map.put("goJobId2", map.get("gojobId").toString().split(",")[1]);
+			}else{
+				map.put("goJobId1", map.get("gojobId").toString());
+			}
+		}
 		BaseUtil.mapToObject(userResume, map);
 		if(userResumeInformation(userResume)){
 			userResume.setFinish1(1);

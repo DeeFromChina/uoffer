@@ -183,7 +183,7 @@ public class BaseUtil {
 		return ret;
 	}
 	
-	public void objectToMap(Map target, Object src) throws Exception {
+	public static void objectToMap(Map target, Object src) throws Exception {
 		if (src == null || target == null)
 			return;
 		Method methods[] = src.getClass().getMethods();
