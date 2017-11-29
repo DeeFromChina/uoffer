@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50051
 File Encoding         : 65001
 
-Date: 2017-11-17 19:21:21
+Date: 2017-11-29 19:24:32
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -154,7 +154,7 @@ CREATE TABLE `job_skill` (
   `job_id` int(11) default NULL,
   `skill_id` int(11) default NULL,
   PRIMARY KEY  (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of job_skill
@@ -163,6 +163,8 @@ INSERT INTO `job_skill` VALUES ('1', '2', '2');
 INSERT INTO `job_skill` VALUES ('2', '2', '1');
 INSERT INTO `job_skill` VALUES ('3', '3', '2');
 INSERT INTO `job_skill` VALUES ('4', '5', '2');
+INSERT INTO `job_skill` VALUES ('5', '2', '4');
+INSERT INTO `job_skill` VALUES ('6', '2', '7');
 
 -- ----------------------------
 -- Table structure for skill
@@ -172,7 +174,7 @@ CREATE TABLE `skill` (
   `id` int(11) NOT NULL auto_increment,
   `name` varchar(200) default NULL,
   PRIMARY KEY  (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of skill
@@ -180,6 +182,10 @@ CREATE TABLE `skill` (
 INSERT INTO `skill` VALUES ('1', 'java');
 INSERT INTO `skill` VALUES ('2', 'javascript');
 INSERT INTO `skill` VALUES ('3', '其他');
+INSERT INTO `skill` VALUES ('4', 'php');
+INSERT INTO `skill` VALUES ('5', 'c');
+INSERT INTO `skill` VALUES ('6', 'c++');
+INSERT INTO `skill` VALUES ('7', 'c#');
 
 -- ----------------------------
 -- Table structure for upload_file
@@ -237,10 +243,10 @@ INSERT INTO `user` VALUES ('2', '123', null, '3123', null, null, null, '1', '1',
 DROP TABLE IF EXISTS `user_experience`;
 CREATE TABLE `user_experience` (
   `id` int(11) NOT NULL auto_increment,
-  `type` varchar(2) default NULL,
+  `type` varchar(4) default NULL,
   `name` varchar(255) default NULL,
   `start_time` datetime default NULL,
-  `endTime` datetime default NULL,
+  `end_time` datetime default NULL,
   `job` varchar(50) default NULL,
   `job_description` varchar(500) default NULL,
   `job_belong` varchar(255) default NULL,
@@ -250,11 +256,12 @@ CREATE TABLE `user_experience` (
   `user_resume_id` int(11) default NULL,
   `user_id` int(11) default NULL,
   PRIMARY KEY  (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of user_experience
 -- ----------------------------
+INSERT INTO `user_experience` VALUES ('1', 'work', 'test_name', '2017-11-23 14:01:09', '2017-11-24 14:01:13', '3', 'test_job', '1', '1', 'testd1', 'testd2', '1', '1');
 
 -- ----------------------------
 -- Table structure for user_resume
@@ -288,25 +295,30 @@ CREATE TABLE `user_resume` (
   `finish2` int(1) default NULL,
   `finish3` int(1) default NULL,
   `finish4` int(1) default NULL,
+  `zhihu` varchar(200) default NULL,
+  `github` varchar(200) default NULL,
+  `blog` varchar(200) default NULL,
+  `personlink` varchar(200) default NULL,
   PRIMARY KEY  (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of user_resume
 -- ----------------------------
-INSERT INTO `user_resume` VALUES ('1', '1', 'name', '1', '2', null, null, '4', '5', 'qita', null, null, null, null, null, null, null, null, null, null, null, null, null, '0', null, null, null);
+INSERT INTO `user_resume` VALUES ('1', '1', 'name', '1', '2', '2', '5', '4', '5', 'qita12', '深圳', null, '1', '1', null, null, null, null, null, null, null, null, null, '0', '1', null, null, null, null, null, null);
 
 -- ----------------------------
--- Table structure for user_skill
+-- Table structure for user_resume_skill
 -- ----------------------------
-DROP TABLE IF EXISTS `user_skill`;
-CREATE TABLE `user_skill` (
+DROP TABLE IF EXISTS `user_resume_skill`;
+CREATE TABLE `user_resume_skill` (
   `id` int(11) NOT NULL auto_increment,
   `skill_id` int(11) default NULL,
-  `user_id` int(11) default NULL,
+  `user_resume_id` int(11) default NULL,
   PRIMARY KEY  (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Records of user_skill
+-- Records of user_resume_skill
 -- ----------------------------
+INSERT INTO `user_resume_skill` VALUES ('1', '1', '1');
