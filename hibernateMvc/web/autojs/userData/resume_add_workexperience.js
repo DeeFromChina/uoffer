@@ -17,11 +17,15 @@ function search(){
 	
 	url = "userData.do?action=userExperienceList?type=edu&userResumeId="+userResumeId;
 	data = ajaxSumbit(url);
+	console.log(data);
 	str = addDiv(data,"edu");
 	$("#eduDiv").html("");
 	$("#eduDiv").append(str);
 }
 function addDiv(items,type){
+	if(items == undefined){
+		return;
+	}
 	var str = '';
 	var baseImg = pages["imgPath"];
 	var jobDescription = "";

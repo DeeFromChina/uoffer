@@ -81,7 +81,10 @@ function selectValue(obj,targetId){
 	$("#"+targetId+"Value").val(obj.innerText);
 }
 /*向ObjId元素赋值*/
-function setValue(objId,val,type){
+function setElementValue(objId,val,type){
+	if(val == undefined){
+		return;
+	}
 	if(type == 'select'){
 		$("input[name='"+objId+"']").val(val);
 		var context = $("#"+objId).find("a[id='"+val+"']").text();

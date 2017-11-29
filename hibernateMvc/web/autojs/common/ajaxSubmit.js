@@ -69,6 +69,7 @@ function ajaxSumbit(urllink, formId) {
             alert("Connection error");
         },
         success: function(result) {
+        	console.log(link);
         	console.log(result);
         	if(result == undefined){
         		alert("数据错误！");
@@ -79,6 +80,7 @@ function ajaxSumbit(urllink, formId) {
         	}
         	if(result.msg != undefined){
         		alert(result.msg);
+        		dataResult = undefined;
         		return;
         	}
         	if(result.status == '1'){
@@ -99,6 +101,10 @@ function ajaxSumbit(urllink, formId) {
         		top.location.href = jspPath+result.data[0];
         	}
         	dataResult = result.data;
+        	if(dataResult == 'normal'){
+        		dataResult = undefined;
+        		return;
+        	}
         }
 	});
 	return dataResult;

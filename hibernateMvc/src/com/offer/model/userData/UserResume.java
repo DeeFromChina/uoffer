@@ -42,6 +42,18 @@ public class UserResume {
 	@Column(name = "other_skill")
 	private String otherSkill;
 	
+	@Column(name = "zhihu")
+	private String zhihu;
+	
+	@Column(name = "github")
+	private String github;
+	
+	@Column(name = "blog")
+	private String blog;
+	
+	@Column(name = "personlink")
+	private String personlink;
+	
 	@Column(name = "now_residence")
 	private String nowResidence;
 	
@@ -171,6 +183,38 @@ public class UserResume {
 
 	public void setOtherSkill(String otherSkill) {
 		this.otherSkill = otherSkill;
+	}
+
+	public String getZhihu() {
+		return zhihu;
+	}
+
+	public void setZhihu(String zhihu) {
+		this.zhihu = zhihu;
+	}
+
+	public String getGithub() {
+		return github;
+	}
+
+	public void setGithub(String github) {
+		this.github = github;
+	}
+
+	public String getBlog() {
+		return blog;
+	}
+
+	public void setBlog(String blog) {
+		this.blog = blog;
+	}
+
+	public String getPersonlink() {
+		return personlink;
+	}
+
+	public void setPersonlink(String personlink) {
+		this.personlink = personlink;
 	}
 
 	public Integer getFinish1() {

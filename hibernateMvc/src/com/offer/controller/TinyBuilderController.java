@@ -39,6 +39,7 @@ public class TinyBuilderController{
 	public static String ERROR = "error";
 	public static String SAVEERROR = "保存失败";
 	public static String SESSIONERROR = "session数据有误";
+	public static String NORMAL = "normal";
 	public boolean isMsg = false;
 	public String isRedirect = "0";
 	
@@ -69,6 +70,12 @@ public class TinyBuilderController{
 			}
 			if(entry.getValue() == null){
 				return entry.getKey()+" error";
+			}
+			if("undefined".equals(entry.getValue()[0].toString().trim())){
+				form.put(entry.getKey(), "");
+			}
+			if("null".equals(entry.getValue()[0].toString().trim())){
+				form.put(entry.getKey(), "");
 			}
 			form.put(entry.getKey(), entry.getValue()[0]);
 		}

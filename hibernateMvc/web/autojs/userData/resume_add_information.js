@@ -1,3 +1,4 @@
+var ishide = true;
 function init() {
 	getTran('1');
 	subWorkTime();
@@ -14,46 +15,56 @@ function init() {
 	selectChkLimit1(data,"jobMeum","1",true);
 	checkedLister("jobMeum",2,"selectWorkTime()");
 	
-	parent.document.getElementById("iframe1").height=document.body.scrollHeight;
-	parent.document.getElementById("myTabContent").style.height=document.body.scrollHeight;
-	parent.dataFormVcenter();
-	parent.countFrameHeight();
-	
-	$("tr[hide^='title']").attr("class","hidden");
-	$("tr[hide^='otherskill']").attr("class","hidden");
-	
+	resizeFrame();
 	setForm();
 }
+function resizeFrame(){
+	if($("table[class^='mainDiv_table']").height() < parent.document.getElementById("iframe1").height){
+		return;
+	}
+	parent.document.getElementById("iframe1").height=document.body.scrollHeight + 30;
+	parent.document.getElementById("myTabContent").style.height=document.body.scrollHeight + 30;
+	parent.dataFormVcenter();
+	parent.countFrameHeight();
+	if(ishide){
+		$("tr[hide^='title']").attr("class","hidden");
+		$("tr[hide^='otherskill']").attr("class","hidden");
+	}
+}
 function setForm(){
-	var userResumeId = "BBNWoZK3kTsExUV00Ywo1G5jlUKKs=";
+	window.top.map["userResumeId"] = "BBNWoZK3kTsExUV00Ywo1G5jlUKKs=";
+	var userResumeId = window.top.map["userResumeId"];
+	$("#userResumeId").val(userResumeId);
 	var url = "userData.do?action=queryUserInformation&userResumeId="+userResumeId;
 	var data = ajaxSumbit(url);
 	$("#dataForm").populateForm(data);
 	
-	setValue("workTime",data.workTime,'select');
-	setValue("jobMeum",data.goJobId1,'checkbox');
-	setValue("jobMeum",data.goJobId2,'checkbox');
+	setElementValue("workTime",data.workTime,'select');
+	setElementValue("jobMeum",data.goJobId1,'checkbox');
+	setElementValue("jobMeum",data.goJobId2,'checkbox');
 	selectWorkTime();
 	if(!isNull(data.workTime1)){
-		setValue("workTime1",data.workTime1,'select');
+		setElementValue("workTime1",data.workTime1,'select');
 	}
 	if(!isNull(data.workTime2)){
-		setValue("workTime2",data.workTime2,'select');
+		setElementValue("workTime2",data.workTime2,'select');
 	}
+	var skill = "";
 	if(!isNull(data.otherSkill)){
-		setValue("skillMeum","other",'checkbox');
+		skill += "other";
+		setElementValue("skillMeum","other",'checkbox');
 		selectOtherSkill();
+		$("#otherSkill").val(data.otherSkill);
 	}
 	
 	url = "userData.do?action=queryUserResumeSkills&userResumeId="+userResumeId;
 	var data2 = ajaxSumbit(url);
-	var skill = "";
 	for(var i in data2){
 		if(skill != ""){
 			skill += ",";
 		}
 		skill += data2.skillId;
-		setValue("skillMeum",data2.skillId,'checkbox');
+		setElementValue("skillMeum",data2.skillId,'checkbox');
 	}
 	$("#skill").val(skill);
 }
@@ -81,11 +92,13 @@ function selectWorkTime(){
 	var data = jQuery.parseJSON(workTime);
 	checkedValue("jobMeum");
 	$("tr[hide^='title']").attr("class","hidden");
+	ishide = true;
 	if(window.top.map["ids"].indexOf(",") > -1){
 		var values = window.top.map["values"].split(",");
 		for(var i in values){
 			$("tr[hide^='title']").each(function(){
 				$(this).removeAttr("class");
+				ishide = false;
 			});
 			$('#title'+(parseInt(i)+1)).html(values[i]);
 		}
@@ -93,6 +106,7 @@ function selectWorkTime(){
 		if(window.top.map["ids"] != ""){
 			$("tr[hide='title1']").each(function(){
 				$(this).removeAttr("class");
+				ishide = false;
 			});
 			$('#title1').html(window.top.map["values"]);
 		}
@@ -109,18 +123,27 @@ function selectWorkTime(){
 	
 	$("#otherSkill").val("");
 	$("tr[hide^='otherskill']").attr("class","hidden");
+	
+	if(!ishide){
+		resizeFrame();
+	}
 }
 
 function selectOtherSkill(){
 	checkedValue("skillMeum");
-	console.log()
 	if(window.top.map["values"].indexOf("其他") > -1){
 		$("tr[hide^='otherskill']").removeAttr("class");
+		ishide = false;
 	}else{
 		$("#otherSkill").val("");
 		$("tr[hide^='otherskill']").attr("class","hidden");
+		ishide = true;
 	}
 	$('#skill').val(window.top.map["ids"]);
+	
+	if(!ishide){
+		resizeFrame();
+	}
 }
 //下一步
 function goNext(){

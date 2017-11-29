@@ -147,7 +147,7 @@ public class UserManagerController extends TinyBuilderController {
 				map.remove("id");
 				return map;
 			}
-			return "";
+			return NORMAL;
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -160,6 +160,7 @@ public class UserManagerController extends TinyBuilderController {
 				Integer userResumeId = EncodeUtil.changeId(form.get("userResumeId").toString());
 				return userResumeSkillService.getByUserResumeId(userResumeId);
 			}
+			return NORMAL;
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -214,7 +215,7 @@ public class UserManagerController extends TinyBuilderController {
 				int userResumeId = EncodeUtil.changeId(form.get("userResumeId").toString());
 				return userExperienceService.getByUserResumeIdAndType(userResumeId,form.get("type").toString());
 			}
-			return "";
+			return NORMAL;
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

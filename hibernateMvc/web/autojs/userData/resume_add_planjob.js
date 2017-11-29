@@ -7,7 +7,9 @@ function init() {
 	setList("companyNature","请选择公司性质",jQuery.parseJSON(companyNature),0,"","w340");
 	setList("companyScale","请选择公司规模",jQuery.parseJSON(companyScale),0,"","w340");
 	
-	parent.document.getElementById("iframe1").height=document.body.scrollHeight;
+	setForm();
+	
+	parent.document.getElementById("iframe2").height=document.body.scrollHeight;
 	parent.document.getElementById("myTabContent").style.height=document.body.scrollHeight;
 	parent.dataFormVcenter();
 	parent.countFrameHeight();
@@ -17,9 +19,21 @@ function setValue(){
 		$("#userResumeId").val(top.map["userResumeId"]);
 	}
 }
+function setForm(){
+//	window.top.map["userResumeId"] = "BBNWoZK3kTsExUV00Ywo1G5jlUKKs=";
+	var userResumeId = window.top.map["userResumeId"];
+	$("#userResumeId").val(userResumeId);
+	var url = "userData.do?action=queryUserInformation&userResumeId="+userResumeId;
+	var data = ajaxSumbit(url);
+	$("#dataForm").populateForm(data);
+	
+	setElementValue("cityMeum",data.goJobCity,'checkbox');
+	setElementValue("companyScale",data.companyScale,'select');
+	setElementValue("companyNature",data.companyNature,'select');
+}
 function selectCity(){
 	checkedValue("cityMeum");
-	$('#goJobCity').val(map["ids"]);
+	$('#goJobCity').val(window.top.map["ids"]);
 }
 //下一步
 function goNext(){
@@ -27,6 +41,7 @@ function goNext(){
 	var url = "userData.do?action=userPlanjob";
 	var formId = "dataForm";
 	var data = ajaxSumbit(url,formId);
+	top.map["userResumeId"] = data;
 	$(window.parent.document.getElementById("page3")).click();
 }
 //上一步
