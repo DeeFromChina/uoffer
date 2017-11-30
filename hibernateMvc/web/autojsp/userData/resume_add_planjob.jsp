@@ -9,7 +9,6 @@
 <link rel="stylesheet" href="<%=baseCss %>userData/resume_add_planjob.css?randomId=<%=Math.random()%>" type="text/css"/>
 </head>
 <script src="<%=baseJs %>userData/resume_add_planjob.js?randomId=<%=Math.random()%>"></script>
-<%-- <script src="<%=baseJs %>common/common.js?randomId=<%=Math.random()%>" type="text/javascript"></script> --%>
 <body onload="init()">
 	<form id="dataForm">
 		<input type="hidden" id="userResumeId" name="userResumeId"/>

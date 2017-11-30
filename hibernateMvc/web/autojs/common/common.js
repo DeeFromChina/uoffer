@@ -164,7 +164,7 @@ function openWindow(pageId,url,title,width,height,targetDocument){
 	if(targetDocument != undefined){
 		window.top.map[pageId]=targetDocument;
 	}
-	var pageStr = "<div class='modal fade' id='myPage"+timestamp+"' tabindex='-1' role='dialog' aria-labelledby='myModalLabel' aria-hidden='true'>"
+	var pageStr = "<div class='overflowY modal fade' id='myPage"+timestamp+"' tabindex='-1' role='dialog' aria-labelledby='myModalLabel' aria-hidden='true'>"
 						+"<div class='modal-dialog' style='width:"+width+";height:"+height+";margin-top:"+marginTop+";'>"
 							+"<div class='modal-content'>"
 								+"<div class='modal-header'>"
@@ -208,11 +208,15 @@ function closeWindow(objId,pageId){
 	$("#"+objId).modal('hide');
 	$("#"+objId).remove();
 	var pageGroup = window.top.document.getElementById("pageGroup");
-	var divs = $(pageGroup).find("div");
+	var divs = $(pageGroup).find("div[id^='myPage']");
 	if(divs.length == 0){
 		window.top.document.body.style.overflowY = "auto";
 	}
 	$(window.top.document.getElementById(objId)).remove();
+}
+function closedialog(){
+	$(document.body).css("overflow-y","auto");
+	closeListener();
 }
 function closeWin(pageId){
 	$(parent.document.getElementById(pageId)).click();
@@ -368,7 +372,7 @@ function getLocalTime(seconds,type) {
 	}
     var date = new Date(seconds);
     var year = date.getFullYear();
-    var month = date.getMonth();
+    var month = date.getMonth() + 1;
     var day = date.getDate();
     var hour = date.getHours();
     var minute = date.getMinutes();

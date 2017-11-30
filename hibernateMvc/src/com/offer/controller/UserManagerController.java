@@ -14,9 +14,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.druid.sql.visitor.functions.Isnull;
 import com.mysql.fabric.HashShardMapping;
+import com.offer.model.baseData.Job;
 import com.offer.model.userData.User;
 import com.offer.model.userData.UserExperience;
 import com.offer.model.userData.UserResume;
+import com.offer.service.baseData.JobService;
 import com.offer.service.userData.UserExperienceService;
 import com.offer.service.userData.UserResumeService;
 import com.offer.service.userData.UserResumeSkillService;
@@ -26,6 +28,9 @@ import com.offer.util.EncodeUtil;
 
 @Controller
 public class UserManagerController extends TinyBuilderController {
+	
+	@Autowired
+	private JobService jobService;
 
 	@Autowired
 	private UserService userService;
@@ -54,7 +59,8 @@ public class UserManagerController extends TinyBuilderController {
 			if("saveUserInformation".equalsIgnoreCase(action)) forward = saveUserInformation();
 			if("userPlanjob".equalsIgnoreCase(action)) forward = userPlanjob();
 			if("userExperienceList".equalsIgnoreCase(action)) forward = userExperienceList();
-			if("userExperience".equalsIgnoreCase(action)) forward = userExperience();
+			if("queryUserExperience".equalsIgnoreCase(action)) forward = queryUserExperience();
+			if("saveUserExperience".equalsIgnoreCase(action)) forward = saveUserExperience();
 			if("userQuestion".equalsIgnoreCase(action)) forward = userQuestion();
 			
 			return toJson(forward);
@@ -195,14 +201,16 @@ public class UserManagerController extends TinyBuilderController {
 	
 	private Object userPlanjob(){
 		try {
+			int userResumeId = 0;
 			if(BaseUtil.isNull(form.get("userResumeId"))){
-				return null;
+				userResumeId = userResumeService.save(form);
+			}else{
+				userResumeId = EncodeUtil.changeId(form.get("userResumeId").toString());
+				UserResume userResume = userResumeService.getById(userResumeId);
+				BaseUtil.mapToObject(userResume, form);
+				userResumeService.update(userResume);
 			}
-			int userResumeId = EncodeUtil.changeId(form.get("userResumeId").toString());
-			UserResume userResume = userResumeService.getById(userResumeId);
-			BaseUtil.mapToObject(userResume, form);
-			userResumeService.update(userResume);
-			return EncodeUtil.IDEncoder(1);
+			return EncodeUtil.IDEncoder(userResumeId);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -213,7 +221,12 @@ public class UserManagerController extends TinyBuilderController {
 		try {
 			if(!BaseUtil.isNull(form.get("userResumeId")) && !BaseUtil.isNull(form.get("type"))){
 				int userResumeId = EncodeUtil.changeId(form.get("userResumeId").toString());
-				return userExperienceService.getByUserResumeIdAndType(userResumeId,form.get("type").toString());
+				List<Map<String, Object>> list = userExperienceService.getByUserResumeIdAndType(userResumeId,form.get("type").toString());
+				for(Map<String, Object> map : list){
+					String id = EncodeUtil.IDEncoder(Integer.valueOf(map.get("id").toString()));
+					map.put("id", id);
+				}
+				return list;
 			}
 			return NORMAL;
 		} catch (Exception e) {
@@ -222,14 +235,44 @@ public class UserManagerController extends TinyBuilderController {
 		return null;
 	}
 	
-	private Object userExperience(){
+	private Object queryUserExperience(){
 		try {
+			if(BaseUtil.isNull(form.get("userExperienceId"))){
+				return NORMAL;
+			}else{
+				int userExperienceId = EncodeUtil.changeId(form.get("userExperienceId").toString());
+				UserExperience userExperience = userExperienceService.getById(userExperienceId);
+				Map<String, Object> map = new HashMap<String, Object>();
+				BaseUtil.objectToMap(map, userExperience);
+				if(userExperience.getJobBelong() != null){
+					Job job = jobService.getById(userExperience.getJobBelong());
+					map.put("jobBelongName", job.getName());
+				}
+				map.put("userExperienceId",EncodeUtil.IDEncoder(userExperience.getId()));
+				return map;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	private Object saveUserExperience(){
+		try {
+			User user = (User) httpSession.getAttribute("user");
+			if(user == null){
+				return SESSIONERROR;
+			}
+			form.put("userId", user.getId());
 			int userResumeId;
 			if(BaseUtil.isNull(form.get("userExperienceId"))){
 				userResumeId = userExperienceService.save(form);
 			}else{
 				int userExperienceId = EncodeUtil.changeId(form.get("userExperienceId").toString());
 				UserExperience userExperience = userExperienceService.getById(userExperienceId);
+				userResumeId = EncodeUtil.changeId(form.get("userResumeId").toString());
+				form.put("userResumeId",userResumeId);
+				BaseUtil.mapToObject(userExperience, form);
 				userExperienceService.update(userExperience);
 				userResumeId = userExperience.getUserResumeId();
 			}
@@ -242,14 +285,16 @@ public class UserManagerController extends TinyBuilderController {
 	
 	private Object userQuestion(){
 		try {
+			int userResumeId = 0;
 			if(BaseUtil.isNull(form.get("userResumeId"))){
-				return null;
+				userResumeId = userResumeService.save(form);
+			}else{
+				userResumeId = EncodeUtil.changeId(form.get("userResumeId").toString());
+				UserResume userResume = userResumeService.getById(userResumeId);
+				BaseUtil.mapToObject(userResume, form);
+				userResumeService.update(userResume);
 			}
-			int userResumeId = EncodeUtil.changeId(form.get("userResumeId").toString());
-			UserResume userResume = userResumeService.getById(userResumeId);
-			BaseUtil.mapToObject(userResume, form);
-			userResumeService.update(userResume);
-			return EncodeUtil.IDEncoder(1);
+			return EncodeUtil.IDEncoder(userResumeId);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

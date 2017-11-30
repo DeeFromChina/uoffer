@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50051
 File Encoding         : 65001
 
-Date: 2017-11-29 19:24:32
+Date: 2017-11-30 18:29:12
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -249,19 +249,19 @@ CREATE TABLE `user_experience` (
   `end_time` datetime default NULL,
   `job` varchar(50) default NULL,
   `job_description` varchar(500) default NULL,
-  `job_belong` varchar(255) default NULL,
+  `job_belong` int(11) default NULL,
   `level` varchar(2) default NULL,
   `descript1` varchar(500) default NULL,
   `descript2` varchar(500) default NULL,
   `user_resume_id` int(11) default NULL,
   `user_id` int(11) default NULL,
   PRIMARY KEY  (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of user_experience
 -- ----------------------------
-INSERT INTO `user_experience` VALUES ('1', 'work', 'test_name', '2017-11-23 14:01:09', '2017-11-24 14:01:13', '3', 'test_job', '1', '1', 'testd1', 'testd2', '1', '1');
+INSERT INTO `user_experience` VALUES ('7', 'work', 'test1', '2017-11-01 00:00:00', '2017-11-02 00:00:00', 'test2', 'test3', '1', '3', 'test4', 'test5', '1', '1');
 
 -- ----------------------------
 -- Table structure for user_resume
@@ -300,12 +300,12 @@ CREATE TABLE `user_resume` (
   `blog` varchar(200) default NULL,
   `personlink` varchar(200) default NULL,
   PRIMARY KEY  (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of user_resume
 -- ----------------------------
-INSERT INTO `user_resume` VALUES ('1', '1', 'name', '1', '2', '2', '5', '4', '5', 'qita12', '深圳', null, '1', '1', null, null, null, null, null, null, null, null, null, '0', '1', null, null, null, null, null, null);
+INSERT INTO `user_resume` VALUES ('1', '1', 'name', '1', '2', '2', '5', '4', '5', 'qita12', '深圳', '2', '1', '1', null, null, null, null, null, null, null, null, null, '0', '1', null, null, null, null, null, null);
 
 -- ----------------------------
 -- Table structure for user_resume_skill

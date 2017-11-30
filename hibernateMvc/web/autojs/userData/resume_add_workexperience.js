@@ -1,4 +1,5 @@
 function init() {
+	setValue();
 	search();
 	
 	parent.document.getElementById("iframe3").height=document.body.scrollHeight;
@@ -6,18 +7,27 @@ function init() {
 	parent.dataFormVcenter();
 	parent.countFrameHeight();
 }
+function setValue(){
+	if(top.map["userResumeId"] != undefined){
+		$("#userResumeId").val(top.map["userResumeId"]);
+	}
+}
 function search(){
 	var userResumeId = $("#userResumeId").val();
-//	userResumeId = "BBNWoZK3kTsExUV00Ywo1G5jlUKKs=";
-	var url = "userData.do?action=userExperienceList?type=work&userResumeId="+userResumeId;
+	var url = "userData.do?action=userExperienceList&type=work&userResumeId="+userResumeId;
 	var data = ajaxSumbit(url);
+	if(data == undefined){
+		return;
+	}
 	var str = addDiv(data,"work");
 	$("#workDiv").html("");
 	$("#workDiv").append(str);
 	
-	url = "userData.do?action=userExperienceList?type=edu&userResumeId="+userResumeId;
+	url = "userData.do?action=userExperienceList&type=edu&userResumeId="+userResumeId;
 	data = ajaxSumbit(url);
-	console.log(data);
+	if(data == undefined){
+		return;
+	}
 	str = addDiv(data,"edu");
 	$("#eduDiv").html("");
 	$("#eduDiv").append(str);
@@ -95,7 +105,7 @@ function addDiv(items,type){
 					+ '<tr>'
 						+ '<td></td>'
 						+ '<td colspan="2">'
-							+ '<div class="editBtn floatR">'
+							+ '<div class="editBtn floatR" onclick="editForm(\''+items[i].id+'\',\''+type+'\')">'
 								+ '<img src="'+baseImg+'bianji.png" class="hand"/>'
 								+ '<a><font class="testbtn hand">编辑</font></a>'
 							+ '</div>'
@@ -122,6 +132,21 @@ function addForm(type){
 	var width = "600";
 	var height = "400";
 	var data = "?type="+type;
+	var pageId = "userExperience";
+	openWindow(pageId,url+data,title,width,height,document);
+}
+function editForm(userExperienceId,type){
+	var url = "userData/resume_add_workexperience_add.jsp";
+	var title = "";
+	if(type == 'work'){
+		title = "工作信息填写";
+	}
+	if(type == 'edu'){
+		title = "工作信息填写";
+	}
+	var width = "600";
+	var height = "400";
+	var data = "?type="+type+"&userExperienceId="+userExperienceId;
 	var pageId = "userExperience";
 	openWindow(pageId,url+data,title,width,height,document);
 }

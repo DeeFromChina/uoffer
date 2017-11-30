@@ -12,6 +12,7 @@
 <body onload="init()">
 <form id="dataForm">
 	<center>
+	<input type="hidden" id="userExperienceId" name="userExperienceId"/>
 	<table class="mainDiv_table bgColorFFFFFF">
 			<col class="wi10"/>
 			<col class="wi15"/>
@@ -28,7 +29,7 @@
 					<font color="#FF0000">*</font><font class="font-14" id="name"></font>
 				</td>
 				<td>
-					<input type="text" name="email" class="form-control input-class">
+					<input type="text" name="name" class="form-control input-class">
 				</td>
 				<td></td>
 			</tr>
@@ -39,12 +40,12 @@
 				</td>
 				<td>
 					<div class='input-append date form_datetime'>
-					    <input type='text' class='date-control form-control' readonly>
+					    <input type='text' class='date-control form-control' name="startTime" readonly>
 					    <span class="add-on"><i class="icon-th"></i></span>
 					</div>
 					<div class="timeLink">~</div>
 					<div class='input-append date form_datetime'>
-					    <input type='text' class='date-control form-control' readonly>
+					    <input type='text' class='date-control form-control' name="endTime" readonly>
 					    <span class="add-on"><i class="icon-th"></i></span>
 					</div>
 				</td>
@@ -56,7 +57,7 @@
 					<font color="#FF0000">*</font><font class="font-14" id="job"></font>
 				</td>
 				<td>
-					<input type="text" name="email" class="form-control input-class">
+					<input type="text" name="job" class="form-control input-class">
 				</td>
 				<td></td>
 			</tr>
@@ -66,7 +67,7 @@
 					<font color="#FF0000">*</font><font class="font-14" id="jobDescription"></font>
 				</td>
 				<td>
-					<input type="text" name="email" class="form-control input-class">
+					<input type="text" name="jobDescription" class="form-control input-class">
 				</td>
 				<td></td>
 			</tr>
@@ -89,30 +90,30 @@
 			<tr>
 				<td></td>
 				<td class="textR paddingRight19">
-					<font color="#FF0000">*</font><font class="font-14" id="level"></font>
+					<font color="#FF0000">*</font><font class="font-14" id="levelName"></font>
 				</td>
 				<td>
-					<input type="text" name="email" class="form-control input-class">
+					<div class="input-group selectInput" id="level"></div>
 				</td>
 				<td></td>
 			</tr>
 			<tr>
 				<td></td>
-				<td class="textR paddingRight19" valign="top">
+				<td class="textR paddingRight19 paddingTop10" valign="top">
 					<font class="font-14" id="descript1"></font>
 				</td>
 				<td>
-					<textarea class="form-control" rows="8"></textarea>
+					<textarea class="form-control" name="descript1" rows="8"></textarea>
 				</td>
 				<td></td>
 			</tr>
 			<tr>
 				<td></td>
-				<td class="textR paddingRight19" valign="top">
+				<td class="textR paddingRight19 paddingTop10" valign="top">
 					<font class="font-14" id="descript2"></font>
 				</td>
 				<td>
-					<textarea class="form-control" rows="8"></textarea>
+					<textarea class="form-control" name="descript2" rows="8"></textarea>
 				</td>
 				<td></td>
 			</tr>

@@ -45,15 +45,14 @@
 			e.start_time AS startTime,
 			e.end_time AS endTime,
 			e.job AS job,
-			j.name AS jobName,
+			j.name AS jobBelong,
 			e.job_description AS jobDescription,
-			e.job_belong AS jobBelong,
 			e.level AS level,
 			e.descript1 AS descript1,
 			e.descript2 AS descript2 
 		FROM
 			user_experience e
-		LEFT JOIN job j ON j.id = e.job {#param}
+		LEFT JOIN job j ON j.id = e.job_belong {#param}
 	</sql>
 	<!-- 用户简历技能列表 -->
 	<sql id="queryUserResumeSkill">

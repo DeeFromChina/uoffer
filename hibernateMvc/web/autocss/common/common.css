@@ -13,6 +13,9 @@
 .floatR{
 	float:right;
 }
+.overflowY{
+	overflow-y:auto;
+}
 .border-collapse{
 	border-collapse:collapse;
 }

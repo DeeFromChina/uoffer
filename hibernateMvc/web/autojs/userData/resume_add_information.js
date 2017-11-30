@@ -1,5 +1,6 @@
 var ishide = true;
 function init() {
+	window.top.map["userResumeId"] = "BBNWoZK3kTsExUV00Ywo1G5jlUKKs=";
 	getTran('1');
 	subWorkTime();
 	var workTimeData = jQuery.parseJSON(workTime);
@@ -32,11 +33,13 @@ function resizeFrame(){
 	}
 }
 function setForm(){
-	window.top.map["userResumeId"] = "BBNWoZK3kTsExUV00Ywo1G5jlUKKs=";
 	var userResumeId = window.top.map["userResumeId"];
 	$("#userResumeId").val(userResumeId);
 	var url = "userData.do?action=queryUserInformation&userResumeId="+userResumeId;
 	var data = ajaxSumbit(url);
+	if(data == undefined){
+		return;
+	}
 	$("#dataForm").populateForm(data);
 	
 	setElementValue("workTime",data.workTime,'select');

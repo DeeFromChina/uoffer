@@ -43,6 +43,6 @@ String baseImg = request.getContextPath() + "/img/";
 <script language="javascript">
 </script>
 <body>
-<input type="button" id="closeListenerBtn" class="hide" onclick="closeListener()"/>
+<input type="button" id="closeListenerBtn" class="hide" onclick="closedialog()"/>
 </body>
 </html>

@@ -7,9 +7,10 @@ function init(){
 		$("#job").html("担任职位:");
 		$("#jobDescription").html("工作描述:");
 		$("#jobBelongTitle").html("所属行业:");
-		$("#level").html("公司性质:");
-		$("#descript1").html("公司规模:");
+		$("#levelName").html("公司性质:");
+		$("#descript1").html("公司联系人及联系方式:");
 		$("#descript2").html("公司描述:");
+		setList("level","请选择公司性质",jQuery.parseJSON(companyNature),0,"","w340");
 	}
 	if(type == 'edu'){
 		$("#name").html("学校名称 :");
@@ -17,9 +18,10 @@ function init(){
 		$("#job").html("专业 :");
 		$("#jobDescription").html("专业描述:");
 		$("#jobBelongTitle").html("所属行业:");
-		$("#level").html("学历:");
+		$("#levelName").html("学历:");
 		$("#descript1").html("掌握技能:");
 		$("#descript2").html("曾获奖项:");
+		setList("level","请选择学历",jQuery.parseJSON(education),0,"","w340");
 	}
 	$(".form_datetime").datetimepicker({
 	    format: "yyyy-mm-dd",
@@ -29,6 +31,22 @@ function init(){
 	    maxView:'decade',
 	    language:'zh-CN'
 	});
+	setForm();
+}
+function setForm(){
+	var userExperienceId = map["userExperienceId"];
+	var url = "userData.do?action=queryUserExperience&userExperienceId="+userExperienceId;
+	var data = ajaxSumbit(url);
+	if(data == undefined){
+		return;
+	}
+	var startTime = getLocalTime(data.startTime,"yyyy-MM-dd");
+	var endTime = getLocalTime(data.endTime,"yyyy-MM-dd");
+	data.startTime = startTime;
+	data.endTime = endTime;
+	$("#dataForm").populateForm(data);
+	
+	setElementValue("level",data.level,'select');
 }
 function selectJob(){
 	var url = "public/job_checkbox.jsp";
@@ -45,7 +63,11 @@ function closeListener(){
 	$("#jobBelongName").val(window.top.map["values"]);
 }
 function goSubmit(){
-	var url = "userData.do?action=userExperience";
+	var type = map["type"];
+	if(top.map["userResumeId"] != undefined){
+		type += "&userResumeId="+top.map["userResumeId"];
+	}
+	var url = "userData.do?action=saveUserExperience&type="+type;
 	var formId = "dataForm";
 	var data = ajaxSumbit(url,formId);
 	var targetDocument = window.top.map["userExperience"];

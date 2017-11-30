@@ -80,16 +80,6 @@ public class TinyBuilderController{
 			form.put(entry.getKey(), entry.getValue()[0]);
 		}
 		putToForm(data);
-		if(form.get("action").toString().indexOf("?") > -1){
-			String action = form.get("action").toString();
-			String actioned = action.split("[?]")[0];
-			String params = action.split("[?]")[1];
-			if(!BaseUtil.isNull(params) && params.indexOf("=") > -1){
-				form.put(params.split("=")[0], params.split("=")[1]);
-			}
-			form.put("action", actioned);
-			
-		}
 		httpSession = request.getSession();
 		return SUCCESS;
 	}

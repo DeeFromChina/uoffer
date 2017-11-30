@@ -20,11 +20,13 @@ function setValue(){
 	}
 }
 function setForm(){
-//	window.top.map["userResumeId"] = "BBNWoZK3kTsExUV00Ywo1G5jlUKKs=";
 	var userResumeId = window.top.map["userResumeId"];
 	$("#userResumeId").val(userResumeId);
 	var url = "userData.do?action=queryUserInformation&userResumeId="+userResumeId;
 	var data = ajaxSumbit(url);
+	if(data == undefined){
+		return;
+	}
 	$("#dataForm").populateForm(data);
 	
 	setElementValue("cityMeum",data.goJobCity,'checkbox');

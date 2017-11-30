@@ -88,6 +88,9 @@ public class BaseUtil {
 				if("".equals(obj.toString().trim())){
 					return true;
 				}
+				if("undefined".equals(obj.toString().trim())){
+					return true;
+				}
 			}else if(obj instanceof Integer){
 				if((Integer)obj == 0){
 					return true;

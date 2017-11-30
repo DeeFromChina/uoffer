@@ -37,10 +37,10 @@ public class UserExperienceServiceImpl implements UserExperienceService {
 		}else{
 			userResumeId = EncodeUtil.changeId(map.get("userResumeId").toString());
 		}
+		map.put("userResumeId", userResumeId);
 		
 		UserExperience userExperience = new UserExperience();
 		BaseUtil.mapToObject(userExperience, map);
-		userExperience.setUserResumeId(userResumeId);
 		baseDao.save(userExperience);
 		
 		return userResumeId;
@@ -48,8 +48,7 @@ public class UserExperienceServiceImpl implements UserExperienceService {
 
 	@Override
 	public void update(UserExperience userExperience) throws Exception {
-		// TODO Auto-generated method stub
-		
+		baseDao.update(userExperience);
 	}
 
 	@Override

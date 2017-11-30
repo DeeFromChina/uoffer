@@ -36,7 +36,7 @@ public class UserExperience {
 	private String jobDescription;
 	
 	@Column(name = "job_belong")
-	private String jobBelong;
+	private Integer jobBelong;
 	
 	@Column(name = "level")
 	private String level;
@@ -109,11 +109,11 @@ public class UserExperience {
 		this.jobDescription = jobDescription;
 	}
 
-	public String getJobBelong() {
+	public Integer getJobBelong() {
 		return jobBelong;
 	}
 
-	public void setJobBelong(String jobBelong) {
+	public void setJobBelong(Integer jobBelong) {
 		this.jobBelong = jobBelong;
 	}
 

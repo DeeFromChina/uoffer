@@ -7,12 +7,11 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.offer.dao.BaseDao;
+import com.offer.dao.common.BaseDao;
 import com.offer.model.baseData.Job;
 import com.offer.model.util.CheckBox;
 import com.offer.model.util.Tree;
 import com.offer.service.baseData.JobService;
-import com.offer.service.impl.BaseServiceImpl;
 import com.offer.util.BaseUtil;
 import com.offer.util.BuildCheckBox;
 import com.offer.util.BuildTree;
@@ -26,8 +25,7 @@ public class JobServiceImpl implements JobService{
 	   
 	@Override
 	public Job getById(int id) throws Exception {
-		
-		return null;
+		return (Job) baseDao.getById(Job.class, id);
 	}
 
 	@Override
