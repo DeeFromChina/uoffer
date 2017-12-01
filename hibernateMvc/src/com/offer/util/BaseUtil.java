@@ -119,12 +119,13 @@ public class BaseUtil {
 				if (methods[i].getName().equalsIgnoreCase(methordName)) {
 					Class type = methods[i].getParameterTypes()[0];
 					Object retValue = null;
-					if ("".equals(value) || value.equals("null")) {
-				      retValue = null;
-					}
-					else{
-						retValue = parseParamenter(type, value);
-					}
+//					if ("".equals(value) || value.equals("null")) {
+//				      retValue = null;
+//					}
+//					else{
+//						retValue = parseParamenter(type, value);
+//					}
+					retValue = parseParamenter(type, value);
 					methods[i].invoke(target, new Object[] { retValue });
 					break;
 				}

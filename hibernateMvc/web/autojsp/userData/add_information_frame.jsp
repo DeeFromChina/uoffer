@@ -53,13 +53,13 @@
 			        <iframe class="wh100" src="resume_add_information.jsp" scrolling="no" frameborder="0" id="iframe1" name="iframe1"></iframe>
 			    </div>
 			   <div class="tab-pane fade" id="resume_add_planjob">
-			        <iframe class="wh100" src="resume_add_planjob.jsp" scrolling="no" frameborder="0" id="iframe2" name="iframe2"></iframe>
+			        <iframe class="wh100" src="" scrolling="no" frameborder="0" id="iframe2" name="iframe2"></iframe>
 			    </div>
 			    <div class="tab-pane fade" id="resume_add_workexperience">
-			        <iframe class="wh100" src="resume_add_workexperience.jsp" scrolling="no" frameborder="0" id="iframe3" name="iframe3"></iframe>
+			        <iframe class="wh100" src="" scrolling="no" frameborder="0" id="iframe3" name="iframe3"></iframe>
 			    </div>
 			    <div class="tab-pane fade" id="resume_add_questionnaire">
-			        <iframe class="wh100" src="resume_add_questionnaire.jsp" scrolling="no" frameborder="0" id="iframe4" name="iframe4"></iframe>
+			        <iframe class="wh100" src="" scrolling="no" frameborder="0" id="iframe4" name="iframe4"></iframe>
 			    </div>
 			</div>
 		</div>

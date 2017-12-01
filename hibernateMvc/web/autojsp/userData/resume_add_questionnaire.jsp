@@ -12,6 +12,7 @@
 <body onload="init()">
 <form id="dataForm">
 	<center>
+		<input type="hidden" id="userResumeId" name="userResumeId"/>
 		<table class="mainDiv_table bgColorFFFFFF">
 			<col class="wi15"/>
 			<col class="wi35"/>
@@ -31,7 +32,7 @@
 			<tr>
 				<td></td>
 				<td colspan="3">
-					<input type="hidden" id="jobstatus" name="jobstatus"/>
+					<input type="hidden" id="nowJobStatus" name="nowJobStatus"/>
 					<table class="chk_table">
 						<tr>
 							<td>
@@ -69,25 +70,25 @@
 			<tr>
 				<td></td>
 				<td colspan="2">
-					<input type="hidden" id="intime" name="intime"/>
+					<input type="hidden" id="intime" name="inTime"/>
 					<table class="chk_table">
 						<tr>
 							<td class="wi50">
-								<div class="circleChkB hand floatL"></div>
+								<div class="circleChkB hand floatL" id="i1"></div>
 								<font class="paddingLeft14 font-14">目前是离职状态，随时可以入职</font>
 							</td>
 							<td class="wi50">
-								<div class="circleChkB hand floatL"></div>
+								<div class="circleChkB hand floatL" id="i2"></div>
 								<font class="paddingLeft14 font-14">一周</font>
 							</td>
 						</tr>
 						<tr>
 							<td>
-								<div class="circleChkB hand floatL"></div>
+								<div class="circleChkB hand floatL" id="i3"></div>
 								<font class="paddingLeft14 font-14">一个月</font>
 							</td>
 							<td>
-								<div class="circleChkB hand floatL"></div>
+								<div class="circleChkB hand floatL" id="i4"></div>
 								<font class="paddingLeft14 font-14">不确定</font>
 							</td>
 						</tr>
@@ -110,7 +111,7 @@
 								<div class="input-group selectInput" id="currency1"></div>
 							</td>
 							<td class="w140">
-								<input type="text" name="monthmoney" id="monthmoney" onchange="moneysum()" class="form-control">
+								<input type="number" min="1" name="monthMoney1" id="monthMoney1" onkeyup="moneysum(1)" class="form-control">
 							</td>
 							<td class="w30 textC">
 								<font class="font-14">每月</font>
@@ -119,12 +120,12 @@
 								<font class="font-14">X</font>
 							</td>
 							<td class="w140">
-								<input type="text" name="monthmoney" id="monthmoney" onchange="moneysum()" class="form-control">
+								<input type="number" min="1" name="month1" id="month1" onkeyup="moneysum(1)" class="form-control">
 							</td>
 							<td class="w30 textC">
 								<font class="font-14">月</font>
 							</td>
-							<td id="summoney" width="90px">= 0 万/年</td>
+							<td id="summoney1" width="90px">= 0 万/年</td>
 							<td/>
 						</tr>
 					</table>
@@ -145,7 +146,7 @@
 								<div class="input-group selectInput" id="currency2"></div>
 							</td>
 							<td class="w140">
-								<input type="text" name="monthmoney" id="monthmoney" onchange="moneysum()" class="form-control">
+								<input type="number" min="1" name="monthMoney2" id="monthMoney2" onkeyup="moneysum(2)" class="form-control">
 							</td>
 							<td class="w30 textC">
 								<font class="font-14">每月</font>
@@ -154,12 +155,12 @@
 								<font class="font-14">X</font>
 							</td>
 							<td class="w140">
-								<input type="text" name="monthmoney" id="monthmoney" onchange="moneysum()" class="form-control">
+								<input type="number" min="1" name="month2" id="month2" onkeyup="moneysum(2)" class="form-control">
 							</td>
 							<td class="w30 textC">
 								<font class="font-14">月</font>
 							</td>
-							<td id="summoney" width="90px">= 0 万/年</td>
+							<td id="summoney2" width="90px">= 0 万/年</td>
 							<td/>
 						</tr>
 					</table>
@@ -174,7 +175,7 @@
 			<tr>
 				<td></td>
 				<td colspan="3">
-					<textarea class="form-control wi80" rows="8"></textarea>
+					<textarea class="form-control wi80" name="remark" rows="8"></textarea>
 				</td>
 			</tr>
 			<tr>
@@ -187,7 +188,7 @@
 				<td></td>
 				<td colspan="3">
 					<div class="input-group border-collapse wi100">
-						<input type="text" id="msgCode" name="msgCode" class="form-control w280" placeholder="请输入您的手机号">
+						<input type="text" name="phone" class="form-control w280" placeholder="请输入您的手机号">
 						<button type="button" class="btn btn-default rightBtn"  onclick="Reciprocal()" id="msgtime">获取验证码</button>
 					</div>
 				</td>
@@ -195,7 +196,7 @@
 			<tr>
 				<td></td>
 				<td>
-					<input type="text" name="monthmoney" id="monthmoney" onchange="moneysum()" class="form-control w280" placeholder="请输入验证码">
+					<input type="text" name="msgCode" id="msgCode" class="form-control w280" placeholder="请输入验证码">
 				</td>
 				<td></td>
 				<td></td>

@@ -78,3 +78,20 @@ function checkNum(val,name,len,isNull){
 	}
 	return true;
 }
+/*判断是否数字，配合onkeydown使用(noNumbers(event))*/
+function noNumbers(e){
+	var keynum;
+	var keychar;
+	var numcheck;
+	
+	 // IE
+	if(window.event){
+		keynum = e.keyCode
+	}
+	else if(e.which){ // Netscape/Firefox/Opera
+		keynum = e.which
+	}
+	keychar = String.fromCharCode(keynum);
+	numcheck = /\d/;
+	return !numcheck.test(keychar);
+}

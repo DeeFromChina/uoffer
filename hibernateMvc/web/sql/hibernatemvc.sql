@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50051
 File Encoding         : 65001
 
-Date: 2017-11-30 18:29:12
+Date: 2017-12-01 18:26:52
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -256,12 +256,13 @@ CREATE TABLE `user_experience` (
   `user_resume_id` int(11) default NULL,
   `user_id` int(11) default NULL,
   PRIMARY KEY  (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of user_experience
 -- ----------------------------
-INSERT INTO `user_experience` VALUES ('7', 'work', 'test1', '2017-11-01 00:00:00', '2017-11-02 00:00:00', 'test2', 'test3', '1', '3', 'test4', 'test5', '1', '1');
+INSERT INTO `user_experience` VALUES ('7', 'work', 'test1', '2017-11-01 00:00:00', '2017-11-02 00:00:00', 'test2', 'test3', '1', '3', 'test4', 'test56', '1', '1');
+INSERT INTO `user_experience` VALUES ('8', 'edu', 'school1', '2017-12-01 00:00:00', '2017-12-02 00:00:00', 'soft', '', '5', '2', 'test1', 'test2', '1', '1');
 
 -- ----------------------------
 -- Table structure for user_resume
@@ -300,12 +301,12 @@ CREATE TABLE `user_resume` (
   `blog` varchar(200) default NULL,
   `personlink` varchar(200) default NULL,
   PRIMARY KEY  (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of user_resume
 -- ----------------------------
-INSERT INTO `user_resume` VALUES ('1', '1', 'name', '1', '2', '2', '5', '4', '5', 'qita12', '深圳', '2', '1', '1', null, null, null, null, null, null, null, null, null, '0', '1', null, null, null, null, null, null);
+INSERT INTO `user_resume` VALUES ('1', '1', 'name', '2', '2', '2', '5', '4', '5', 'qita12', '深圳', '', '1', '1', '1', '1', '1', '1000.00', '12', '2', '1200.00', '13', 'test1', '0', '1', null, null, 'test1', 'test2', 'test3', 'test4');
 
 -- ----------------------------
 -- Table structure for user_resume_skill

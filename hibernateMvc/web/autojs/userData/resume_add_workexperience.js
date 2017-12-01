@@ -3,7 +3,9 @@ function init() {
 	search();
 	
 	parent.document.getElementById("iframe3").height=document.body.scrollHeight;
-	parent.document.getElementById("myTabContent").style.height=document.body.scrollHeight;
+	if(document.body.scrollHeight > parent.document.getElementById("myTabContent").style.height){
+		parent.document.getElementById("myTabContent").style.height=document.body.scrollHeight;
+	}
 	parent.dataFormVcenter();
 	parent.countFrameHeight();
 }

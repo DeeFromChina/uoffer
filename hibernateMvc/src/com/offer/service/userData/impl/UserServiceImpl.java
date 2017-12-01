@@ -1,5 +1,6 @@
 package com.offer.service.userData.impl;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -14,6 +15,7 @@ import com.offer.model.util.Tree;
 import com.offer.service.impl.BaseServiceImpl;
 import com.offer.service.userData.UserService;
 import com.offer.util.BaseUtil;
+import com.offer.util.EncodeUtil;
 
 @Service("userService")
 public class UserServiceImpl implements UserService {
@@ -101,29 +103,30 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public int checkUserResume(int userId) throws Exception {
+	public Map<String, String> checkUserResume(int userId) throws Exception {
 		String hql = "FROM UserResume WHERE userId=" + String.valueOf(userId);
 		List<UserResume> userResumes = (List<UserResume>) baseDao.findByHql(hql);
+		Map<String, String> map = new HashMap<String, String>();
 		if(userResumes == null || userResumes.size() == 0){
-			return 0;
+			map.put("param", "1");
 		}else if(userResumes.size() == 1){
 			UserResume userResume = userResumes.get(0);
-			if(userResume.getFinish1() == 0){
-				return 1;
+			map.put("userResumeId", EncodeUtil.IDEncoder(userResume.getId()));
+			if(BaseUtil.returnInt(userResume.getFinish1()) == 0){
+				map.put("param", "1");
+			}else if(BaseUtil.returnInt(userResume.getFinish2()) == 0){
+				map.put("param", "2");
+			}else if(BaseUtil.returnInt(userResume.getFinish3()) == 0){
+				map.put("param", "3");
+			}else if(BaseUtil.returnInt(userResume.getFinish4()) == 0){
+				map.put("param", "4");
+			}else{
+				map.put("param", "1");
 			}
-			if(userResume.getFinish2() == 0){
-				return 2;
-			}
-			if(userResume.getFinish3() == 0){
-				return 3;
-			}
-			if(userResume.getFinish4() == 0){
-				return 4;
-			}
-			return 1;
 		}else{
-			return 6;
+			map.put("param", "6");
 		}
+		return map;
 	}
 
 }

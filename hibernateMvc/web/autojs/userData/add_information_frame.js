@@ -1,20 +1,23 @@
-	function init() {
-//		var url = "user/resumeAddInformationPage1.do";
-//		var formId = "userInformationForm";
-//		var data = ajaxSumbit(url, formId);
-//		dataName = data.dataName;
-//		addCheckJob(data.nowJobList);
-//		if(data.offerUserName != undefined){
-//			editCheckJob(data.jobId1,data.jobId2, data.jobvalue1, data.jobvalue2);
-//			setSexValue(data.offerUserSex);
-//		}
-//		$("#userInformationForm").populateForm(data);
-		dataFormVcenter();
-		countFrameHeight();
-		parent.changeHeaderTitle();
-		var pageName = top.map["param"];
-		$("#"+pageName).addClass("in active");
-	}
+if(top.map["param"].userResumeId != undefined){
+	window.top.map["userResumeId"] = top.map["param"].userResumeId;
+}
+new form({
+	id:"1",
+	value:"test"
+});
+function init() {
+	dataFormVcenter();
+	countFrameHeight();
+	parent.changeHeaderTitle();
+	
+	$("#iframe2").attr("src","resume_add_planjob.jsp");
+	$("#iframe3").attr("src","resume_add_workexperience.jsp");
+	$("#iframe4").attr("src","resume_add_questionnaire.jsp");
+	
+	var param = top.map["param"];
+	var pageName = param.pageName;
+	$("#"+pageName).addClass("in active");
+}
 function clickMe(obj){
 	$(".circleA").each(function(){
 		$(this).removeClass("circleA");

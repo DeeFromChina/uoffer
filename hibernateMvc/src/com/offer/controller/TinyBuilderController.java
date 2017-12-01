@@ -120,7 +120,7 @@ public class TinyBuilderController{
 	 */
 	public Object[] redirect(String str, Object param, String msg) {
 		isRedirect = "2";
-		Object[] returnMsg = new String[3];
+		Object[] returnMsg = new Object[3];
 		returnMsg[0] = str;
 		returnMsg[1] = param;
 		returnMsg[2] = msg;
@@ -138,7 +138,7 @@ public class TinyBuilderController{
 		}else{
 			isRedirect = "2";
 		}
-		Object[] returnMsg = new String[3];
+		Object[] returnMsg = new Object[3];
 		returnMsg[0] = str;
 		returnMsg[1] = param;
 		returnMsg[2] = msg;

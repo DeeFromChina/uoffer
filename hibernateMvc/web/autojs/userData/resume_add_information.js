@@ -1,6 +1,7 @@
 var ishide = true;
 function init() {
-	window.top.map["userResumeId"] = "BBNWoZK3kTsExUV00Ywo1G5jlUKKs=";
+	f.sys();
+	
 	getTran('1');
 	subWorkTime();
 	var workTimeData = jQuery.parseJSON(workTime);
@@ -41,7 +42,9 @@ function setForm(){
 		return;
 	}
 	$("#dataForm").populateForm(data);
+	window.top.map["userResume"] = data;
 	
+	getTran(data.sex);
 	setElementValue("workTime",data.workTime,'select');
 	setElementValue("jobMeum",data.goJobId1,'checkbox');
 	setElementValue("jobMeum",data.goJobId2,'checkbox');
@@ -72,6 +75,7 @@ function setForm(){
 	$("#skill").val(skill);
 }
 function getTran(ret) {
+	console.log(getid("sex"));
 	if (ret == '1') {
 		getid("sex").value="1";
 		$("#btn1").addClass("checkedBtn");

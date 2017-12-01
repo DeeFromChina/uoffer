@@ -76,7 +76,7 @@ function ajaxSumbit(urllink, formId) {
         	}
         	if(result == 'unlogin'){
         		alert("请重新登陆！");
-        		top.location.href = "../index.jsp";
+        		top.location.href = hiPath+"index.jsp";
         	}
         	if(result.msg != undefined){
         		alert(result.msg);

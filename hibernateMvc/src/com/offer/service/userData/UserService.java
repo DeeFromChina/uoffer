@@ -27,5 +27,5 @@ public interface UserService {
 	
 	public User getByAccount(String account, String password) throws Exception;
 	
-	public int checkUserResume(int userId) throws Exception;
+	public Map<String, String> checkUserResume(int userId) throws Exception;
 }

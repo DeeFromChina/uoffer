@@ -41,7 +41,7 @@ function appearForm(){
 var myVar;
 var second = 60;
 function Reciprocal(){
-	var phone = $("input[name='offer_user_phone']").val();
+	var phone = $("input[name='phone']").val();
 	if(isNaN(phone) || phone.length < 11){
 		alert("手机号码格式不正确！")
 		return;

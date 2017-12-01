@@ -57,10 +57,13 @@ public class UserManagerController extends TinyBuilderController {
 			if("queryUserInformation".equalsIgnoreCase(action)) forward = queryUserInformation();
 			if("queryUserResumeSkills".equalsIgnoreCase(action)) forward = queryUserResumeSkills();
 			if("saveUserInformation".equalsIgnoreCase(action)) forward = saveUserInformation();
+			
 			if("userPlanjob".equalsIgnoreCase(action)) forward = userPlanjob();
+
 			if("userExperienceList".equalsIgnoreCase(action)) forward = userExperienceList();
 			if("queryUserExperience".equalsIgnoreCase(action)) forward = queryUserExperience();
 			if("saveUserExperience".equalsIgnoreCase(action)) forward = saveUserExperience();
+			
 			if("userQuestion".equalsIgnoreCase(action)) forward = userQuestion();
 			
 			return toJson(forward);
@@ -113,23 +116,29 @@ public class UserManagerController extends TinyBuilderController {
 	
 	private Object userToPage(){
 		String pageName = "resume_add_information";
+		Map<String, String> map = new HashMap<String, String>();
 		try {
 			User user = (User) httpSession.getAttribute("user");
-			int pageNum;
-			pageNum = userService.checkUserResume(user.getId());
+			map = userService.checkUserResume(user.getId());
+			if(map.get("param") == null){
+				throw new Exception("userToPage Map is null!");
+			}
+			String pageNum = map.get("param");
 			switch (pageNum) {
-			case 1: pageName = "resume_add_information";break;
-			case 2: pageName = "resume_add_planjob.jsp";break;
-			case 3: pageName = "resume_add_questionnaire.jsp";break;
-			case 4: pageName = "resume_add_workexperience.jsp";break;
-			case 6: 
+			case "1": pageName = "resume_add_information";break;
+			case "2": pageName = "resume_add_planjob.jsp";break;
+			case "3": pageName = "resume_add_questionnaire.jsp";break;
+			case "4": pageName = "resume_add_workexperience.jsp";break;
+			case "6": 
 				pageName = "resume_add_information.jsp";
 				return redirect("common/frame.jsp", "", "很多份简历", true);
 			}
 		} catch (Exception e) {
+			System.err.println(e.getMessage());
 			e.printStackTrace();
 		}
-		return redirect("userData/add_information_frame.jsp", pageName, "", false);
+		map.put("pageName", pageName);
+		return redirect("userData/add_information_frame.jsp", map, "", false);
 	}
 	
 	private Object queryUserInformation(){
@@ -201,6 +210,11 @@ public class UserManagerController extends TinyBuilderController {
 	
 	private Object userPlanjob(){
 		try {
+			User user = (User) httpSession.getAttribute("user");
+			if(user == null){
+				return SESSIONERROR;
+			}
+			form.put("userId", user.getId());
 			int userResumeId = 0;
 			if(BaseUtil.isNull(form.get("userResumeId"))){
 				userResumeId = userResumeService.save(form);
@@ -285,6 +299,11 @@ public class UserManagerController extends TinyBuilderController {
 	
 	private Object userQuestion(){
 		try {
+			User user = (User) httpSession.getAttribute("user");
+			if(user == null){
+				return SESSIONERROR;
+			}
+			form.put("userId", user.getId());
 			int userResumeId = 0;
 			if(BaseUtil.isNull(form.get("userResumeId"))){
 				userResumeId = userResumeService.save(form);

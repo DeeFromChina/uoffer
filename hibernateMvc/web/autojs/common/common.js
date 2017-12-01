@@ -1,5 +1,6 @@
 //var jspPath = "http://10.18.12.29:8080/hibernateMvc/autojsp/";
 var jspPath = "http://localhost:8080/hibernateMvc/autojsp/";
+var hiPath = "http://localhost:8080/hibernateMvc/";
 var doc = document;
 var map = {};
 
@@ -93,6 +94,10 @@ function setElementValue(objId,val,type){
 	if(type == 'checkbox'){
 		$('#'+objId).find("input[id='"+objId+"_"+val+"']").parent().addClass("checked");
 	}
+	if(type == 'circle'){
+		$('#'+objId+val).removeClass("circleChkB");
+		$('#'+objId+val).addClass("circleChkA");
+	}
 }
 /**
  * 在业务字典找到对应单词
@@ -145,7 +150,7 @@ function openWindow(pageId,url,title,width,height,targetDocument){
 	doc = window.top.document;
 	
 	if(url != ''){
-		url = "http://localhost:8080/hibernateMvc/autojsp/" + url;
+		url = jspPath + url;
 	}
 	var pageGroup = doc.getElementById("pageGroup");
 	var divs = $(pageGroup).find("div");

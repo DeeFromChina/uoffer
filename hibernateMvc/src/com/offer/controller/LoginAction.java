@@ -60,6 +60,7 @@ public class LoginAction extends TinyBuilderController{
 			}
 			httpSession.setAttribute("type", form.get("type"));
 			httpSession.setAttribute("user", user);
+			httpSession.setAttribute("islogin", "true");
 		} catch (Exception e) {
 			e.printStackTrace();
 			return addMessage(e.getMessage());

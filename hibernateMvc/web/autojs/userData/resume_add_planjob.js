@@ -10,7 +10,9 @@ function init() {
 	setForm();
 	
 	parent.document.getElementById("iframe2").height=document.body.scrollHeight;
-	parent.document.getElementById("myTabContent").style.height=document.body.scrollHeight;
+	if(document.body.scrollHeight > parent.document.getElementById("myTabContent").style.height){
+		parent.document.getElementById("myTabContent").style.height=document.body.scrollHeight;
+	}
 	parent.dataFormVcenter();
 	parent.countFrameHeight();
 }
@@ -22,13 +24,13 @@ function setValue(){
 function setForm(){
 	var userResumeId = window.top.map["userResumeId"];
 	$("#userResumeId").val(userResumeId);
-	var url = "userData.do?action=queryUserInformation&userResumeId="+userResumeId;
-	var data = ajaxSumbit(url);
-	if(data == undefined){
-		return;
-	}
+//	var url = "userData.do?action=queryUserInformation&userResumeId="+userResumeId;
+//	var data = ajaxSumbit(url);
+//	if(data == undefined){
+//		return;
+//	}
+	var data = window.top.map["userResume"];
 	$("#dataForm").populateForm(data);
-	
 	setElementValue("cityMeum",data.goJobCity,'checkbox');
 	setElementValue("companyScale",data.companyScale,'select');
 	setElementValue("companyNature",data.companyNature,'select');
