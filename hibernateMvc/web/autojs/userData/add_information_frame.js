@@ -1,10 +1,6 @@
 if(top.map["param"].userResumeId != undefined){
 	window.top.map["userResumeId"] = top.map["param"].userResumeId;
 }
-new form({
-	id:"1",
-	value:"test"
-});
 function init() {
 	dataFormVcenter();
 	countFrameHeight();

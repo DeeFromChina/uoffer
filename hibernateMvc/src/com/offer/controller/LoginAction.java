@@ -77,12 +77,12 @@ public class LoginAction extends TinyBuilderController{
 				return ERROR;
 			}
 			if("1".equals(form.get("type"))){
-//				checkRequired("email", "goJobId", "cityId", "password");
+				checkRequired("email", "goJobId", "cityId", "password");
 			}
 			if("2".equals(form.get("type"))){
-//				checkRequired("companyName", "userName", "jobId", "email", "phone", "password");
+				checkRequired("companyName", "userName", "jobId", "email", "phone", "password");
 			}
-//			userService.save(form);
+			userService.save(form);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return addMessage(e.getMessage());

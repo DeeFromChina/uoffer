@@ -1,6 +1,6 @@
-//var jspPath = "http://10.18.12.29:8080/hibernateMvc/autojsp/";
-var jspPath = "http://localhost:8080/hibernateMvc/autojsp/";
-var hiPath = "http://localhost:8080/hibernateMvc/";
+var urlPrefix = window.location.origin;
+var jspPath = urlPrefix+"/hibernateMvc/autojsp/";
+var rootPath = urlPrefix+"/hibernateMvc/";
 var doc = document;
 var map = {};
 
@@ -272,9 +272,7 @@ function dataFormVcenter(){
 	}
 }
 function setSrc(id,path){
-//	path = "http://10.18.12.29:8080/hibernateMvc/img/" + path;
-//	path = "http://192.168.10.163:8080/hibernateMvc/img/" + path;
-	path = "http://localhost:8080/hibernateMvc/img/" + path;
+	path = rootPath+"img/" + path;
 	$('#'+id).attr('src',path);
 }
 /**

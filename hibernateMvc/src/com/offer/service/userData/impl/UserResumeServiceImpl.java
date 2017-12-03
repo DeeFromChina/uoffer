@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 
 import com.offer.dao.common.BaseDao;
 import com.offer.model.userData.UserResume;
-import com.offer.service.impl.BaseServiceImpl;
 import com.offer.service.userData.UserResumeService;
 import com.offer.util.BaseUtil;
 
@@ -39,6 +38,16 @@ public class UserResumeServiceImpl implements UserResumeService {
 			userResume.setFinish1(1);
 		}else{
 			userResume.setFinish1(0);
+		}
+		if(userResumePlanJob(userResume)){
+			userResume.setFinish2(1);
+		}else{
+			userResume.setFinish2(0);
+		}
+		if(userResumeQuestion(userResume)){
+			userResume.setFinish4(1);
+		}else{
+			userResume.setFinish4(0);
 		}
 		baseDao.save(userResume);
 		return userResume.getId();
@@ -76,31 +85,6 @@ public class UserResumeServiceImpl implements UserResumeService {
 		
 	}
 	
-	private boolean userResumePlanJob(UserResume userResume){
-		if(BaseUtil.isNull(userResume.getName())){
-			return false;
-		}
-		if(BaseUtil.isNull(userResume.getSex())){
-			return false;
-		}
-		if(BaseUtil.isNull(userResume.getWorkTime())){
-			return false;
-		}
-		if(BaseUtil.isNull(userResume.getGoJobId1())){
-			return false;
-		}
-		if(BaseUtil.isNull(userResume.getGoJobId2())){
-			return false;
-		}
-		if(BaseUtil.isNull(userResume.getWorkTime1())){
-			return false;
-		}
-		if(BaseUtil.isNull(userResume.getWorkTime2())){
-			return false;
-		}
-		return true;
-	}
-	
 	private boolean userResumeInformation(UserResume userResume){
 		if(BaseUtil.isNull(userResume.getNowResidence())){
 			return false;
@@ -116,5 +100,51 @@ public class UserResumeServiceImpl implements UserResumeService {
 		}
 		return true;
 	}
+	
+	private boolean userResumePlanJob(UserResume userResume){
+		if(BaseUtil.isNull(userResume.getNowResidence())){
+			return false;
+		}
+		if(BaseUtil.isNull(userResume.getGoJobCity())){
+			return false;
+		}
+		if(BaseUtil.isNull(userResume.getCompanyNature())){
+			return false;
+		}
+		if(BaseUtil.isNull(userResume.getCompanyScale())){
+			return false;
+		}
+		return true;
+	}
 
+	private boolean userResumeQuestion(UserResume userResume){
+		if(BaseUtil.isNull(userResume.getNowJobStatus())){
+			return false;
+		}
+		if(BaseUtil.isNull(userResume.getSex())){
+			return false;
+		}
+		if(BaseUtil.isNull(userResume.getInTime())){
+			return false;
+		}
+		if(BaseUtil.isNull(userResume.getCurrency1())){
+			return false;
+		}
+		if(BaseUtil.isNull(userResume.getCurrency2())){
+			return false;
+		}
+		if(BaseUtil.isNull(userResume.getMonthMoney1())){
+			return false;
+		}
+		if(BaseUtil.isNull(userResume.getMonthMoney2())){
+			return false;
+		}
+		if(BaseUtil.isNull(userResume.getMonth1())){
+			return false;
+		}
+		if(BaseUtil.isNull(userResume.getMonth2())){
+			return false;
+		}
+		return true;
+	}
 }

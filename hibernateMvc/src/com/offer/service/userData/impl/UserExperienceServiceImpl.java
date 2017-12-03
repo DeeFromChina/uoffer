@@ -10,8 +10,8 @@ import org.springframework.stereotype.Service;
 import com.offer.dao.common.BaseDao;
 import com.offer.model.userData.UserExperience;
 import com.offer.model.userData.UserResume;
-import com.offer.service.impl.BaseServiceImpl;
 import com.offer.service.userData.UserExperienceService;
+import com.offer.service.userData.UserResumeService;
 import com.offer.util.BaseUtil;
 import com.offer.util.EncodeUtil;
 import com.offer.util.InitSqlXml;
@@ -22,6 +22,9 @@ public class UserExperienceServiceImpl implements UserExperienceService {
 	@Autowired
 	private BaseDao baseDao;
 	
+	@Autowired
+	private UserResumeService userResumeService;
+	
 	@Override
 	public UserExperience getById(int id) throws Exception {
 		return (UserExperience) baseDao.getById(UserExperience.class, id);
@@ -30,8 +33,8 @@ public class UserExperienceServiceImpl implements UserExperienceService {
 	@Override
 	public Integer save(Map<String, Object> map) throws Exception {
 		int userResumeId;
+		UserResume userResume = new UserResume();
 		if(map.get("userResumeId") == null){
-			UserResume userResume = new UserResume();
 			baseDao.save(userResume);
 			userResumeId = userResume.getId();
 		}else{
@@ -43,12 +46,19 @@ public class UserExperienceServiceImpl implements UserExperienceService {
 		BaseUtil.mapToObject(userExperience, map);
 		baseDao.save(userExperience);
 		
+		userResume = userResumeService.getById(userExperience.getUserResumeId());
+		userResume.setFinish3(1);
+		baseDao.update(userResume);
+		
 		return userResumeId;
 	}
 
 	@Override
 	public void update(UserExperience userExperience) throws Exception {
 		baseDao.update(userExperience);
+		UserResume userResume = userResumeService.getById(userExperience.getUserResumeId());
+		userResume.setFinish3(1);
+		baseDao.update(userResume);
 	}
 
 	@Override

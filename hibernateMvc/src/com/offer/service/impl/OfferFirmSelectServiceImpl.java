@@ -8,9 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.offer.dao.BaseDao;
-import com.offer.model.OfferFirm;
 import com.offer.model.OfferFirmSelect;
-import com.offer.model.OfferInvite;
 import com.offer.service.OfferFirmSelectService;
 
 @Service("offerFirmSelectService")

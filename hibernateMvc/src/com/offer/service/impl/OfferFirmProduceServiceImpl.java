@@ -11,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.offer.dao.BaseDao;
-import com.offer.model.OfferCollect;
 import com.offer.model.OfferFirmProduce;
 import com.offer.service.OfferFirmProduceService;
 import com.offer.util.ConUtil;

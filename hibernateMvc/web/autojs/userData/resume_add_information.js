@@ -1,7 +1,5 @@
 var ishide = true;
 function init() {
-	f.sys();
-	
 	getTran('1');
 	subWorkTime();
 	var workTimeData = jQuery.parseJSON(workTime);

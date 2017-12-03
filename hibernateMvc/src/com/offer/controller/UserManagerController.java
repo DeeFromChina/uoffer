@@ -12,8 +12,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.alibaba.druid.sql.visitor.functions.Isnull;
-import com.mysql.fabric.HashShardMapping;
 import com.offer.model.baseData.Job;
 import com.offer.model.userData.User;
 import com.offer.model.userData.UserExperience;
@@ -290,6 +288,7 @@ public class UserManagerController extends TinyBuilderController {
 				userExperienceService.update(userExperience);
 				userResumeId = userExperience.getUserResumeId();
 			}
+			
 			return EncodeUtil.IDEncoder(userResumeId);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -304,6 +303,13 @@ public class UserManagerController extends TinyBuilderController {
 				return SESSIONERROR;
 			}
 			form.put("userId", user.getId());
+			
+			int phone = BaseUtil.returnInt(form.get("phone"));
+			if(phone != 0){
+				user.setPhone(phone);
+				userService.update(user);
+			}
+			
 			int userResumeId = 0;
 			if(BaseUtil.isNull(form.get("userResumeId"))){
 				userResumeId = userResumeService.save(form);

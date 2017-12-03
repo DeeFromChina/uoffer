@@ -21,8 +21,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.mysql.fabric.xmlrpc.base.Data;
-import com.offer.model.Guwen;
 import com.offer.model.OfferEmail;
 import com.offer.model.OfferFirm;
 import com.offer.model.OfferFirmChoose;
@@ -34,7 +32,6 @@ import com.offer.model.OfferJob;
 import com.offer.model.OfferMatch;
 import com.offer.model.OfferPhoto;
 import com.offer.model.OfferUser;
-import com.offer.model.OfferUserInformation;
 import com.offer.model.TJ;
 import com.offer.service.BaseService;
 import com.offer.service.OfferCollectService;
@@ -53,9 +50,7 @@ import com.offer.util.Code;
 import com.offer.util.Encryption;
 import com.offer.util.FileUtils;
 import com.offer.util.GeneratePDF;
-import com.offer.util.Msgtest;
 import com.offer.util.SendEmail;
-import com.sun.org.apache.bcel.internal.generic.NEW;
 
 @Controller
 public class OfferFirmController extends BaseController {

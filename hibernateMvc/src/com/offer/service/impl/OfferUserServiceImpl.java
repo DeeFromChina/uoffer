@@ -6,14 +6,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.alibaba.druid.sql.visitor.functions.Now;
 import com.offer.dao.BaseDao;
-import com.offer.model.OfferFirm;
 import com.offer.model.OfferJob;
 import com.offer.model.OfferUser;
 import com.offer.model.OfferUserInformation;
@@ -23,7 +19,6 @@ import com.offer.service.OfferUserInformationService;
 import com.offer.service.OfferUserService;
 import com.offer.util.ConUtil;
 import com.offer.util.Encryption;
-import com.sun.org.apache.bcel.internal.generic.NEW;
 
 @Service("offerUserService")
 public class OfferUserServiceImpl extends BaseServiceImpl implements OfferUserService{

@@ -58,6 +58,16 @@ function selectJob(){
 	var pageId = "jobCheckbox";
 	openWindow(pageId,url+data,title,width,height,document);
 }
+function history(){
+	var userExperienceId = map["userExperienceId"];
+	var url = "userData/resume_history_demo.jsp";
+	var title = "选择您的历史模板";
+	var width = "600";
+	var height = "400";
+	var data = "?userExperienceId="+userExperienceId;
+	var pageId = "history_demo";
+	openWindow(pageId,url+data,title,width,height,document);
+}
 function closeListener(){
 	$("#jobBelong").val(window.top.map["ids"]);
 	$("#jobBelongName").val(window.top.map["values"]);

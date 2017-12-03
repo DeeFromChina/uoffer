@@ -7,15 +7,12 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.alibaba.fastjson.serializer.ListSerializer;
 import com.offer.dao.common.BaseDao;
-import com.offer.model.baseData.Job;
 import com.offer.model.baseData.Skill;
 import com.offer.model.util.CheckBox;
 import com.offer.service.baseData.SkillService;
 import com.offer.util.BaseUtil;
 import com.offer.util.BuildCheckBox;
-import com.offer.util.CacheClass;
 
 @Service("skillService")
 public class SkillServiceImpl extends BaseServiceImpl implements SkillService {
