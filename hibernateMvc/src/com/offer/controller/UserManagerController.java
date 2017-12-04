@@ -115,30 +115,31 @@ public class UserManagerController extends TinyBuilderController {
 	}
 	
 	private Object userToPage(){
-		String pageName = "resume_add_information";
-		Map<String, String> map = new HashMap<String, String>();
-		try {
-			User user = (User) httpSession.getAttribute("user");
-			map = userService.checkUserResume(user.getId());
-			if(map.get("param") == null){
-				throw new Exception("userToPage Map is null!");
-			}
-			String pageNum = map.get("param");
-			switch (pageNum) {
-			case "1": pageName = "resume_add_information";break;
-			case "2": pageName = "resume_add_planjob.jsp";break;
-			case "3": pageName = "resume_add_questionnaire.jsp";break;
-			case "4": pageName = "resume_add_workexperience.jsp";break;
-			case "6": 
-				pageName = "resume_add_information.jsp";
-				return redirect("common/frame.jsp", "", "很多份简历", true);
-			}
-		} catch (Exception e) {
-			System.err.println(e.getMessage());
-			e.printStackTrace();
-		}
-		map.put("pageName", pageName);
-		return redirect("userData/add_information_frame.jsp", map, "", false);
+//		String pageName = "resume_add_information";
+//		Map<String, String> map = new HashMap<String, String>();
+//		try {
+//			User user = (User) httpSession.getAttribute("user");
+//			map = userService.checkUserResume(user.getId());
+//			if(map.get("param") == null){
+//				throw new Exception("userToPage Map is null!");
+//			}
+//			String pageNum = map.get("param");
+//			switch (pageNum) {
+//			case "1": pageName = "resume_add_information";break;
+//			case "2": pageName = "resume_add_planjob.jsp";break;
+//			case "3": pageName = "resume_add_questionnaire.jsp";break;
+//			case "4": pageName = "resume_add_workexperience.jsp";break;
+//			case "6": 
+//				pageName = "resume_add_information.jsp";
+//				return redirect("common/frame.jsp", "", "很多份简历", true);
+//			}
+//		} catch (Exception e) {
+//			System.err.println(e.getMessage());
+//			e.printStackTrace();
+//		}
+//		map.put("pageName", pageName);
+//		return redirect("userData/add_information_frame.jsp", map, "", false);
+		return redirect("userInterview/user_resumes.jsp", "", "", false);
 	}
 	
 	private Object queryUserInformation(){
