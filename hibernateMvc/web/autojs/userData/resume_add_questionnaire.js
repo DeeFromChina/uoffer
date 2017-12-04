@@ -1,4 +1,5 @@
 var data;
+var userResumeId = loadValue("userResumeId");
 function init() {
 	$(".circleChkB").click(function(){
 		selected(this);
@@ -10,15 +11,15 @@ function init() {
 	setForm();
 	
 	parent.document.getElementById("iframe4").height=document.body.scrollHeight;
-	if(document.body.scrollHeight > parent.document.getElementById("myTabContent").style.height){
-		parent.document.getElementById("myTabContent").style.height=document.body.scrollHeight;
+	if(document.body.scrollHeight > $(parent.document.getElementById("myTabContent")).height()){
+		$(parent.document.getElementById("myTabContent")).height(document.body.scrollHeight);
 	}
 	parent.dataFormVcenter();
 	parent.countFrameHeight();
 }
 function setValue(){
-	if(top.map["userResumeId"] != undefined){
-		$("#userResumeId").val(top.map["userResumeId"]);
+	if(userResumeId != undefined){
+		$("#userResumeId").val(userResumeId);
 	}
 }
 function selected(obj){
@@ -52,14 +53,8 @@ function moneysum(num){
 	}
 }
 function setForm(){
-	var userResumeId = window.top.map["userResumeId"];
 	$("#userResumeId").val(userResumeId);
-//	var url = "userData.do?action=queryUserInformation&userResumeId="+userResumeId;
-//	var data = ajaxSumbit(url);
-//	if(data == undefined){
-//		return;
-//	}
-	var data = window.top.map["userResume"];
+	var data = loadValue("userResume");
 	$("#dataForm").populateForm(data);
 	
 	setElementValue("j",data.nowJobStatus,'circle');
@@ -108,6 +103,7 @@ function goBack(){
 	$(window.parent.document.getElementById("page3")).click();
 }
 function goSubmit(){
+	removeValue("userResumeId");
 	var url = "userData.do?action=userQuestion";
 	var formId = "dataForm";
 	data = ajaxSumbit(url,formId);

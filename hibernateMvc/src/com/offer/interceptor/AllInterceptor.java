@@ -21,6 +21,7 @@ public class AllInterceptor extends HandlerInterceptorAdapter {
     			islogin = true;
     		}
 			if(user == null && islogin){
+				httpSession.setAttribute("islogin", null);
 				ServletOutputStream out = response.getOutputStream();
 				out.print("unlogin");
     			out.flush();

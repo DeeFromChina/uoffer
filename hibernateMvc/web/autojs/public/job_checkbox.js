@@ -12,7 +12,5 @@ function init(){
 }
 function submit(){
 	checkedValue("jobMeum");
-	mainFrameSetValue(map["targetId"],window.top.map["ids"]);
-	mainFrameSetValue(map["targetValue"],window.top.map["values"]);
 	closeWin("jobCheckbox");
 }

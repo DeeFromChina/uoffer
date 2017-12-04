@@ -1,0 +1,27 @@
+.demolist{
+	border:1px #999999 solid;
+	margin-top:10px;
+	font-size:14px;
+	color: #999999;
+}
+.demolist:focus{
+	border:1px #4F4F4F solid;
+}
+.demoChk{
+	cursor:pointer;
+	margin:auto;
+}
+.leftBtn{
+	font-size:14px;
+	width: 100px;
+	height:41px;
+	background-color: #00B38A;
+	border-color: #00B38A;
+}
+.rightBtn{
+	font-size:14px;
+	width: 100px;
+	height:41px;
+	background-color: #00B38A;
+	border-color: #00B38A;
+}

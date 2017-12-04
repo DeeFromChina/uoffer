@@ -22,28 +22,28 @@ function subProvince(obj){
 	var id = obj.id;
 	var provinceData = treeToSelect(data,id);
 	if(map["type"] == 1) return;
-	setList("province","请选择您的省份",provinceData,0,"subCity(this)");
+	setList("province","请选择您的省份",provinceData,0,"subCity(this)","w340");
 	$("#province").find("div[class='dropdown input-class']").addClass("marginAuto");
 }
 function subCity(obj){
 	var id = obj.id;
 	var cityData = treeToSelect(data,id);
 	if(map["type"] == 2) return;
-	setList("city","请选择您的城市",cityData,0,"subArea(this)");
+	setList("city","请选择您的城市",cityData,0,"subArea(this)","w340");
 	$("#city").find("div[class='dropdown input-class']").addClass("marginAuto");
 }
 function subArea(obj){
 	var id = obj.id;
 	var areaData = treeToSelect(data,id);
 	if(map["type"] == 3) return;
-	setList("area","请选择您的区域",areaData,0,"");
+	setList("area","请选择您的区域",areaData,0,"","w340");
 	$("#area").find("div[class='dropdown input-class']").addClass("marginAuto");
 }
 function submit(){
 	var form = $("#dataForm").serializeObject();
 	if(map["target"] == "city"){
-		mainFrameSetValue(map["targetId"],form.city);
-		mainFrameSetValue(map["targetValue"],form.cityValue);
+		saveValue("cityId",form.city);
+		saveValue("cityName",form.cityValue);
 	}
 	closeWin("citySelect");
 }

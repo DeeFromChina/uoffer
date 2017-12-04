@@ -14,6 +14,15 @@ $(".dropdown .form-control").click(function(){
 function getid(id){
 	return document.getElementById(id);
 }
+function saveValue(key,value){
+	window.top.map[key] = value;
+}
+function loadValue(key){
+	return window.top.map[key];
+}
+function removeValue(key){
+	delete window.top.map[key];
+}
 /**
  * 填充下拉框
  * listId:下拉框id
@@ -146,7 +155,8 @@ function go(urlnum){
  * height:窗口高度
  * dom:目标页面document
  * */
-function openWindow(pageId,url,title,width,height,targetDocument){
+function openWindow(pageId,url,title,width,height){
+	var targetDocument = document;
 	doc = window.top.document;
 	
 	if(url != ''){
@@ -165,9 +175,8 @@ function openWindow(pageId,url,title,width,height,targetDocument){
 	
 	var timestamp = Date.parse(new Date());
 	timestamp = timestamp / 1000;
-	window.top.map["pageId"] = "myPage"+timestamp;
 	if(targetDocument != undefined){
-		window.top.map[pageId]=targetDocument;
+		saveValue(pageId,targetDocument);
 	}
 	var pageStr = "<div class='overflowY modal fade' id='myPage"+timestamp+"' tabindex='-1' role='dialog' aria-labelledby='myModalLabel' aria-hidden='true'>"
 						+"<div class='modal-dialog' style='width:"+width+";height:"+height+";margin-top:"+marginTop+";'>"
@@ -205,10 +214,10 @@ function openWindow(pageId,url,title,width,height,targetDocument){
  * objId:打开窗口id
  * */
 function closeWindow(objId,pageId){
-	if(window.top.map[pageId] != undefined){
-		var targetDocument = window.top.map[pageId];
+	if(loadValue(pageId) != undefined){
+		var targetDocument = loadValue(pageId);
 		targetDocument.getElementById("closeListenerBtn").click();
-		window.top.map[pageId]=undefined;
+		removeValue(pageId);
 	}
 	$("#"+objId).modal('hide');
 	$("#"+objId).remove();
@@ -310,15 +319,6 @@ function setMap(){
 			map[key] = value;
 		}
 	}
-}
-/**
- * 向mainFrame中的页面传值(适用于弹框向父页面传值)
- * targetId:目标元素id
- * value:目标元素赋的值
- * */
-function mainFrameSetValue(targetId,value){
-	var mainFrame = parent.$('#mainFrame').contents();
-	mainFrame.find("#"+targetId).val(value);
 }
 
 /**

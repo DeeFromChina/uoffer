@@ -13,6 +13,9 @@
 .floatR{
 	float:right;
 }
+.floatC{
+	float:center;
+}
 .overflowY{
 	overflow-y:auto;
 }

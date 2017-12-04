@@ -1,3 +1,4 @@
+var userResumeId = loadValue("userResumeId");
 function init() {
 	var url = "baseData.do?action=getCity";
 	var data = ajaxSumbit(url);
@@ -10,26 +11,20 @@ function init() {
 	setForm();
 	
 	parent.document.getElementById("iframe2").height=document.body.scrollHeight;
-	if(document.body.scrollHeight > parent.document.getElementById("myTabContent").style.height){
-		parent.document.getElementById("myTabContent").style.height=document.body.scrollHeight;
+	if(document.body.scrollHeight > $(parent.document.getElementById("myTabContent")).height()){
+		$(parent.document.getElementById("myTabContent")).height(document.body.scrollHeight);
 	}
 	parent.dataFormVcenter();
 	parent.countFrameHeight();
 }
 function setValue(){
-	if(top.map["userResumeId"] != undefined){
-		$("#userResumeId").val(top.map["userResumeId"]);
+	if(userResumeId != undefined){
+		$("#userResumeId").val(userResumeId);
 	}
 }
 function setForm(){
-	var userResumeId = window.top.map["userResumeId"];
 	$("#userResumeId").val(userResumeId);
-//	var url = "userData.do?action=queryUserInformation&userResumeId="+userResumeId;
-//	var data = ajaxSumbit(url);
-//	if(data == undefined){
-//		return;
-//	}
-	var data = window.top.map["userResume"];
+	var data = loadValue("userResume");
 	$("#dataForm").populateForm(data);
 	setElementValue("cityMeum",data.goJobCity,'checkbox');
 	setElementValue("companyScale",data.companyScale,'select');
@@ -37,7 +32,9 @@ function setForm(){
 }
 function selectCity(){
 	checkedValue("cityMeum");
-	$('#goJobCity').val(window.top.map["ids"]);
+	var ids = loadValue("ids");
+	removeValue("ids");
+	$('#goJobCity').val(ids);
 }
 //下一步
 function goNext(){
@@ -45,7 +42,7 @@ function goNext(){
 	var url = "userData.do?action=userPlanjob";
 	var formId = "dataForm";
 	var data = ajaxSumbit(url,formId);
-	top.map["userResumeId"] = data;
+	saveValue("userResumeId",data);
 	$(window.parent.document.getElementById("page3")).click();
 }
 //上一步

@@ -147,6 +147,15 @@ public class BaseDaoImpl implements BaseDao{
 		}
 	}
 	
+	public void deleteById(int id, Class<?> t) throws Exception{
+		try {
+			Object object = hibernateTemplate.get(t, id);
+			hibernateTemplate.delete(object);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
 	public void deleteByIds(Serializable[] ids,Class<?> t) throws Exception{
 		try {
 			List<Object> list = new ArrayList<Object>();

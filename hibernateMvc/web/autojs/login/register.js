@@ -90,6 +90,24 @@ function selectCity(){
 	var pageId = "citySelect";
 	openWindow(pageId,url+data,title,width,height);
 }
+function closeListener(){
+	var ids = loadValue("ids");
+	var values = loadValue("values");
+	if(ids != undefined && values != undefined){
+		removeValue("ids");
+		removeValue("values");
+		$("#goJobId").val(ids);
+		$("#goJobName").val(values);
+	}
+	var cityId = loadValue("cityId");
+	var cityName = loadValue("cityName");
+	if(cityId != undefined && cityName != undefined){
+		removeValue("cityId");
+		removeValue("cityName");
+		$("#cityId").val(cityId);
+		$("#cityName").val(cityName);
+	}
+}
 function goSubmit(){
 	var isPass = true;
 //	isPass = checkValidateCode("inputCode");

@@ -51,6 +51,7 @@
 		<servlet-name>springMvc</servlet-name>
 		<url-pattern>*.do</url-pattern>
 	</servlet-mapping>
+	<!-- 设置session超时时长 -->
 	<session-config>
 		<session-timeout>15</session-timeout>
 	</session-config>

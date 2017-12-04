@@ -1,17 +1,18 @@
+var userResumeId = loadValue("userResumeId");
 function init() {
 	setValue();
 	search();
 	
 	parent.document.getElementById("iframe3").height=document.body.scrollHeight;
-	if(document.body.scrollHeight > parent.document.getElementById("myTabContent").style.height){
-		parent.document.getElementById("myTabContent").style.height=document.body.scrollHeight;
+	if(document.body.scrollHeight > $(parent.document.getElementById("myTabContent")).height()){
+		$(parent.document.getElementById("myTabContent")).height(document.body.scrollHeight);
 	}
 	parent.dataFormVcenter();
 	parent.countFrameHeight();
 }
 function setValue(){
-	if(top.map["userResumeId"] != undefined){
-		$("#userResumeId").val(top.map["userResumeId"]);
+	if(userResumeId != undefined){
+		$("#userResumeId").val(userResumeId);
 	}
 }
 function search(){
@@ -111,7 +112,7 @@ function addDiv(items,type){
 								+ '<img src="'+baseImg+'bianji.png" class="hand"/>'
 								+ '<a><font class="testbtn hand">编辑</font></a>'
 							+ '</div>'
-							+ '<div class="editBtn floatR">'
+							+ '<div class="editBtn floatR" onclick="delForm(\''+items[i].id+'\')">'
 								+ '<img src="'+baseImg+'lajitong.png" class="hand"/>'
 								+ '<a><font class="testbtn hand">删除</font></a>'
 							+ '</div>'
@@ -135,7 +136,7 @@ function addForm(type){
 	var height = "400";
 	var data = "?type="+type;
 	var pageId = "userExperience";
-	openWindow(pageId,url+data,title,width,height,document);
+	openWindow(pageId,url+data,title,width,height);
 }
 function editForm(userExperienceId,type){
 	var url = "userData/resume_add_workexperience_add.jsp";
@@ -150,7 +151,12 @@ function editForm(userExperienceId,type){
 	var height = "400";
 	var data = "?type="+type+"&userExperienceId="+userExperienceId;
 	var pageId = "userExperience";
-	openWindow(pageId,url+data,title,width,height,document);
+	openWindow(pageId,url+data,title,width,height);
+}
+function delForm(userExperienceId){
+	var url = "userData.do?action=delUserExperience&userExperienceId="+userExperienceId;
+	var data = ajaxSumbit(url);
+	init();
 }
 function closeListener(){
 	init();

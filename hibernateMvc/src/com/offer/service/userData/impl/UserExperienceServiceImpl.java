@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.offer.dao.common.BaseDao;
+import com.offer.model.userData.User;
 import com.offer.model.userData.UserExperience;
 import com.offer.model.userData.UserResume;
 import com.offer.service.userData.UserExperienceService;
@@ -74,9 +75,8 @@ public class UserExperienceServiceImpl implements UserExperienceService {
 	}
 
 	@Override
-	public void deleteById(String ids) throws Exception {
-		// TODO Auto-generated method stub
-		
+	public void deleteById(int id) throws Exception {
+		baseDao.deleteById(id, UserExperience.class);
 	}
 
 	@Override
@@ -89,10 +89,10 @@ public class UserExperienceServiceImpl implements UserExperienceService {
 	}
 	
 	@Override
-	public List<Map<String, Object>> getByUserResumeIdAndType(int userResumeId, String type) throws Exception {
+	public List<Map<String, Object>> getByUserResumeIdAndType(int UserResumeId, String type) throws Exception{
 		String param = "where 1=1 ";
-		if(userResumeId > 0){
-			param += " AND e.user_resume_id = " + userResumeId;
+		if(UserResumeId != 0){
+			param += " AND e.user_id = " + UserResumeId;
 		}
 		if(!"".equals(type)){
 			param += " AND e.type = '" + type + "'";
@@ -100,6 +100,24 @@ public class UserExperienceServiceImpl implements UserExperienceService {
 		Map<String, String> params = new HashMap<String, String>();
 		params.put("param", param);
 		String sql = InitSqlXml.buildSql(params, "queryUserExperience");
+		return baseDao.findBySql(sql);
+	}
+	
+	/** 
+	 * 用户简历历史模板
+	 */
+	@Override
+	public List<Map<String, Object>> getDemo(int UserId, String type) throws Exception {
+		String param = "where 1=1 ";
+		if(UserId != 0){
+			param += " AND experience.user_id = " + UserId;
+		}
+		if(!"".equals(type)){
+			param += " AND experience.type = '" + type + "'";
+		}
+		Map<String, String> params = new HashMap<String, String>();
+		params.put("param", param);
+		String sql = InitSqlXml.buildSql(params, "queryUserExperienceName");
 		return baseDao.findBySql(sql);
 	}
 

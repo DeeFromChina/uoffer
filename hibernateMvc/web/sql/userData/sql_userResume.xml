@@ -8,9 +8,9 @@
 					WHEN detail.ename = detail.sname 
 					THEN 
 						IF(
-							@named = (select @named := detail.ename),
-							CONCAT(detail.sname,(@i := @i + 1)),
-							CONCAT(detail.sname,(@i := 1))
+							@named = (select @named = detail.ename),
+							CONCAT(detail.sname,"_"+(@i = @i + 1)),
+							detail.sname
 						) 
 					ELSE "" END 
 			) AS dname 
@@ -29,12 +29,10 @@
 								user_experience experience
 							GROUP BY
 								experience.name
-							HAVING
-								count(experience.name) > 1
 						) sube ON experience.name = sube.name {#param}
 						ORDER BY ename DESC
 				) detail,
-				(SELECT @i := 0) AS it 
+				(SELECT @i = 1) AS it 
 	</sql>
 	<!-- 用户经历列表 -->
 	<sql id="queryUserExperience">

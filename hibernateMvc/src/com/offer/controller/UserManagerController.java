@@ -60,7 +60,9 @@ public class UserManagerController extends TinyBuilderController {
 
 			if("userExperienceList".equalsIgnoreCase(action)) forward = userExperienceList();
 			if("queryUserExperience".equalsIgnoreCase(action)) forward = queryUserExperience();
+			if("queryUserExperienceDemo".equalsIgnoreCase(action)) forward = queryUserExperienceDemo();
 			if("saveUserExperience".equalsIgnoreCase(action)) forward = saveUserExperience();
+			if("delUserExperience".equalsIgnoreCase(action)) forward = delUserExperience();
 			
 			if("userQuestion".equalsIgnoreCase(action)) forward = userQuestion();
 			
@@ -229,11 +231,15 @@ public class UserManagerController extends TinyBuilderController {
 		return null;
 	}
 	
+	/**
+	 * 简历工作经历
+	 * @return
+	 */
 	private Object userExperienceList(){
 		try {
 			if(!BaseUtil.isNull(form.get("userResumeId")) && !BaseUtil.isNull(form.get("type"))){
 				int userResumeId = EncodeUtil.changeId(form.get("userResumeId").toString());
-				List<Map<String, Object>> list = userExperienceService.getByUserResumeIdAndType(userResumeId,form.get("type").toString());
+				List<Map<String, Object>> list = userExperienceService.getByUserResumeIdAndType(userResumeId, form.get("type").toString());
 				for(Map<String, Object> map : list){
 					String id = EncodeUtil.IDEncoder(Integer.valueOf(map.get("id").toString()));
 					map.put("id", id);
@@ -269,6 +275,27 @@ public class UserManagerController extends TinyBuilderController {
 		return null;
 	}
 	
+	private Object queryUserExperienceDemo(){
+		try {
+			User user = (User) httpSession.getAttribute("user");
+			if(user == null){
+				return SESSIONERROR;
+			}
+			if(!BaseUtil.isNull(form.get("type"))){
+				List<Map<String, Object>> list = userExperienceService.getDemo(user.getId(), form.get("type").toString());
+				for(Map<String, Object> map : list){
+					String id = EncodeUtil.IDEncoder(Integer.valueOf(map.get("id").toString()));
+					map.put("id", id);
+				}
+				return list;
+			}
+			return NORMAL;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
 	private Object saveUserExperience(){
 		try {
 			User user = (User) httpSession.getAttribute("user");
@@ -294,6 +321,21 @@ public class UserManagerController extends TinyBuilderController {
 			e.printStackTrace();
 		}
 		return null;
+	}
+	
+	private Object delUserExperience(){
+		try {
+			if(!BaseUtil.isNull(form.get("userExperienceId"))){
+				int userResumeId = EncodeUtil.changeId(form.get("userExperienceId").toString());
+				userExperienceService.deleteById(userResumeId);
+			}else{
+				return null;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+		return NORMAL;
 	}
 	
 	private Object userQuestion(){

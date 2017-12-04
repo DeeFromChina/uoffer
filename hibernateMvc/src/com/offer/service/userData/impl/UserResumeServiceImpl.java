@@ -56,10 +56,20 @@ public class UserResumeServiceImpl implements UserResumeService {
 	@Override
 	public void update(UserResume userResume) throws Exception {
 		try{
+			if(userResumeInformation(userResume)){
+				userResume.setFinish1(1);
+			}else{
+				userResume.setFinish1(0);
+			}
 			if(userResumePlanJob(userResume)){
 				userResume.setFinish2(1);
 			}else{
 				userResume.setFinish2(0);
+			}
+			if(userResumeQuestion(userResume)){
+				userResume.setFinish4(1);
+			}else{
+				userResume.setFinish4(0);
 			}
 			baseDao.update(userResume);
 		}catch(Exception e){
@@ -86,16 +96,19 @@ public class UserResumeServiceImpl implements UserResumeService {
 	}
 	
 	private boolean userResumeInformation(UserResume userResume){
-		if(BaseUtil.isNull(userResume.getNowResidence())){
+		if(BaseUtil.isNull(userResume.getName())){
 			return false;
 		}
-		if(BaseUtil.isNull(userResume.getGoJobCity())){
+		if(BaseUtil.isNull(userResume.getSex())){
 			return false;
 		}
-		if(BaseUtil.isNull(userResume.getCompanyNature())){
+		if(BaseUtil.isNull(userResume.getWorkTime())){
 			return false;
 		}
-		if(BaseUtil.isNull(userResume.getCompanyScale())){
+		if(BaseUtil.isNull(userResume.getGoJobId1())){
+			return false;
+		}
+		if(BaseUtil.isNull(userResume.getWorkTime1())){
 			return false;
 		}
 		return true;

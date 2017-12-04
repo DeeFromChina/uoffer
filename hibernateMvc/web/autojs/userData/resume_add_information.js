@@ -23,7 +23,7 @@ function resizeFrame(){
 		return;
 	}
 	parent.document.getElementById("iframe1").height=document.body.scrollHeight + 30;
-	parent.document.getElementById("myTabContent").style.height=document.body.scrollHeight + 30;
+	$(parent.document.getElementById("myTabContent")).height(document.body.scrollHeight + 30);
 	parent.dataFormVcenter();
 	parent.countFrameHeight();
 	if(ishide){
@@ -32,7 +32,7 @@ function resizeFrame(){
 	}
 }
 function setForm(){
-	var userResumeId = window.top.map["userResumeId"];
+	var userResumeId = loadValue("userResumeId");
 	$("#userResumeId").val(userResumeId);
 	var url = "userData.do?action=queryUserInformation&userResumeId="+userResumeId;
 	var data = ajaxSumbit(url);
@@ -40,7 +40,7 @@ function setForm(){
 		return;
 	}
 	$("#dataForm").populateForm(data);
-	window.top.map["userResume"] = data;
+	saveValue("userResume",data);
 	
 	getTran(data.sex);
 	setElementValue("workTime",data.workTime,'select');
@@ -73,7 +73,6 @@ function setForm(){
 	$("#skill").val(skill);
 }
 function getTran(ret) {
-	console.log(getid("sex"));
 	if (ret == '1') {
 		getid("sex").value="1";
 		$("#btn1").addClass("checkedBtn");
@@ -98,27 +97,33 @@ function selectWorkTime(){
 	checkedValue("jobMeum");
 	$("tr[hide^='title']").attr("class","hidden");
 	ishide = true;
-	if(window.top.map["ids"].indexOf(",") > -1){
-		var values = window.top.map["values"].split(",");
-		for(var i in values){
+	var ids = loadValue("ids");
+	var values = loadValue("values");
+	if(ids == undefined){
+		return;
+	}
+	removeValue("ids");
+	if(ids.indexOf(",") > -1){
+		var vals = values.split(",");
+		for(var i in vals){
 			$("tr[hide^='title']").each(function(){
 				$(this).removeAttr("class");
 				ishide = false;
 			});
-			$('#title'+(parseInt(i)+1)).html(values[i]);
+			$('#title'+(parseInt(i)+1)).html(vals[i]);
 		}
 	}else{
-		if(window.top.map["ids"] != ""){
+		if(ids != ""){
 			$("tr[hide='title1']").each(function(){
 				$(this).removeAttr("class");
 				ishide = false;
 			});
-			$('#title1').html(window.top.map["values"]);
+			$('#title1').html(values);
 		}
 	}
-	$('#gojobId').val(window.top.map["ids"]);
+	$('#gojobId').val(ids);
 	
-	var url = "baseData.do?action=getSkill&ids="+window.top.map["ids"];
+	var url = "baseData.do?action=getSkill&ids="+ids;
 	data = ajaxSumbit(url);
 	
 	$('.hiddenCheckBox').unbind();//因为要清除数据，得先把绑定事件去除，不然会造成事件冲突，可以注释试一下效果
@@ -136,7 +141,14 @@ function selectWorkTime(){
 
 function selectOtherSkill(){
 	checkedValue("skillMeum");
-	if(window.top.map["values"].indexOf("其他") > -1){
+	var values = loadValue("values");
+	var ids = loadValue("ids");
+	if(ids == undefined){
+		return;
+	}
+	removeValue("ids");
+	removeValue("values");
+	if(values.indexOf("其他") > -1){
 		$("tr[hide^='otherskill']").removeAttr("class");
 		ishide = false;
 	}else{
@@ -144,7 +156,7 @@ function selectOtherSkill(){
 		$("tr[hide^='otherskill']").attr("class","hidden");
 		ishide = true;
 	}
-	$('#skill').val(window.top.map["ids"]);
+	$('#skill').val(ids);
 	
 	if(!ishide){
 		resizeFrame();
@@ -155,6 +167,6 @@ function goNext(){
 	var url = "userData.do?action=saveUserInformation";
 	var formId = "dataForm";
 	var data = ajaxSumbit(url,formId);
-	top.map["userResumeId"] = data;
+	saveValue("userResumeId",data);
 	$(window.parent.document.getElementById("page2")).click();
 }

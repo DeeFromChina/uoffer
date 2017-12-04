@@ -21,6 +21,8 @@ public interface BaseDao {
 	public void update(Object object) throws Exception;
 
 	public void delete(Object object) throws Exception;
+	
+	public void deleteById(int id, Class<?> t) throws Exception;
 
 	public void deleteByIds(Serializable[] ids, Class<?> t) throws Exception;
 	

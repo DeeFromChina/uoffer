@@ -17,9 +17,11 @@ public interface UserExperienceService {
 
 	public void deleteByIds(String ids) throws Exception;
 
-	public void deleteById(String ids) throws Exception;
+	public void deleteById(int id) throws Exception;
 	
 	public List<UserExperience> getByUserId(int userId) throws Exception;
 	
-	public List<Map<String, Object>> getByUserResumeIdAndType(int userResumeId, String type) throws Exception;
+	public List<Map<String, Object>> getByUserResumeIdAndType(int UserResumeId, String type) throws Exception;
+	
+	public List<Map<String, Object>> getDemo(int UserId, String type) throws Exception;
 }

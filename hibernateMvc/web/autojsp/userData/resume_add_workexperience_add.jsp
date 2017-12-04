@@ -20,7 +20,7 @@
 			<col class="wi10"/>
 			<tr>
 				<td colspan="4" class="textR">
-					<a class="font-14" onclick="history">选择历史模板</a>
+					<a class="font-14" onclick="history()" href="#">选择历史模板</a>
 				</td>
 			</tr>
 			<tr>

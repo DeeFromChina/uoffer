@@ -1,3 +1,4 @@
+var userResumeId = loadValue("userResumeId");
 function init(){
 	setMap();
 	var type = map["type"];
@@ -54,33 +55,47 @@ function selectJob(){
 	var width = "600";
 	var height = "400";
 	var type = "1";
-	var data = "?type="+type+"&targetId=jobBelong&targetValue=jobBelongName&isMultiselect=false";
+	var data = "?type="+type+"&isMultiselect=false";
 	var pageId = "jobCheckbox";
-	openWindow(pageId,url+data,title,width,height,document);
+	openWindow(pageId,url+data,title,width,height);
 }
 function history(){
-	var userExperienceId = map["userExperienceId"];
-	var url = "userData/resume_history_demo.jsp";
+	var type = map["type"];
+	var url = "userData/resume_history_demo.jsp?type="+type;
 	var title = "选择您的历史模板";
 	var width = "600";
 	var height = "400";
-	var data = "?userExperienceId="+userExperienceId;
 	var pageId = "history_demo";
-	openWindow(pageId,url+data,title,width,height,document);
+	openWindow(pageId,url,title,width,height);
 }
 function closeListener(){
-	$("#jobBelong").val(window.top.map["ids"]);
-	$("#jobBelongName").val(window.top.map["values"]);
+	var ids = loadValue("ids");
+	var values = loadValue("values");
+	if(ids != undefined && values != undefined){
+		removeValue("ids");
+		removeValue("values");
+		$("#jobBelong").val(ids);
+		$("#jobBelongName").val(values);
+	}
+	var demoId = loadValue("demoId");
+	if(demoId != undefined){
+		removeValue("demoId");
+		var userExperienceId = map["userExperienceId"];
+		map["userExperienceId"] = demoId;
+		setForm();
+		$("#userExperienceId").val(userExperienceId);
+		map["userExperienceId"] = userExperienceId;
+	}
 }
 function goSubmit(){
 	var type = map["type"];
-	if(top.map["userResumeId"] != undefined){
-		type += "&userResumeId="+top.map["userResumeId"];
+	if(userResumeId != undefined){
+		type += "&userResumeId="+userResumeId;
 	}
 	var url = "userData.do?action=saveUserExperience&type="+type;
 	var formId = "dataForm";
 	var data = ajaxSumbit(url,formId);
-	var targetDocument = window.top.map["userExperience"];
+	var targetDocument = loadValue("userExperience");
 	targetDocument.getElementById("userResumeId").value = data;
 	closeWin("userExperience");
 }
