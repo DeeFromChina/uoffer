@@ -1,0 +1,56 @@
+.photoDiv{
+	width:200px;
+	height:200px;
+	float:right;
+	margin-right:20px;
+}
+.photoDiv > img{
+	width:100%;
+	height:100%;
+	border-radius:10px;
+}
+.titleDiv{
+	padding:10px;
+	height:50px;
+	width:100%;
+	font-size:18px;
+}
+.userRemark{
+	width:200px;
+	float:right;
+	margin-right:20px;
+	padding-top:20px;
+	color:#586069;
+}
+.userRemark > table {
+	width:100%;
+	border-collapse:separate;
+	border-spacing:0px 10px;
+}
+.user_resume_div{
+	border:1px #d1d5da solid;
+	float:left;
+	width:90%;
+	min-width:450px;
+	height:150px;
+	margin-left:8px;
+	margin-bottom:25px;
+}
+.user_resume_div > table {
+	width:100%;
+	border-collapse:separate;
+	border-spacing:0px 10px;
+	color:#999999;
+	padding:0px 20px;
+}
+.col1{
+	color:#0366d6;
+	font-size:16px;
+}
+.col2{
+	color:#999999;
+	font-size:14px;
+}
+.col3{
+	font-size:12px;
+}

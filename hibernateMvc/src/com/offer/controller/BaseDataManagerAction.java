@@ -25,7 +25,7 @@ import com.offer.service.baseData.SkillService;
  *
  */
 @Controller
-public class BaseDataManagerAction extends TinyBuilderController{
+public class BaseDataManagerAction extends TinyBuilderController {
 	
 	@Autowired
 	private JobService jobService;

@@ -20,9 +20,6 @@ import com.offer.util.BaseUtil;
 public class LoginAction extends TinyBuilderController{
 	
 	@Autowired
-	private JobService jobService;
-	
-	@Autowired
 	private UserService userService;
 	
 	@ResponseBody
@@ -34,7 +31,7 @@ public class LoginAction extends TinyBuilderController{
 			String action = form.get("action").toString();
 			
 			if("login".equalsIgnoreCase(action)) forward = login();
-			if("register".equalsIgnoreCase(action)) forward = register();
+			else if("register".equalsIgnoreCase(action)) forward = register();
 			
 			return toJson(forward);
 		} catch (Exception e) {

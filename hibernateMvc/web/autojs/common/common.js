@@ -248,7 +248,7 @@ function countFrameHeight(){
  * dataForm垂直居中
  * 
  * */
-function dataFormVcenter(){
+function dataFormVcenter(ispad){
 	var windowHeight = window.screen.availHeight;//屏幕可用工作区高度
 	
 	var formHeight = $('#dataForm').height();
@@ -270,6 +270,9 @@ function dataFormVcenter(){
 		bodyHeight = windowHeight;
 	}
 	var marginTH = 0;
+	if(ispad != undefined){
+		flag = false;
+	}
 	if(flag){
 		document.body.height = bodyHeight - bh - 68;
 		marginTH = (document.body.height - formHeight)/2;

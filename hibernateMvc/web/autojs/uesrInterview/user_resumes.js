@@ -1,5 +1,7 @@
 function init() {
-	dataFormVcenter();
+	setSrc('test','changjinglu.jpg');
+	
+	dataFormVcenter(false);
 	countFrameHeight();
 	parent.changeHeaderTitle();
 }

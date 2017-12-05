@@ -10,14 +10,9 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
-import com.offer.util.BaseUtil;
+import com.offer.model.userData.User;
 import com.offer.util.RedisJava;
 
 
@@ -29,6 +24,7 @@ public class TinyBuilderController{
 	public List<Map<String, Object>> homeList = new ArrayList<Map<String, Object>>();
 	public Map<String, Object> form = new HashMap<String, Object>();
 	public Map<String, Object> redisMap = new HashMap<String, Object>();
+	public User user = null;
 	
 	protected SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 	protected SimpleDateFormat sdt = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -51,11 +47,10 @@ public class TinyBuilderController{
 		this.form = form;
 	}
 	
-	public String setMap(HttpServletRequest request, String data){
+	public String setMap(HttpServletRequest request, String data) throws Exception{
 		if(request == null){
 			return "request error";
 		}
-		request.getParameter("action");
 		Map<String, String[]> map = request.getParameterMap();
 		if(map == null){
 			return "map error";
@@ -81,6 +76,7 @@ public class TinyBuilderController{
 		}
 		putToForm(data);
 		httpSession = request.getSession();
+		user = (User) httpSession.getAttribute("user");
 		return SUCCESS;
 	}
 	

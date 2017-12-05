@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.offer.model.baseData.Job;
-import com.offer.model.userData.User;
 import com.offer.model.userData.UserExperience;
 import com.offer.model.userData.UserResume;
 import com.offer.service.baseData.JobService;
@@ -51,20 +50,20 @@ public class UserManagerController extends TinyBuilderController {
 			String action = form.get("action").toString();
 			
 			if("getTop".equalsIgnoreCase(action)) forward = getTop();
-			if("userToPage".equalsIgnoreCase(action)) forward = userToPage();
-			if("queryUserInformation".equalsIgnoreCase(action)) forward = queryUserInformation();
-			if("queryUserResumeSkills".equalsIgnoreCase(action)) forward = queryUserResumeSkills();
-			if("saveUserInformation".equalsIgnoreCase(action)) forward = saveUserInformation();
+			else if("userToPage".equalsIgnoreCase(action)) forward = userToPage();
+			else if("queryUserInformation".equalsIgnoreCase(action)) forward = queryUserInformation();
+			else if("queryUserResumeSkills".equalsIgnoreCase(action)) forward = queryUserResumeSkills();
+			else if("saveUserInformation".equalsIgnoreCase(action)) forward = saveUserInformation();
 			
-			if("userPlanjob".equalsIgnoreCase(action)) forward = userPlanjob();
+			else if("userPlanjob".equalsIgnoreCase(action)) forward = userPlanjob();
 
-			if("userExperienceList".equalsIgnoreCase(action)) forward = userExperienceList();
-			if("queryUserExperience".equalsIgnoreCase(action)) forward = queryUserExperience();
-			if("queryUserExperienceDemo".equalsIgnoreCase(action)) forward = queryUserExperienceDemo();
-			if("saveUserExperience".equalsIgnoreCase(action)) forward = saveUserExperience();
-			if("delUserExperience".equalsIgnoreCase(action)) forward = delUserExperience();
+			else if("userExperienceList".equalsIgnoreCase(action)) forward = userExperienceList();
+			else if("queryUserExperience".equalsIgnoreCase(action)) forward = queryUserExperience();
+			else if("queryUserExperienceDemo".equalsIgnoreCase(action)) forward = queryUserExperienceDemo();
+			else if("saveUserExperience".equalsIgnoreCase(action)) forward = saveUserExperience();
+			else if("delUserExperience".equalsIgnoreCase(action)) forward = delUserExperience();
 			
-			if("userQuestion".equalsIgnoreCase(action)) forward = userQuestion();
+			else if("userQuestion".equalsIgnoreCase(action)) forward = userQuestion();
 			
 			return toJson(forward);
 		} catch (Exception e) {
@@ -74,10 +73,6 @@ public class UserManagerController extends TinyBuilderController {
 	}
 	
 	private Object getTop(){
-		User user = (User) httpSession.getAttribute("user");
-		if(user == null){
-			return addMessage("没有找到用户");
-		}
 		
 		Map<String, Object> titleMap = new HashMap<String, Object>();
 		
@@ -89,9 +84,9 @@ public class UserManagerController extends TinyBuilderController {
 		centerTitle.append("]");
 		
 		String userIcon = "changjinglu.jpg";
-		if(user.getUserType() == 1){
-			
-		}
+//		if(user.getUserType() == 1){
+//			
+//		}
 		StringBuffer userImg = new StringBuffer();
 		userImg.append("[");
 		userImg.append("{\"url\":\""+ userIcon +"\"}");
@@ -118,7 +113,6 @@ public class UserManagerController extends TinyBuilderController {
 //		String pageName = "resume_add_information";
 //		Map<String, String> map = new HashMap<String, String>();
 //		try {
-//			User user = (User) httpSession.getAttribute("user");
 //			map = userService.checkUserResume(user.getId());
 //			if(map.get("param") == null){
 //				throw new Exception("userToPage Map is null!");
@@ -185,10 +179,6 @@ public class UserManagerController extends TinyBuilderController {
 	
 	private Object saveUserInformation(){
 		try {
-			User user = (User) httpSession.getAttribute("user");
-			if(user == null){
-				return SESSIONERROR;
-			}
 			form.put("userId", user.getId());
 			Integer userResumeId = 0;
 			if(!BaseUtil.isNull(form.get("userResumeId"))){
@@ -211,10 +201,6 @@ public class UserManagerController extends TinyBuilderController {
 	
 	private Object userPlanjob(){
 		try {
-			User user = (User) httpSession.getAttribute("user");
-			if(user == null){
-				return SESSIONERROR;
-			}
 			form.put("userId", user.getId());
 			int userResumeId = 0;
 			if(BaseUtil.isNull(form.get("userResumeId"))){
@@ -278,10 +264,6 @@ public class UserManagerController extends TinyBuilderController {
 	
 	private Object queryUserExperienceDemo(){
 		try {
-			User user = (User) httpSession.getAttribute("user");
-			if(user == null){
-				return SESSIONERROR;
-			}
 			if(!BaseUtil.isNull(form.get("type"))){
 				List<Map<String, Object>> list = userExperienceService.getDemo(user.getId(), form.get("type").toString());
 				for(Map<String, Object> map : list){
@@ -299,10 +281,6 @@ public class UserManagerController extends TinyBuilderController {
 	
 	private Object saveUserExperience(){
 		try {
-			User user = (User) httpSession.getAttribute("user");
-			if(user == null){
-				return SESSIONERROR;
-			}
 			form.put("userId", user.getId());
 			int userResumeId;
 			if(BaseUtil.isNull(form.get("userExperienceId"))){
@@ -341,10 +319,6 @@ public class UserManagerController extends TinyBuilderController {
 	
 	private Object userQuestion(){
 		try {
-			User user = (User) httpSession.getAttribute("user");
-			if(user == null){
-				return SESSIONERROR;
-			}
 			form.put("userId", user.getId());
 			
 			int phone = BaseUtil.returnInt(form.get("phone"));

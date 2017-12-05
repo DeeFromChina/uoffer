@@ -10,6 +10,7 @@ import com.offer.dao.common.BaseDao;
 import com.offer.model.userData.UserResume;
 import com.offer.service.userData.UserResumeService;
 import com.offer.util.BaseUtil;
+import com.offer.util.InitSqlXml;
 
 @Service("userResumeService")
 public class UserResumeServiceImpl implements UserResumeService {
@@ -79,8 +80,8 @@ public class UserResumeServiceImpl implements UserResumeService {
 
 	@Override
 	public List<Map<String, Object>> getMap(Map<String, Object> map) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		String sql = InitSqlXml.buildSql(params, "queryUserExperience");
+		return baseDao.findBySql(sql);
 	}
 
 	@Override
