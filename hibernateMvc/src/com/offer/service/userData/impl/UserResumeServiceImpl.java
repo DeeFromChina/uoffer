@@ -1,5 +1,6 @@
 package com.offer.service.userData.impl;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -79,8 +80,10 @@ public class UserResumeServiceImpl implements UserResumeService {
 	}
 
 	@Override
-	public List<Map<String, Object>> getMap(Map<String, Object> map) throws Exception {
-		String sql = InitSqlXml.buildSql(params, "queryUserExperience");
+	public List<Map<String, Object>> queryUserResumeList(int userId) throws Exception {
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("param", " WHERE r.user_id="+userId);
+		String sql = InitSqlXml.buildSql(map, "queryUserResumeList");
 		return baseDao.findBySql(sql);
 	}
 

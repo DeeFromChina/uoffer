@@ -21,50 +21,28 @@
 				<td/>
 				<td valign="top">
 					<div class="photoDiv">
-						<img id="test" src=""/>
+						<img id="userphoto" onclick="changeImg()"/>
 					</div>
 					<div class="userRemark">
 						<table>
 							<tr>
-								<td class="col1">景</td>
+								<td class="col1" id="username"></td>
 							</tr>
 							<tr>
-								<td class="col2">1234567</td>
+								<td class="col2" id="phone"></td>
 							</tr>
 							<tr>
-								<td class="col2">123123@cc.com</td>
+								<td class="col2" id="email"></td>
 							</tr>
 						</table>
 					</div>
 				</td>
-				<td valign="top">
+				<td valign="top" id="resumeList">
 					<div class="titleDiv">
 						简历
 						<div>
 						</div>
 					</div>
-					<div class="user_resume_div">
-						<table class="mainDiv_table">
-							<tr>
-								<td colspan="2" class="col1">name</td>
-							</tr>
-							<tr>
-								<td class="col2">job|money</td>
-							</tr>
-							<tr>
-								<td class="col3">但某天，百科的“航母杀手”词条被某编导信以为真，于是在甘肃电视台的军事节目《揭秘真相》里，我们看到主持人表情严肃地指出：“……特别是其搭载690战术核显卡的改进型号，一发就可以摧毁一个航母战斗群。”——和百科中的文本完全一样。...</td>
-							</tr>
-						</table>
-					</div>
-					<div class="user_resume_div"></div>
-					<div class="user_resume_div"></div>
-					<div class="user_resume_div"></div>
-					<div class="user_resume_div"></div>
-					<div class="user_resume_div"></div>
-					<div class="user_resume_div"></div>
-					<div class="user_resume_div"></div>
-					<div class="user_resume_div"></div>
-					<div class="user_resume_div"></div>
 				</td>
 				<td/>
 			</tr>

@@ -43,6 +43,9 @@ public class FileTable {
 	
 	@Column(name = "file_size")
 	private Double fileSize;
+	
+	@Column(name = "file_type")
+	private String fileType;
 
 	public Integer getId() {
 		return id;
@@ -122,5 +125,13 @@ public class FileTable {
 
 	public void setFileSize(Double fileSize) {
 		this.fileSize = fileSize;
+	}
+
+	public String getFileType() {
+		return fileType;
+	}
+
+	public void setFileType(String fileType) {
+		this.fileType = fileType;
 	}
 }

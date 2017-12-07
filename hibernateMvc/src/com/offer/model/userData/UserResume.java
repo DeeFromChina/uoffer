@@ -104,6 +104,9 @@ public class UserResume {
 	
 	@Column(name = "finish4")
 	private Integer finish4;
+	
+	@Column(name = "resume_name")
+	private String resumeName;
 
 	public Integer getId() {
 		return id;
@@ -351,5 +354,13 @@ public class UserResume {
 
 	public void setMonth2(Integer month2) {
 		this.month2 = month2;
+	}
+
+	public String getResumeName() {
+		return resumeName;
+	}
+
+	public void setResumeName(String resumeName) {
+		this.resumeName = resumeName;
 	}
 }

@@ -13,7 +13,9 @@ function init(){
 	var rightTitle = jQuery.parseJSON(data.rightTitle);
 	setTitle(centerTitle);
 	setRightTitle(userImg, rightTitle);
-	
+	saveValue("phone",data.information.phone);
+	saveValue("email",data.information.email);
+	saveValue("username",data.information.username);
 	var url = "";
 	if(data.type == "1"){
 		url = "userData.do?action=userToPage";

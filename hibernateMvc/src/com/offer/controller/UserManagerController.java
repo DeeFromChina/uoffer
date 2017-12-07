@@ -12,9 +12,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.offer.model.baseData.FileTable;
 import com.offer.model.baseData.Job;
 import com.offer.model.userData.UserExperience;
 import com.offer.model.userData.UserResume;
+import com.offer.service.baseData.FileTableService;
 import com.offer.service.baseData.JobService;
 import com.offer.service.userData.UserExperienceService;
 import com.offer.service.userData.UserResumeService;
@@ -28,6 +30,9 @@ public class UserManagerController extends TinyBuilderController {
 	
 	@Autowired
 	private JobService jobService;
+
+	@Autowired
+	private FileTableService fileTableService;
 
 	@Autowired
 	private UserService userService;
@@ -73,7 +78,6 @@ public class UserManagerController extends TinyBuilderController {
 	}
 	
 	private Object getTop(){
-		
 		Map<String, Object> titleMap = new HashMap<String, Object>();
 		
 		StringBuffer centerTitle = new StringBuffer();
@@ -84,9 +88,19 @@ public class UserManagerController extends TinyBuilderController {
 		centerTitle.append("]");
 		
 		String userIcon = "changjinglu.jpg";
-//		if(user.getUserType() == 1){
-//			
-//		}
+		try {
+			Map<String, Object> param = new HashMap<String, Object>();
+			param.put("tableName", "user");
+			param.put("table_id", user.getId());
+			param.put("file_type", "photo");
+			FileTable fileTable = fileTableService.findFileTable(param);
+			if(!BaseUtil.isNull(fileTable)){
+				userIcon = fileTable.getFilePath();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
 		StringBuffer userImg = new StringBuffer();
 		userImg.append("[");
 		userImg.append("{\"url\":\""+ userIcon +"\"}");
@@ -102,6 +116,11 @@ public class UserManagerController extends TinyBuilderController {
 		titleMap.put("centerTitle", centerTitle);
 		titleMap.put("userImg", userImg);
 		titleMap.put("rightTitle", rightTitle);
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("phone", user.getPhone());
+		map.put("email", user.getEmail());
+		map.put("username", user.getUserName());
+		titleMap.put("information", map);
 		
 		String type = (String) httpSession.getAttribute("type");
 		titleMap.put("type", type);

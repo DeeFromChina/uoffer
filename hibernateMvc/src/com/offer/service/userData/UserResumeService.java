@@ -13,7 +13,7 @@ public interface UserResumeService {
 
 	public void update(UserResume userResume) throws Exception;
 
-	public List<Map<String, Object>> getMap(Map<String, Object> map) throws Exception;
+	public List<Map<String, Object>> queryUserResumeList(int userId) throws Exception;
 
 	public void deleteByIds(String ids) throws Exception;
 

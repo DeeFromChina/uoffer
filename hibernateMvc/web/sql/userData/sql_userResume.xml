@@ -52,6 +52,36 @@
 			user_experience e
 		LEFT JOIN job j ON j.id = e.job_belong {#param}
 	</sql>
+	<!-- 用户简历列表 -->
+	<sql id="queryUserResumeList">
+		SELECT
+			r.id AS id,
+			r.resume_name AS name,
+			FORMAT((r.month2 * r.month_money2) / 10000, 2) AS money,
+			s.skillname AS skillName,
+			CONCAT(
+					"      ",
+					IF (
+						LENGTH(r.other_skill) > 124,
+						SUBSTR(r.other_skill, 0, 124),
+						CONCAT(r.other_skill,"...")
+					)
+			) AS otherSkill,
+			GROUP_CONCAT(j.name) AS job
+		FROM
+			user_resume r
+		LEFT JOIN (
+			SELECT 
+				GROUP_CONCAT(s.name) AS skillname, 
+				rs.user_resume_id AS resume_id 
+			FROM skill s
+			LEFT JOIN user_resume_skill rs ON rs.skill_id = s.id
+			GROUP BY rs.user_resume_id
+		) s ON s.resume_id = r.id
+		LEFT JOIN job j ON j.id = r.go_job_id1 OR j.id = r.go_job_id2
+		{#param}
+		GROUP BY r.id
+	</sql>
 	<!-- 用户简历技能列表 -->
 	<sql id="queryUserResumeSkill">
 		SELECT 
