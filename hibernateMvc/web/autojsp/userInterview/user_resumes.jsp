@@ -21,7 +21,7 @@
 				<td/>
 				<td valign="top">
 					<div class="photoDiv">
-						<img id="userphoto" onclick="changeImg()"/>
+						<img id="photoReview" onclick="userPhotoUpload()"/>
 					</div>
 					<div class="userRemark">
 						<table>

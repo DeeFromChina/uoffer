@@ -1,3 +1,10 @@
+var urlPrefix = window.location.origin;
+var projectName = "/hibernateMvc/";
+var jspPath = urlPrefix+projectName+"autojsp/";
+var rootPath = urlPrefix+projectName;
+var doc = document;
+var map = {};
+
 var companyNature = "["
 				+"{\"id\":\"1\",\"value\":\"创业公司\"},"
 				+"{\"id\":\"2\",\"value\":\"上市企业\"},"

@@ -8,6 +8,26 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 </head>
 <script language="javascript">
+function up(){
+	
+	var url = "fileManager.do?action=fileUpload&a=b";
+	var files = ['file1'];
+	var data = fileUpload(url, files);
+	return data;
+}
+function fileUpload(urllink, files) {  
+	var link = "/hibernateMvc/" + urllink;
+	console.log(link);
+    $.ajaxFileUpload( {  
+        url : link,     //用于文件上传的服务器端请求地址    
+        secureuri : false,            //一般设置为false    
+        fileElementId : files,        //文件上传的id属性  <input type="file" id="file" name="file" />
+        dataType : 'json',            //返回值类型 一般设置为json    
+        type : 'post',
+        success : function(data) {  
+        }  
+    })  
+}
 function test(){
 	//var url = "user/filefilefile.do";
 	//var files = ['file1','file2','file3'];
@@ -72,7 +92,7 @@ function test(){
 		<input type="file" id="file3" name="file"/>
 		<input type="file" id="file4" name="file"/>
 		<input type="hidden" name="asd" value="123"/>
-		<input type="button" onclick="test()" value="1111111"/>
+		<input type="button" onclick="up()" value="1111111"/>
 		<textarea id="textTest"></textarea>
 	</form>
 </body>

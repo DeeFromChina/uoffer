@@ -42,7 +42,7 @@ public class FileTable {
 	private String fileSuffix;
 	
 	@Column(name = "file_size")
-	private Double fileSize;
+	private long fileSize;
 	
 	@Column(name = "file_type")
 	private String fileType;
@@ -119,11 +119,11 @@ public class FileTable {
 		this.fileSuffix = fileSuffix;
 	}
 
-	public Double getFileSize() {
+	public long getFileSize() {
 		return fileSize;
 	}
 
-	public void setFileSize(Double fileSize) {
+	public void setFileSize(long fileSize) {
 		this.fileSize = fileSize;
 	}
 

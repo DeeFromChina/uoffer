@@ -45,9 +45,9 @@ public class BaseDataManagerAction extends TinyBuilderController {
 			String action = form.get("action").toString();
 			
 			if("addJob".equalsIgnoreCase(action)) forward=addJob();
-			if("getJob".equalsIgnoreCase(action)) forward=getJob();
-			if("getCity".equalsIgnoreCase(action)) forward=getCity();
-			if("getSkill".equalsIgnoreCase(action)) forward=getSkill();
+			else if("getJob".equalsIgnoreCase(action)) forward=getJob();
+			else if("getCity".equalsIgnoreCase(action)) forward=getCity();
+			else if("getSkill".equalsIgnoreCase(action)) forward=getSkill();
 			
 			return toJson(forward);
 		} catch (Exception e) {

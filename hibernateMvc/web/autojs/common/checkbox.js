@@ -123,44 +123,6 @@ function selectChkLimit1(obj,formId,type,isMultiselect){
 	});
 }
 
-//function addCheckBox(obj,formId,haveCheckBox,isMultiselect){
-////	var data = '[{"title":"中餐","content":[{"title":"t1","content":"","type":"title"}],"type":"title"}';
-////	data += ',{"title":"西餐","type":"title","content":[{"title":"t2"}]}]';
-////	var obj = eval('(' + data + ')');
-//	var str = "";
-//	if(obj == undefined){
-//		return;
-//	}
-//	if(obj[0] != undefined){
-//		for(var i = 0; i < obj.length; i++){
-//			str += appendCheckBoxTitle(obj[i],formId,haveCheckBox);
-//		}
-//	}else{
-//		str += appendCheckBoxTitle(obj,formId,haveCheckBox);
-//	}
-//	$("#"+formId).append(str);
-//	$('.hiddenCheckBox').click(function(){
-//		var ischecked = false;
-//		if($(this).parent().hasClass("checked")){
-//			$(this).parent().removeClass("checked");
-//		}else{
-//			$(this).parent().addClass("checked");
-//			ischecked = true;
-//		}
-//		if(!isMultiselect){
-//			$('.hiddenCheckBox').each(function(){
-//				if($(this).parent().hasClass("checked")){
-//					$(this).parent().removeClass("checked");
-//				}
-//			});
-//			if(ischecked){
-//				$(this).parent().addClass("checked");
-//			} 
-//		}
-//	});
-//}
-
-
 var count = 0;
 function appendCheckBoxTitle(obj,name,haveCheckBox){
 	var str = "";

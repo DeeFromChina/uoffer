@@ -71,7 +71,9 @@ public class EncodeUtil {
 				}
 			}
 		}
-		return Integer.valueOf(id.toString());
+		int rid = 0;
+		rid = Integer.valueOf(id.toString());
+		return rid;
 	}
 	
 	private static char returnAsciiCode(int i){

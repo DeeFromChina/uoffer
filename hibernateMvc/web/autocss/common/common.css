@@ -149,7 +149,7 @@ button > font {
 .formBtnGroup{
 	width:100%;
 	position:fixed;
-	bottom:0;
+	bottom:10;
 	text-align:center;
 }
 .rightImg{
@@ -243,4 +243,11 @@ button > font {
 .modal-body {
     position: relative;
     padding : 0px;
+}
+.openWindowBtn{
+	font-size:14px;
+	width: 100px;
+	height:41px;
+	background-color: #00B38A;
+	border-color: #00B38A;
 }

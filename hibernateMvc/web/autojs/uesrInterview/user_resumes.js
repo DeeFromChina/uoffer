@@ -1,5 +1,5 @@
 function init() {
-	$("#userphoto").attr("src",window.top.document.getElementById("userImg").src);
+	$("#photoReview").attr("src",window.top.document.getElementById("userImg").src);
 	$("#username").append(loadValue("username"));
 	$("#phone").append(loadValue("phone"));
 	$("#email").append(loadValue("email"));
@@ -34,6 +34,15 @@ function addUserResumeDiv(items){
 	}
 	$("#resumeList").append(str);
 }
-function changeImg(){
+function userPhotoUpload(){
+	var path = $("#photoReview").attr('src');
+	var url = "common/photoUpload.jsp?type=userPhoto&path="+path;
+	var title = "上传头像";
+	var width = "500";
+	var height = "400";
+	var pageId = "photoUpload";
+	openWindow(pageId,url,title,width,height);
+}
+function closeListener(){
 	
 }

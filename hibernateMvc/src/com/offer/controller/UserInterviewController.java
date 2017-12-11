@@ -44,6 +44,7 @@ public class UserInterviewController extends TinyBuilderController {
 		}
 		return toJson(SUCCESS);
 	}
+	
 	private Object getTop(){
 		Map<String, Object> titleMap = new HashMap<String, Object>();
 		

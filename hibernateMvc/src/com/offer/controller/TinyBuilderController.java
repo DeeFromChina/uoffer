@@ -20,6 +20,7 @@ import com.offer.util.RedisJava;
 public class TinyBuilderController{
 
 	public HttpSession httpSession;
+	public static String FILE_PATH = "";
 	
 	public List<Map<String, Object>> homeList = new ArrayList<Map<String, Object>>();
 	public Map<String, Object> form = new HashMap<String, Object>();
@@ -51,6 +52,9 @@ public class TinyBuilderController{
 		if(request == null){
 			return "request error";
 		}
+		if("".equals(FILE_PATH)){
+			FILE_PATH = request.getSession().getServletContext().getRealPath("");
+		}
 		Map<String, String[]> map = request.getParameterMap();
 		if(map == null){
 			return "map error";
@@ -74,7 +78,9 @@ public class TinyBuilderController{
 			}
 			form.put(entry.getKey(), entry.getValue()[0]);
 		}
-		putToForm(data);
+		if(data != null){
+			putToForm(data);
+		}
 		httpSession = request.getSession();
 		user = (User) httpSession.getAttribute("user");
 		return SUCCESS;

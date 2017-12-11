@@ -1,9 +1,3 @@
-var urlPrefix = window.location.origin;
-var jspPath = urlPrefix+"/hibernateMvc/autojsp/";
-var rootPath = urlPrefix+"/hibernateMvc/";
-var doc = document;
-var map = {};
-
 $(".dropdown .form-control").click(function(){
 	if(this.parentNode.getElementsByTagName("button") == undefined){
 		return;
@@ -442,4 +436,31 @@ function clearSelection() {
 	 		$(this).replaceWith($(this).html());
 	 	});
  	});
+}
+//预览图片
+function review(targetId,reviewId){
+	var docObj=document.getElementById(targetId);
+	var imgObjPreview=document.getElementById(reviewId);
+	if(!checkFile(targetId,"photo")){
+		return;
+	}
+	//files属性：返回一个 Files 集合，由指定文件夹中包含的所有 File 对象组成，包括设置了隐藏和系统文件属性的文件。
+	if(docObj.files && docObj.files[0]){
+		imgObjPreview.src = window.URL.createObjectURL(docObj.files[0]);
+	}else{
+		//IE下，使用滤镜
+		docObj.select();
+		var imgSrc = document.selection.createRange().text;
+		//图片异常的捕捉，防止用户修改后缀来伪造图片    
+		try{
+			imgObjPreview.style.filter="progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale)";
+			imgObjPreview.filters.item("DXImageTransform.Microsoft.AlphaImageLoader").src = imgSrc;
+		}
+		catch(e)
+		{
+			$("#"+targetId).val("");
+			alert("您上传的图片格式不正确，请重新选择!");
+		}
+		document.selection.empty();
+	}
 }

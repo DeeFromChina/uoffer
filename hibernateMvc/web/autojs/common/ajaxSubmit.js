@@ -52,7 +52,7 @@ $.fn.populateForm = function(data){
 };
 
 function ajaxSumbit(urllink, formId) {
-	var link = "/hibernateMvc/" + urllink;
+	var link = projectName + urllink;
 	var formIndex = "";
 	if(formId != undefined){
 		formIndex = "#" + formId;
@@ -108,4 +108,56 @@ function ajaxSumbit(urllink, formId) {
         }
 	});
 	return dataResult;
+}
+function fileUpload(urllink, files) {  
+	var link = projectName + urllink;
+	var dataResult;
+    $.ajaxFileUpload( {  
+        url : link,     //用于文件上传的服务器端请求地址    
+        secureuri : false,            //一般设置为false    
+        fileElementId : files,        //文件上传的id属性  <input type="file" id="file" name="file" />
+        dataType : 'json',            //返回值类型 一般设置为json    
+        type : 'POST',
+        success : function(result) {
+        	console.log("1");
+        	console.log(link);
+        	console.log(result);
+        	if(result == undefined){
+        		alert("数据错误！");
+        	}
+        	if(result == 'unlogin'){
+        		alert("请重新登陆！");
+        		top.location.href = rootPath+"index.jsp";
+        	}
+        	if(result.msg != undefined){
+        		alert(result.msg);
+        		dataResult = undefined;
+        		return;
+        	}
+        	if(result.status == '1'){
+        		alert("数据错误！");
+        	}
+        	if(result.status == '2'){
+        		if(result.data[2].toString() != ''){
+        			alert(result.data[2]);
+        		}
+        		map["param"] = result.data[1];
+        		parent.$('#mainFrame').attr("src",jspPath+result.data[0]);
+        	}
+        	if(result.status == '3'){
+        		if(result.data[2].toString() != ''){
+        			alert(result.data[2]);
+        		}
+        		map["param"] = result.data[1];
+        		top.location.href = jspPath+result.data[0];
+        	}
+        	dataResult = result.data;
+        	if(dataResult == 'normal'){
+        		dataResult = undefined;
+        		return;
+        	}
+        }  
+    });
+    console.log("2");
+    return dataResult;
 }
