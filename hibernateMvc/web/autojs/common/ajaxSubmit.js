@@ -118,10 +118,10 @@ function fileUpload(urllink, files) {
         fileElementId : files,        //文件上传的id属性  <input type="file" id="file" name="file" />
         dataType : 'json',            //返回值类型 一般设置为json    
         type : 'POST',
+        error: function(result) {
+            alert("Connection error");
+        },
         success : function(result) {
-        	console.log("1");
-        	console.log(link);
-        	console.log(result);
         	if(result == undefined){
         		alert("数据错误！");
         	}
@@ -158,6 +158,5 @@ function fileUpload(urllink, files) {
         	}
         }  
     });
-    console.log("2");
     return dataResult;
 }

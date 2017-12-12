@@ -24,7 +24,7 @@ public class InitDataLoadFilter {
 		BaseUtil.findFiles(sqlPath, "sql_*.xml", resultList, 5000);
 		for(String path : resultList){
 			try {
-				InitSqlXml.init(initData,path);
+				InitSqlXml.init(initData,path,"sql");
 			} catch (Exception e) {
 				e.printStackTrace();
 			}

@@ -9,5 +9,6 @@ http://www.springframework.org/schema/context/spring-context-3.0.xsd
 	<context:property-placeholder location="/spring/config.properties" />
 	
 	<bean class="com.offer.interceptor.InitDataLoadFilter"/>
+	<bean class="com.offer.interceptor.InitTypeMappingFilter"/>
 
 </beans>

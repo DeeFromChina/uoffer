@@ -169,7 +169,7 @@ jQuery.extend({
         // Timeout checker
         if ( s.timeout > 0 ) 
 		{
-            setTimeout(function(){
+            setTimeout(function(){console.log("setTimeout");
                 // Check to see if the request is still happening
                 if( !requestDone ) uploadCallback( "timeout" );
             }, s.timeout);
@@ -195,7 +195,12 @@ jQuery.extend({
 		{			
             jQuery.handleError(s, xml, null, e);
         }
-		
+        if(window.attachEvent){
+            document.getElementById(frameId).attachEvent('onload', uploadCallback);
+        }
+        else{
+            document.getElementById(frameId).addEventListener('load', uploadCallback, false);
+        } 
 		//jQuery('#' + frameId).load(uploadCallback);
         return {abort: function(){
 			try
@@ -218,8 +223,8 @@ jQuery.extend({
         if ( type == "json" )
             //eval( "data = " + data );
         	//data会被加<pre>导致ajax不走success方法,改成如下形式
-        	eval( "data = \" " + data + " \" " );
-//        	data = jQuery.parseJSON(jQuery(data).text());
+        	//eval( "data = \" " + data + " \" " );
+        	data = JSON.parse(jQuery(data).text());
         // evaluate scripts within html
         if ( type == "html" )
             jQuery("<div>").html(data).evalScripts();

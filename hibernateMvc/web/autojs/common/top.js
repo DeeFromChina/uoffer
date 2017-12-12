@@ -6,7 +6,7 @@ window.onresize=function(){
 function init(){
 	setSrc('loginImg','U-Offerlogo.png');
 	changBottomDiv();
-	var url = "userData.do?action=getTop";
+	var url = "baseData.do?action=getTop";
 	var data = ajaxSumbit(url);
 	var centerTitle = jQuery.parseJSON(data.centerTitle);
 	var userImg = jQuery.parseJSON(data.userImg);
@@ -16,8 +16,11 @@ function init(){
 	saveValue("phone",data.information.phone);
 	saveValue("email",data.information.email);
 	saveValue("username",data.information.username);
+	saveValue("userid",data.information.userid);
 	var url = "";
 	if(data.type == "1"){
+		url = "userData.do?action=userToPage";
+	}else if(data.type == "2"){
 		url = "userData.do?action=userToPage";
 	}
 	var data = ajaxSumbit(url);

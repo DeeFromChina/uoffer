@@ -53,7 +53,7 @@ public class TinyBuilderController{
 			return "request error";
 		}
 		if("".equals(FILE_PATH)){
-			FILE_PATH = request.getSession().getServletContext().getRealPath("");
+			FILE_PATH = request.getSession().getServletContext().getRealPath("/upload/");
 		}
 		Map<String, String[]> map = request.getParameterMap();
 		if(map == null){

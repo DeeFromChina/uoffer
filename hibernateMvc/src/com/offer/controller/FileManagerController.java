@@ -1,16 +1,13 @@
 package com.offer.controller;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.Date;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.fileupload.disk.DiskFileItem;
-import org.codehaus.jackson.JsonGenerationException;
-import org.codehaus.jackson.map.JsonMappingException;
-import org.codehaus.jackson.map.ObjectMapper;
+import org.codehaus.jackson.annotate.JsonAnyGetter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,7 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
-import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson.JSON;
 import com.offer.model.baseData.FileTable;
 import com.offer.service.baseData.FileTableService;
 import com.offer.util.EncodeUtil;
@@ -33,8 +30,7 @@ public class FileManagerController extends TinyBuilderController {
 
 	@ResponseBody
 	@RequestMapping(value = "/fileManager", produces = "application/json")
-	public String doAction(HttpServletRequest request, @RequestParam("uploadFile") MultipartFile[] files) {
-		ObjectMapper objectMapper = new ObjectMapper();
+	public Map<String, Object> doAction(HttpServletRequest request, @RequestParam("uploadFile") MultipartFile[] files) {
 		try {
 			setMap(request, null);
 			Object forward = null;
@@ -43,11 +39,11 @@ public class FileManagerController extends TinyBuilderController {
 			if("fileUpload".equalsIgnoreCase(action)) forward = fileUpload(files);
 			else if("fileDel".equalsIgnoreCase(action)) forward = fileDel();
 			
-			return objectMapper.writeValueAsString(toJson(forward));
+			return toJson(forward);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return "";
+		return null;
 	}
 	
 	private Object fileUpload(MultipartFile[] files){
@@ -62,10 +58,19 @@ public class FileManagerController extends TinyBuilderController {
 				String tableName = returnString(form.get("tableName"));
 				int tableId = EncodeUtil.changeId(returnString(form.get("tableId")));
 				
+				File dirFile = new File(filePath);
+				if(!dirFile.exists() || !dirFile.isDirectory()){
+					dirFile.mkdirs();
+				}
+				
 				for(MultipartFile file : files){
-					CommonsMultipartFile cf= (CommonsMultipartFile)file; 
-					DiskFileItem fi = (DiskFileItem)cf.getFileItem(); 
-					File f = fi.getStoreLocation();
+//					无效
+//					CommonsMultipartFile cf= (CommonsMultipartFile)file; 
+//					DiskFileItem fi = (DiskFileItem)cf.getFileItem(); 
+//					File f = fi.getStoreLocation();
+//					if(!f.exists()){
+//						continue;
+//					}
 					
 					String endless = file.getOriginalFilename().substring(file.getOriginalFilename().indexOf("."));
 					String cName = String.valueOf(System.currentTimeMillis());
@@ -82,19 +87,21 @@ public class FileManagerController extends TinyBuilderController {
 					fileTable.setFilePath(filePath + cName + endless);
 					fileTable.setTableId(tableId);
 					fileTable.setTableName(tableName);
-					fileTableService.saveFileTable(fileTable);
-					
-//					FileUtils.fileUpload(filePath + cName + endless, f);
+					fileTableService.uploadFileTable(fileTable, file, filePath + cName + endless);
 				}
+				return SUCCESS;
 			} catch (Exception e) {
 				e.printStackTrace();
 				return addMessage(e.getMessage());
 			}
-			return NORMAL;
 		}
 	}
 	
 	private Object fileDel(){
+		return null;
+	}
+	
+	private Object test(){
 		return null;
 	}
 }

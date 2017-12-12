@@ -35,8 +35,9 @@ function addUserResumeDiv(items){
 	$("#resumeList").append(str);
 }
 function userPhotoUpload(){
+	var tableId = loadValue("userid");
 	var path = $("#photoReview").attr('src');
-	var url = "common/photoUpload.jsp?type=userPhoto&path="+path;
+	var url = "common/photoUpload.jsp?tableName=user&tableId="+tableId+"&type=userPhoto&path="+path;
 	var title = "上传头像";
 	var width = "500";
 	var height = "400";

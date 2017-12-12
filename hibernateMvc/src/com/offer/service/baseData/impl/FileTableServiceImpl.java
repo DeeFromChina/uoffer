@@ -1,14 +1,17 @@
 package com.offer.service.baseData.impl;
 
+import java.io.File;
 import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.offer.dao.common.BaseDao;
 import com.offer.model.baseData.FileTable;
 import com.offer.service.baseData.FileTableService;
+import com.offer.util.FileUtils;
 
 @Service("fileTableService")
 public class FileTableServiceImpl implements FileTableService{
@@ -38,6 +41,14 @@ public class FileTableServiceImpl implements FileTableService{
 	@Override
 	public void updateFileTable(FileTable fileTable) throws Exception {
 		baseDao.update(fileTable);
+	}
+	
+	@Override
+	public void uploadFileTable(FileTable fileTable, MultipartFile file, String FileName) throws Exception {
+		baseDao.save(fileTable);
+		FileUtils.MultipartFileUpload(file, FileName);
+		
+		
 	}
 
 }

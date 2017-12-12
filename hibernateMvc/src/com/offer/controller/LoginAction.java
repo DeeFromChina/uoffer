@@ -32,17 +32,12 @@ public class LoginAction extends TinyBuilderController{
 			
 			if("login".equalsIgnoreCase(action)) forward = login();
 			else if("register".equalsIgnoreCase(action)) forward = register();
-			else if("fileUpload".equalsIgnoreCase(action)) forward = fileUpload();
 			
 			return toJson(forward);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return toJson(SUCCESS);
-	}
-	
-	private Object fileUpload(){
-		return null;
 	}
 
 	private Object login() {
