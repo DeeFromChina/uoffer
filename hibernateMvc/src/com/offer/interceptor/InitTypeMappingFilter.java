@@ -8,13 +8,13 @@ import java.util.Map;
 import javax.annotation.PostConstruct;
 
 import com.offer.util.BaseUtil;
-import com.offer.util.InitSqlXml;
+import com.offer.util.InitMappingXml;
 
 public class InitTypeMappingFilter {
 
 private String FILE_PATH = this.getClass().getClassLoader().getResource("").getPath();
 	
-	public static Map<String, String> initTypeMapping = new HashMap<String, String>();
+	public static Map<String, Object> initTypeMapping = new HashMap<String, Object>();
 	
 	@PostConstruct 
 	public void initData() {
@@ -24,7 +24,7 @@ private String FILE_PATH = this.getClass().getClassLoader().getResource("").getP
 		BaseUtil.findFiles(sqlPath, "mapping_*.xml", resultList, 5000);
 		for(String path : resultList){
 			try {
-				InitSqlXml.init(initTypeMapping,path,"mapping");
+				InitMappingXml.init(initTypeMapping,path);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}

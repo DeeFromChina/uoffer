@@ -63,6 +63,10 @@ public class BaseUtil {
 		return null;
 	}
 	
+	public static Object[] returnObjects(Object...objects){
+		return objects;
+	}
+	
 	public static boolean isEmail(Object obj){
 		try {
 			if(obj != null){

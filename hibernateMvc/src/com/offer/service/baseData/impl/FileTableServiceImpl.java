@@ -47,8 +47,11 @@ public class FileTableServiceImpl implements FileTableService{
 	public void uploadFileTable(FileTable fileTable, MultipartFile file, String FileName) throws Exception {
 		baseDao.save(fileTable);
 		FileUtils.MultipartFileUpload(file, FileName);
-		
-		
+	}
+	
+	@Override
+	public void test(String t, Integer i) throws Exception {
+		System.out.println(t+i.toString());
 	}
 
 }
