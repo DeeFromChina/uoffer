@@ -17,7 +17,6 @@ public interface FileTableService {
 	
 	public void updateFileTable(FileTable fileTable) throws Exception;
 	
-	public void uploadFileTable(FileTable fileTable, MultipartFile file, String FileName) throws Exception;
+	public void uploadFileTable(Map<String, Object> form, MultipartFile[] files) throws Exception;
 	
-	public void test(String t, Integer i) throws Exception;
 }

@@ -106,6 +106,17 @@ public class BaseUtil {
 		return false;
 	}
 	
+	public static void checkRequired(Object... params) throws Exception {
+		for(int i = 0; i < params.length; i++){
+			if(params[i] == null){
+				throw new Exception(params[i]+"不能为空!");
+			}
+			else if("".equals(params[i])){
+				throw new Exception(params[i]+"不能为空!");
+			}
+		}
+	}
+	
 	public static void mapToObject(Object target, Map src)
 			throws Exception {
 		if (src == null || target == null){

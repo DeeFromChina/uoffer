@@ -52,43 +52,10 @@ public class FileManagerController extends TinyBuilderController {
 		}else{
 			try {
 				checkRequired("type", "tableName", "tableId");
-				
-				String date = sdf.format(new Date());
-				String filePath = FILE_PATH + File.separator + form.get("type") + File.separator + date + File.separator;
-				String tableName = returnString(form.get("tableName"));
-				int tableId = EncodeUtil.changeId(returnString(form.get("tableId")));
-				
-				File dirFile = new File(filePath);
-				if(!dirFile.exists() || !dirFile.isDirectory()){
-					dirFile.mkdirs();
-				}
-				
-				for(MultipartFile file : files){
-//					无效
-//					CommonsMultipartFile cf= (CommonsMultipartFile)file; 
-//					DiskFileItem fi = (DiskFileItem)cf.getFileItem(); 
-//					File f = fi.getStoreLocation();
-//					if(!f.exists()){
-//						continue;
-//					}
-					
-					String endless = file.getOriginalFilename().substring(file.getOriginalFilename().indexOf("."));
-					String cName = String.valueOf(System.currentTimeMillis());
-					String fileRealName = file.getOriginalFilename();
-					
-					FileTable fileTable = new FileTable();
-					fileTable.setFileType(returnString(form.get("type")));
-					fileTable.setFileNewName(cName+endless);
-					fileTable.setCreateTime(new Date());
-					fileTable.setFileSize(file.getSize());
-					fileTable.setFileSuffix(endless);
-					fileTable.setFileRealName(fileRealName);
-					fileTable.setCreateUserId(user.getId());
-					fileTable.setFilePath(filePath + cName + endless);
-					fileTable.setTableId(tableId);
-					fileTable.setTableName(tableName);
-					fileTableService.uploadFileTable(fileTable, file, filePath + cName + endless);
-				}
+				form.put("FILE_PATH", FILE_PATH);
+				form.put("type", returnString(form.get("type")));
+				form.put("userId", user.getId());
+				fileTableService.uploadFileTable(form, files);
 				return SUCCESS;
 			} catch (Exception e) {
 				e.printStackTrace();

@@ -12,14 +12,13 @@ import com.offer.util.InitMappingXml;
 
 public class InitTypeMappingFilter {
 
-private String FILE_PATH = this.getClass().getClassLoader().getResource("").getPath();
+	private String FILE_PATH = this.getClass().getClassLoader().getResource("").getPath();
 	
 	public static Map<String, Object> initTypeMapping = new HashMap<String, Object>();
 	
-	@PostConstruct 
 	public void initData() {
-		FILE_PATH = FILE_PATH.replace("WEB-INF/classes/properties", "");
-		String sqlPath = FILE_PATH + "sql";
+		FILE_PATH = FILE_PATH.replace("WEB-INF/classes/", "");
+		String sqlPath = FILE_PATH + "properties";
 		List<String> resultList = new ArrayList<String>();
 		BaseUtil.findFiles(sqlPath, "mapping_*.xml", resultList, 5000);
 		for(String path : resultList){

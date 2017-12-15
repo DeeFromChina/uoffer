@@ -1,9 +1,0 @@
-<xml>
-	<mappingGroup id="FileTable">
-		<mapping id="save" class="com.offer.service.baseData.impl.FileTableServiceImpl" method="test" />
-	</mappingGroup>
-	
-	<mappingGroup id="FileTable2">
-		<mapping id="save" class="com.offer.controller.FileManagerController" method="test" />
-	</mappingGroup>
-</xml>

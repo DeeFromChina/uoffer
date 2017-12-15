@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.offer.dao.common.BaseDao;
+import com.offer.model.baseData.FileTable;
 import com.offer.model.userData.User;
 import com.offer.model.userData.UserResume;
 import com.offer.model.util.CheckBox;
@@ -127,6 +128,16 @@ public class UserServiceImpl implements UserService {
 			map.put("param", "6");
 		}
 		return map;
+	}
+	
+	@Override
+	public void updateUserPhoto(List<FileTable> fileTables, Map<String, Object> form) throws Exception{
+		if(fileTables.size() == 0){
+			return;
+		}
+		FileTable fileTable = fileTables.get(0);
+		String sql = "DELETE FROM file_table WHERE table_id = " + fileTable.getTableId() + " AND id != " + fileTable.getId();
+		baseDao.deleteBySql(sql);
 	}
 
 }

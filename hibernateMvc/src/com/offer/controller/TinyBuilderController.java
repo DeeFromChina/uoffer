@@ -210,7 +210,7 @@ public class TinyBuilderController{
 			if(form.get(params[i]) == null){
 				throw new Exception(params[i]+"不能为空!");
 			}
-			if("".equals(form.get(params[i]))){
+			else if("".equals(form.get(params[i]))){
 				throw new Exception(params[i]+"不能为空!");
 			}
 		}

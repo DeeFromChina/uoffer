@@ -1,0 +1,5 @@
+<xml>
+	<mappingGroup id="User">
+		<mapping id="updateUserPhoto" class="com.offer.service.userData.impl.UserServiceImpl" method="updateUserPhoto" />
+	</mappingGroup>
+</xml>

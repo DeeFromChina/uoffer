@@ -2,7 +2,6 @@ package com.offer.util;
 
 import java.io.File;
 import java.lang.reflect.Method;
-import java.lang.reflect.Type;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -20,18 +19,18 @@ import com.offer.interceptor.InitTypeMappingFilter;
 
 public class InitMappingXml {
 
-	public static void main(String[] args){
-		String systemPath = System.getProperty("user.dir");
-		String path = systemPath+"\\web\\WEB-INF\\classes\\properties\\mapping_FileTable.xml";
-		Map<String, Object> map = new HashMap<String, Object>();
-		try {
-			init(map, path);
-			InitTypeMappingFilter.initTypeMapping.putAll(map);
-			mappingValue("FileTable", "save", "test1", "345");
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
+//	public static void main(String[] args){
+//		String systemPath = System.getProperty("user.dir");
+//		String path = systemPath+"\\web\\WEB-INF\\classes\\properties\\mapping_FileTable.xml";
+//		Map<String, Object> map = new HashMap<String, Object>();
+//		try {
+//			init(map, path);
+//			InitTypeMappingFilter.initTypeMapping.putAll(map);
+//			mappingValue("FileTable", "save", "test1", "345");
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//	}
 	
 	public static void init(Map<String, Object> map, String path) throws Exception {
 		try {
@@ -132,7 +131,6 @@ public class InitMappingXml {
 					if(CorrectParam(method, objects, groupId, mappingId, mappingClass, mappingMethod)){
 						method.invoke(o, objects);
 					}
-					
 				}
 			}
 		} catch (Exception e) {

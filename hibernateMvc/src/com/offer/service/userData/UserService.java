@@ -3,6 +3,7 @@ package com.offer.service.userData;
 import java.util.List;
 import java.util.Map;
 
+import com.offer.model.baseData.FileTable;
 import com.offer.model.userData.User;
 import com.offer.model.util.CheckBox;
 import com.offer.model.util.Tree;
@@ -28,4 +29,6 @@ public interface UserService {
 	public User getByAccount(String account, String password) throws Exception;
 	
 	public Map<String, String> checkUserResume(int userId) throws Exception;
+	
+	public void updateUserPhoto(List<FileTable> fileTables, Map<String, Object> form) throws Exception;
 }
