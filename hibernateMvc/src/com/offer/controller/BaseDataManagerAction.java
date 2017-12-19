@@ -79,7 +79,7 @@ public class BaseDataManagerAction extends TinyBuilderController {
 			Map<String, Object> param = new HashMap<String, Object>();
 			param.put("tableName", "user");
 			param.put("tableId", user.getId());
-			param.put("fileType", "photo");
+			param.put("fileType", "userPhoto");
 			FileTable fileTable = fileTableService.findFileTable(param);
 			if(!BaseUtil.isNull(fileTable)){
 				userIcon = fileTable.getFilePath();

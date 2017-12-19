@@ -9,8 +9,16 @@ function goSubmit(){
 	var tableName = map["tableName"];
 	var tableId = map["tableId"];
 	var type = map["type"];
-	var url = "fileManager.do?action=fileUpload"+"&tableName="+tableName+"&tableId="+tableId+"&type="+type;
+	var data = "";
+	if(map["mapping"] != undefined){
+		data = "&mappingGroup="+map["mappingGroup"]+"&mapping="+map["mapping"];
+	}
+	var url = "fileManager.do?action=fileUpload"+"&type="+type+data+"&tableName="+tableName+"&tableId="+tableId;
 	var files = ['uploadFile'];
-	var data = fileUpload(url, files);
-	return data;
+	fileUpload(url, files, 1);
+}
+function goSuccess(data, index){
+	if(index == 1){
+		console.log(data);
+	}
 }

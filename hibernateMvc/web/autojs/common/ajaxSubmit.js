@@ -51,10 +51,10 @@ $.fn.populateForm = function(data){
     });
 };
 
-function ajaxSumbit(urllink, formId) {
+function ajaxSumbit(urllink, formId, index) {
 	var link = projectName + urllink;
 	var formIndex = "";
-	if(formId != undefined){
+	if(formId != undefined && formId != ""){
 		formIndex = "#" + formId;
 	}
 	var dataResult;
@@ -71,45 +71,11 @@ function ajaxSumbit(urllink, formId) {
         success: function(result) {
         	console.log(link);
         	console.log(result);
-        	if(result == undefined){
-        		alert("数据错误！");
-        	}
-        	if(result == 'unlogin'){
-        		alert("请重新登陆！");
-        		top.location.href = rootPath+"index.jsp";
-        	}
-        	if(result.msg != undefined){
-        		alert(result.msg);
-        		dataResult = undefined;
-        		return;
-        	}
-        	if(result.status == '1'){
-        		alert("数据错误！");
-        	}
-        	if(result.status == '2'){
-        		if(result.data[2].toString() != ''){
-        			alert(result.data[2]);
-        		}
-        		map["param"] = result.data[1];
-        		parent.$('#mainFrame').attr("src",jspPath+result.data[0]);
-        	}
-        	if(result.status == '3'){
-        		if(result.data[2].toString() != ''){
-        			alert(result.data[2]);
-        		}
-        		map["param"] = result.data[1];
-        		top.location.href = jspPath+result.data[0];
-        	}
-        	dataResult = result.data;
-        	if(dataResult == 'normal'){
-        		dataResult = undefined;
-        		return;
-        	}
+        	returnSuccess(link,formId,index,result);
         }
 	});
-	return dataResult;
 }
-function fileUpload(urllink, files) {  
+function fileUpload(urllink, files, index) {  
 	var link = projectName + urllink;
 	var dataResult;
     $.ajaxFileUpload( {  
@@ -122,41 +88,48 @@ function fileUpload(urllink, files) {
             alert("Connection error");
         },
         success : function(result) {
-        	if(result == undefined){
-        		alert("数据错误！");
-        	}
-        	if(result == 'unlogin'){
-        		alert("请重新登陆！");
-        		top.location.href = rootPath+"index.jsp";
-        	}
-        	if(result.msg != undefined){
-        		alert(result.msg);
-        		dataResult = undefined;
-        		return;
-        	}
-        	if(result.status == '1'){
-        		alert("数据错误！");
-        	}
-        	if(result.status == '2'){
-        		if(result.data[2].toString() != ''){
-        			alert(result.data[2]);
-        		}
-        		map["param"] = result.data[1];
-        		parent.$('#mainFrame').attr("src",jspPath+result.data[0]);
-        	}
-        	if(result.status == '3'){
-        		if(result.data[2].toString() != ''){
-        			alert(result.data[2]);
-        		}
-        		map["param"] = result.data[1];
-        		top.location.href = jspPath+result.data[0];
-        	}
-        	dataResult = result.data;
-        	if(dataResult == 'normal'){
-        		dataResult = undefined;
-        		return;
-        	}
+        	console.log(link);
+        	console.log(result);
+        	returnSuccess(link,formId,index,result);
         }  
     });
-    return dataResult;
+}
+function returnSuccess(link,formId,index,result){
+	if(result == undefined){
+		alert("数据错误！");
+	}
+	if(result == 'unlogin'){
+		alert("请重新登陆！");
+		top.location.href = rootPath+"index.jsp";
+	}
+	if(result.msg != undefined){
+		alert(result.msg);
+		dataResult = undefined;
+		return;
+	}
+	if(result.status == '1'){
+		alert("数据错误！");
+	}
+	if(result.status == '2'){
+		if(result.data[2].toString() != ''){
+			alert(result.data[2]);
+		}
+		map["param"] = result.data[1];
+		parent.$('#mainFrame').attr("src",jspPath+result.data[0]);
+	}
+	if(result.status == '3'){
+		if(result.data[2].toString() != ''){
+			alert(result.data[2]);
+		}
+		map["param"] = result.data[1];
+		top.location.href = jspPath+result.data[0];
+	}
+	dataResult = result.data;
+	if(dataResult == 'normal'){
+		dataResult = undefined;
+		return;
+	}
+	if(index != undefined){
+		goSuccess(dataResult, index);
+	}
 }

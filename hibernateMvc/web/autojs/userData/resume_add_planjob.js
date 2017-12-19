@@ -1,9 +1,7 @@
 var userResumeId = loadValue("userResumeId");
 function init() {
 	var url = "baseData.do?action=getCity";
-	var data = ajaxSumbit(url);
-	selectChkLimit1(data,"cityMeum","1",true);
-	checkedLister("cityMeum",2,"selectCity()");
+	ajaxSumbit(url, "", 1);
 	
 	setList("companyNature","请选择公司性质",jQuery.parseJSON(companyNature),0,"","w340");
 	setList("companyScale","请选择公司规模",jQuery.parseJSON(companyScale),0,"","w340");
@@ -41,11 +39,18 @@ function goNext(){
 	setValue();
 	var url = "userData.do?action=userPlanjob";
 	var formId = "dataForm";
-	var data = ajaxSumbit(url,formId);
-	saveValue("userResumeId",data);
+	ajaxSumbit(url,formId,2);
 	$(window.parent.document.getElementById("page3")).click();
 }
 //上一步
 function goBack(){
 	$(window.parent.document.getElementById("page1")).click();
+}
+function goSuccess(data, index){
+	if(index == 1){
+		selectChkLimit1(data,"cityMeum","1",true);
+		checkedLister("cityMeum",2,"selectCity()");
+	}else if(index == 2){
+		saveValue("userResumeId",data);
+	}
 }

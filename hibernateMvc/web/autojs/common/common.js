@@ -277,8 +277,12 @@ function dataFormVcenter(ispad){
 		$('#dataForm').css("padding-bottom",bh);
 	}
 }
-function setSrc(id,path){
-	path = rootPath+"img/" + path;
+function setSrc(id,path,isbase){
+	if(isbase != undefined){
+		path = rootPath + path;
+	}else{
+		path = rootPath+"img/" + path;
+	}
 	$('#'+id).attr('src',path);
 }
 /**

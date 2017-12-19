@@ -5,12 +5,16 @@ function init() {
 	$("#email").append(loadValue("email"));
 	
 	var url = "userInterview.do?action=userResumeList";
-	var data = ajaxSumbit(url);
-	addUserResumeDiv(data);
+	ajaxSumbit(url, "", 1);
 	
 	dataFormVcenter(false);
 	countFrameHeight();
 	parent.changeHeaderTitle();
+}
+function goSuccess(data, index){
+	if(index == 1){
+		addUserResumeDiv(data);
+	}
 }
 function addUserResumeDiv(items){
 	var str = "";
@@ -37,7 +41,8 @@ function addUserResumeDiv(items){
 function userPhotoUpload(){
 	var tableId = loadValue("userid");
 	var path = $("#photoReview").attr('src');
-	var url = "common/photoUpload.jsp?tableName=user&tableId="+tableId+"&type=userPhoto&path="+path;
+	var data = "&mappingGroup=User&mapping=updateUserPhoto";
+	var url = "common/photoUpload.jsp?tableName=user&tableId="+tableId+"&type=userPhoto&path="+path+data;
 	var title = "上传头像";
 	var width = "500";
 	var height = "400";

@@ -37,17 +37,7 @@ function init(){
 function setForm(){
 	var userExperienceId = map["userExperienceId"];
 	var url = "userData.do?action=queryUserExperience&userExperienceId="+userExperienceId;
-	var data = ajaxSumbit(url);
-	if(data == undefined){
-		return;
-	}
-	var startTime = getLocalTime(data.startTime,"yyyy-MM-dd");
-	var endTime = getLocalTime(data.endTime,"yyyy-MM-dd");
-	data.startTime = startTime;
-	data.endTime = endTime;
-	$("#dataForm").populateForm(data);
-	
-	setElementValue("level",data.level,'select');
+	ajaxSumbit(url, "", 1);
 }
 function selectJob(){
 	var url = "public/job_checkbox.jsp";
@@ -94,8 +84,22 @@ function goSubmit(){
 	}
 	var url = "userData.do?action=saveUserExperience&type="+type;
 	var formId = "dataForm";
-	var data = ajaxSumbit(url,formId);
-	var targetDocument = loadValue("userExperience");
-	targetDocument.getElementById("userResumeId").value = data;
+	ajaxSumbit(url, formId, 2);
 	closeWin("userExperience");
+}
+function goSuccess(data, index){
+	if(index == 1){
+		if(data == undefined){
+			return;
+		}
+		var startTime = getLocalTime(data.startTime,"yyyy-MM-dd");
+		var endTime = getLocalTime(data.endTime,"yyyy-MM-dd");
+		data.startTime = startTime;
+		data.endTime = endTime;
+		$("#dataForm").populateForm(data);
+		setElementValue("level",data.level,'select');
+	}else if(index == 2){
+		var targetDocument = loadValue("userExperience");
+		targetDocument.getElementById("userResumeId").value = data;
+	}
 }

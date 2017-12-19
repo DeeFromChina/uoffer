@@ -1,4 +1,5 @@
 var ishide = true;
+var skill = "";
 function init() {
 	getTran('1');
 	subWorkTime();
@@ -11,12 +12,22 @@ function init() {
 	setSrc('personlink','personlink.png');
 	
 	var url = "baseData.do?action=getJob";
-	var data = ajaxSumbit(url);
-	selectChkLimit1(data,"jobMeum","1",true);
-	checkedLister("jobMeum",2,"selectWorkTime()");
+	ajaxSumbit(url, "", 1);
 	
 	resizeFrame();
 	setForm();
+}
+function goSuccess(data, index){
+	if(index == 1){
+		selectChkLimit1(data,"jobMeum","1",true);
+		checkedLister("jobMeum",2,"selectWorkTime()");
+	}else if(index == 2){
+		setForm1(data);
+	}else if(index == 3){
+		setForm2(data)
+	}else if(index == 4){
+		saveValue("userResumeId",data);
+	}
 }
 function resizeFrame(){
 	if($("table[class^='mainDiv_table']").height() < parent.document.getElementById("iframe1").height){
@@ -35,7 +46,12 @@ function setForm(){
 	var userResumeId = loadValue("userResumeId");
 	$("#userResumeId").val(userResumeId);
 	var url = "userData.do?action=queryUserInformation&userResumeId="+userResumeId;
-	var data = ajaxSumbit(url);
+	ajaxSumbit(url, "", 2);
+	
+	url = "userData.do?action=queryUserResumeSkills&userResumeId="+userResumeId;
+	ajaxSumbit(url, "", 3);
+}
+function setForm1(data){
 	if(data == undefined){
 		return;
 	}
@@ -53,22 +69,20 @@ function setForm(){
 	if(!isNull(data.workTime2)){
 		setElementValue("workTime2",data.workTime2,'select');
 	}
-	var skill = "";
 	if(!isNull(data.otherSkill)){
 		skill += "other";
 		setElementValue("skillMeum","other",'checkbox');
 		selectOtherSkill();
 		$("#otherSkill").val(data.otherSkill);
 	}
-	
-	url = "userData.do?action=queryUserResumeSkills&userResumeId="+userResumeId;
-	var data2 = ajaxSumbit(url);
-	for(var i in data2){
+}
+function setForm2(data){
+	for(var i in data){
 		if(skill != ""){
 			skill += ",";
 		}
-		skill += data2.skillId;
-		setElementValue("skillMeum",data2.skillId,'checkbox');
+		skill += data.skillId;
+		setElementValue("skillMeum",data.skillId,'checkbox');
 	}
 	$("#skill").val(skill);
 }
@@ -166,7 +180,6 @@ function selectOtherSkill(){
 function goNext(){
 	var url = "userData.do?action=saveUserInformation";
 	var formId = "dataForm";
-	var data = ajaxSumbit(url,formId);
-	saveValue("userResumeId",data);
+	ajaxSumbit(url, formId, 4);
 	$(window.parent.document.getElementById("page2")).click();
 }

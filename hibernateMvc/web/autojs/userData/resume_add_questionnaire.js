@@ -106,5 +106,5 @@ function goSubmit(){
 	removeValue("userResumeId");
 	var url = "userData.do?action=userQuestion";
 	var formId = "dataForm";
-	data = ajaxSumbit(url,formId);
+	ajaxSumbit(url,formId);
 }

@@ -52,6 +52,7 @@ public class FileTableServiceImpl extends BaseServiceImpl implements FileTableSe
 	public void uploadFileTable(Map<String, Object> form, MultipartFile[] files) throws Exception {
 		
 		String FILE_PATH = form.get("FILE_PATH").toString();
+		FILE_PATH = FILE_PATH.substring(FILE_PATH.indexOf("\\upload"));
 		String date = sdf.format(new Date());
 		String filePath = FILE_PATH + File.separator + form.get("type") + File.separator + date + File.separator;
 		String tableName = form.get("tableName").toString();

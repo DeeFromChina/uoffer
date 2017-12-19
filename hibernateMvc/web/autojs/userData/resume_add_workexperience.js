@@ -18,22 +18,10 @@ function setValue(){
 function search(){
 	var userResumeId = $("#userResumeId").val();
 	var url = "userData.do?action=userExperienceList&type=work&userResumeId="+userResumeId;
-	var data = ajaxSumbit(url);
-	if(data == undefined){
-		return;
-	}
-	var str = addDiv(data,"work");
-	$("#workDiv").html("");
-	$("#workDiv").append(str);
+	ajaxSumbit(url, "", 1);
 	
 	url = "userData.do?action=userExperienceList&type=edu&userResumeId="+userResumeId;
-	data = ajaxSumbit(url);
-	if(data == undefined){
-		return;
-	}
-	str = addDiv(data,"edu");
-	$("#eduDiv").html("");
-	$("#eduDiv").append(str);
+	ajaxSumbit(url, "", 2);
 }
 function addDiv(items,type){
 	if(items == undefined){
@@ -155,7 +143,7 @@ function editForm(userExperienceId,type){
 }
 function delForm(userExperienceId){
 	var url = "userData.do?action=delUserExperience&userExperienceId="+userExperienceId;
-	var data = ajaxSumbit(url);
+	ajaxSumbit(url);
 	init();
 }
 function closeListener(){
@@ -165,12 +153,28 @@ function closeListener(){
 function goNext(){
 	var url = "userData.do?action=userExperience";
 	var formId = "dataForm";
-	var data = ajaxSumbit(url,formId);
+	ajaxSumbit(url,formId);
 	$(window.parent.document.getElementById("page4")).click();
 }
 //上一步
 function goBack(){
 	$(window.parent.document.getElementById("page2")).click();
 }
-
+function goSuccess(data, index){
+	if(index == 1){
+		if(data == undefined){
+			return;
+		}
+		var str = addDiv(data,"work");
+		$("#workDiv").html("");
+		$("#workDiv").append(str);
+	}else if(index == 2){
+		if(data == undefined){
+			return;
+		}
+		str = addDiv(data,"edu");
+		$("#eduDiv").html("");
+		$("#eduDiv").append(str);
+	}
+}
 

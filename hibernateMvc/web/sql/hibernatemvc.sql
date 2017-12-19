@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50051
 File Encoding         : 65001
 
-Date: 2017-12-01 18:26:52
+Date: 2017-12-19 19:39:42
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -82,19 +82,16 @@ CREATE TABLE `file_table` (
   `create_time` datetime default NULL,
   `create_user_id` int(11) default NULL,
   `file_suffix` varchar(50) default NULL,
-  `file_size` double default NULL,
+  `file_size` decimal(10,0) default NULL,
+  `file_type` varchar(255) default NULL,
   PRIMARY KEY  (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of file_table
 -- ----------------------------
-INSERT INTO `file_table` VALUES ('1', 'test', '12', null, null, null, null, null, null, null);
-INSERT INTO `file_table` VALUES ('2', 'test', '12', null, null, null, null, null, null, null);
-INSERT INTO `file_table` VALUES ('3', 't', '12', null, null, null, null, null, null, null);
-INSERT INTO `file_table` VALUES ('4', 'test', '12', null, null, null, null, null, null, null);
-INSERT INTO `file_table` VALUES ('5', 't1', '12', null, null, null, null, null, null, null);
-INSERT INTO `file_table` VALUES ('6', 't1', '12', null, null, null, null, null, null, null);
+INSERT INTO `file_table` VALUES ('6', 'user', '1', 'aguy.png', '1513648865052.png', '\\upload\\userPhoto\\2017-12-18\\1513590290171.png', '2017-12-19 10:01:05', '1', '.png', '23296', 'userPhoto');
+INSERT INTO `file_table` VALUES ('7', 'user', '1', 'add.png', '1513683352592.png', '\\upload\\userPhoto\\2017-12-19\\1513683352592.png', '2017-12-19 19:35:52', '1', '.png', '15385', 'userPhoto');
 
 -- ----------------------------
 -- Table structure for function
@@ -234,8 +231,8 @@ CREATE TABLE `user` (
 -- ----------------------------
 -- Records of user
 -- ----------------------------
-INSERT INTO `user` VALUES ('1', '123123@cc.com', null, '123', null, null, '3', '1', '1', null, null, null, null, null);
-INSERT INTO `user` VALUES ('2', '123', null, '3123', null, null, null, '1', '1', null, null, null, null, null);
+INSERT INTO `user` VALUES ('1', '123123@cc.com', '321', '123', 'yess!', null, '3', '1', '1', null, null, null, null, null);
+INSERT INTO `user` VALUES ('2', '123', '123', '123', null, null, null, '1', '1', null, null, null, null, null);
 
 -- ----------------------------
 -- Table structure for user_experience
@@ -256,13 +253,11 @@ CREATE TABLE `user_experience` (
   `user_resume_id` int(11) default NULL,
   `user_id` int(11) default NULL,
   PRIMARY KEY  (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of user_experience
 -- ----------------------------
-INSERT INTO `user_experience` VALUES ('7', 'work', 'test1', '2017-11-01 00:00:00', '2017-11-02 00:00:00', 'test2', 'test3', '1', '3', 'test4', 'test56', '1', '1');
-INSERT INTO `user_experience` VALUES ('8', 'edu', 'school1', '2017-12-01 00:00:00', '2017-12-02 00:00:00', 'soft', '', '5', '2', 'test1', 'test2', '1', '1');
 
 -- ----------------------------
 -- Table structure for user_resume
@@ -300,13 +295,14 @@ CREATE TABLE `user_resume` (
   `github` varchar(200) default NULL,
   `blog` varchar(200) default NULL,
   `personlink` varchar(200) default NULL,
+  `resume_name` varchar(255) default NULL,
   PRIMARY KEY  (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of user_resume
 -- ----------------------------
-INSERT INTO `user_resume` VALUES ('1', '1', 'name', '2', '2', '2', '5', '4', '5', 'qita12', '深圳', '', '1', '1', '1', '1', '1', '1000.00', '12', '2', '1200.00', '13', 'test1', '0', '1', null, null, 'test1', 'test2', 'test3', 'test4');
+INSERT INTO `user_resume` VALUES ('1', '1', 'name', '2', '2', '2', '5', '4', '5', 'qita123', '深圳', '2', '1', '1', '1', '1', '1', '1000.00', '12', '2', '1200.00', '13', 'test1', '1', '1', '1', '1', 'test1', 'test2', 'test3', 'test4', 'resumeName');
 
 -- ----------------------------
 -- Table structure for user_resume_skill
@@ -317,9 +313,10 @@ CREATE TABLE `user_resume_skill` (
   `skill_id` int(11) default NULL,
   `user_resume_id` int(11) default NULL,
   PRIMARY KEY  (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of user_resume_skill
 -- ----------------------------
 INSERT INTO `user_resume_skill` VALUES ('1', '1', '1');
+INSERT INTO `user_resume_skill` VALUES ('2', '2', '1');

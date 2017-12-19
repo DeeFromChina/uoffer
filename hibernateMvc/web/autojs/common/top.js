@@ -7,26 +7,33 @@ function init(){
 	setSrc('loginImg','U-Offerlogo.png');
 	changBottomDiv();
 	var url = "baseData.do?action=getTop";
-	var data = ajaxSumbit(url);
-	var centerTitle = jQuery.parseJSON(data.centerTitle);
-	var userImg = jQuery.parseJSON(data.userImg);
-	var rightTitle = jQuery.parseJSON(data.rightTitle);
-	setTitle(centerTitle);
-	setRightTitle(userImg, rightTitle);
-	saveValue("phone",data.information.phone);
-	saveValue("email",data.information.email);
-	saveValue("username",data.information.username);
-	saveValue("userid",data.information.userid);
-	var url = "";
-	if(data.type == "1"){
-		url = "userData.do?action=userToPage";
-	}else if(data.type == "2"){
-		url = "userData.do?action=userToPage";
-	}
-	var data = ajaxSumbit(url);
+	ajaxSumbit(url, "", 1);
+	
 //	var pageurl = judgeSize("mainFrame","width",800,"userData/add_information_frame.jsp","userData/add_information_frame.jsp");
 //	var pageurl = judgeSize("mainFrame","width",800,data,data);
 //	$('#mainFrame').attr("src",jspPath+pageurl);
+}
+function goSuccess(data, index){
+	if(index == 1){
+		var centerTitle = jQuery.parseJSON(data.centerTitle);
+		var str = data.userImg.replace(/\\/g,"/");
+		var userImg = JSON.parse(str);
+		var rightTitle = jQuery.parseJSON(data.rightTitle);
+		setTitle(centerTitle);
+		setRightTitle(userImg, rightTitle);
+		saveValue("phone",data.information.phone);
+		saveValue("email",data.information.email);
+		saveValue("username",data.information.username);
+		saveValue("userid",data.information.userid);
+		
+		var url = "";
+		if(data.type == "1"){
+			url = "userData.do?action=userToPage";
+		}else if(data.type == "2"){
+			url = "userData.do?action=userToPage";
+		}
+		ajaxSumbit(url, "", 2);
+	}
 }
 function setTitle(data){
 	if(data.length == 0){
@@ -48,7 +55,11 @@ function setTitle(data){
 function setRightTitle(userImg, data){
 	var img = "<img id='userImg' class='rightImg'/>";
 	$('#rightTitle').prepend(img);
-	setSrc('userImg',userImg[0].url);
+	if(userImg[0].url.indexOf("upload") > -1){
+		setSrc('userImg',userImg[0].url,true);
+	}else{
+		setSrc('userImg',userImg[0].url);
+	}
 	
 	var str = "";
 	for(var i in data){

@@ -2,21 +2,25 @@ var data;
 function init(){
 	setMap();
 	var url = "baseData.do?action=getCity";
-	data = ajaxSumbit(url);
-	var countryData = treeToSelect(data);
-	var type = map["type"];
-	if(type == undefined || type < 1) {return;}
-	setList("country","请选择您的国家",countryData,0,"subProvince(this)","w340");
-	$("#country").find("div[class='dropdown input-class']").addClass("marginAuto");
-	if(type == 1) return;
-	setList("province","请选择您的省份","",0,"","w340");
-	$("#province").find("div[class='dropdown input-class']").addClass("marginAuto");
-	if(type == 2) return;
-	setList("city","请选择您的城市","",0,"","w340");
-	$("#city").find("div[class='dropdown input-class']").addClass("marginAuto");
-	if(type == 3) return;
-	setList("area","请选择您的区域","",0,"","w340");
-	$("#area").find("div[class='dropdown input-class']").addClass("marginAuto");
+	ajaxSumbit(url, "", 1);
+}
+function goSuccess(data, index){
+	if(index == 1){
+		var countryData = treeToSelect(data);
+		var type = map["type"];
+		if(type == undefined || type < 1) {return;}
+		setList("country","请选择您的国家",countryData,0,"subProvince(this)","w340");
+		$("#country").find("div[class='dropdown input-class']").addClass("marginAuto");
+		if(type == 1) return;
+		setList("province","请选择您的省份","",0,"","w340");
+		$("#province").find("div[class='dropdown input-class']").addClass("marginAuto");
+		if(type == 2) return;
+		setList("city","请选择您的城市","",0,"","w340");
+		$("#city").find("div[class='dropdown input-class']").addClass("marginAuto");
+		if(type == 3) return;
+		setList("area","请选择您的区域","",0,"","w340");
+		$("#area").find("div[class='dropdown input-class']").addClass("marginAuto");
+	}
 }
 function subProvince(obj){
 	var id = obj.id;

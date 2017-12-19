@@ -124,7 +124,7 @@ function goSubmit(){
 //	isPass = checkValue(form);
 	if(!isPass) return;
 	var url = "login.do?action=register"+param;
-	var data = ajaxSumbit(url,form);
+	ajaxSumbit(url,form);
 }
 
 function checkValue(formId){

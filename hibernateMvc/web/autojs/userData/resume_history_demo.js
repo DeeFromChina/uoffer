@@ -3,11 +3,7 @@ function init(){
 	setMap();
 	var type = map["type"];
 	var url = "userData.do?action=queryUserExperienceDemo&type="+type;
-	var data = ajaxSumbit(url);
-	if(data == undefined){
-		return;
-	}
-	setDemo(data);
+	ajaxSumbit(url, "", 1);
 	$('#list').height($(document.body).height() - 77);
 }
 function setDemo(items){
@@ -35,4 +31,12 @@ function selected(obj){
 function goSubmit(){
 	saveValue("demoId", demoId);
 	closeWin("history_demo");
+}
+function goSuccess(data, index){
+	if(index == 1){
+		if(data == undefined){
+			return;
+		}
+		setDemo(data);
+	}
 }

@@ -21,6 +21,7 @@ public class TinyBuilderController{
 
 	public HttpSession httpSession;
 	public static String FILE_PATH = "";
+	public static String CONTENT_PATH = "";
 	
 	public List<Map<String, Object>> homeList = new ArrayList<Map<String, Object>>();
 	public Map<String, Object> form = new HashMap<String, Object>();
@@ -53,7 +54,9 @@ public class TinyBuilderController{
 			return "request error";
 		}
 		if("".equals(FILE_PATH)){
+			CONTENT_PATH = request.getSession().getServletContext().getContextPath().substring(1);
 			FILE_PATH = request.getSession().getServletContext().getRealPath("/upload/");
+			System.out.println(FILE_PATH);
 		}
 		Map<String, String[]> map = request.getParameterMap();
 		if(map == null){
@@ -73,7 +76,7 @@ public class TinyBuilderController{
 			if("undefined".equals(entry.getValue()[0].toString().trim())){
 				form.put(entry.getKey(), "");
 			}
-			if("null".equals(entry.getValue()[0].toString().trim())){
+			else if("null".equals(entry.getValue()[0].toString().trim())){
 				form.put(entry.getKey(), "");
 			}
 			form.put(entry.getKey(), entry.getValue()[0]);
