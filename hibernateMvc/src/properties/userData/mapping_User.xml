@@ -1,5 +1,7 @@
 <xml>
 	<mappingGroup id="User">
-		<mapping id="updateUserPhoto" class="com.offer.service.userData.impl.UserServiceImpl" method="updateUserPhoto" />
+		<mapping id="updateUserPhoto" class="com.offer.service.userData.impl.UserServiceImpl" method="updateUserPhoto">
+			<ref name="baseDao" class=""></ref>
+		</mapping>
 	</mappingGroup>
 </xml>

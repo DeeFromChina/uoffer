@@ -94,7 +94,7 @@ public class FileTableServiceImpl extends BaseServiceImpl implements FileTableSe
 		}
 		if(form.get("mapping") != null){
 			BaseUtil.checkRequired(form.get("mappingGroup"), form.get("mapping"));
-			InitMappingXml.mappingValue(form.get("mappingGroup").toString(), form.get("mappingGroup").toString(), fileTables, form);
+			InitMappingXml.mappingValue(baseDao, form.get("mappingGroup").toString(), form.get("mapping").toString(), fileTables, form);
 		}
 	}
 

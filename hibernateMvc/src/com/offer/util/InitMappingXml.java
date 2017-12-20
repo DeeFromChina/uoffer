@@ -14,8 +14,10 @@ import org.dom4j.Element;
 import org.dom4j.io.OutputFormat;
 import org.dom4j.io.SAXReader;
 import org.dom4j.io.XMLWriter;
+import org.springframework.beans.factory.annotation.Autowired;
 
-import com.offer.interceptor.InitTypeMappingFilter;
+import com.offer.dao.common.BaseDao;
+import com.offer.interceptor.InitDataLoadFilter;
 
 public class InitMappingXml {
 
@@ -31,7 +33,6 @@ public class InitMappingXml {
 //			e.printStackTrace();
 //		}
 //	}
-	
 	public static void init(Map<String, Object> map, String path) throws Exception {
 		try {
 			XMLWriter writer = null;// 声明写XML的对象
@@ -111,11 +112,11 @@ public class InitMappingXml {
 		}
 	}
 	
-	public static void mappingValue(String groupId, String mappingId, Object...objects){
-		if(InitTypeMappingFilter.initTypeMapping.get(groupId) == null){
+	public static void mappingValue(BaseDao baseDao, String groupId, String mappingId, Object...objects){
+		if(InitDataLoadFilter.initTypeMapping.get(groupId) == null){
 			return;
 		}
-		Map<String, Object> mappingGroupMap = (Map<String, Object>) InitTypeMappingFilter.initTypeMapping.get(groupId);
+		Map<String, Object> mappingGroupMap = (Map<String, Object>) InitDataLoadFilter.initTypeMapping.get(groupId);
 		if(mappingGroupMap.get(mappingId) == null){
 			return;
 		}
@@ -126,6 +127,11 @@ public class InitMappingXml {
 			Class t = Class.forName(mappingClass);
 			Object o = t.newInstance();
 			Method[] methods = t.getMethods();
+//			for(Method method : methods){
+//				if("setBaseDao".equals(method.getName())){
+//					method.invoke(o, baseDao);
+//				}
+//			}
 			for(Method method : methods){
 				if(mappingMethod.equals(method.getName())){
 					if(CorrectParam(method, objects, groupId, mappingId, mappingClass, mappingMethod)){
@@ -135,6 +141,7 @@ public class InitMappingXml {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
+			throw new RuntimeException();
 		}
 	}
 	

@@ -2,18 +2,19 @@ package com.offer.service.userData.impl;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.ArrayList;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.offer.dao.common.BaseDao;
+import com.offer.dao.common.impl.BaseDaoImpl;
 import com.offer.model.baseData.FileTable;
 import com.offer.model.userData.User;
 import com.offer.model.userData.UserResume;
 import com.offer.model.util.CheckBox;
 import com.offer.model.util.Tree;
-import com.offer.service.impl.BaseServiceImpl;
 import com.offer.service.userData.UserService;
 import com.offer.util.BaseUtil;
 import com.offer.util.EncodeUtil;
@@ -131,7 +132,7 @@ public class UserServiceImpl implements UserService {
 	}
 	
 	@Override
-	public void updateUserPhoto(List<FileTable> fileTables, Map<String, Object> form) throws Exception{
+	public void updateUserPhoto(ArrayList<FileTable> fileTables, HashMap<String, Object> form) throws Exception{
 		if(fileTables.size() == 0){
 			return;
 		}
@@ -140,4 +141,12 @@ public class UserServiceImpl implements UserService {
 		baseDao.deleteBySql(sql);
 	}
 
+	public BaseDao getBaseDao() {
+		return baseDao;
+	}
+
+	public void setBaseDao(BaseDao baseDao) {
+		this.baseDao = baseDao;
+	}
+	
 }

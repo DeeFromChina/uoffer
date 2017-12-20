@@ -1,5 +1,7 @@
 package com.offer.service.userData;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -30,5 +32,5 @@ public interface UserService {
 	
 	public Map<String, String> checkUserResume(int userId) throws Exception;
 	
-	public void updateUserPhoto(List<FileTable> fileTables, Map<String, Object> form) throws Exception;
+	public void updateUserPhoto(ArrayList<FileTable> fileTables, HashMap<String, Object> form) throws Exception;
 }
