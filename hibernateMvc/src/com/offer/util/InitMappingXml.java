@@ -1,7 +1,10 @@
 package com.offer.util;
 
 import java.io.File;
+import java.lang.annotation.Annotation;
+import java.lang.reflect.Field;
 import java.lang.reflect.Method;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -127,6 +130,16 @@ public class InitMappingXml {
 			Class t = Class.forName(mappingClass);
 			Object o = t.newInstance();
 			Method[] methods = t.getMethods();
+			List<Field>  list = Arrays.asList(t.getDeclaredFields());
+			for(int i = 0; i < list.size(); i++){
+				Field field = list.get(i);
+				field.setAccessible(true);// 设置些属性是可以访问的
+				if(field.isAnnotationPresent(Autowired.class)){
+					Class autoClass = field.getType();//需要被注入的接口类
+					Object autoO = autoClass.newInstance();
+					field.set(autoO, autoO);
+				}
+			}
 //			for(Method method : methods){
 //				if("setBaseDao".equals(method.getName())){
 //					method.invoke(o, baseDao);
