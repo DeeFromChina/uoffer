@@ -12,8 +12,11 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 
 public class JSONForObject {
+	
+	public static String clString = "com.offer.commonBean.CommonBean";
 
 	public static void main(String[] args) {
+		
 		StringBuffer xml = new StringBuffer();
 		xml.append("<xml>");
 		xml.append("<mappingGroup id=\"User\">");
@@ -24,13 +27,7 @@ public class JSONForObject {
 		xml.append("</xml>");
 		try {
 			Document document = strToDocument(xml.toString());
-			List<Element> list = document.content();
-			for(Element element : list){
-				System.out.println(element.getText());
-			}
-//			for(int i = 0; i < list.size(); i++){
-//				System.out.println(list.get(i));
-//			}
+			Element rootElement = document.getRootElement();
 		} catch (DocumentException e) {
 			e.printStackTrace();
 		}
