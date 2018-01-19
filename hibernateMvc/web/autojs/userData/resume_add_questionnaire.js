@@ -4,9 +4,18 @@ function init() {
 	$(".circleChkB").click(function(){
 		selected(this);
 	});
-	
-	setList("currency1","请选择您的币种",jQuery.parseJSON(currency),0,"","w140");
-	setList("currency2","请选择您的币种",jQuery.parseJSON(currency),0,"","w140");
+	setList({
+		listId : "currency1",
+		placeholder : "请选择您的币种",
+		listValue : jQuery.parseJSON(currency),
+		widthClass : "w140"
+	});
+	setList({
+		listId : "currency2",
+		placeholder : "请选择您的币种",
+		listValue : jQuery.parseJSON(currency),
+		widthClass : "w140"
+	});
 	setValue();
 	setForm();
 	

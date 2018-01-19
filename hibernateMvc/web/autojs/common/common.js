@@ -24,13 +24,43 @@ function removeValue(key){
  * index:多层
  * method:方法（this作为参数）
  * */
-function setList(listId,placeholder,listValue,index,method,widthClass){
+function setList(options){
+	var listId = options.listId;
+	var placeholder = options.placeholder;
+	var listValue = options.listValue;
+	var index = options.index;
+	var method = options.method;
+	var widthClass = options.widthClass;
+	var selectMeum = "selectMeum";
+	var inputClass = options.inputClass;
+	
 	if(widthClass == undefined){
 		widthClass = "wi100";
+	}else{
+		selectMeum = " selectMeum2 " + widthClass;
 	}
+	
+	if(inputClass == undefined){
+		inputClass = "input-class";
+	}else{
+		inputClass = " h41 " + inputClass;
+	}
+	
+	if(placeholder == undefined){
+		placeholder = "";
+	}
+	
+	if(method == undefined){
+		method = "";
+	}
+	
+	if(index == undefined){
+		index = 0;
+	}
+	
 	var level = index;
 	var inn = "";
-	inn += "<div class=\"dropdown input-class\">";
+	inn += "<div class=\"dropdown " + inputClass + "\">";
 	inn += "<div class=\""+widthClass+"\">";
 	inn += "<input type=\"text\" id=\""+listId+"Value\" name=\""+listId+"Value\" class=\"form-control\" readOnly=\"readOnly\" placeholder=\""+placeholder+"\" />";
 	inn += "<input type=\"hidden\" name=\""+listId+"\" />";
@@ -38,12 +68,12 @@ function setList(listId,placeholder,listValue,index,method,widthClass){
 	inn += "<button type=\"button\" class=\"btn dropdown-toggle selectBtn\" data-toggle=\"dropdown\">";
 	inn += "<span class=\"caret\"></span>";
 	inn += "</button>";
-	if(listValue != ''){
-		inn += "<ul class=\"dropdown-menu selectMeum\" role=\"menu\" aria-labelledby=\"dropdownMenu\">";
-		inn += addListChild(listId,listValue,index,method);
+	if(listValue != '' && listValue != undefined){
+		inn += "<ul class=\"dropdown-menu " + selectMeum + "\" role=\"menu\" aria-labelledby=\"dropdownMenu\">";
+		inn += addListChild(listId,listValue,index,method,selectMeum);
 		inn += "</ul>";
 	}else{
-		inn += "<ul class=\"dropdown-menu selectMeum\" role=\"menu\" aria-labelledby=\"dropdownMenu\">";
+		inn += "<ul class=\"dropdown-menu " + selectMeum + "\" role=\"menu\" aria-labelledby=\"dropdownMenu\">";
 		inn+="<li role='presentation'>"
 				+"<a class='selectValue' role='menuitem' >"
 					+placeholder
@@ -54,7 +84,7 @@ function setList(listId,placeholder,listValue,index,method,widthClass){
 	inn += "</div>";
 	getid(listId).innerHTML = inn;
 }
-function addListChild(listId,listValue,index,method){
+function addListChild(listId,listValue,index,method,selectMeum){
 	var level = index;
 	var inn = "";
 	var cls = "";
@@ -67,7 +97,7 @@ function addListChild(listId,listValue,index,method){
 					+listValue[i].value
 				+"</a>";
 		if(level > 1){
-			inn+="<ul class='dropdown-menu selectMeum'>";
+			inn+="<ul class='dropdown-menu " + selectMeum + "'>";
 			inn+=setList(listId,listValue,level-1,method);
 			inn+="</ul>";
 		}

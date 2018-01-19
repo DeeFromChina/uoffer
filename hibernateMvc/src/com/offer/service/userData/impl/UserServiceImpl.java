@@ -18,6 +18,7 @@ import com.offer.model.util.Tree;
 import com.offer.service.userData.UserService;
 import com.offer.util.BaseUtil;
 import com.offer.util.EncodeUtil;
+import com.offer.util.FileUtils;
 
 @Service("userService")
 public class UserServiceImpl implements UserService {
@@ -137,16 +138,18 @@ public class UserServiceImpl implements UserService {
 			return;
 		}
 		FileTable fileTable = fileTables.get(0);
+		String hql = "FROM FileTable f WHERE f.tableName = 'user' AND f.fileType = 'userPhoto' AND f.tableId = " + fileTable.getTableId();
+		List<FileTable> fileTableList = (List<FileTable>) baseDao.findByHql(hql);
+		String FILE_PATH = form.get("FILE_PATH").toString();
+		FILE_PATH = FILE_PATH.substring(0,FILE_PATH.indexOf("\\upload"));
+		for(FileTable fileTable2 : fileTableList){
+			if(fileTable.getId() == fileTable2.getId()){
+				continue;
+			}
+			FileUtils.deleteFile(FILE_PATH+fileTable2.getFilePath());
+		}
 		String sql = "DELETE FROM file_table WHERE table_id = " + fileTable.getTableId() + " AND id != " + fileTable.getId();
 		baseDao.deleteBySql(sql);
-	}
-
-	public BaseDao getBaseDao() {
-		return baseDao;
-	}
-
-	public void setBaseDao(BaseDao baseDao) {
-		this.baseDao = baseDao;
 	}
 	
 }

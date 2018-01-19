@@ -8,7 +8,7 @@ public interface BaseDao {
 
 	public Object getById(Class<?> t, Serializable id) throws Exception;
 	
-//	public Object findField(Class<?> t, Serializable id) throws Exception;
+	public Object findField(Class<?> t, Serializable id) throws Exception;
 
 	public List<?> findField(Class<?> t, Map<String, Object> map) throws Exception;
 
@@ -26,7 +26,7 @@ public interface BaseDao {
 
 	public void deleteByIds(Serializable[] ids, Class<?> t) throws Exception;
 	
-	public List<Map<String, Object>> findByQuery(String path, Map<String, Object> params) throws Exception;
+//	public List<Map<String, Object>> findByQuery(String path, Map<String, Object> params) throws Exception;
 	
 	public void deleteBySql(String sql) throws Exception;
 	

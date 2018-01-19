@@ -100,7 +100,8 @@ public class UserManagerController extends TinyBuilderController {
 //		}
 //		map.put("pageName", pageName);
 //		return redirect("userData/add_information_frame.jsp", map, "", false);
-		return redirect("userInterview/user_resumes.jsp", "", "", false);
+//		return redirect("userInterview/user_resumes.jsp", "", "", false);
+		return redirect("userInterview/user_interview.jsp", "", "", false);
 	}
 	
 	private Object queryUserInformation(){

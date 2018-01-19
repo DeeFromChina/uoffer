@@ -7,6 +7,9 @@
 .w140{
 	width:140px;
 }
+.w181{
+	width:181px;
+}
 .w200{
 	width:200px;
 }
@@ -15,6 +18,9 @@
 }
 .w340{
 	width:340px;
+}
+.w381{
+	width:381px;
 }
 .wi5{
 	width:5%;
@@ -155,6 +161,9 @@ font {
 }
 .bgColor00B38A{
 	background-color:#00B38A;
+}
+.bgColorE7E7E7{
+	background-color:#E7E7E7;
 }
 .brColor00B38A{
 	border-color: #00B38A;

@@ -83,7 +83,6 @@ public class UserExperienceServiceImpl implements UserExperienceService {
 	public List<UserExperience> getByUserId(int userId) throws Exception {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("userId", userId);
-		baseDao.findByQuery("sql/userData/sql_user", map);
 		List<UserExperience> userExperiences = (List<UserExperience>) baseDao.findField(UserExperience.class, map);
 		return userExperiences;
 	}

@@ -2,9 +2,18 @@ var userResumeId = loadValue("userResumeId");
 function init() {
 	var url = "baseData.do?action=getCity";
 	ajaxSumbit(url, "", 1);
-	
-	setList("companyNature","请选择公司性质",jQuery.parseJSON(companyNature),0,"","w340");
-	setList("companyScale","请选择公司规模",jQuery.parseJSON(companyScale),0,"","w340");
+	setList({
+		listId : "companyNature",
+		placeholder : "请选择公司性质",
+		listValue : jQuery.parseJSON(companyNature),
+		widthClass : "w340"
+	});
+	setList({
+		listId : "companyScale",
+		placeholder : "请选择公司规模",
+		listValue : jQuery.parseJSON(companyScale),
+		widthClass : "w340"
+	});
 	
 	setForm();
 	

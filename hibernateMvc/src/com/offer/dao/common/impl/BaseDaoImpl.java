@@ -17,22 +17,13 @@ import org.hibernate.criterion.CriteriaSpecification;
 import org.hibernate.jdbc.Work;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate4.HibernateTemplate;
-import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
 import com.offer.dao.common.BaseDao;
 import com.offer.util.BaseUtil;
-import com.offer.util.ConUtil;
-import com.offer.util.Dom4jXml;
 @Service("BaseDaoImpl")
 public class BaseDaoImpl implements BaseDao{
 
-	@Autowired
-	private Dom4jXml dom4jXml;
-	
-	@Autowired
-	private ConUtil conUtil;
-	
 	@Autowired
 	private HibernateTemplate hibernateTemplate;
 	
@@ -56,8 +47,12 @@ public class BaseDaoImpl implements BaseDao{
 			hql.append(tableName+" a ");
 			hql.append(" WHERE a.id=");
 			hql.append(id);
-			return hibernateTemplate.find(hql.toString());
-			
+			List list = hibernateTemplate.find(hql.toString());
+			if(list != null && list.size() == 1){
+				return list.get(0);
+			}else{
+				return null;
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -175,8 +170,8 @@ public class BaseDaoImpl implements BaseDao{
 			path = FILE_PATH + path;
 			Map<String, String> map = new HashMap<String, String>();
 			params.putAll(map);
-			String sql = dom4jXml.initSqlXml(path, map);
-			return findBySql(sql);
+//			String sql = dom4jXml.initSqlXml(path, map);
+//			return findBySql(sql);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

@@ -56,7 +56,7 @@ public class TinyBuilderController{
 		if("".equals(FILE_PATH)){
 			CONTENT_PATH = request.getSession().getServletContext().getContextPath().substring(1);
 			FILE_PATH = request.getSession().getServletContext().getRealPath("/upload/");
-			System.out.println(FILE_PATH);
+			form.put("FILE_PATH", FILE_PATH);
 		}
 		Map<String, String[]> map = request.getParameterMap();
 		if(map == null){

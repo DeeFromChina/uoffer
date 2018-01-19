@@ -11,7 +11,12 @@ function init(){
 		$("#levelName").html("公司性质:");
 		$("#descript1").html("公司联系人及联系方式:");
 		$("#descript2").html("公司描述:");
-		setList("level","请选择公司性质",jQuery.parseJSON(companyNature),0,"","w340");
+		setList({
+			listId : "level",
+			placeholder : "请选择公司性质",
+			listValue : jQuery.parseJSON(companyNature),
+			widthClass : "w340"
+		});
 	}
 	if(type == 'edu'){
 		$("#name").html("学校名称 :");
@@ -22,7 +27,12 @@ function init(){
 		$("#levelName").html("学历:");
 		$("#descript1").html("掌握技能:");
 		$("#descript2").html("曾获奖项:");
-		setList("level","请选择学历",jQuery.parseJSON(education),0,"","w340");
+		setList({
+			listId : "level",
+			placeholder : "请选择学历",
+			listValue : jQuery.parseJSON(education),
+			widthClass : "w340"
+		});
 	}
 	$(".form_datetime").datetimepicker({
 	    format: "yyyy-mm-dd",

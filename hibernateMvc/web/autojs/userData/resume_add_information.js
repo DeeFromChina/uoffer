@@ -4,8 +4,18 @@ function init() {
 	getTran('1');
 	subWorkTime();
 	var workTimeData = jQuery.parseJSON(workTime);
-	setList("workTime1","请选择您的工作年限",workTimeData,0,"","w340");
-	setList("workTime2","请选择您的工作年限",workTimeData,0,"","w340");
+	setList({
+		listId : "workTime1",
+		placeholder : "请选择您的工作年限",
+		listValue : workTimeData,
+		widthClass : "w340"
+	});
+	setList({
+		listId : "workTime2",
+		placeholder : "请选择您的工作年限",
+		listValue : workTimeData,
+		widthClass : "w340"
+	});
 	setSrc('zhihu','zhihu.png');
 	setSrc('github','github.png');
 	setSrc('blog','blog.png');
@@ -104,7 +114,12 @@ function getTran(ret) {
 }
 function subWorkTime(){
 	var data = jQuery.parseJSON(workTime);
-	setList("workTime","请选择您的工作年限",data,0,"","w340");
+	setList({
+		listId : "workTime",
+		placeholder : "请选择您的工作年限",
+		listValue : data,
+		widthClass : "w340"
+	});
 }
 function selectWorkTime(){
 	var data = jQuery.parseJSON(workTime);

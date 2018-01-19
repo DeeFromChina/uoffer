@@ -1,0 +1,5 @@
+<xml>
+	<bean id="baseDao" class="com.offer.dao.common.impl.BaseDaoImpl">
+		<ref id="hibernateTemplate" class="org.springframework.orm.hibernate4.HibernateTemplate"></ref>
+	</bean>
+</xml>
