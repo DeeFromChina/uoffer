@@ -1,0 +1,38 @@
+.messageDiv{
+	width: 80%;
+}
+.messageDiv > div {
+	color: #00B38A;
+	padding: 20px 10px 20px 20px;
+	border-bottom: 1px #00B38A solid;
+	min-width: 724px;
+	width: 100%;
+}
+.messageDiv > div > font {
+	font-size: 14px;
+	float: right;
+}
+.pagination {
+	display: block;
+    padding-left: 0;
+    margin: 20px 0;
+    border-radius: 4px;
+}
+.list_row {
+	width: 100%;
+	height: 60px;
+}
+.list_cow {
+	text-align: right;
+	width: 50%;
+	float: left;
+	padding: 0 20px;
+}
+.list_cow > font {
+	line-height: 60px;
+}
+.list_cow > div {
+	height: 50%;
+	line-height: 30px;
+	text-align: left;
+}

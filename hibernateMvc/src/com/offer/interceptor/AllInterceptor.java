@@ -54,6 +54,8 @@ public class AllInterceptor extends HandlerInterceptorAdapter {
     			return false;
     		}
 		}
+    	HttpSession httpSession = request.getSession();
+    	httpSession.setAttribute("islogin", "true");
     	return true;
     }
 }

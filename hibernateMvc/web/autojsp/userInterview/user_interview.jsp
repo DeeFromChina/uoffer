@@ -6,7 +6,7 @@
 <%@include file="../common/common.jsp"%>
 <title></title>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="stylesheet" href="<%=baseCss %>userInterview/user_resumes.css?randomId=<%=Math.random()%>" type="text/css"/>
+<link rel="stylesheet" href="<%=baseCss %>userInterview/user_interview.css?randomId=<%=Math.random()%>" type="text/css"/>
 </head>
 <script src="<%=baseJs %>uesrInterview/user_interview.js?randomId=<%=Math.random()%>"></script>
 <body bgcolor="#FFFFFF" onload="init()">
@@ -25,47 +25,46 @@
 					<td><div class="input-group selectInput" id="area"></div></td>
 				</tr>
 			</table>
-			
-			
-			
-			
+		</div>
+		<div class="messageDiv">
+			<div>
+				<font>查询出&nbsp;<font color="#000000">0</font>&nbsp;条信息</font>
+			</div>
+		</div>
+		<div class="wi80" id="formList">
+			<div class="list_row">
+				<div class="list_cow">
+					<div>
+						<font>测试一段文字的字体是山ID号覅汉顺帝发货</font>
+					</div>
+					<div>
+						<font>测试一段文字的字体是山ID号覅汉顺帝发货</font>
+					</div>
+				</div>
+				<div class="list_cow">
+					<font>4000~5000</font>
+				</div>
+			</div>
+			<ul class="pagination">
+			    <li><a href="#">&laquo;</a></li>
+			    <li><a href="#">1</a></li>
+			    <li><a href="#">2</a></li>
+			    <li><a href="#">3</a></li>
+			    <li><a href="#">4</a></li>
+			    <li><a href="#">5</a></li>
+			    <li><a href="#">&raquo;</a></li>
+			</ul>
 		</div>
 	</center>
-		<table class="mainDiv_table hi100">
-			<col class="wi10"/>
-			<col class="wi30"/>
-			<col class="wi50"/>
-			<col class="wi10"/>
-			<tr>
-				<td/>
-				<td valign="top">
-					<div class="photoDiv">
-						<img id="photoReview" onclick="userPhotoUpload()"/>
-					</div>
-					<div class="userRemark">
-						<table>
-							<tr>
-								<td class="col1" id="username"></td>
-							</tr>
-							<tr>
-								<td class="col2" id="phone"></td>
-							</tr>
-							<tr>
-								<td class="col2" id="email"></td>
-							</tr>
-						</table>
-					</div>
-				</td>
-				<td valign="top" id="resumeList">
-					<div class="titleDiv">
-						简历
-						<div>
-						</div>
-					</div>
-				</td>
-				<td/>
-			</tr>
-		</table>
 </form>
 </body>
 </html>
+
+
+
+
+
+
+
+
+
