@@ -9,11 +9,12 @@
 </head>
 <script src="<%=baseJs %>common/list_page.js?randomId=<%=Math.random()%>" type="text/javascript"></script>
 <body>
-	<list>
+	<list id="list1">
 		<list-head>title1,title2,title3</list-head>
-		<list-head-size>200,30%,400</list-head-size>
+		<list-head-size>200,300,400</list-head-size>
 		<list-value>value1,value2,value3</list-value>
-		<list-value-css></list-value-css>
+		<list-value-class>list-head</list-value-class>
+		<is-share-class>true</is_share_class>
 	</list>
 </body>
 </html>
